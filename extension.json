@@ -15,13 +15,20 @@
 	},
 	"config": {
 		"GoogleSiteVerificationKey": {
-			"description": "Site verification key for Google WebmasterTools"
+			"description": "Site verification key for Google WebmasterTools",
+			"value": null
 		},
-		"FacebookAdmins": [],
-		"FacebookAppID": "",
-		"IncludeJsonLD": {
-			"description": "Flag to enable JsonLD metadata",
-			"value": true
+		"FacebookAppId":  {
+			"description": "App Id fpr Facebook Insights",
+			"value": null
+		},
+		"MetadataGenerators":  {
+			"description": "Array with metadata generators",
+			"value": [
+				"JsonLD",
+				"OpenGraph",
+				"Twitter"
+			]
 		}
 	},
 	"MessagesDirs": {

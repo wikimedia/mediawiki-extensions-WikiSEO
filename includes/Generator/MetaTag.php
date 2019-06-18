@@ -4,7 +4,7 @@ namespace Octfx\WikiSEO\Generator;
 
 use OutputPage;
 
-class JsonLD implements GeneratorInterface {
+class MetaTag implements GeneratorInterface {
 
 	public function addMetaToPage( OutputPage $out ) {
 		// TODO: Implement addMetaToPage() method.
