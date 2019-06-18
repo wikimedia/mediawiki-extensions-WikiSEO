@@ -9,7 +9,7 @@
 class WikiSEO{
 
 	//array of valid parameter names
-	protected static 	$valid_params = array(
+	protected static 	$valid_params = [
 		'title',
 		'title_mode', //append, prepend, replace
 		'title_separator',
@@ -43,9 +43,9 @@ class WikiSEO{
 		'DC.date.issued',
 		'DC.date.created',
 		'name',
-		);
+    ];
 
-	protected static $tag_types = array(
+	protected static $tag_types = [
 		'title' => 'title',
 		'keywords' => 'meta',
 		'description' => 'meta',
@@ -80,20 +80,20 @@ class WikiSEO{
 		'DC.date.created' => 'property',
 		'name' => 'property',
 		'google-site-verification' => 'meta'
-	);
+    ];
 	//valid title modes
-	protected static 	$valid_title_modes = array('prepend', 'append', 'replace');
+	protected static 	$valid_title_modes = ['prepend', 'append', 'replace'];
 	//allow other parameter names... these will be converted internally
-	protected static 	$convert_params = array(
+	protected static 	$convert_params = [
 		'metakeywords'=>'keywords',
 		'metak'=>'keywords',
 		'metadescription'=>'description',
 		'metad'=>'description',
 		'titlemode'=>'title_mode',
 		'title mode'=>'title_mode'
-	);
+    ];
 	//parameters which should be parsed if possible to allow for the expansion of templates
-	protected static  $parse_params = array('title', 'description', 'keywords');
+	protected static  $parse_params = ['title', 'description', 'keywords'];
 
 	//the value for the html title tag
 	protected static 	$title = '';
@@ -103,9 +103,9 @@ class WikiSEO{
 	protected static  $title_separator = ' - ';
 
 	//array of meta name values
-	protected static 	$meta = array();
+	protected static 	$meta = [];
 	//array of meta property values
-	protected static 	$property = array();
+	protected static 	$property = [];
 
 	//do not allow this class to be instantiated, it is static
 	private function __construct(){ }
@@ -120,12 +120,12 @@ class WikiSEO{
 
 	/**
 	 * Parse the values input from the <seo> tag extension
-	 * @param String $text The text content of the tag
-	 * @param Array $params The HTML attributes of the tag
+     * @param string $text The text content of the tag
+     * @param array $params The HTML attributes of the tag
 	 * @param Parser $parser The active Parser instance
-	 * @return String The HTML comments of cached attributes
+     * @return string The HTML comments of cached attributes
 	 */
-	public static function parserTag( $text, $params = array(), Parser $parser ) {
+	public static function parserTag($text, $params = [], Parser $parser ) {
 
 		$params = self::processParams($params, $parser);
 
@@ -144,12 +144,12 @@ class WikiSEO{
 	/**
 	 * Parse the values input from the {{#seo}} parser function
 	 * @param Parser $parser The active Parser instance
-	 * @return Array Parser options and the HTML comments of cached attributes
+     * @return array Parser options and the HTML comments of cached attributes
 	 */
 	public static function parserFunction(Parser $parser ){
 		$args = func_get_args();
 		$args = array_slice($args, 1, count($args) );
-		$params = array();
+		$params = [];
 		foreach($args as $a){
 			if(strpos($a, '=')){
 				$exploded = explode('=', $a);
@@ -166,14 +166,14 @@ class WikiSEO{
 
 		$html = self::renderParamsAsHtmlComments( $params );
 
-		return array( $html, 'noparse' => true, 'isHTML' => true );
+		return [$html, 'noparse' => true, 'isHTML' => true];
 	}
 
 	/**
 	 * Processes params (assumed valid) and sets them as class properties
-	 * @param Array $params Array of pre-validated params
+     * @param array $params Array of pre-validated params
 	 * @param Parser $parser If passed, the parser will be used to recursively parse all params
-	 * @return Array An array of processed params
+     * @return array An array of processed params
 	 */
 	protected static function processParams($params, $parser=null){
 		global $wgGoogleSiteVerificationKey, $wgFacebookAdmins, $wgFacebookAppID;
@@ -186,7 +186,7 @@ class WikiSEO{
 			}
 		}
 
-		$processed = array();
+		$processed = [];
 
 		if ($wgGoogleSiteVerificationKey !== null) {
 			$processed['google-site-verification'] = $wgGoogleSiteVerificationKey;
@@ -252,8 +252,8 @@ class WikiSEO{
 	 * to propagate the information in cached pages, the information is stored
 	 * as HTML comments in the Wiki text.
 	 *
-	 * @param Array $params Array of params to render into HTML comments
-	 * @return String A HTML string of comments
+     * @param array $params Array of params to render into HTML comments
+     * @return string A HTML string of comments
 	 */
 	protected static function renderParamsAsHtmlComments( $params ){
 		$html = '<!--seostart--><p id="wikiseo'.wfRandomString(4).'"><!--'."\n";
@@ -272,7 +272,7 @@ class WikiSEO{
 	 * This method is called by the OutputPageBeforeHTML hook
 	 *
 	 * @param OutputPage $out
-	 * @param String $text
+     * @param string $text
 	 */
 	public static function loadParamsFromWikitext( $out, &$text ) {
 
@@ -286,7 +286,7 @@ class WikiSEO{
 			return true;
 		}
 
-		$params = array();
+		$params = [];
 		foreach($matches as $match){
 			$params[$match[1]] = base64_decode($match[2]);
 		}
@@ -322,7 +322,7 @@ class WikiSEO{
 			}
 			$title = preg_replace( "/\r|\n/", "", $title );
 			$out->setHTMLTitle($title);
-			$out->addHeadItem("og:title", Html::element( 'meta', array( 'property' => 'og:title', 'content' => $title ) ));
+			$out->addHeadItem("og:title", Html::element( 'meta', ['property' => 'og:title', 'content' => $title]));
 			$jsonLD .= '"name":"'.$title.'","headline":"'.$title.'",';
 		}
 		//set meta tags
@@ -335,7 +335,7 @@ class WikiSEO{
 					}
 					$out->addMeta( $name, $content );
 					$out->addMeta( "twitter:description", $content );
-					$out->addHeadItem("og:description", Html::element( 'meta', array( 'property' => 'og:description', 'content' => $content ) ));
+					$out->addHeadItem("og:description", Html::element( 'meta', ['property' => 'og:description', 'content' => $content]));
 					$jsonLD .= '"description":"'.$content.'",';
 				} else {
 					$out->addMeta( $name, $content );
@@ -377,7 +377,7 @@ class WikiSEO{
 
 			foreach(self::$property as $property => $content){
 				$content = preg_replace( "/\r|\n/", "", $content );
-				$out->addHeadItem($property, Html::element( 'meta', array( 'property' => $property, 'content' => $content ) ) . "\n");
+				$out->addHeadItem($property, Html::element( 'meta', ['property' => $property, 'content' => $content]) . "\n");
 			}
 		}
 

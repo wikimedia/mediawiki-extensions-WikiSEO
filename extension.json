@@ -1,20 +1,25 @@
 {
 	"name": "WikiSEO",
-	"version": "1.2.1",
+	"version": "2.0.0",
 	"author": [
+		"FoXFTW",
 		"Andru Vallance",
 		"..."
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:WikiSEO",
 	"descriptionmsg": "seo-desc",
+	"requires": {
+		"MediaWiki": ">= 1.27.0"
+	},
 	"license-name": "GPL-2.0+",
 	"type": "parserhook",
-	"ExtensionMessagesFiles": {
-		"WikiSEOMagic": "WikiSEO.i18n.magic.php",
-		"WikiSEO": "WikiSEO.i18n.php"
+	"MessagesDirs": {
+		"WikiSEO": [
+			"i18n"
+		]
 	},
 	"AutoloadClasses": {
-		"WikiSEO": "WikiSEO.body.php"
+		"WikiSEO": "src/WikiSEO.php"
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
@@ -32,5 +37,6 @@
 		"FacebookAdmins": [],
 		"FacebookAppID": "",
 		"AddJSONLD": true
-	}
+	},
+	"manifest_version": 1
 }
