@@ -1,4 +1,4 @@
 {
-  "seo-desc": "Ermöglicht das Festlegen der Meta-Elemente „keywords“ und „description“ sowie das Anpassen des Seitentitels",
-  "seo-empty-attr": "Fehler: Das Tag &lt;seo&gt; muß zu mindestens einem Meta-Element einen Wert enthalten."
+  "wiki-seo-desc": "Ermöglicht das Festlegen der Meta-Elemente „keywords“ und „description“ sowie das Anpassen des Seitentitels",
+  "wiki-seo-empty-attr": "Fehler: Das Tag &lt;seo&gt; muß zu mindestens einem Meta-Element einen Wert enthalten."
 }
