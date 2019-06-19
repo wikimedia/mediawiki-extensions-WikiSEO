@@ -23,6 +23,8 @@ class Validator {
 		'type',
 		'site_name',
 		'locale',
+		'section',
+		'author',
 
 		'published_time', 'modified_time',
 

@@ -36,11 +36,8 @@ Added features:
   * Array of metadata generators to use, default: [OpenGraph, Twitter, JsonLD]
 
 Removed tags:
-* article:author
-* twitter:domain
-* article:section
-* DC.date.issued
 * DC.date.created
+* DC.date.issued
 * google
 * googlebot
 * name
@@ -48,6 +45,7 @@ Removed tags:
 * og:url (automatically set)
 * twitter:card (automatically set)
 * twitter:creator
+* twitter:domain
 
 Removed configs:
 * $wgFacebookAdminIds (use $wgFacebookAppId instead)
@@ -61,6 +59,8 @@ Removed aliases:
   * use title_mode instead
 
 Changed tags:
+* article:author -> author
+* article:section -> section
 * article:tag -> keywords
 * article:published_time -> published_time
 * article:modified_time / og:updated_time -> modified_time
