@@ -19,13 +19,12 @@
 			"value": null
 		},
 		"FacebookAppId":  {
-			"description": "App Id fpr Facebook Insights",
+			"description": "App Id for Facebook Insights",
 			"value": null
 		},
 		"MetadataGenerators":  {
 			"description": "Array with metadata generators",
 			"value": [
-				"JsonLD",
 				"OpenGraph",
 				"Twitter"
 			]
@@ -44,7 +43,6 @@
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "Octfx\\WikiSEO\\Hooks::onParserFirstCallInit",
-		"OutputPageBeforeHTML": "Octfx\\WikiSEO\\Hooks::onOutputPageBeforeHTML",
 		"BeforePageDisplay": "Octfx\\WikiSEO\\Hooks::onBeforePageDisplay"
 	},
 	"manifest_version": 2
