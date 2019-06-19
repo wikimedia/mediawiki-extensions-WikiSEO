@@ -30,7 +30,8 @@
 			"description": "Array with metadata generators",
 			"value": [
 				"OpenGraph",
-				"Twitter"
+				"Twitter",
+				"JsonLD"
 			]
 		}
 	},
