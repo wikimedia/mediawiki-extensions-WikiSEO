@@ -2,41 +2,48 @@
 	"name": "WikiSEO",
 	"version": "2.0.0",
 	"author": [
-		"FoXFTW",
+		"Octfx",
 		"Andru Vallance",
 		"..."
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:WikiSEO",
-	"descriptionmsg": "seo-desc",
+	"descriptionmsg": "wiki-seo-desc",
+	"license-name": "GPL-2.0+",
+	"type": "parserhook",
 	"requires": {
 		"MediaWiki": ">= 1.27.0"
 	},
-	"license-name": "GPL-2.0+",
-	"type": "parserhook",
+	"config": {
+		"GoogleSiteVerificationKey": {
+			"description": "Site verification key for Google WebmasterTools",
+			"value": null
+		},
+		"FacebookAppId":  {
+			"description": "App Id for Facebook Insights",
+			"value": null
+		},
+		"MetadataGenerators":  {
+			"description": "Array with metadata generators",
+			"value": [
+				"OpenGraph",
+				"Twitter"
+			]
+		}
+	},
 	"MessagesDirs": {
 		"WikiSEO": [
 			"i18n"
 		]
 	},
-	"AutoloadClasses": {
-		"WikiSEO": "src/WikiSEO.php"
+	"ExtensionMessagesFiles": {
+		"WikiSEOMagic" : "WikiSEO.i18n.magic.php"
+	},
+	"AutoloadNamespaces": {
+		"Octfx\\WikiSEO\\": "includes/"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": [
-			"WikiSEO::init"
-		],
-		"OutputPageBeforeHTML": [
-			"WikiSEO::loadParamsFromWikitext"
-		],
-		"BeforePageDisplay": [
-			"WikiSEO::modifyHTML"
-		]
+		"ParserFirstCallInit": "Octfx\\WikiSEO\\Hooks::onParserFirstCallInit",
+		"BeforePageDisplay": "Octfx\\WikiSEO\\Hooks::onBeforePageDisplay"
 	},
-	"config": {
-		"GoogleSiteVerificationKey": "",
-		"FacebookAdmins": [],
-		"FacebookAppID": "",
-		"AddJSONLD": true
-	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
