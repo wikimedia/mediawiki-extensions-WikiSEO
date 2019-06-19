@@ -2,13 +2,13 @@
 
 namespace Octfx\WikiSEO\Tests\Generator\Plugin;
 
-use Octfx\WikiSEO\Generator\Plugins\JsonLD;
+use Octfx\WikiSEO\Generator\Plugins\SchemaOrg;
 use Octfx\WikiSEO\Tests\Generator\GeneratorTest;
 
-class JsonLDTest extends GeneratorTest {
+class SchemaOrgTest extends GeneratorTest {
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\JsonLD::init
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\JsonLD::addMetadata
+	 * @covers \Octfx\WikiSEO\Generator\Plugins\SchemaOrg::init
+	 * @covers \Octfx\WikiSEO\Generator\Plugins\SchemaOrg::addMetadata
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -18,7 +18,7 @@ class JsonLDTest extends GeneratorTest {
 
 		$out = $this->newInstance();
 
-		$generator = new JsonLD();
+		$generator = new SchemaOrg();
 		$generator->init( $metadata, $out );
 		$generator->addMetadata();
 

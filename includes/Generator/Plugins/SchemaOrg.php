@@ -5,7 +5,7 @@ namespace Octfx\WikiSEO\Generator\Plugins;
 use Octfx\WikiSEO\Generator\GeneratorInterface;
 use OutputPage;
 
-class JsonLD implements GeneratorInterface {
+class SchemaOrg implements GeneratorInterface {
 	/**
 	 * Valid Tags for this generator
 	 *
@@ -15,8 +15,10 @@ class JsonLD implements GeneratorInterface {
 		'type',
 		'image',
 		'description',
+		'keywords',
 		'published_time',
 		'modified_time',
+		'section'
 	];
 
 	/**
@@ -65,7 +67,13 @@ class JsonLD implements GeneratorInterface {
 		$meta = [
 			'@context' => 'http://schema.org',
 			'name'     => $this->outputPage->getHTMLTitle(),
+			'headline' => $this->outputPage->getHTMLTitle(),
 		];
+
+		if ( $this->outputPage->getTitle() !== null ) {
+			$meta['identifier'] = $this->outputPage->getTitle()->getFullURL();
+			$meta['url'] = $this->outputPage->getTitle()->getFullURL();
+		}
 
 		foreach ( static::$tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {

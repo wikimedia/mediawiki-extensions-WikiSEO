@@ -21,16 +21,18 @@ class OpenGraph implements GeneratorInterface {
 	 * @var array
 	 */
 	protected static $tags = [
-		'type',
+		'author',
+		'description',
 		'image',
 		'image_width',
 		'image_height',
-		'description',
 		'keywords',
 		'locale',
-		'site_name',
-		'published_time',
 		'modified_time',
+		'published_time',
+		'section',
+		'site_name',
+		'type',
 	];
 
 	/**
@@ -48,9 +50,11 @@ class OpenGraph implements GeneratorInterface {
 		'site_name'   => 'og:site_name',
 		'description' => 'og:description',
 
-		'keywords'       => 'article:tag',
+		'author'         => 'article:author',
+		'modified_time'  => 'article:modified_time',
 		'published_time' => 'article:published_time',
-		'modified_time'  => 'article:modified_time'
+		'section'        => 'article:section',
+		'keywords'       => 'article:tag',
 	];
 
 	/**

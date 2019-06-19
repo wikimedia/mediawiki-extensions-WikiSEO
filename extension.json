@@ -1,6 +1,6 @@
 {
 	"name": "WikiSEO",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"author": [
 		"Octfx",
 		"Andru Vallance",
@@ -26,12 +26,16 @@
 			"description": "Site verification key for Bing WebmasterTools",
 			"value": null
 		},
+		"TwitterSiteHandle": {
+			"description": "Twitter Site handle to add globally",
+			"value": null
+		},
 		"MetadataGenerators":  {
 			"description": "Array with metadata generators",
 			"value": [
 				"OpenGraph",
 				"Twitter",
-				"JsonLD"
+				"SchemaOrg"
 			]
 		}
 	},
