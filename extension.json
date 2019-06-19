@@ -26,6 +26,10 @@
 			"description": "Site verification key for Bing WebmasterTools",
 			"value": null
 		},
+		"TwitterSiteHandle": {
+			"description": "Twitter Site handle to add globally",
+			"value": null
+		},
 		"MetadataGenerators":  {
 			"description": "Array with metadata generators",
 			"value": [
