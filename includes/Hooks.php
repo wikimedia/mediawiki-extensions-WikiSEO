@@ -2,24 +2,28 @@
 
 namespace Octfx\WikiSEO;
 
+use MWException;
 use OutputPage;
 use Parser;
-use Skin;
-use MWException;
 
 class Hooks {
 	/**
-	 * Customisations to OutputPage right before page display.
+	 * Extracts the generated seo html comments form the page and adds them as meta tags
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
+	 *
+	 * @param OutputPage $out
 	 */
-	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
-
+	public static function onBeforePageDisplay( OutputPage $out ) {
+		$seo = new WikiSEO();
+		$tags = TagParser::extractSeoDataFromHtml( $out->getHTML() );
+		$seo->setMetadataArray( $tags );
+		$seo->addMetadataToPage( $out );
 	}
-
 
 	/**
 	 * Register parser hooks.
+	 * <seo> and {{#seo:}}
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
 	 * @see https://www.mediawiki.org/wiki/Manual:Parser_functions
@@ -29,14 +33,8 @@ class Hooks {
 	 * @throws MWException
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
-		// parserTag
 		$parser->setHook( 'seo', 'Octfx\WikiSEO\WikiSEO::fromTag' );
 
-		// parserFunction
 		$parser->setFunctionHook( 'seo', 'Octfx\WikiSEO\WikiSEO::fromParserFunction', Parser::SFH_OBJECT_ARGS );
-	}
-
-	public static function onOutputPageBeforeHTML( OutputPage $out, &$text ) {
-
 	}
 }
