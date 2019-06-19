@@ -44,6 +44,7 @@ class MetaTag implements GeneratorInterface {
 	 */
 	public function addMetadata() {
 		$this->addGoogleSiteVerification();
+		$this->addBingSiteVerification();
 		$this->addFacebookAppId();
 
 		foreach ( self::$tags as $tag ) {
@@ -61,6 +62,17 @@ class MetaTag implements GeneratorInterface {
 
 		if ( $wgGoogleSiteVerificationKey !== null ) {
 			$this->outputPage->addMeta( 'google-site-verification', $wgGoogleSiteVerificationKey );
+		}
+	}
+
+	/**
+	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 */
+	private function addBingSiteVerification() {
+		global $wgBingSiteVerificationKey;
+
+		if ( $wgBingSiteVerificationKey !== null ) {
+			$this->outputPage->addMeta( 'msvalidate.01', $wgBingSiteVerificationKey );
 		}
 	}
 

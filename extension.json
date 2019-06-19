@@ -22,6 +22,10 @@
 			"description": "App Id for Facebook Insights",
 			"value": null
 		},
+		"BingSiteVerificationKey": {
+			"description": "Site verification key for Bing WebmasterTools",
+			"value": null
+		},
 		"MetadataGenerators":  {
 			"description": "Array with metadata generators",
 			"value": [
