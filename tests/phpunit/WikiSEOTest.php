@@ -42,7 +42,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( sprintf( '%s - %s', $origTitle, $this->replacementTitle ), $out->getHTMLTitle() );
+		$this->assertEquals( sprintf( '%s - %s', $origTitle, $this->replacementTitle ),
+			$out->getHTMLTitle() );
 	}
 
 	/**
@@ -61,7 +62,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( sprintf( '%s - %s', $this->replacementTitle, $origTitle ), $out->getHTMLTitle() );
+		$this->assertEquals( sprintf( '%s - %s', $this->replacementTitle, $origTitle ),
+			$out->getHTMLTitle() );
 	}
 
 	/**
@@ -81,7 +83,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( sprintf( '%sSEP__SEP%s', $origTitle, $this->replacementTitle ), $out->getHTMLTitle() );
+		$this->assertEquals( sprintf( '%sSEP__SEP%s', $origTitle, $this->replacementTitle ),
+			$out->getHTMLTitle() );
 	}
 
 	/**

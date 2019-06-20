@@ -26,8 +26,7 @@ use OutputPage;
  *
  * @package MediaWiki\Extension\WikiSEO\Generator
  */
-interface GeneratorInterface
-{
+interface GeneratorInterface {
 	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
 	 *

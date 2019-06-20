@@ -2,7 +2,6 @@
 
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
-use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
@@ -43,7 +42,8 @@ class TwitterTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>', $out->getHeadItemsArray()['twitter:site'] );
+		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>',
+			$out->getHeadItemsArray()['twitter:site'] );
 	}
 
 	/**
@@ -56,10 +56,11 @@ class TwitterTest extends GeneratorTest {
 		$out = $this->newInstance();
 
 		$generator = new Twitter();
-		$generator->init( ['twitter_site' => '@NotAdded'], $out );
+		$generator->init( [ 'twitter_site' => '@NotAdded' ], $out );
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>', $out->getHeadItemsArray()['twitter:site'] );
+		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>',
+			$out->getHeadItemsArray()['twitter:site'] );
 	}
 }

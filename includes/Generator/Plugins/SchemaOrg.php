@@ -103,6 +103,9 @@ class SchemaOrg implements GeneratorInterface {
 			}
 		}
 
-		$this->outputPage->addHeadItem( 'jsonld-metadata', sprintf( $template, json_encode( $meta ) ) );
+		$this->outputPage->addHeadItem(
+			'jsonld-metadata',
+			sprintf( $template, json_encode( $meta ) )
+		);
 	}
 }

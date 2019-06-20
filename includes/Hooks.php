@@ -52,6 +52,7 @@ class Hooks {
 	public static function onParserFirstCallInit( Parser $parser ) {
 		$parser->setHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromTag' );
 
-		$parser->setFunctionHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction', Parser::SFH_OBJECT_ARGS );
+		$parser->setFunctionHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction',
+			Parser::SFH_OBJECT_ARGS );
 	}
 }

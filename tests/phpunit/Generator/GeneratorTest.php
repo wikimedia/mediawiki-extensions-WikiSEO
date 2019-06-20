@@ -34,7 +34,7 @@ class GeneratorTest extends MediaWikiTestCase {
 			$context->getConfig()
 		] ) );
 
-		if ( !in_array( 'notitle', (array) $options ) ) {
+		if ( !in_array( 'notitle', (array)$options ) ) {
 			$context->setTitle( Title::newFromText( 'My test page' ) );
 		}
 

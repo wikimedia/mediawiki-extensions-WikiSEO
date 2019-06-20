@@ -55,6 +55,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'fb:app_id', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="fb:app_id" content="0011223344"/>', $out->getHeadItemsArray()['fb:app_id'] );
+		$this->assertEquals( '<meta property="fb:app_id" content="0011223344"/>',
+			$out->getHeadItemsArray()['fb:app_id'] );
 	}
 }

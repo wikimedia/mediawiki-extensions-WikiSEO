@@ -2,8 +2,8 @@
 
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
-use MediaWikiTestCase;
 use MediaWiki\Extension\WikiSEO\TagParser;
+use MediaWikiTestCase;
 
 class TagParserTest extends MediaWikiTestCase {
 	/**
@@ -54,7 +54,8 @@ class TagParserTest extends MediaWikiTestCase {
 
 		$this->assertCount( 1, $parsedArgs );
 		$this->assertArrayHasKey( 'description', $parsedArgs );
-		$this->assertEquals( 'First Equal separates = Second Equal is included', $parsedArgs['description'] );
+		$this->assertEquals( 'First Equal separates = Second Equal is included',
+			$parsedArgs['description'] );
 	}
 
 	/**
