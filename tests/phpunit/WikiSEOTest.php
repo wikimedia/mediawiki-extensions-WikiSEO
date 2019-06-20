@@ -1,16 +1,16 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests;
+namespace MediaWiki\Extension\WikiSEO\Tests;
 
-use Octfx\WikiSEO\Tests\Generator\GeneratorTest;
-use Octfx\WikiSEO\WikiSEO;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\WikiSEO;
 
 class WikiSEOTest extends GeneratorTest {
 	private $replacementTitle = 'Replaced Title';
 
 	/**
-	 * @covers \Octfx\WikiSEO\WikiSEO::modifyPageTitle
-	 * @covers \Octfx\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
 	 */
 	public function testModifyTitleReplace() {
 		$seo = new WikiSEO();
@@ -27,8 +27,8 @@ class WikiSEOTest extends GeneratorTest {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\WikiSEO::modifyPageTitle
-	 * @covers \Octfx\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
 	 */
 	public function testModifyTitleAppend() {
 		$seo = new WikiSEO();
@@ -42,12 +42,13 @@ class WikiSEOTest extends GeneratorTest {
 
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( sprintf( '%s - %s', $origTitle, $this->replacementTitle ), $out->getHTMLTitle() );
+		$this->assertEquals( sprintf( '%s - %s', $origTitle, $this->replacementTitle ),
+			$out->getHTMLTitle() );
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\WikiSEO::modifyPageTitle
-	 * @covers \Octfx\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
 	 */
 	public function testModifyTitlePrepend() {
 		$seo = new WikiSEO();
@@ -61,12 +62,13 @@ class WikiSEOTest extends GeneratorTest {
 
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( sprintf( '%s - %s', $this->replacementTitle, $origTitle ), $out->getHTMLTitle() );
+		$this->assertEquals( sprintf( '%s - %s', $this->replacementTitle, $origTitle ),
+			$out->getHTMLTitle() );
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\WikiSEO::modifyPageTitle
-	 * @covers \Octfx\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
 	 */
 	public function testModifyTitleAppendChangedSeparator() {
 		$seo = new WikiSEO();
@@ -81,12 +83,13 @@ class WikiSEOTest extends GeneratorTest {
 
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( sprintf( '%sSEP__SEP%s', $origTitle, $this->replacementTitle ), $out->getHTMLTitle() );
+		$this->assertEquals( sprintf( '%sSEP__SEP%s', $origTitle, $this->replacementTitle ),
+			$out->getHTMLTitle() );
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\WikiSEO::modifyPageTitle
-	 * @covers \Octfx\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
 	 */
 	public function testModifyTitleHtmlEntities() {
 		$seo = new WikiSEO();
