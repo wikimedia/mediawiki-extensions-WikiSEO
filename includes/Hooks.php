@@ -1,6 +1,6 @@
 <?php
 
-namespace Octfx\WikiSEO;
+namespace MediaWiki\Extension\WikiSEO;
 
 use MWException;
 use OutputPage;
@@ -33,8 +33,8 @@ class Hooks {
 	 * @throws MWException
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
-		$parser->setHook( 'seo', 'Octfx\WikiSEO\WikiSEO::fromTag' );
+		$parser->setHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromTag' );
 
-		$parser->setFunctionHook( 'seo', 'Octfx\WikiSEO\WikiSEO::fromParserFunction', Parser::SFH_OBJECT_ARGS );
+		$parser->setFunctionHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction', Parser::SFH_OBJECT_ARGS );
 	}
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace Octfx\WikiSEO\Generator\Plugins;
+namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use Html;
-use Octfx\WikiSEO\Generator\GeneratorInterface;
+use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use OutputPage;
 
 /**
  * OpenGraph metadata generator
  *
- * @package Octfx\WikiSEO\Generator\Plugins
+ * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
 class OpenGraph implements GeneratorInterface {
 	protected static $htmlElementPropertyKey = 'property';

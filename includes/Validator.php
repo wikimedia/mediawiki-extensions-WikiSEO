@@ -1,11 +1,11 @@
 <?php
 
-namespace Octfx\WikiSEO;
+namespace MediaWiki\Extension\WikiSEO;
 
 /**
  * Class Validator
  *
- * @package Octfx\WikiSEO
+ * @package MediaWiki\Extension\WikiSEO
  */
 class Validator {
 	private static $validParams = [

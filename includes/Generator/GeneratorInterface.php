@@ -1,13 +1,13 @@
 <?php
 
-namespace Octfx\WikiSEO\Generator;
+namespace MediaWiki\Extension\WikiSEO\Generator;
 
 use OutputPage;
 
 /**
  * Interface for metadata generators
  *
- * @package Octfx\WikiSEO\Generator
+ * @package MediaWiki\Extension\WikiSEO\Generator
  */
 interface GeneratorInterface
 {

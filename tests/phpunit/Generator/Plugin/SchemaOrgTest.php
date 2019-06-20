@@ -1,14 +1,14 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests\Generator\Plugin;
+namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
-use Octfx\WikiSEO\Generator\Plugins\SchemaOrg;
-use Octfx\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
 class SchemaOrgTest extends GeneratorTest {
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\SchemaOrg::init
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\SchemaOrg::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::addMetadata
 	 */
 	public function testAddMetadata() {
 		$metadata = [

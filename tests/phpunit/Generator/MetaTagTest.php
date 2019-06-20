@@ -1,13 +1,13 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests\Generator;
+namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
-use Octfx\WikiSEO\Generator\MetaTag;
+use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 
 class MetaTagTest extends GeneratorTest {
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\MetaTag::init
-	 * @covers \Octfx\WikiSEO\Generator\MetaTag::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addMetadata
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -26,8 +26,8 @@ class MetaTagTest extends GeneratorTest {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\MetaTag::init
-	 * @covers \Octfx\WikiSEO\Generator\MetaTag::addGoogleSiteVerification
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addGoogleSiteVerification
 	 */
 	public function testAddGoogleSiteKey() {
 		$this->setMwGlobals( 'wgGoogleSiteVerificationKey', 'TestKey' );
@@ -42,8 +42,8 @@ class MetaTagTest extends GeneratorTest {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\MetaTag::init
-	 * @covers \Octfx\WikiSEO\Generator\MetaTag::addFacebookAppId
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addFacebookAppId
 	 */
 	public function testAddFacebookAppId() {
 		$this->setMwGlobals( 'wgFacebookAppId', '0011223344' );

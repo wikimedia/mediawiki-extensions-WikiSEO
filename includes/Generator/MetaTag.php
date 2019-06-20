@@ -1,6 +1,6 @@
 <?php
 
-namespace Octfx\WikiSEO\Generator;
+namespace MediaWiki\Extension\WikiSEO\Generator;
 
 use Html;
 use OutputPage;
@@ -9,7 +9,7 @@ use OutputPage;
  * Basic metadata tag generator
  * Adds metadata for description, keywords and robots
  *
- * @package Octfx\WikiSEO\Generator
+ * @package MediaWiki\Extension\WikiSEO\Generator
  */
 class MetaTag implements GeneratorInterface {
 	private static $tags = [ 'description', 'keywords', 'robots' ];

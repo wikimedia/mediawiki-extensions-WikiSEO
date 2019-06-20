@@ -48,11 +48,11 @@
 		"WikiSEOMagic" : "WikiSEO.i18n.magic.php"
 	},
 	"AutoloadNamespaces": {
-		"Octfx\\WikiSEO\\": "includes/"
+		"MediaWiki\\Extension\\WikiSEO\\": "includes/"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": "Octfx\\WikiSEO\\Hooks::onParserFirstCallInit",
-		"BeforePageDisplay": "Octfx\\WikiSEO\\Hooks::onBeforePageDisplay"
+		"ParserFirstCallInit": "MediaWiki\\Extension\\WikiSEO\\Hooks::onParserFirstCallInit",
+		"BeforePageDisplay": "MediaWiki\\Extension\\WikiSEO\\Hooks::onBeforePageDisplay"
 	},
 	"manifest_version": 2
 }

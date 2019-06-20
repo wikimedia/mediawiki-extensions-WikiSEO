@@ -1,9 +1,9 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests;
+namespace MediaWiki\Extension\WikiSEO\Tests;
 
 use MediaWikiTestCase;
-use Octfx\WikiSEO\TagParser;
+use MediaWiki\Extension\WikiSEO\TagParser;
 
 class TagParserTest extends MediaWikiTestCase {
 	/**
@@ -22,7 +22,7 @@ class TagParserTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\TagParser::parseArgs
+	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::parseArgs
 	 */
 	public function testParseArgs() {
 		$args = [
@@ -41,7 +41,7 @@ class TagParserTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\TagParser::parseArgs
+	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::parseArgs
 	 */
 	public function testParseArgsMultipleEquals() {
 		$args = [
@@ -58,7 +58,7 @@ class TagParserTest extends MediaWikiTestCase {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\TagParser::parseText
+	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::parseText
 	 */
 	public function testParseText() {
 		$text = <<<EOL
@@ -77,7 +77,7 @@ EOL;
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\TagParser::extractSeoDataFromHtml
+	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::extractSeoDataFromHtml
 	 */
 	public function testExtractSeoDataFromHtml() {
 		$text = <<<EOL

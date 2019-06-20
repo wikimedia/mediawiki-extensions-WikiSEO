@@ -1,6 +1,6 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests\Generator;
+namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
 use HashConfig;
 use MediaWikiTestCase;

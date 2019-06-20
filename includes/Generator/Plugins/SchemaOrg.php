@@ -1,8 +1,8 @@
 <?php
 
-namespace Octfx\WikiSEO\Generator\Plugins;
+namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
-use Octfx\WikiSEO\Generator\GeneratorInterface;
+use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use OutputPage;
 
 class SchemaOrg implements GeneratorInterface {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Octfx\WikiSEO\Generator\Plugins;
+namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use Html;
 
 /**
  * Twitter metadata generator
  *
- * @package Octfx\WikiSEO\Generator\Plugins
+ * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
 class Twitter extends OpenGraph {
 	protected static $tags = [ 'type', 'image', 'image_width', 'image_height', 'description', 'keywords', 'locale', 'site_name', 'published_time', 'modified_time', 'twitter_site', ];

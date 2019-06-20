@@ -1,6 +1,6 @@
 <?php
 
-namespace Octfx\WikiSEO;
+namespace MediaWiki\Extension\WikiSEO;
 
 use Parser;
 use PPFrame;
@@ -8,7 +8,7 @@ use PPFrame;
 /**
  * Parses tags and expands wikitext
  *
- * @package Octfx\WikiSEO
+ * @package MediaWiki\Extension\WikiSEO
  */
 class TagParser {
 	/**

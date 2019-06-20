@@ -1,9 +1,9 @@
 <?php
 
-namespace Octfx\WikiSEO;
+namespace MediaWiki\Extension\WikiSEO;
 
-use Octfx\WikiSEO\Generator\GeneratorInterface;
-use Octfx\WikiSEO\Generator\MetaTag;
+use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
+use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use OutputPage;
 use Parser;
 use PPFrame;
@@ -84,7 +84,7 @@ class WikiSEO {
 		$this->generatorInstances[] = new MetaTag();
 
 		foreach ( $this->generators as $generator ) {
-			$classPath = "Octfx\\WikiSEO\\Generator\\Plugins\\$generator";
+			$classPath = "MediaWiki\\Extension\\WikiSEO\\Generator\\Plugins\\$generator";
 
 			if ( !class_exists( $classPath ) ) {
 				$this->errors[] = wfMessage( 'wiki-seo-invalid-generator', $generator )->parse();

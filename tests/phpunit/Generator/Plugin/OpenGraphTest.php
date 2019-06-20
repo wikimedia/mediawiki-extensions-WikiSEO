@@ -1,14 +1,14 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests\Generator\Plugin;
+namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
-use Octfx\WikiSEO\Generator\Plugins\OpenGraph;
-use Octfx\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
 class OpenGraphTest extends GeneratorTest {
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\OpenGraph::init
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\OpenGraph::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addMetadata
 	 */
 	public function testAddMetadata() {
 		$metadata = [

@@ -1,15 +1,15 @@
 <?php
 
-namespace Octfx\WikiSEO\Tests\Generator\Plugin;
+namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
-use Octfx\WikiSEO\Generator\MetaTag;
-use Octfx\WikiSEO\Generator\Plugins\Twitter;
-use Octfx\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
 class TwitterTest extends GeneratorTest {
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\Twitter::init
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\Twitter::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addMetadata
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -30,8 +30,8 @@ class TwitterTest extends GeneratorTest {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\Twitter::init
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
 	 */
 	public function testAddTwitterSiteHandle() {
 		$this->setMwGlobals( 'wgTwitterSiteHandle', '@TestKey' );
@@ -47,8 +47,8 @@ class TwitterTest extends GeneratorTest {
 	}
 
 	/**
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\Twitter::init
-	 * @covers \Octfx\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
 	 */
 	public function testIgnoreMetaIfGlobal() {
 		$this->setMwGlobals( 'wgTwitterSiteHandle', '@TestKey' );
