@@ -8,7 +8,7 @@
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:WikiSEO",
 	"descriptionmsg": "wiki-seo-desc",
-	"license-name": "GPL-2.0+",
+	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
 	"requires": {
 		"MediaWiki": ">= 1.31.0"
