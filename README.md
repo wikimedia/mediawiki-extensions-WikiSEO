@@ -27,13 +27,13 @@ Add the following line to the end of your LocalSettings file:
 Use this extension as described [on the extensions documentation page](https://www.mediawiki.org/wiki/Extension:WikiSEO).
 
 ## Changes to v1.2.2
-Minimum required MediaWiki version is: 1.27.0  
+Minimum required MediaWiki version is: 1.31.0  
 
 Added features:
 * $wgBingSiteVerificationKey
   * Key for Bing WebmasterTools, adds ``msvalidate.01`` meta tag
 * $wgMetadataGenerators
-  * Array of metadata generators to use, default: [OpenGraph, Twitter, JsonLD]
+  * Array of metadata generators to use, default: [OpenGraph, Twitter, SchemaOrg]
 
 Removed tags:
 * DC.date.created
