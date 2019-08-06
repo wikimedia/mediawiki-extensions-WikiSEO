@@ -81,6 +81,7 @@ class TagParser {
 		}
 
 		$tags = array_map( 'strip_tags', $tags );
+		$tags = array_map( 'html_entity_decode', $tags );
 
 		return array_map( 'trim', $tags );
 	}
