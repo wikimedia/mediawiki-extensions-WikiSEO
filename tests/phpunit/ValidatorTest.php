@@ -11,12 +11,12 @@ class ValidatorTest extends MediaWikiTestCase {
 	 */
 	private $validator;
 
-	protected function setUp() {
+	protected function setUp(): void {
 		parent::setUp();
 		$this->validator = new Validator();
 	}
 
-	protected function tearDown() {
+	protected function tearDown(): void {
 		unset( $this->validator );
 		parent::tearDown();
 	}
