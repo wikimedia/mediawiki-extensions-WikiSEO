@@ -34,8 +34,9 @@ class Validator {
 		'description',
 
 		'robots',
+		'google_bot',
 
-		'image', 'image_width', 'image_height',
+		'image', 'image_width', 'image_height', 'image_alt',
 
 		'type',
 		'site_name',

@@ -27,19 +27,6 @@ use Html;
  * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
 class Twitter extends OpenGraph {
-	protected static $tags = [
-		'type',
-		'image',
-		'image_width',
-		'image_height',
-		'description',
-		'keywords',
-		'locale',
-		'site_name',
-		'published_time',
-		'modified_time',
-		'twitter_site',
-	];
 
 	/**
 	 * Page title property name
@@ -53,10 +40,14 @@ class Twitter extends OpenGraph {
 	 * Updates some tag name conversions
 	 */
 	public function __construct() {
-		self::$conversions['twitter_site'] = 'twitter:site';
+		self::$tags[] = 'twitter_site';
 
-		self::$conversions['description'] = 'twitter:description';
-		self::$conversions['image'] = 'twitter:image';
+		self::$conversions = array_merge( self::$conversions, [
+			'twitter_site' => 'twitter:site',
+			'description' => 'twitter:description',
+			'image' => 'twitter:image',
+			'image_alt' => 'twitter:image:alt,'
+		] );
 	}
 
 	/**

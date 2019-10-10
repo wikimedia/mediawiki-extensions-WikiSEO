@@ -43,6 +43,7 @@ class OpenGraph implements GeneratorInterface {
 		'image',
 		'image_width',
 		'image_height',
+		'image_alt',
 		'keywords',
 		'locale',
 		'modified_time',
@@ -61,6 +62,7 @@ class OpenGraph implements GeneratorInterface {
 		'image'        => 'og:image',
 		'image_width'  => 'og:image:width',
 		'image_height' => 'og:image:height',
+		'image_alt'    => 'og:image:alt',
 
 		'locale'      => 'og:locale',
 		'type'        => 'og:type',
