@@ -1,0 +1,4 @@
+{
+  "wiki-seo-desc": "Extension that allows the user to add metadata tags for seo improvements",
+  "wiki-seo-empty-attr": "Error message if the parser hook or tag is called without content"
+}
