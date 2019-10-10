@@ -2,9 +2,7 @@
 	"name": "WikiSEO",
 	"version": "2.0.2",
 	"author": [
-		"Octfx",
-		"Andru Vallance",
-		"..."
+		"Octfx"
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:WikiSEO",
 	"descriptionmsg": "wiki-seo-desc",
@@ -15,15 +13,31 @@
 	},
 	"config": {
 		"GoogleSiteVerificationKey": {
-			"description": "Site verification key for Google WebmasterTools",
+			"description": "Site verification key for Google Search Console",
+			"value": null
+		},
+		"BingSiteVerificationKey": {
+			"description": "Site verification key for Bing Webmaster Center",
 			"value": null
 		},
 		"FacebookAppId":  {
 			"description": "App Id for Facebook Insights",
 			"value": null
 		},
-		"BingSiteVerificationKey": {
-			"description": "Site verification key for Bing WebmasterTools",
+		"YandexSiteVerificationKey": {
+			"description": "Site verification key for Yandex Webmasters",
+			"value": null
+		},
+		"AlexaSiteVerificationKey": {
+			"description": "Site verification key for Alexa Console",
+			"value": null
+		},
+		"PinterestSiteVerificationKey": {
+			"description": "Site verification key for Pinterest Console",
+			"value": null
+		},
+		"NortonSiteVerificationKey": {
+			"description": "Site verification key for Norton Safe Web",
 			"value": null
 		},
 		"TwitterSiteHandle": {

@@ -29,7 +29,7 @@ use OutputPage;
  * @package MediaWiki\Extension\WikiSEO\Generator
  */
 class MetaTag implements GeneratorInterface {
-	private static $tags = [ 'description', 'keywords', 'robots' ];
+	private static $tags = [ 'description', 'keywords', 'robots', 'google_bot' ];
 
 	/**
 	 * @var array
@@ -62,6 +62,10 @@ class MetaTag implements GeneratorInterface {
 	public function addMetadata() {
 		$this->addGoogleSiteVerification();
 		$this->addBingSiteVerification();
+		$this->addYandexSiteVerification();
+		$this->addAlexaSiteVerification();
+		$this->addPinterestSiteVerification();
+		$this->addNortonSiteVerification();
 		$this->addFacebookAppId();
 
 		foreach ( self::$tags as $tag ) {
@@ -90,6 +94,50 @@ class MetaTag implements GeneratorInterface {
 
 		if ( $wgBingSiteVerificationKey !== null ) {
 			$this->outputPage->addMeta( 'msvalidate.01', $wgBingSiteVerificationKey );
+		}
+	}
+
+	/**
+	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 */
+	private function addYandexSiteVerification() {
+		global $wgYandexSiteVerificationKey;
+
+		if ( $wgYandexSiteVerificationKey !== null ) {
+			$this->outputPage->addMeta( 'yandex-verification', $wgYandexSiteVerificationKey );
+		}
+	}
+
+	/**
+	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 */
+	private function addAlexaSiteVerification() {
+		global $wgAlexaSiteVerificationKey;
+
+		if ( $wgAlexaSiteVerificationKey !== null ) {
+			$this->outputPage->addMeta( 'alexaVerifyID', $wgAlexaSiteVerificationKey );
+		}
+	}
+
+	/**
+	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 */
+	private function addPinterestSiteVerification() {
+		global $wgPinterestSiteVerificationKey;
+
+		if ( $wgPinterestSiteVerificationKey !== null ) {
+			$this->outputPage->addMeta( 'p:domain_verify', $wgPinterestSiteVerificationKey );
+		}
+	}
+
+	/**
+	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 */
+	private function addNortonSiteVerification() {
+		global $wgNortonSiteVerificationKey;
+
+		if ( $wgNortonSiteVerificationKey !== null ) {
+			$this->outputPage->addMeta( 'norton-safeweb-site-verification', $wgNortonSiteVerificationKey );
 		}
 	}
 
