@@ -208,7 +208,10 @@ class WikiSEO {
 		$tagParser = new TagParser();
 
 		$parsedInput = $tagParser->parseText( $input );
-		$seo->setMetadataArray( $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame ) );
+		$tags = $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame );
+		$tags = array_merge( $tags, $args );
+
+		$seo->setMetadataArray( $tags );
 
 		return $seo->makeHtmlOutput();
 	}
