@@ -103,10 +103,11 @@ class WikiSEO {
 		foreach ( $this->generators as $generator ) {
 			$classPath = "MediaWiki\\Extension\\WikiSEO\\Generator\\Plugins\\$generator";
 
-			if ( !class_exists( $classPath ) ) {
+			try {
+				$class = new \ReflectionClass( $classPath );
+				$this->generatorInstances[] = $class->newInstance();
+			} catch ( \ReflectionException $e ) {
 				$this->errors[] = wfMessage( 'wiki-seo-invalid-generator', $generator )->parse();
-			} else {
-				$this->generatorInstances[] = new $classPath();
 			}
 		}
 	}

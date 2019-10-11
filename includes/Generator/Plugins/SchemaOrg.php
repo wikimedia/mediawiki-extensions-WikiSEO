@@ -28,7 +28,7 @@ class SchemaOrg implements GeneratorInterface {
 	 *
 	 * @var array
 	 */
-	protected static $tags = [
+	protected $tags = [
 		'type',
 		'image',
 		'description',
@@ -43,7 +43,7 @@ class SchemaOrg implements GeneratorInterface {
 	 *
 	 * @var array
 	 */
-	protected static $conversions = [
+	protected $conversions = [
 		'type' => '@type',
 
 		'published_time' => 'datePublished',
@@ -92,11 +92,11 @@ class SchemaOrg implements GeneratorInterface {
 			$meta['url'] = $this->outputPage->getTitle()->getFullURL();
 		}
 
-		foreach ( static::$tags as $tag ) {
+		foreach ( $this->tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
 				$convertedTag = $tag;
-				if ( isset( static::$conversions[$tag] ) ) {
-					$convertedTag = static::$conversions[$tag];
+				if ( isset( $this->conversions[$tag] ) ) {
+					$convertedTag = $this->conversions[$tag];
 				}
 
 				$meta[$convertedTag] = $this->metadata[$tag];

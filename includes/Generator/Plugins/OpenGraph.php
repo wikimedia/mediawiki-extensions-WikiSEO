@@ -37,7 +37,7 @@ class OpenGraph implements GeneratorInterface {
 	 *
 	 * @var array
 	 */
-	protected static $tags = [
+	protected $tags = [
 		'author',
 		'description',
 		'image',
@@ -58,7 +58,7 @@ class OpenGraph implements GeneratorInterface {
 	 *
 	 * @var array
 	 */
-	protected static $conversions = [
+	protected $conversions = [
 		'image'        => 'og:image',
 		'image_width'  => 'og:image:width',
 		'image_height' => 'og:image:height',
@@ -121,9 +121,9 @@ class OpenGraph implements GeneratorInterface {
 			] ) );
 		}
 
-		foreach ( static::$tags as $tag ) {
+		foreach ( $this->tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
-				$convertedTag = static::$conversions[$tag];
+				$convertedTag = $this->conversions[$tag];
 
 				$this->outputPage->addHeadItem( $convertedTag, Html::element( 'meta', [
 					self::$htmlElementPropertyKey => $convertedTag,

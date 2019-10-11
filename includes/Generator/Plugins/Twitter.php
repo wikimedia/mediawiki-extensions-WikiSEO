@@ -40,9 +40,9 @@ class Twitter extends OpenGraph {
 	 * Updates some tag name conversions
 	 */
 	public function __construct() {
-		self::$tags[] = 'twitter_site';
+		$this->tags[] = 'twitter_site';
 
-		self::$conversions = array_merge( self::$conversions, [
+		$this->conversions = array_merge( $this->conversions, [
 			'twitter_site' => 'twitter:site',
 			'description' => 'twitter:description',
 			'image' => 'twitter:image',
@@ -75,7 +75,7 @@ class Twitter extends OpenGraph {
 
 		if ( $wgTwitterSiteHandle !== null ) {
 			unset( $this->metadata['twitter_site'] );
-			unset( self::$tags['twitter_site'], self::$conversions['twitter_site'] );
+			unset( $this->tags['twitter_site'], $this->conversions['twitter_site'] );
 
 			$this->outputPage->addHeadItem( 'twitter:site', Html::element( 'meta', [
 				self::$htmlElementPropertyKey => 'twitter:site',
