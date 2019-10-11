@@ -46,7 +46,7 @@ class Twitter extends OpenGraph {
 			'twitter_site' => 'twitter:site',
 			'description' => 'twitter:description',
 			'image' => 'twitter:image',
-			'image_alt' => 'twitter:image:alt,'
+			'image_alt' => 'twitter:image:alt'
 		] );
 	}
 
