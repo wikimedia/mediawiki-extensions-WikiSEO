@@ -21,6 +21,7 @@ namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use Html;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
+use MediaWiki\Extension\WikiSEO\WikiSEO;
 use OutputPage;
 
 /**
@@ -115,9 +116,13 @@ class OpenGraph implements GeneratorInterface {
 		$this->addTitleMeta();
 
 		if ( $this->outputPage->getTitle() !== null ) {
+			$url = $this->outputPage->getTitle()->getFullURL();
+
+			$url = WikiSEO::protocolizeUrl( $url, $this->outputPage->getRequest() );
+
 			$this->outputPage->addHeadItem( 'og:url', Html::element( 'meta', [
 				self::$htmlElementPropertyKey => 'og:url',
-				self::$htmlElementContentKey  => $this->outputPage->getTitle()->getFullURL()
+				self::$htmlElementContentKey  => $url,
 			] ) );
 		}
 
