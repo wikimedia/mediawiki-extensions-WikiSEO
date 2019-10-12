@@ -239,4 +239,20 @@ class WikiSEO {
 
 		return [ $seo->makeHtmlOutput(), 'noparse' => true, 'isHTML' => true ];
 	}
+
+	/**
+	 * Add the server protocol to the url if it is missing
+	 *
+	 * @param string $url Url from getFullURL()
+	 * @param \WebRequest $request
+	 *
+	 * @return string
+	 */
+	public static function protocolizeUrl( $url, \WebRequest $request ) {
+		if ( parse_url( $url, PHP_URL_SCHEME ) === null ) {
+			$url = sprintf( '%s:%s', $request->getProtocol(), $url );
+		}
+
+		return $url;
+	}
 }

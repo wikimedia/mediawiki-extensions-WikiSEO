@@ -20,6 +20,7 @@
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
+use MediaWiki\Extension\WikiSEO\WikiSEO;
 use OutputPage;
 
 class SchemaOrg implements GeneratorInterface {
@@ -88,8 +89,12 @@ class SchemaOrg implements GeneratorInterface {
 		];
 
 		if ( $this->outputPage->getTitle() !== null ) {
-			$meta['identifier'] = $this->outputPage->getTitle()->getFullURL();
-			$meta['url'] = $this->outputPage->getTitle()->getFullURL();
+			$url = $this->outputPage->getTitle()->getFullURL();
+
+			$url = WikiSEO::protocolizeUrl( $url, $this->outputPage->getRequest() );
+
+			$meta['identifier'] = $url;
+			$meta['url'] = $url;
 		}
 
 		foreach ( static::$tags as $tag ) {

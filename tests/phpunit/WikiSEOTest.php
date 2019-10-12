@@ -105,4 +105,24 @@ class WikiSEOTest extends GeneratorTest {
 
 		$this->assertNotContains( '&nbsp;', $out->getHTMLTitle() );
 	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::protocolizeUrl
+	 */
+	public function testProtocolizeUrlProtoMissing() {
+		$out = $this->newInstance();
+		$url = '//localhost/Main_Page';
+
+		$this->assertContains( 'http', WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::protocolizeUrl
+	 */
+	public function testProtocolizeUrl() {
+		$out = $this->newInstance();
+		$url = 'http://localhost/Main_Page';
+
+		$this->assertEquals( $url, WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
+	}
 }
