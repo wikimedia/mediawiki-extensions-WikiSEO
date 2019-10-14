@@ -84,6 +84,7 @@ class SchemaOrg implements GeneratorInterface {
 
 		$meta = [
 			'@context' => 'http://schema.org',
+			'@type' => 'WebPage',
 			'name'     => $this->outputPage->getHTMLTitle(),
 			'headline' => $this->outputPage->getHTMLTitle(),
 		];
