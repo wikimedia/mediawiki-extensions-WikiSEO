@@ -24,6 +24,7 @@ use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use OutputPage;
 use Parser;
 use PPFrame;
+use WebRequest;
 
 class WikiSEO {
 	/**
@@ -245,11 +246,11 @@ class WikiSEO {
 	 * Add the server protocol to the url if it is missing
 	 *
 	 * @param string $url Url from getFullURL()
-	 * @param \WebRequest $request
+	 * @param WebRequest $request
 	 *
 	 * @return string
 	 */
-	public static function protocolizeUrl( $url, \WebRequest $request ) {
+	public static function protocolizeUrl( $url, WebRequest $request ) {
 		if ( parse_url( $url, PHP_URL_SCHEME ) === null ) {
 			$url = sprintf( '%s:%s', $request->getProtocol(), $url );
 		}

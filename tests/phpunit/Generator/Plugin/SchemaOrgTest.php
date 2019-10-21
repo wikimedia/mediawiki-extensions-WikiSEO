@@ -26,4 +26,44 @@ class SchemaOrgTest extends GeneratorTest {
 
 		$this->assertContains( '@type', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getAuthorMetadata
+	 */
+	public function testContainsOrganization() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertContains( 'Organization', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getSearchActionMetadata
+	 */
+	public function testContainsSearchAction() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertContains( 'SearchAction', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getAuthorMetadata
+	 */
+	public function testContainsAuthorAndPublisher() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertContains( 'author', $out->getHeadItemsArray()['jsonld-metadata'] );
+		$this->assertContains( 'publisher', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
 }

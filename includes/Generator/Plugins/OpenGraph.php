@@ -22,6 +22,7 @@ namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 use Html;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\FileMetadataTrait as FileMetadata;
 use OutputPage;
 
 /**
@@ -30,6 +31,8 @@ use OutputPage;
  * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
 class OpenGraph implements GeneratorInterface {
+	use FileMetadata;
+
 	protected static $htmlElementPropertyKey = 'property';
 	protected static $htmlElementContentKey = 'content';
 
@@ -105,6 +108,8 @@ class OpenGraph implements GeneratorInterface {
 	public function init( array $metadata, OutputPage $out ) {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
+
+		$this->preprocessFileMetadata();
 	}
 
 	/**
