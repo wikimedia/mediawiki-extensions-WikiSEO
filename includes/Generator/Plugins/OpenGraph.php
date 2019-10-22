@@ -21,8 +21,9 @@ namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use Html;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
-use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\FileMetadataTrait as FileMetadata;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\RevisionMetadataTrait as RevisionMetadata;
+use MediaWiki\Extension\WikiSEO\WikiSEO;
 use OutputPage;
 
 /**
@@ -32,6 +33,7 @@ use OutputPage;
  */
 class OpenGraph implements GeneratorInterface {
 	use FileMetadata;
+	use RevisionMetadata;
 
 	protected static $htmlElementPropertyKey = 'property';
 	protected static $htmlElementContentKey = 'content';
@@ -110,6 +112,11 @@ class OpenGraph implements GeneratorInterface {
 		$this->outputPage = $out;
 
 		$this->preprocessFileMetadata();
+		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
+
+		if ( !isset( $this->metadata['published_time'] ) ) {
+			$this->metadata['published_time'] = $this->metadata['modified_time'];
+		}
 	}
 
 	/**

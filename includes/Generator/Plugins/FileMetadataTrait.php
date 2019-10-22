@@ -19,9 +19,11 @@
 
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
+use Exception;
 use File;
 use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\MediaWikiServices;
 use RepoGroup;
 use Title;
 
@@ -88,6 +90,15 @@ trait FileMetadataTrait {
 			catch ( InvalidArgumentException $e ) {
 				// File does not exist.
 				// Maybe the user has set an url, should we do something?
+			}
+		} else {
+			try {
+				$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
+				$logo = wfExpandUrl( $logo );
+				$this->metadata['image'] = $logo;
+			}
+			catch ( Exception  $e ) {
+				// We do nothing
 			}
 		}
 	}

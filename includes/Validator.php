@@ -44,7 +44,7 @@ class Validator {
 		'section',
 		'author',
 
-		'published_time', 'modified_time',
+		'published_time',
 
 		'twitter_site',
 	];

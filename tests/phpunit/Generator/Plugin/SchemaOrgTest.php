@@ -66,4 +66,48 @@ class SchemaOrgTest extends GeneratorTest {
 		$this->assertContains( 'author', $out->getHeadItemsArray()['jsonld-metadata'] );
 		$this->assertContains( 'publisher', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getRevisionTimestamp
+	 */
+	public function testContainsRevisionTimestamp() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertContains( 'datePublished', $out->getHeadItemsArray()['jsonld-metadata'] );
+		$this->assertContains( 'dateModified', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getRevisionTimestamp
+	 */
+	public function testContainsPublishedTimestampManual() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init( [
+			'published_time' => '2012-01-01',
+		], $out );
+		$generator->addMetadata();
+
+		$this->assertContains( '2012-01-01', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getImageMetadata
+	 */
+	public function testContainsImageObject() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertContains( 'wiki.png', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
 }

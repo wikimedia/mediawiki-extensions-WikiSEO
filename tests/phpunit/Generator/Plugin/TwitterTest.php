@@ -63,4 +63,19 @@ class TwitterTest extends GeneratorTest {
 		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>',
 			$out->getHeadItemsArray()['twitter:site'] );
 	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::preprocessFileMetadata
+	 */
+	public function testContainsImage() {
+		$out = $this->newInstance();
+
+		$generator = new Twitter();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertArrayHasKey( 'twitter:image', $out->getHeadItemsArray() );
+		$this->assertContains( 'wiki.png', $out->getHeadItemsArray()['twitter:image'] );
+	}
 }

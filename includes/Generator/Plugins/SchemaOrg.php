@@ -24,6 +24,7 @@ use Exception;
 use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\FileMetadataTrait as FileMetadata;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\RevisionMetadataTrait as RevisionMetadata;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
@@ -31,6 +32,7 @@ use Title;
 
 class SchemaOrg implements GeneratorInterface {
 	use FileMetadata;
+	use RevisionMetadata;
 
 	/**
 	 * Valid Tags for this generator
@@ -41,8 +43,8 @@ class SchemaOrg implements GeneratorInterface {
 		'type',
 		'description',
 		'keywords',
-		'published_time',
 		'modified_time',
+		'published_time',
 		'section'
 	];
 
@@ -71,6 +73,12 @@ class SchemaOrg implements GeneratorInterface {
 	public function init( array $metadata, OutputPage $out ) {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
+
+		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
+
+		if ( !isset( $this->metadata['published_time'] ) ) {
+			$this->metadata['published_time'] = $this->metadata['modified_time'];
+		}
 	}
 
 	/**
