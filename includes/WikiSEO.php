@@ -155,7 +155,7 @@ class WikiSEO {
 			}
 		}
 
-		return sprintf( "<!--wiki-seo-data-start\n%swiki-seo-data-end-->", $data );
+		return sprintf( "<!--\n%s-->", $data );
 	}
 
 	/**
