@@ -1,0 +1,141 @@
+!! test
+Parser only title
+!! wikitext
+{{#seo:
+|title=SeoWiki
+}}
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kifQ==--></div>
+!! end
+
+
+!! test
+Tag only title
+!! wikitext
+<seo>
+|title=SeoWiki
+</seo>
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kifQ==--></div>
+!! end
+
+
+!! test
+Tag only title internal
+!! wikitext
+<seo title="SeoWiki"></seo>
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kifQ==--></div>
+!! end
+
+
+!! test
+Tag only title internal self-closing
+!! wikitext
+<seo title="SeoWiki" />
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kifQ==--></div>
+!! end
+
+
+!! test
+Tag empty
+!! wikitext
+<seo></seo>
+!! html+tidy
+<div class="errorbox">Error: &lt;seo&gt; tag must contain at least one non-empty attribute.</div>
+!! end
+
+
+!! test
+Tag empty self-closing
+!! wikitext
+<seo />
+!! html+tidy
+<div class="errorbox">Error: &lt;seo&gt; tag must contain at least one non-empty attribute.</div>
+!! end
+
+
+!! test
+Parser empty
+!! wikitext
+{{#seo:}}
+!! html+tidy
+<div class="errorbox">Error: {{#seo:}} must contain at least one non-empty attribute.</div>
+!! end
+
+
+!! test
+Parser a lot of args
+!! wikitext
+{{#seo:
+|title=SeoWiki
+|title_mode=append
+|keywords=SEO, Wiki, MediaWiki, Extension
+|description=Allows per page meta settings (keywords, description), changing the title and various site verifications.
+|image_alt=SeoWiki Logo
+|site_name=SeoWiki
+|type=WebPage 
+|locale=en_EN
+|modified_time=2012-01-01
+}}
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kiLCJ0aXRsZV9tb2RlIjoiYXBwZW5kIiwia2V5d29yZHMiOiJTRU8sIFdpa2ksIE1lZGlhV2lraSwgRXh0ZW5zaW9uIiwiZGVzY3JpcHRpb24iOiJBbGxvd3MgcGVyIHBhZ2UgbWV0YSBzZXR0aW5ncyAoa2V5d29yZHMsIGRlc2NyaXB0aW9uKSwgY2hhbmdpbmcgdGhlIHRpdGxlIGFuZCB2YXJpb3VzIHNpdGUgdmVyaWZpY2F0aW9ucy4iLCJpbWFnZV9hbHQiOiJTZW9XaWtpIExvZ28iLCJzaXRlX25hbWUiOiJTZW9XaWtpIiwidHlwZSI6IldlYlBhZ2UiLCJsb2NhbGUiOiJlbl9FTiIsIm1vZGlmaWVkX3RpbWUiOiIyMDEyLTAxLTAxIn0=--></div>
+!! end
+
+
+!! test
+Tag internal a lot of args
+!! wikitext
+<seo>
+|title=SeoWiki
+|title_mode=append
+|keywords=SEO, Wiki, MediaWiki, Extension
+|description=Allows per page meta settings (keywords, description), changing the title and various site verifications.
+|image_alt=SeoWiki Logo
+|site_name=SeoWiki
+|type=WebPage
+|locale=en_EN
+|modified_time=2012-01-01
+</seo>
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kiLCJ0aXRsZV9tb2RlIjoiYXBwZW5kIiwia2V5d29yZHMiOiJTRU8sIFdpa2ksIE1lZGlhV2lraSwgRXh0ZW5zaW9uIiwiZGVzY3JpcHRpb24iOiJBbGxvd3MgcGVyIHBhZ2UgbWV0YSBzZXR0aW5ncyAoa2V5d29yZHMsIGRlc2NyaXB0aW9uKSwgY2hhbmdpbmcgdGhlIHRpdGxlIGFuZCB2YXJpb3VzIHNpdGUgdmVyaWZpY2F0aW9ucy4iLCJpbWFnZV9hbHQiOiJTZW9XaWtpIExvZ28iLCJzaXRlX25hbWUiOiJTZW9XaWtpIiwidHlwZSI6IldlYlBhZ2UiLCJsb2NhbGUiOiJlbl9FTiIsIm1vZGlmaWVkX3RpbWUiOiIyMDEyLTAxLTAxIn0=--></div>
+!! end
+
+
+!! test
+Tag attributes a lot of args
+!! wikitext
+<seo
+title="SeoWiki"
+title_mode="append"
+keywords="SEO, Wiki, MediaWiki, Extension"
+description="Allows per page meta settings (keywords, description), changing the title and various site verifications."
+image_alt="SeoWiki Logo"
+site_name="SeoWiki"
+type="WebPage"
+locale="en_EN"
+modified_time="2012-01-01">
+</seo>
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kiLCJ0aXRsZV9tb2RlIjoiYXBwZW5kIiwia2V5d29yZHMiOiJTRU8sIFdpa2ksIE1lZGlhV2lraSwgRXh0ZW5zaW9uIiwiZGVzY3JpcHRpb24iOiJBbGxvd3MgcGVyIHBhZ2UgbWV0YSBzZXR0aW5ncyAoa2V5d29yZHMsIGRlc2NyaXB0aW9uKSwgY2hhbmdpbmcgdGhlIHRpdGxlIGFuZCB2YXJpb3VzIHNpdGUgdmVyaWZpY2F0aW9ucy4iLCJpbWFnZV9hbHQiOiJTZW9XaWtpIExvZ28iLCJzaXRlX25hbWUiOiJTZW9XaWtpIiwidHlwZSI6IldlYlBhZ2UiLCJsb2NhbGUiOiJlbl9FTiIsIm1vZGlmaWVkX3RpbWUiOiIyMDEyLTAxLTAxIn0=--></div>
+!! end
+
+
+!! test
+Tag attributes a lot of args self-closing
+!! wikitext
+<seo
+title="SeoWiki"
+title_mode="append"
+keywords="SEO, Wiki, MediaWiki, Extension"
+description="Allows per page meta settings (keywords, description), changing the title and various site verifications."
+image_alt="SeoWiki Logo"
+site_name="SeoWiki"
+type="WebPage "
+locale="en_EN"
+modified_time="2012-01-01"
+/>
+!! html+tidy
+<div class="wiki-seo"><!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kiLCJ0aXRsZV9tb2RlIjoiYXBwZW5kIiwia2V5d29yZHMiOiJTRU8sIFdpa2ksIE1lZGlhV2lraSwgRXh0ZW5zaW9uIiwiZGVzY3JpcHRpb24iOiJBbGxvd3MgcGVyIHBhZ2UgbWV0YSBzZXR0aW5ncyAoa2V5d29yZHMsIGRlc2NyaXB0aW9uKSwgY2hhbmdpbmcgdGhlIHRpdGxlIGFuZCB2YXJpb3VzIHNpdGUgdmVyaWZpY2F0aW9ucy4iLCJpbWFnZV9hbHQiOiJTZW9XaWtpIExvZ28iLCJzaXRlX25hbWUiOiJTZW9XaWtpIiwidHlwZSI6IldlYlBhZ2UiLCJsb2NhbGUiOiJlbl9FTiIsIm1vZGlmaWVkX3RpbWUiOiIyMDEyLTAxLTAxIn0=--></div>
+!! end
