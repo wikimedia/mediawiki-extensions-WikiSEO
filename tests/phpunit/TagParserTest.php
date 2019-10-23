@@ -81,6 +81,10 @@ EOL;
 	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::extractSeoDataFromHtml
 	 */
 	public function testExtractSeoDataFromHtml() {
+		$seoDiv =
+			'<!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kiLCJ0aXRsZV9tb2RlIjoiYXBwZW5kIiwia2V5d' .
+			'29yZHMiOiJTRU8sIFdpa2ksIFNFT1dpa2kiLCJsb2NhbGUiOiJlbl9FTiJ9-->';
+
 		$text = <<<EOL
 <html>
 <!-- Fake HTML Document -->
@@ -89,12 +93,7 @@ EOL;
 </head>
 <body>
 <p>Lorem Ipsum Dolor Sit Amet</p>
-<p><!--wiki-seo-data-start
-WikiSEO:title_mode;cmVwbGFjZQ==
-WikiSEO:title;VGl0bGUgZnJvbSBXaWtpU0VPIEV4dGVuc2lvbg==
-WikiSEO:keywords;S2V5d29yZCAxLCBLZXl3b3JkIDIsIEtleXdvcmQgMw==
-WikiSEO:locale;ZGVfREU=
-wiki-seo-data-end--></p>
+<div class="wiki-seo">$seoDiv</div>
 </body>
 </html>
 EOL;

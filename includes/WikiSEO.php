@@ -27,6 +27,14 @@ use PPFrame;
 use WebRequest;
 
 class WikiSEO {
+	private const MODE_TAG = 'tag';
+	private const MODE_PARSER = 'parser';
+
+	/**
+	 * @var string $mode 'tag' or 'parser'
+	 */
+	private $mode;
+
 	/**
 	 * prepend, append or replace the new title to the existing title
 	 *
@@ -64,11 +72,15 @@ class WikiSEO {
 	/**
 	 * WikiSEO constructor.
 	 * Loads generator names from LocalSettings
+	 *
+	 * @param string $mode the parser mode
 	 */
-	public function __construct() {
+	public function __construct( $mode = self::MODE_PARSER ) {
 		global $wgMetadataGenerators;
 
 		$this->generators = $wgMetadataGenerators;
+
+		$this->mode = $mode;
 	}
 
 	/**
@@ -118,7 +130,8 @@ class WikiSEO {
 	 */
 	private function makeHtmlOutput() {
 		if ( empty( $this->metadataArray ) ) {
-			$this->errors[] = wfMessage( 'wiki-seo-empty-attr' );
+			$message = sprintf( 'wiki-seo-empty-attr-%s', $this->mode );
+			$this->errors[] = wfMessage( $message );
 
 			return $this->makeErrorHtml();
 		}
@@ -132,7 +145,7 @@ class WikiSEO {
 	private function makeErrorHtml() {
 		$text = implode( '<br>', $this->errors );
 
-		return "<div class='errorbox'>{$text}</div>";
+		return sprintf( '<div class="errorbox">%s</div>', $text );
 	}
 
 	/**
@@ -147,15 +160,16 @@ class WikiSEO {
 	private function makeMetadataHtml() {
 		$validator = new Validator();
 
-		$data = '';
+		$data = [];
+		$template = '<div class="wiki-seo"><!--WikiSEO:%s--></div>';
 
 		foreach ( $validator->validateParams( $this->metadataArray ) as $k => $v ) {
 			if ( !empty( $v ) ) {
-				$data .= sprintf( "WikiSEO:%s;%s\n", $k, base64_encode( $v ) );
+				$data[$k] = $v;
 			}
 		}
 
-		return sprintf( "<!--\n%s-->", $data );
+		return sprintf( $template, base64_encode( json_encode( $data ) ) );
 	}
 
 	/**
@@ -206,7 +220,7 @@ class WikiSEO {
 	 * @return string The HTML comments of cached attributes
 	 */
 	public static function fromTag( $input, array $args, Parser $parser, PPFrame $frame ) {
-		$seo = new WikiSEO();
+		$seo = new WikiSEO( self::MODE_TAG );
 		$tagParser = new TagParser();
 
 		$parsedInput = $tagParser->parseText( $input );
@@ -234,7 +248,7 @@ class WikiSEO {
 			$expandedArgs[] = trim( $frame->expand( $arg ) );
 		}
 
-		$seo = new WikiSEO();
+		$seo = new WikiSEO( self::MODE_PARSER );
 		$tagParser = new TagParser();
 
 		$seo->setMetadataArray( $tagParser->parseArgs( $expandedArgs ) );
