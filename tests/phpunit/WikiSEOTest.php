@@ -16,11 +16,12 @@ class WikiSEOTest extends GeneratorTest {
 		$seo = new WikiSEO();
 		$out = $this->newInstance();
 
-		$seo->setMetadataArray( [
+		$out->setProperty( 'WikiSEO', json_encode( [
 			'title'      => $this->replacementTitle,
 			'title_mode' => 'replace'
-		] );
+		] ) );
 
+		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
 		$this->assertEquals( $this->replacementTitle, $out->getHTMLTitle() );
@@ -35,11 +36,12 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$origTitle = $out->getHTMLTitle();
 
-		$seo->setMetadataArray( [
+		$out->setProperty( 'WikiSEO', json_encode( [
 			'title'      => $this->replacementTitle,
 			'title_mode' => 'append'
-		] );
+		] ) );
 
+		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
 		$this->assertEquals( sprintf( '%s - %s', $origTitle, $this->replacementTitle ),
@@ -55,11 +57,12 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$origTitle = $out->getHTMLTitle();
 
-		$seo->setMetadataArray( [
+		$out->setProperty( 'WikiSEO', json_encode( [
 			'title'      => $this->replacementTitle,
 			'title_mode' => 'prepend'
-		] );
+		] ) );
 
+		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
 		$this->assertEquals( sprintf( '%s - %s', $this->replacementTitle, $origTitle ),
@@ -75,12 +78,13 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$origTitle = $out->getHTMLTitle();
 
-		$seo->setMetadataArray( [
+		$out->setProperty( 'WikiSEO', json_encode( [
 			'title'           => $this->replacementTitle,
 			'title_mode'      => 'append',
 			'title_separator' => 'SEP__SEP'
-		] );
+		] ) );
 
+		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
 		$this->assertEquals( sprintf( '%sSEP__SEP%s', $origTitle, $this->replacementTitle ),
@@ -95,12 +99,13 @@ class WikiSEOTest extends GeneratorTest {
 		$seo = new WikiSEO();
 		$out = $this->newInstance();
 
-		$seo->setMetadataArray( [
+		$out->setProperty( 'WikiSEO', json_encode( [
 			'title'           => $this->replacementTitle,
 			'title_mode'      => 'append',
 			'title_separator' => '&nbsp;&nbsp;--&nbsp;&nbsp;'
-		] );
+		] ) );
 
+		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
 		$this->assertNotContains( '&nbsp;', $out->getHTMLTitle() );

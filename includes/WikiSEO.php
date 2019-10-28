@@ -21,17 +21,20 @@ namespace MediaWiki\Extension\WikiSEO;
 
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Parser;
+use ParserOutput;
 use PPFrame;
 use WebRequest;
 
 class WikiSEO {
 	private const MODE_TAG = 'tag';
 	private const MODE_PARSER = 'parser';
+	private const PAGE_PROP_NAME = 'WikiSEO';
 
 	/**
-	 * @var string $mode 'tag' or 'parser'
+	 * @var string $mode 'tag' or 'parser' used to determine the error message
 	 */
 	private $mode;
 
@@ -67,7 +70,7 @@ class WikiSEO {
 	/**
 	 * @var array
 	 */
-	private $metadataArray;
+	private $metadata = [];
 
 	/**
 	 * WikiSEO constructor.
@@ -84,12 +87,33 @@ class WikiSEO {
 	}
 
 	/**
-	 * Set an array with metadata key value pairs
+	 * Set the metadata by loading the page props from the db
 	 *
-	 * @param array $metadataArray
+	 * @param OutputPage $outputPage
 	 */
-	public function setMetadataArray( array $metadataArray ) {
-		$this->metadataArray = $metadataArray;
+	public function setMetadataFromPageProps( OutputPage $outputPage ) {
+		if ( null === $outputPage->getTitle() ) {
+			$this->errors[] = wfMessage( 'wiki-seo-missing-page-title' );
+
+			return;
+		}
+
+		$pageId = $outputPage->getTitle()->getArticleID();
+
+		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$db = $dbl->getConnection( DB_REPLICA );
+
+		$propValue = $db->selectField( 'page_props', 'pp_value', [
+			'pp_page' => $pageId,
+			'pp_propname' => self::PAGE_PROP_NAME,
+		], __METHOD__ );
+
+		// Not found in DB, lets try OutputPage
+		if ( false === $propValue ) {
+			$propValue = $outputPage->getProperty( self::PAGE_PROP_NAME ) ?? '{}';
+		}
+
+		$this->setMetadata( json_decode( $propValue, true ) );
 	}
 
 	/**
@@ -102,9 +126,29 @@ class WikiSEO {
 		$this->instantiateMetadataPlugins();
 
 		foreach ( $this->generatorInstances as $generatorInstance ) {
-			$generatorInstance->init( $this->metadataArray, $out );
+			$generatorInstance->init( $this->metadata, $out );
 			$generatorInstance->addMetadata();
 		}
+	}
+
+	/**
+	 * Set an array with metadata key value pairs
+	 * Gets validated by Validator
+	 * @param array $metadataArray
+	 * @see Validator
+	 *
+	 */
+	private function setMetadata( array $metadataArray ) {
+		$validator = new Validator();
+		$validMetadata = [];
+
+		foreach ( $validator->validateParams( $metadataArray ) as $k => $v ) {
+			if ( !empty( $v ) ) {
+				$validMetadata[$k] = $v;
+			}
+		}
+
+		$this->metadata = $validMetadata;
 	}
 
 	/**
@@ -126,17 +170,24 @@ class WikiSEO {
 	}
 
 	/**
-	 * @return string Error | Metadata Html content
+	 * Finalize everything.
+	 * Check for errors and save to props if everything is ok.
+	 *
+	 * @param ParserOutput $output
+	 *
+	 * @return string String with errors that happened or empty
 	 */
-	private function makeHtmlOutput() {
-		if ( empty( $this->metadataArray ) ) {
+	private function finalize( ParserOutput $output ) {
+		if ( empty( $this->metadata ) ) {
 			$message = sprintf( 'wiki-seo-empty-attr-%s', $this->mode );
 			$this->errors[] = wfMessage( $message );
 
 			return $this->makeErrorHtml();
 		}
 
-		return $this->makeMetadataHtml();
+		$this->saveMetadataToProps( $output );
+
+		return '';
 	}
 
 	/**
@@ -149,47 +200,23 @@ class WikiSEO {
 	}
 
 	/**
-	 * Renders the parameters as HTML comment tags in order to cache them in the Wiki text.
-	 *
-	 * When MediaWiki caches pages it does not cache the contents of the <head> tag, so
-	 * to propagate the information in cached pages, the information is stored
-	 * as HTML comments in the Wiki text.
-	 *
-	 * @return string A HTML string of comments
-	 */
-	private function makeMetadataHtml() {
-		$validator = new Validator();
-
-		$data = [];
-		$template = '<div class="wiki-seo"><!--WikiSEO:%s--></div>';
-
-		foreach ( $validator->validateParams( $this->metadataArray ) as $k => $v ) {
-			if ( !empty( $v ) ) {
-				$data[$k] = $v;
-			}
-		}
-
-		return sprintf( $template, base64_encode( json_encode( $data ) ) );
-	}
-
-	/**
 	 * Modifies the page title based on 'titleMode'
 	 *
 	 * @param OutputPage $out
 	 */
 	private function modifyPageTitle( OutputPage $out ) {
-		if ( !array_key_exists( 'title', $this->metadataArray ) ) {
+		if ( !array_key_exists( 'title', $this->metadata ) ) {
 			return;
 		}
 
-		$metaTitle = $this->metadataArray['title'];
+		$metaTitle = $this->metadata['title'];
 
-		if ( array_key_exists( 'title_separator', $this->metadataArray ) ) {
-			$this->titleSeparator = html_entity_decode( $this->metadataArray['title_separator'] );
+		if ( array_key_exists( 'title_separator', $this->metadata ) ) {
+			$this->titleSeparator = html_entity_decode( $this->metadata['title_separator'] );
 		}
 
-		if ( array_key_exists( 'title_mode', $this->metadataArray ) ) {
-			$this->titleMode = $this->metadataArray['title_mode'];
+		if ( array_key_exists( 'title_mode', $this->metadata ) ) {
+			$this->titleMode = $this->metadata['title_mode'];
 		}
 
 		switch ( $this->titleMode ) {
@@ -210,6 +237,15 @@ class WikiSEO {
 	}
 
 	/**
+	 * Save the metadata array json encoded to the page props table
+	 *
+	 * @param ParserOutput $outputPage
+	 */
+	private function saveMetadataToProps( ParserOutput $outputPage ) {
+		$outputPage->setProperty( self::PAGE_PROP_NAME, json_encode( $this->metadata ) );
+	}
+
+	/**
 	 * Parse the values input from the <seo> tag extension
 	 *
 	 * @param string $input The text content of the tag
@@ -227,9 +263,9 @@ class WikiSEO {
 		$tags = $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame );
 		$tags = array_merge( $tags, $args );
 
-		$seo->setMetadataArray( $tags );
+		$seo->setMetadata( $tags );
 
-		return $seo->makeHtmlOutput();
+		return $seo->finalize( $parser->getOutput() );
 	}
 
 	/**
@@ -251,9 +287,18 @@ class WikiSEO {
 		$seo = new WikiSEO( self::MODE_PARSER );
 		$tagParser = new TagParser();
 
-		$seo->setMetadataArray( $tagParser->parseArgs( $expandedArgs ) );
+		$seo->setMetadata( $tagParser->parseArgs( $expandedArgs ) );
 
-		return [ $seo->makeHtmlOutput(), 'noparse' => true, 'isHTML' => true ];
+		$fin = $seo->finalize( $parser->getOutput() );
+		if ( !empty( $fin ) ) {
+			return [
+				$fin,
+				'noparse' => true,
+				'isHTML' => true,
+			];
+		}
+
+		return [];
 	}
 
 	/**

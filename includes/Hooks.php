@@ -33,8 +33,7 @@ class Hooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage $out ) {
 		$seo = new WikiSEO();
-		$tags = TagParser::extractSeoDataFromHtml( $out->getHTML() );
-		$seo->setMetadataArray( $tags );
+		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 	}
 
