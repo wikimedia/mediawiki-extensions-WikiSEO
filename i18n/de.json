@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"wiki-seo-empty-attr-tag": "Fehler: Das Tag &lt;seo&gt; muss zu mindestens einem Meta-Element einen Wert enthalten.",
 	"wiki-seo-empty-attr-parser": "Fehler: Die Parser-Funktion <nowiki>{{#seo:}}</nowiki> muss zu mindestens einem Meta-Element einen Wert enthalten.",
 	"wiki-seo-invalid-generator": "Fehler: $1 ist kein valider Metadatengenerator.",

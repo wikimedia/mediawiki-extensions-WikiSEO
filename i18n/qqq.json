@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"wiki-seo-empty-attr-tag": "Error message if the parser tag is called without content",
 	"wiki-seo-empty-attr-parser": "Error message if the parser hook is called without content",
 	"wiki-seo-invalid-generator": "Error message if a generator name ($1) is not valid.",
