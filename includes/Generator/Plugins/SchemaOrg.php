@@ -148,8 +148,7 @@ class SchemaOrg implements GeneratorInterface {
 				$file = $this->getFileObject( $image );
 
 				return array_merge( $data, $this->getFileInfo( $file ) );
-			}
-			catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException $e ) {
 				// Fallthrough
 			}
 		}
@@ -158,9 +157,8 @@ class SchemaOrg implements GeneratorInterface {
 			$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
 			$logo = wfExpandUrl( $logo );
 			$data['url'] = $logo;
-		}
-		catch ( Exception  $e ) {
-			// Uh oh either there was a ConfigException or there was an error expanding the url.
+		} catch ( Exception $e ) {
+			// Uh oh either there was a ConfigException or there was an error expanding the URL.
 			// We'll bail out.
 			$data = [];
 		}
@@ -176,8 +174,7 @@ class SchemaOrg implements GeneratorInterface {
 	private function getAuthorMetadata() {
 		try {
 			$sitename = MediaWikiServices::getInstance()->getMainConfig()->get( 'Sitename' );
-		}
-		catch ( ConfigException $e ) {
+		} catch ( ConfigException $e ) {
 			// Empty tags will be ignored
 			$sitename = '';
 		}
@@ -197,9 +194,9 @@ class SchemaOrg implements GeneratorInterface {
 	private function getSearchActionMetadata() {
 		$searchPage = Title::newFromText( 'Special:Search' );
 
-		if ( null !== $searchPage ) {
+		if ( $searchPage !== null ) {
 			$search =
-				$searchPage->getFullUrl( [ 'search' => 'search_term' ], false,
+				$searchPage->getFullURL( [ 'search' => 'search_term' ], false,
 					$this->outputPage->getRequest()->getProtocol() );
 			$search = str_replace( 'search_term', '{search_term}', $search );
 

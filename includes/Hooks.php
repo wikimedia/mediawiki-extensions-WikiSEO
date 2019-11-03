@@ -25,7 +25,7 @@ use Parser;
 
 class Hooks {
 	/**
-	 * Extracts the generated seo html comments form the page and adds them as meta tags
+	 * Extracts the generated SEO HTML comments form the page and adds them as meta tags
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
 	 *

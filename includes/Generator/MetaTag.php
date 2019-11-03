@@ -98,7 +98,7 @@ class MetaTag implements GeneratorInterface {
 	}
 
 	/**
-	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 * Add $wgYandexSiteVerificationKey from LocalSettings
 	 */
 	private function addYandexSiteVerification() {
 		global $wgYandexSiteVerificationKey;
@@ -109,7 +109,7 @@ class MetaTag implements GeneratorInterface {
 	}
 
 	/**
-	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 * Add $wgAlexaSiteVerificationKey from LocalSettings
 	 */
 	private function addAlexaSiteVerification() {
 		global $wgAlexaSiteVerificationKey;
@@ -120,7 +120,7 @@ class MetaTag implements GeneratorInterface {
 	}
 
 	/**
-	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 * Add $wgPinterestSiteVerificationKey from LocalSettings
 	 */
 	private function addPinterestSiteVerification() {
 		global $wgPinterestSiteVerificationKey;
@@ -131,7 +131,7 @@ class MetaTag implements GeneratorInterface {
 	}
 
 	/**
-	 * Add $wgBingSiteVerificationKey from LocalSettings
+	 * Add $wgNortonSiteVerificationKey from LocalSettings
 	 */
 	private function addNortonSiteVerification() {
 		global $wgNortonSiteVerificationKey;

@@ -86,18 +86,16 @@ trait FileMetadataTrait {
 				$this->metadata['image'] = $info['url'];
 				$this->metadata['image_width'] = $info['width'];
 				$this->metadata['image_height'] = $info['height'];
-			}
-			catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException $e ) {
 				// File does not exist.
-				// Maybe the user has set an url, should we do something?
+				// Maybe the user has set an URL, should we do something?
 			}
 		} else {
 			try {
 				$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
 				$logo = wfExpandUrl( $logo );
 				$this->metadata['image'] = $logo;
-			}
-			catch ( Exception  $e ) {
+			} catch ( Exception $e ) {
 				// We do nothing
 			}
 		}

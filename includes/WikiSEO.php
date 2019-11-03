@@ -92,7 +92,7 @@ class WikiSEO {
 	 * @param OutputPage $outputPage
 	 */
 	public function setMetadataFromPageProps( OutputPage $outputPage ) {
-		if ( null === $outputPage->getTitle() ) {
+		if ( $outputPage->getTitle() === null ) {
 			$this->errors[] = wfMessage( 'wiki-seo-missing-page-title' );
 
 			return;
@@ -108,8 +108,8 @@ class WikiSEO {
 			'pp_propname' => self::PAGE_PROP_NAME,
 		], __METHOD__ );
 
-		// Not found in DB, lets try OutputPage
-		if ( false === $propValue ) {
+		// Not found in DB, let's try OutputPage
+		if ( $propValue === false ) {
 			$propValue = $outputPage->getProperty( self::PAGE_PROP_NAME ) ?? '{}';
 		}
 
@@ -134,9 +134,9 @@ class WikiSEO {
 	/**
 	 * Set an array with metadata key value pairs
 	 * Gets validated by Validator
+	 *
 	 * @param array $metadataArray
 	 * @see Validator
-	 *
 	 */
 	private function setMetadata( array $metadataArray ) {
 		$validator = new Validator();
@@ -302,9 +302,9 @@ class WikiSEO {
 	}
 
 	/**
-	 * Add the server protocol to the url if it is missing
+	 * Add the server protocol to the URL if it is missing
 	 *
-	 * @param string $url Url from getFullURL()
+	 * @param string $url URL from getFullURL()
 	 * @param WebRequest $request
 	 *
 	 * @return string

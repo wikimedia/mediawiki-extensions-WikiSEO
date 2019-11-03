@@ -97,7 +97,7 @@ class TagParser {
 		$params = [];
 		$pattern = '/<div class="wiki-seo"><!--WikiSEO:([0-9a-zA-Z+\/=]+)--><\/div>/';
 
-		if ( 1 === preg_match( $pattern, $html, $matches ) ) {
+		if ( preg_match( $pattern, $html, $matches ) === 1 ) {
 			return json_decode( base64_decode( $matches[1] ), true );
 		}
 

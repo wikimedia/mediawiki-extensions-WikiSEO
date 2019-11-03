@@ -32,14 +32,14 @@ trait RevisionMetadataTrait {
 		$timestamp = $this->outputPage->getRevisionTimestamp();
 
 		// No cached timestamp, load it from the database
-		if ( null === $timestamp ) {
+		if ( $timestamp === null ) {
 			$timestamp =
 				MediaWikiServices::getInstance()
 					->getRevisionLookup()
 					->getKnownCurrentRevision( $this->outputPage->getTitle(),
 						$this->outputPage->getRevisionId() );
 
-			if ( false === $timestamp ) {
+			if ( $timestamp === false ) {
 				$timestamp = wfTimestampNow();
 			} else {
 				$timestamp = $timestamp->getTimestamp() ?? wfTimestampNow();
