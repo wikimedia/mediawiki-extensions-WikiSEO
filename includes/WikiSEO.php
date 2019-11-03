@@ -26,6 +26,8 @@ use OutputPage;
 use Parser;
 use ParserOutput;
 use PPFrame;
+use ReflectionClass;
+use ReflectionException;
 use WebRequest;
 
 class WikiSEO {
@@ -161,9 +163,9 @@ class WikiSEO {
 			$classPath = "MediaWiki\\Extension\\WikiSEO\\Generator\\Plugins\\$generator";
 
 			try {
-				$class = new \ReflectionClass( $classPath );
+				$class = new ReflectionClass( $classPath );
 				$this->generatorInstances[] = $class->newInstance();
-			} catch ( \ReflectionException $e ) {
+			} catch ( ReflectionException $e ) {
 				$this->errors[] = wfMessage( 'wiki-seo-invalid-generator', $generator )->parse();
 			}
 		}

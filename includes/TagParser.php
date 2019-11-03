@@ -85,22 +85,4 @@ class TagParser {
 
 		return array_map( 'trim', $tags );
 	}
-
-	/**
-	 * Convert the attributed cached as HTML comments back into an attribute array
-	 *
-	 * @param string $html
-	 *
-	 * @return array
-	 */
-	public static function extractSeoDataFromHtml( $html ) {
-		$params = [];
-		$pattern = '/<div class="wiki-seo"><!--WikiSEO:([0-9a-zA-Z+\/=]+)--><\/div>/';
-
-		if ( preg_match( $pattern, $html, $matches ) === 1 ) {
-			return json_decode( base64_decode( $matches[1] ), true );
-		}
-
-		return $params;
-	}
 }

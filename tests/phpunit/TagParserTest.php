@@ -76,38 +76,4 @@ EOL;
 		$this->assertArrayHasKey( 'title', $parsedArgs );
 		$this->assertArrayNotHasKey( 'emptyContent', $parsedArgs );
 	}
-
-	/**
-	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::extractSeoDataFromHtml
-	 */
-	public function testExtractSeoDataFromHtml() {
-		$seoDiv =
-			'<!--WikiSEO:eyJ0aXRsZSI6IlNlb1dpa2kiLCJ0aXRsZV9tb2RlIjoiYXBwZW5kIiwia2V5d' .
-			'29yZHMiOiJTRU8sIFdpa2ksIFNFT1dpa2kiLCJsb2NhbGUiOiJlbl9FTiJ9-->';
-
-		$text = <<<EOL
-<html>
-<!-- Fake HTML Document -->
-<head>
-<title>Test Page</title>
-</head>
-<body>
-<p>Lorem Ipsum Dolor Sit Amet</p>
-<div class="wiki-seo">$seoDiv</div>
-</body>
-</html>
-EOL;
-
-		$expectedKeys = [
-			'title_mode',
-			'title',
-			'keywords',
-			'locale',
-		];
-
-		$parsedArgs = TagParser::extractSeoDataFromHtml( $text );
-
-		$this->assertCount( 4, $parsedArgs );
-		$this->assertArrayEquals( $expectedKeys, array_keys( $parsedArgs ) );
-	}
 }
