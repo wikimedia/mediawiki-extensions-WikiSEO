@@ -4,5 +4,7 @@
 			"Eduardo Addad de Oliveira"
 		]
 	},
+	"wiki-se-desc": "Permite meta-configurações por página, como palavras-chave e descrição, alterando o título e várias tags de verificação do site.",
+	"wiki-seo-invalid-generator": "Erro: $1 não é um gerador de metadados válido.",
 	"wiki-seo-missing-page-title": "Erro: o título da página fornecido é inválido."
 }
