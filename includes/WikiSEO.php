@@ -300,7 +300,7 @@ class WikiSEO {
 			];
 		}
 
-		return [];
+		return [ '' ];
 	}
 
 	/**
