@@ -118,7 +118,6 @@ class SchemaOrg implements GeneratorInterface {
 
 		foreach ( $this->tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
-
 				$convertedTag = $this->conversions[$tag] ?? $tag;
 
 				$meta[$convertedTag] = $this->metadata[$tag];
@@ -143,7 +142,7 @@ class SchemaOrg implements GeneratorInterface {
 	}
 
 	/**
-	 * Generate jsonld metadata from the wiki logo or supplied file name
+	 * Generate jsonld metadata from the supplied file name, configured default image or wiki logo
 	 *
 	 * @return array
 	 */
@@ -151,6 +150,20 @@ class SchemaOrg implements GeneratorInterface {
 		$data = [
 			'@type' => 'ImageObject',
 		];
+
+		if ( !isset( $this->metadata['image'] ) ) {
+			try {
+				$defaultImage =
+					MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoDefaultImage' );
+
+				if ( $defaultImage !== null ) {
+					$this->metadata['image'] = $defaultImage;
+				}
+
+			} catch ( ConfigException $e ) {
+				// Fallthrough
+			}
+		}
 
 		if ( isset( $this->metadata['image'] ) ) {
 			$image = $this->metadata['image'];

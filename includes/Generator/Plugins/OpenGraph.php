@@ -113,6 +113,20 @@ class OpenGraph implements GeneratorInterface {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
+		if ( !isset( $this->metadata['image'] ) ) {
+			try {
+				$defaultImage =
+					MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoDefaultImage' );
+
+				if ( $defaultImage !== null ) {
+					$this->metadata['image'] = $defaultImage;
+				}
+
+			} catch ( ConfigException $e ) {
+				// Fallthrough
+			}
+		}
+
 		$this->preprocessFileMetadata();
 		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
 
