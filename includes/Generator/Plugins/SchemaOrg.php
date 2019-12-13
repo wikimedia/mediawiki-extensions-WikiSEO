@@ -249,7 +249,7 @@ class SchemaOrg implements GeneratorInterface {
 		if ( $searchPage !== null ) {
 			$search =
 				$searchPage->getFullURL( [ 'search' => 'search_term' ], false,
-					$this->outputPage->getRequest()->getProtocol() );
+					sprintf( '%s://', $this->outputPage->getRequest()->getProtocol() ) );
 			$search = str_replace( 'search_term', '{search_term}', $search );
 
 			return [
