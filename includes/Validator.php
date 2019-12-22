@@ -50,19 +50,31 @@ class Validator {
 	];
 
 	/**
-	 * Removes all params that are not in §valid_params
+	 * Removes all params that are not in $valid_params
 	 *
 	 * @param array $params Raw params
 	 * @return array Validated params
 	 */
 	public function validateParams( array $params ) {
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s (%d) | %s', __METHOD__, 'Validating parameters', count( $params ),
+				json_encode( $params ) ), 'all', $params );
+
 		$validatedParams = [];
 
 		foreach ( $params as $paramKey => $paramData ) {
-			if ( in_array( $paramKey, self::$validParams, true ) ) {
+			$inArray = in_array( $paramKey, self::$validParams, true );
+
+			wfDebugLog( 'wikiseo', sprintf( '%s: %s in $validParams %s', __METHOD__, $paramKey,
+				$inArray ? 'true' : 'false' ) );
+
+			if ( $inArray === true ) {
 				$validatedParams[$paramKey] = $paramData;
 			}
 		}
+
+		wfDebugLog( 'wikiseo', sprintf( '%s: %s %d | %s', __METHOD__, 'Params after validation',
+			count( $validatedParams ), json_encode( $validatedParams ) ), 'all', $validatedParams );
 
 		return $validatedParams;
 	}

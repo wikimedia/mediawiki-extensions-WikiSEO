@@ -141,6 +141,10 @@ class WikiSEO {
 	 * @see Validator
 	 */
 	private function setMetadata( array $metadataArray ) {
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s (%d) | %s', __METHOD__, 'Got raw medatata', count( $metadataArray ),
+				json_encode( $metadataArray ) ), 'all', $metadataArray );
+
 		$validator = new Validator();
 		$validMetadata = [];
 
@@ -149,6 +153,10 @@ class WikiSEO {
 				$validMetadata[$k] = $v;
 			}
 		}
+
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s (%d) | %s', __METHOD__, 'Validated metadata', count( $validMetadata ),
+				json_encode( $validMetadata ) ), 'all', $validMetadata );
 
 		$this->metadata = $validMetadata;
 	}
@@ -180,6 +188,8 @@ class WikiSEO {
 	 * @return string String with errors that happened or empty
 	 */
 	private function finalize( ParserOutput $output ) {
+		wfDebugLog( 'wikiseo', sprintf( '%s: %s', __METHOD__, 'Finalizing output' ) );
+
 		if ( empty( $this->metadata ) ) {
 			$message = sprintf( 'wiki-seo-empty-attr-%s', $this->mode );
 			$this->errors[] = wfMessage( $message );
@@ -244,7 +254,15 @@ class WikiSEO {
 	 * @param ParserOutput $outputPage
 	 */
 	private function saveMetadataToProps( ParserOutput $outputPage ) {
+		wfDebugLog( 'wikiseo', sprintf( '%s: %s (%d) | %s', __METHOD__, 'Saving metadata to props',
+			count( $this->metadata ), json_encode( $this->metadata ) ), 'all', $this->metadata );
+
 		$outputPage->setProperty( self::PAGE_PROP_NAME, json_encode( $this->metadata ) );
+
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: Parser output has %s property %s', __METHOD__, self::PAGE_PROP_NAME,
+				( $outputPage->getProperty( self::PAGE_PROP_NAME ) !== false ? 'true'
+					: 'false' ) ) );
 	}
 
 	/**
@@ -258,6 +276,10 @@ class WikiSEO {
 	 * @return string The HTML comments of cached attributes
 	 */
 	public static function fromTag( $input, array $args, Parser $parser, PPFrame $frame ) {
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s | %s', __METHOD__, 'WikiSEO in tag mode', json_encode( $args ) ),
+			'all', $args );
+
 		$seo = new WikiSEO( self::MODE_TAG );
 		$tagParser = new TagParser();
 
@@ -280,11 +302,18 @@ class WikiSEO {
 	 * @return array Parser options and the HTML comments of cached attributes
 	 */
 	public static function fromParserFunction( Parser $parser, PPFrame $frame, array $args ) {
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s | %s', __METHOD__, 'WikiSEO in parser mode', json_encode( $args ) ),
+			'all', $args );
 		$expandedArgs = [];
 
 		foreach ( $args as $arg ) {
 			$expandedArgs[] = trim( $frame->expand( $arg ) );
 		}
+
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s | %s', __METHOD__, 'Args expanded', json_encode( $expandedArgs ) ),
+			'all', $expandedArgs );
 
 		$seo = new WikiSEO( self::MODE_PARSER );
 		$tagParser = new TagParser();

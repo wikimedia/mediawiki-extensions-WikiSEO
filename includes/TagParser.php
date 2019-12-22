@@ -36,6 +36,8 @@ class TagParser {
 	 * @return array
 	 */
 	public function parseArgs( array $args ) {
+		wfDebugLog( 'wikiseo', sprintf( '%s: %s %d args', __METHOD__, 'Parsing', count( $args ) ) );
+
 		$results = [];
 
 		foreach ( $args as $arg ) {
@@ -43,14 +45,20 @@ class TagParser {
 			$pair = array_map( 'trim', $pair );
 
 			if ( count( $pair ) === 2 ) {
-				list( $name, $value ) = $pair;
+				[ $name, $value ] = $pair;
 				$results[$name] = $value;
 			}
 		}
 
-		return array_filter( $results, static function ( $value, $key ) {
+		$filtered = array_filter( $results, static function ( $value, $key ) {
 			return mb_strlen( $value ) > 0 && mb_strlen( $key ) > 0;
 		}, ARRAY_FILTER_USE_BOTH );
+
+		wfDebugLog( 'wikiseo',
+			sprintf( '%s: %s %d filtered args | %s', __METHOD__, 'Returning', count( $filtered ),
+				json_encode( $filtered ) ), 'all', $filtered );
+
+		return $filtered;
 	}
 
 	/**
@@ -61,7 +69,12 @@ class TagParser {
 	 * @return array
 	 */
 	public function parseText( $text ) {
+		wfDebugLog( 'wikiseo', sprintf( '%s: %s', __METHOD__, 'Parsing text' ) );
+
 		$lines = explode( '|', $text );
+
+		wfDebugLog( 'wikiseo', sprintf( '%s: Got %d raw args | %s', __METHOD__, count( $lines ),
+			json_encode( $lines ) ), 'all', $lines );
 
 		return $this->parseArgs( $lines );
 	}
@@ -76,6 +89,9 @@ class TagParser {
 	 * @return array Parsed wiki texts
 	 */
 	public function expandWikiTextTagArray( array $tags, Parser $parser, PPFrame $frame ) {
+		wfDebugLog( 'wikiseo', sprintf( '%s: Expanding %d tags | %s', __METHOD__, count( $tags ),
+			json_encode( $tags ) ), 'all', $tags );
+
 		foreach ( $tags as $key => $tag ) {
 			$tags[$key] = $parser->recursiveTagParseFully( $tag, $frame );
 		}
