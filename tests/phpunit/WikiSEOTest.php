@@ -3,8 +3,16 @@
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\MediaWikiServices;
+use OutputPage;
 
+/**
+ * Class WikiSEOTest
+ * @package MediaWiki\Extension\WikiSEO\Tests
+ * @group Database
+ */
 class WikiSEOTest extends GeneratorTest {
 	private $replacementTitle = 'Replaced Title';
 
@@ -16,10 +24,10 @@ class WikiSEOTest extends GeneratorTest {
 		$seo = new WikiSEO();
 		$out = $this->newInstance();
 
-		$out->setProperty( 'WikiSEO', json_encode( [
-			'title'      => $this->replacementTitle,
-			'title_mode' => 'replace'
-		] ) );
+		$this->setProperties( [
+			'title' => $this->replacementTitle,
+			'title_mode' => 'replace',
+		], $out );
 
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
@@ -36,10 +44,10 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$origTitle = $out->getHTMLTitle();
 
-		$out->setProperty( 'WikiSEO', json_encode( [
-			'title'      => $this->replacementTitle,
-			'title_mode' => 'append'
-		] ) );
+		$this->setProperties( [
+			'title' => $this->replacementTitle,
+			'title_mode' => 'append',
+		], $out );
 
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
@@ -57,10 +65,10 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$origTitle = $out->getHTMLTitle();
 
-		$out->setProperty( 'WikiSEO', json_encode( [
-			'title'      => $this->replacementTitle,
-			'title_mode' => 'prepend'
-		] ) );
+		$this->setProperties( [
+			'title' => $this->replacementTitle,
+			'title_mode' => 'prepend',
+		], $out );
 
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
@@ -78,11 +86,11 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$origTitle = $out->getHTMLTitle();
 
-		$out->setProperty( 'WikiSEO', json_encode( [
-			'title'           => $this->replacementTitle,
-			'title_mode'      => 'append',
-			'title_separator' => 'SEP__SEP'
-		] ) );
+		$this->setProperties( [
+			'title' => $this->replacementTitle,
+			'title_mode' => 'append',
+			'title_separator' => 'SEP__SEP',
+		], $out );
 
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
@@ -99,11 +107,11 @@ class WikiSEOTest extends GeneratorTest {
 		$seo = new WikiSEO();
 		$out = $this->newInstance();
 
-		$out->setProperty( 'WikiSEO', json_encode( [
-			'title'           => $this->replacementTitle,
-			'title_mode'      => 'append',
-			'title_separator' => '&nbsp;&nbsp;--&nbsp;&nbsp;'
-		] ) );
+		$this->setProperties( [
+			'title' => $this->replacementTitle,
+			'title_mode' => 'append',
+			'title_separator' => '&nbsp;&nbsp;--&nbsp;&nbsp;',
+		], $out );
 
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
@@ -129,5 +137,78 @@ class WikiSEOTest extends GeneratorTest {
 		$url = 'http://localhost/Main_Page';
 
 		$this->assertEquals( $url, WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
+	}
+
+	/**
+	 * Tests the parser setting and saving page props
+	 *
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction
+	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::parseArgs
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::saveMetadataToProps
+	 * @throws \MWException
+	 */
+	public function testPropsParse() {
+		$page =
+			$this->insertPage( 'PagePropParse', '{{#seo:|title=Test Title|title_mode=prepend}}',
+				NS_MAIN );
+
+		/** @var \Title $title */
+		$title = $page['title'];
+
+		$page = $this->getExistingTestPage( $title );
+
+		$result = $this->loadPropForPageId( $page->getId() );
+
+		$this->assertArrayEquals( [
+			'title' => 'Test Title',
+			'title_mode' => 'prepend',
+		], $result );
+	}
+
+	/**
+	 * Sets props on outputpage
+	 *
+	 * @param array $props
+	 * @param OutputPage $out
+	 */
+	private function setProperties( array $props, OutputPage $out ) {
+		foreach ( $props as $key => $value ) {
+			$out->setProperty( $key, serialize( $value ) );
+		}
+	}
+
+	/**
+	 * Loads the page props for a given page id.
+	 *
+	 * @param int $id
+	 * @return array
+	 */
+	private function loadPropForPageId( int $id ) {
+		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$db = $dbl->getConnection( DB_REPLICA );
+
+		$propValue = $db->select( 'page_props', [ 'pp_propname', 'pp_value' ], [
+			'pp_page' => $id,
+			// Select only props used by this extension
+			'pp_propname' => Validator::$validParams,
+		], __METHOD__ );
+
+		$result = [];
+
+		if ( $propValue !== false ) {
+			foreach ( $propValue as $row ) {
+				$result[$row->pp_propname] = unserialize( $row->pp_value, [ false ] );
+			}
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @inheritDoc
+	 * @return bool
+	 */
+	public function needsDB() {
+		return true;
 	}
 }

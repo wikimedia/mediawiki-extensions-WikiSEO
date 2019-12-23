@@ -19,6 +19,7 @@
 
 namespace MediaWiki\Extension\WikiSEO;
 
+use ConfigException;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
@@ -28,12 +29,12 @@ use ParserOutput;
 use PPFrame;
 use ReflectionClass;
 use ReflectionException;
+use RuntimeException;
 use WebRequest;
 
 class WikiSEO {
 	private const MODE_TAG = 'tag';
 	private const MODE_PARSER = 'parser';
-	private const PAGE_PROP_NAME = 'WikiSEO';
 
 	/**
 	 * @var string $mode 'tag' or 'parser' used to determine the error message
@@ -79,17 +80,35 @@ class WikiSEO {
 	 * Loads generator names from LocalSettings
 	 *
 	 * @param string $mode the parser mode
+	 * @throws RuntimeException
 	 */
 	public function __construct( $mode = self::MODE_PARSER ) {
-		global $wgMetadataGenerators;
+		if ( !function_exists( 'json_encode' ) ) {
+			throw new RuntimeException( "WikiSEO required 'ext-json' to be installed." );
+		}
 
-		$this->generators = $wgMetadataGenerators;
+		$this->setMetadataGenerators();
 
 		$this->mode = $mode;
 	}
 
+	private function setMetadataGenerators() {
+		try {
+			$generators =
+				MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
+		} catch ( ConfigException $e ) {
+			$generators = [
+				'OpenGraph',
+				'Twitter',
+				'SchemaOrg',
+			];
+		}
+
+		$this->generators = $generators;
+	}
+
 	/**
-	 * Set the metadata by loading the page props from the db
+	 * Set the metadata by loading the page props from the db or the OutputPage object
 	 *
 	 * @param OutputPage $outputPage
 	 */
@@ -102,20 +121,61 @@ class WikiSEO {
 
 		$pageId = $outputPage->getTitle()->getArticleID();
 
+		$result =
+			$this->loadPagePropsFromDb( $pageId ) ??
+			$this->loadPagePropsFromOutputPage( $outputPage ) ?? [];
+
+		$this->setMetadata( $result );
+	}
+
+	/**
+	 * Loads all page props with pp_propname in Validator::$validParams
+	 *
+	 * @param int $pageId
+	 * @return null | array Null if empty
+	 * @see Validator::$validParams
+	 */
+	private function loadPagePropsFromDb( int $pageId ) {
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( DB_REPLICA );
 
-		$propValue = $db->selectField( 'page_props', 'pp_value', [
+		$propValue = $db->select( 'page_props', [ 'pp_propname', 'pp_value' ], [
 			'pp_page' => $pageId,
-			'pp_propname' => self::PAGE_PROP_NAME,
+			// Select only props used by this extension
+			'pp_propname' => Validator::$validParams,
 		], __METHOD__ );
 
-		// Not found in DB, let's try OutputPage
-		if ( $propValue === false ) {
-			$propValue = $outputPage->getProperty( self::PAGE_PROP_NAME ) ?? '{}';
+		$result = null;
+
+		if ( $propValue !== false ) {
+			$result = [];
+
+			foreach ( $propValue as $row ) {
+				$result[$row->pp_propname] = unserialize( $row->pp_value, [ false ] );
+			}
 		}
 
-		$this->setMetadata( json_decode( $propValue, true ) );
+		return empty( $result ) ? null : $result;
+	}
+
+	/**
+	 * Tries to load the page props from OutputPage with keys from Validator::$validParams
+	 *
+	 * @param OutputPage $page
+	 * @return array
+	 * @see Validator::$validParams
+	 */
+	private function loadPagePropsFromOutputPage( OutputPage $page ) {
+		$result = [];
+
+		foreach ( Validator::$validParams as $param ) {
+			$prop = $page->getProperty( $param );
+			if ( $prop !== null ) {
+				$result[$param] = unserialize( $prop, [ false ] );
+			}
+		}
+
+		return empty( $result ) ? null : $result;
 	}
 
 	/**
@@ -244,7 +304,11 @@ class WikiSEO {
 	 * @param ParserOutput $outputPage
 	 */
 	private function saveMetadataToProps( ParserOutput $outputPage ) {
-		$outputPage->setProperty( self::PAGE_PROP_NAME, json_encode( $this->metadata ) );
+		foreach ( $this->metadata as $key => $value ) {
+			if ( $outputPage->getProperty( $key ) === false ) {
+				$outputPage->setProperty( $key, serialize( $value ) );
+			}
+		}
 	}
 
 	/**
