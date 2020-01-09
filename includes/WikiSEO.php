@@ -141,8 +141,6 @@ class WikiSEO {
 
 		$propValue = $db->select( 'page_props', [ 'pp_propname', 'pp_value' ], [
 			'pp_page' => $pageId,
-			// Select only props used by this extension
-			'pp_propname' => Validator::$validParams,
 		], __METHOD__ );
 
 		$result = null;
@@ -151,7 +149,12 @@ class WikiSEO {
 			$result = [];
 
 			foreach ( $propValue as $row ) {
-				$result[$row->pp_propname] = unserialize( $row->pp_value, [ false ] );
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				$value = @unserialize( $row->pp_value, [ 'allowed_classes' => false ] );
+
+				if ( $value !== false ) {
+					$result[$row->pp_propname] = $value;
+				}
 			}
 		}
 
@@ -171,7 +174,8 @@ class WikiSEO {
 		foreach ( Validator::$validParams as $param ) {
 			$prop = $page->getProperty( $param );
 			if ( $prop !== null ) {
-				$result[$param] = unserialize( $prop, [ false ] );
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				$result[$param] = @unserialize( $prop, [ 'allowed_classes' => false ] );
 			}
 		}
 
