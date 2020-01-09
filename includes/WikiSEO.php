@@ -274,7 +274,7 @@ class WikiSEO {
 		$metaTitle = $this->metadata['title'];
 
 		if ( array_key_exists( 'title_separator', $this->metadata ) ) {
-			$this->titleSeparator = html_entity_decode( $this->metadata['title_separator'] );
+			$this->titleSeparator = $this->metadata['title_separator'];
 		}
 
 		if ( array_key_exists( 'title_mode', $this->metadata ) ) {
@@ -294,6 +294,7 @@ class WikiSEO {
 		}
 
 		$pageTitle = preg_replace( "/\r|\n/", '', $pageTitle );
+		$pageTitle = html_entity_decode( $pageTitle );
 
 		$out->setHTMLTitle( $pageTitle );
 	}
