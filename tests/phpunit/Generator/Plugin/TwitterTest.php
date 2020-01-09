@@ -69,6 +69,9 @@ class TwitterTest extends GeneratorTest {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::preprocessFileMetadata
 	 */
 	public function testContainsImage() {
+		// Unset default image if set
+		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
+
 		$out = $this->newInstance();
 
 		$generator = new Twitter();

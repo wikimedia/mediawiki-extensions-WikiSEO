@@ -101,8 +101,8 @@ class SchemaOrg implements GeneratorInterface {
 
 		$meta = [
 			'@context' => 'http://schema.org',
-			'@type'     => $this->getTypeMetadata(),
-			'name'     => $this->outputPage->getHTMLTitle(),
+			'@type' => $this->getTypeMetadata(),
+			'name' => $this->outputPage->getHTMLTitle(),
 			'headline' => $this->outputPage->getHTMLTitle(),
 			'mainEntityOfPage' => $this->outputPage->getPageTitle(),
 		];

@@ -25,7 +25,7 @@ namespace MediaWiki\Extension\WikiSEO;
  * @package MediaWiki\Extension\WikiSEO
  */
 class Validator {
-	private static $validParams = [
+	public static $validParams = [
 		'title',
 		'title_mode',
 		'title_separator',
