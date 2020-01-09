@@ -19,7 +19,10 @@
 
 namespace MediaWiki\Extension\WikiSEO\Generator;
 
+use ConfigException;
 use Html;
+use MediaWiki\Extension\WikiSEO\Validator;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 
 /**
@@ -67,6 +70,7 @@ class MetaTag implements GeneratorInterface {
 		$this->addPinterestSiteVerification();
 		$this->addNortonSiteVerification();
 		$this->addFacebookAppId();
+		$this->addHrefLangs();
 
 		foreach ( self::$tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
@@ -150,7 +154,41 @@ class MetaTag implements GeneratorInterface {
 		if ( $wgFacebookAppId !== null ) {
 			$this->outputPage->addHeadItem( 'fb:app_id', Html::element( 'meta', [
 				'property' => 'fb:app_id',
-				'content'  => $wgFacebookAppId
+				'content' => $wgFacebookAppId,
+			] ) );
+		}
+	}
+
+	/**
+	 * Sets <link rel="alternate" href="url" hreflang="language-area"> elements
+	 * Will add a link element for the current page if $wgWikiSeoDefaultLanguage is set
+	 */
+	private function addHrefLangs() {
+		try {
+			$language =
+				MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoDefaultLanguage' );
+		} catch ( ConfigException $e ) {
+			wfLogWarning( 'Could not get config for "$wgWikiSeoDefaultLanguage".' );
+			$language = null;
+		}
+
+		if ( $language !== null && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
+			$this->outputPage->addHeadItem( $language, Html::element( 'link', [
+				'rel' => 'alternate',
+				'href' => $this->outputPage->getTitle()->getFullURL(),
+				'hreflang' => $language,
+			] ) );
+		}
+
+		foreach ( $this->metadata as $metaKey => $url ) {
+			if ( strpos( $metaKey, 'hreflang' ) === false ) {
+				continue;
+			}
+
+			$this->outputPage->addHeadItem( $metaKey, Html::element( 'link', [
+				'rel' => 'alternate',
+				'href' => $url,
+				'hreflang' => substr( $metaKey, 9 ),
 			] ) );
 		}
 	}
