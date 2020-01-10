@@ -161,6 +161,8 @@ class SchemaOrg implements GeneratorInterface {
 				}
 
 			} catch ( ConfigException $e ) {
+				wfWarn( sprintf( 'Could not gef config for "$wgWikiSeoDefaultImage". %s',
+					$e->getMessage() ) );
 				// Fallthrough
 			}
 		}
@@ -190,13 +192,16 @@ class SchemaOrg implements GeneratorInterface {
 		try {
 			$sitename = MediaWikiServices::getInstance()->getMainConfig()->get( 'Sitename' );
 		} catch ( ConfigException $e ) {
+			wfWarn( sprintf( 'Could not gef config for "$wgSitename". %s', $e->getMessage() ) );
 			// Empty tags will be ignored
 			$sitename = '';
 		}
 
 		try {
 			$server = MediaWikiServices::getInstance()->getMainConfig()->get( 'Server' );
-		} catch ( Exception $e ) {
+		} catch ( ConfigException $e ) {
+			wfWarn( sprintf( 'Could not gef config for "$wgServer". %s', $e->getMessage() ) );
+
 			$server = '';
 		}
 

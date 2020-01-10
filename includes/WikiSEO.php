@@ -97,6 +97,9 @@ class WikiSEO {
 			$generators =
 				MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
 		} catch ( ConfigException $e ) {
+			wfWarn( sprintf( 'Could not get config for "$wgMetadataGenerators", using default. %s',
+				$e->getMessage() ) );
+
 			$generators = [
 				'OpenGraph',
 				'Twitter',
