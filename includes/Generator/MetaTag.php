@@ -188,6 +188,13 @@ class MetaTag implements GeneratorInterface {
 		}
 	}
 
+	/**
+	 * Wrapper function for getMainConfig()
+	 * Logs errors
+	 *
+	 * @param string $key
+	 * @return mixed|null
+	 */
 	private function getConfig( $key ) {
 		try {
 			$value = MediaWikiServices::getInstance()->getMainConfig()->get( $key );

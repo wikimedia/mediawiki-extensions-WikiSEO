@@ -278,7 +278,7 @@ class Validator {
 
 		foreach ( $params as $paramKey => $paramData ) {
 			$valid =
-				in_array( $paramKey, self::$validParams, true ) ||
+				in_array( $paramKey, static::$validParams, true ) ||
 				in_array( substr( $paramKey, 9 ), static::$isoLanguageCodes, true );
 
 			if ( $valid ) {

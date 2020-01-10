@@ -300,7 +300,7 @@ class WikiSEO {
 				$pageTitle = $metaTitle;
 		}
 
-		$pageTitle = preg_replace( "/\r|\n/", '', $pageTitle );
+		$pageTitle = preg_replace( "/[\r\n]/", '', $pageTitle );
 		$pageTitle = html_entity_decode( $pageTitle, ENT_QUOTES );
 
 		$out->setHTMLTitle( $pageTitle );

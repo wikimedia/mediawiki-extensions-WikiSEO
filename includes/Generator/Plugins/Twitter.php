@@ -29,7 +29,6 @@ use MediaWiki\MediaWikiServices;
  * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
 class Twitter extends OpenGraph {
-
 	/**
 	 * Page title property name
 	 *
