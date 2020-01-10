@@ -7,6 +7,7 @@ use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
+use RequestContext;
 
 /**
  * Class WikiSEOTest
@@ -159,10 +160,46 @@ class WikiSEOTest extends GeneratorTest {
 
 		$result = $this->loadPropForPageId( $page->getId() );
 
-		$this->assertArrayEquals( [
-			'title' => 'Test Title',
-			'title_mode' => 'prepend',
-		], $result );
+		$this->assertArrayHasKey( 'title', $result );
+		$this->assertArrayHasKey( 'title_mode', $result );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @throws \MWException
+	 */
+	public function testNoHtmlEntitiesInTitleAmpersand() {
+		$page =
+			$this->insertPage( 'Title with &',
+				'{{#seo:|title={{FULLPAGENAME}}|title_mode=replace}}', NS_MAIN );
+
+		$context = new RequestContext();
+		$context->setTitle( $page['title'] );
+		$out = new OutputPage( $context );
+
+		$seo = new WikiSEO();
+		$seo->setMetadataFromPageProps( $out );
+		$seo->addMetadataToPage( $out );
+
+		$this->assertEquals( 'Title with &', $out->getHTMLTitle() );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
+	 * @throws \MWException
+	 */
+	public function testNoHtmlEntitiesInTitleApostrophe() {
+		$page = $this->insertPage( 'Title with \'', '{{#seo:|title={{FULLPAGENAME}}}}', NS_MAIN );
+
+		$context = new RequestContext();
+		$context->setTitle( $page['title'] );
+		$out = new OutputPage( $context );
+
+		$seo = new WikiSEO();
+		$seo->setMetadataFromPageProps( $out );
+		$seo->addMetadataToPage( $out );
+
+		$this->assertEquals( 'Title with \'', $out->getHTMLTitle() );
 	}
 
 	/**
@@ -189,7 +226,6 @@ class WikiSEOTest extends GeneratorTest {
 
 		$propValue = $db->select( 'page_props', [ 'pp_propname', 'pp_value' ], [
 			'pp_page' => $id,
-			// Select only props used by this extension
 			'pp_propname' => Validator::$validParams,
 		], __METHOD__ );
 
@@ -197,7 +233,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		if ( $propValue !== false ) {
 			foreach ( $propValue as $row ) {
-				$result[$row->pp_propname] = unserialize( $row->pp_value, [ false ] );
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				$result[$row->pp_propname] = @unserialize( $row->pp_value, [ false ] );
 			}
 		}
 
