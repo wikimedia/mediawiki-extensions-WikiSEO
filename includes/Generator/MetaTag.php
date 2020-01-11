@@ -22,6 +22,7 @@ namespace MediaWiki\Extension\WikiSEO\Generator;
 use ConfigException;
 use Html;
 use MediaWiki\Extension\WikiSEO\Validator;
+use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 
@@ -170,7 +171,8 @@ class MetaTag implements GeneratorInterface {
 		if ( $language !== null && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
 			$this->outputPage->addHeadItem( $language, Html::element( 'link', [
 				'rel' => 'alternate',
-				'href' => $this->outputPage->getTitle()->getFullURL(),
+				'href' => WikiSEO::protocolizeUrl( $this->outputPage->getTitle()->getFullURL(),
+					$this->outputPage->getRequest() ),
 				'hreflang' => $language,
 			] ) );
 		}
