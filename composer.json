@@ -35,6 +35,7 @@
 		]
 	},
 	"extra": {
-		"installer-name": "WikiSEO"
+		"installer-name": "WikiSEO",
+		"phan-taint-check-plugin": "2.0.1"
 	}
 }

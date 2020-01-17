@@ -31,7 +31,8 @@ use Title;
 /**
  * File Metadata methods used in generators
  *
- * @property OutputPage outputPage
+ * @property OutputPage $outputPage
+ * @property array $metadata
  */
 trait FileMetadataTrait {
 	/**
