@@ -72,7 +72,7 @@ class TwitterTest extends GeneratorTest {
 	public function testContainsImage() {
 		// Unset default image if set
 		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
-        $this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
+		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
 
 		$out = $this->newInstance();
 
@@ -90,7 +90,7 @@ class TwitterTest extends GeneratorTest {
 	public function testDoesNotContainLogoFallbackImage() {
 		// Unset default image if set
 		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
-        $this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', true );
+		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', true );
 
 		$out = $this->newInstance();
 

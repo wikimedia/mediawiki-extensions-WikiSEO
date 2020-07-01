@@ -77,7 +77,7 @@ class OpenGraphTest extends GeneratorTest {
 		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
 		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
 
-        $out = $this->newInstance();
+		$out = $this->newInstance();
 
 		$generator = new OpenGraph();
 		$generator->init( [], $out );

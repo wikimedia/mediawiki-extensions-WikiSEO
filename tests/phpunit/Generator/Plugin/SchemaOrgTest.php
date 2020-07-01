@@ -31,7 +31,7 @@ class SchemaOrgTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getAuthorMetadata
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getConfigValue
-     * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getLogoMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getLogoMetadata
 	 */
 	public function testContainsOrganization() {
 		$out = $this->newInstance();
@@ -107,9 +107,9 @@ class SchemaOrgTest extends GeneratorTest {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getImageMetadata
 	 */
 	public function testContainsImageObject() {
-        $this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
+		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
 
-        $out = $this->newInstance();
+		$out = $this->newInstance();
 
 		$generator = new SchemaOrg();
 		$generator->init( [], $out );
