@@ -19,13 +19,10 @@
 
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
-use ConfigException;
 use Html;
+use MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
-use MediaWiki\Extension\WikiSEO\Generator\Plugins\FileMetadataTrait as FileMetadata;
-use MediaWiki\Extension\WikiSEO\Generator\Plugins\RevisionMetadataTrait as RevisionMetadata;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
-use MediaWiki\MediaWikiServices;
 use OutputPage;
 
 /**
@@ -33,10 +30,7 @@ use OutputPage;
  *
  * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
-class OpenGraph implements GeneratorInterface {
-	use FileMetadata;
-	use RevisionMetadata;
-
+class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	protected static $htmlElementPropertyKey = 'property';
 	protected static $htmlElementContentKey = 'content';
 
@@ -114,18 +108,10 @@ class OpenGraph implements GeneratorInterface {
 		$this->outputPage = $out;
 
 		if ( !isset( $this->metadata['image'] ) ) {
-			try {
-				$defaultImage =
-					MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoDefaultImage' );
+			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
 
-				if ( $defaultImage !== null ) {
-					$this->metadata['image'] = $defaultImage;
-				}
-
-			} catch ( ConfigException $e ) {
-				wfLogWarning( sprintf( 'Could not gef config for "$wgWikiSeoDefaultImage". %s',
-					$e->getMessage() ) );
-				// Fallthrough
+			if ( $defaultImage !== null ) {
+				$this->metadata['image'] = $defaultImage;
 			}
 		}
 
@@ -187,13 +173,7 @@ class OpenGraph implements GeneratorInterface {
 	 * @return void
 	 */
 	private function addSiteName() {
-		try {
-			$sitename = MediaWikiServices::getInstance()->getMainConfig()->get( 'Sitename' );
-		} catch ( ConfigException $e ) {
-			wfLogWarning( sprintf( 'Could not gef config for "$wgSitename". %s', $e->getMessage() ) );
-
-			$sitename = null;
-		}
+		$sitename = $this->getConfigValue( 'Sitename' );
 
 		if ( !isset( $this->metadata['site_name'] ) && $sitename !== null ) {
 			$this->outputPage->addHeadItem( 'og:site_name', Html::element( 'meta', [
