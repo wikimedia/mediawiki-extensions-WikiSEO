@@ -43,7 +43,7 @@ class TagParser {
 			$pair = array_map( 'trim', $pair );
 
 			if ( count( $pair ) === 2 ) {
-				[ $name, $value ] = $pair;
+				list( $name, $value ) = $pair;
 				$results[$name] = $value;
 			}
 		}

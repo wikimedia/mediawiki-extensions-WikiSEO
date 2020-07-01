@@ -11,12 +11,12 @@ class TagParserTest extends MediaWikiTestCase {
 	 */
 	private $tagParser;
 
-	protected function setUp(): void {
+	protected function setUp() {
 		parent::setUp();
 		$this->tagParser = new TagParser();
 	}
 
-	protected function tearDown(): void {
+	protected function tearDown() {
 		unset( $this->tagParser );
 		parent::tearDown();
 	}

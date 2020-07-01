@@ -33,8 +33,8 @@ use RuntimeException;
 use WebRequest;
 
 class WikiSEO {
-	private const MODE_TAG = 'tag';
-	private const MODE_PARSER = 'parser';
+	const MODE_TAG = 'tag';
+	const MODE_PARSER = 'parser';
 
 	/**
 	 * @var string $mode 'tag' or 'parser' used to determine the error message
