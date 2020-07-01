@@ -24,6 +24,10 @@
 			"description": "App Id for Facebook Insights",
 			"value": null
 		},
+		"FacebookAdmins":  {
+			"description": "Admin id for Facebook Insights. Multiple ids can be separated by ','",
+			"value": null
+		},
 		"YandexSiteVerificationKey": {
 			"description": "Site verification key for Yandex Webmasters",
 			"value": null
@@ -55,6 +59,10 @@
 		"WikiSeoDefaultImage": {
 			"description": "Default image. Local image, if not set $wgLogo will be used.",
 			"value": null
+		},
+		"WikiSeoDisableLogoFallbackImage": {
+			"description": "Disable setting the sites logo as the default SEO image if no image was provided.",
+			"value": false
 		},
 		"TwitterCardType": {
 			"description": "Type of twitter card to use. Defaults to 'summary_large_image'. Possible values: 'summary', 'summary_large_image'",
