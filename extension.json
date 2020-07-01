@@ -60,10 +60,6 @@
 			"description": "Default image. Local image, if not set $wgLogo will be used.",
 			"value": null
 		},
-		"WikiSeoDisableLogoFallbackImage": {
-			"description": "Disable setting the sites logo as the default SEO image if no image was provided.",
-			"value": false
-		},
 		"TwitterCardType": {
 			"description": "Type of twitter card to use. Defaults to 'summary_large_image'. Possible values: 'summary', 'summary_large_image'",
 			"value": "summary_large_image"
@@ -71,7 +67,11 @@
 		"WikiSeoDefaultLanguage": {
 			"description": "Language code and area which will set a <link rel='alternate'> for the current page.",
 			"value": null
-		}
+		},
+        "WikiSeoDisableLogoFallbackImage": {
+            "description": "Disable setting the sites logo as the default SEO image if no image was provided.",
+            "value": false
+        }
 	},
 	"MessagesDirs": {
 		"WikiSEO": [
