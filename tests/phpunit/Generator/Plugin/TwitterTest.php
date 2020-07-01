@@ -9,6 +9,7 @@ class TwitterTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addMetadata
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -31,6 +32,7 @@ class TwitterTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getConfigValue
 	 */
 	public function testAddTwitterSiteHandle() {
 		$this->setMwGlobals( 'wgTwitterSiteHandle', '@TestKey' );
@@ -70,6 +72,7 @@ class TwitterTest extends GeneratorTest {
 	public function testContainsImage() {
 		// Unset default image if set
 		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
+        $this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
 
 		$out = $this->newInstance();
 
@@ -79,6 +82,24 @@ class TwitterTest extends GeneratorTest {
 
 		$this->assertArrayHasKey( 'twitter:image', $out->getHeadItemsArray() );
 		$this->assertContains( 'wiki.png', $out->getHeadItemsArray()['twitter:image'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
+	 */
+	public function testDoesNotContainLogoFallbackImage() {
+		// Unset default image if set
+		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
+        $this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', true );
+
+		$out = $this->newInstance();
+
+		$generator = new Twitter();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertArrayNotHasKey( 'twitter:image', $out->getHeadItemsArray() );
+		$this->assertNotContains( 'wiki.png', $out->getHeadItemsArray()['twitter:image'] );
 	}
 
 	/**

@@ -8,6 +8,7 @@ class MetaTagTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getConfigValue
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -138,8 +139,25 @@ class MetaTagTest extends GeneratorTest {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addFacebookAdmins
+	 */
+	public function testAddFacebookAdmins() {
+		$this->setMwGlobals( 'wgFacebookAdmins', '0011223344' );
+
+		$out = $this->newInstance();
+
+		$generator = new MetaTag();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertArrayHasKey( 'fb:admins', $out->getHeadItemsArray() );
+		$this->assertEquals( '<meta property="fb:admins" content="0011223344"/>',
+			$out->getHeadItemsArray()['fb:admins'] );
+	}
+
+	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addHrefLangs
-	 * @throws \MWException
 	 */
 	public function testAddDefaultLanguageLink() {
 		$this->setMwGlobals( 'wgWikiSeoDefaultLanguage', 'de-de' );
@@ -156,7 +174,6 @@ class MetaTagTest extends GeneratorTest {
 
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addHrefLangs
-	 * @throws \MWException
 	 */
 	public function testAddLanguageLinks() {
 		$this->setMwGlobals( 'wgWikiSeoDefaultLanguage', 'de-de' );

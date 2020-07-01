@@ -9,6 +9,11 @@ class OpenGraphTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addTitleMeta
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addSiteName
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getConfigValue
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::protocolizeUrl
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -70,8 +75,9 @@ class OpenGraphTest extends GeneratorTest {
 	public function testContainsImage() {
 		// Unset default image if set
 		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
+		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
 
-		$out = $this->newInstance();
+        $out = $this->newInstance();
 
 		$generator = new OpenGraph();
 		$generator->init( [], $out );

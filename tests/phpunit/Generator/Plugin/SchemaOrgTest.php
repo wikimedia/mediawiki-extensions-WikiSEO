@@ -9,6 +9,7 @@ class SchemaOrgTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getRevisionTimestamp
 	 */
 	public function testAddMetadata() {
 		$metadata = [
@@ -29,6 +30,8 @@ class SchemaOrgTest extends GeneratorTest {
 
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getAuthorMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getConfigValue
+     * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getLogoMetadata
 	 */
 	public function testContainsOrganization() {
 		$out = $this->newInstance();
@@ -55,6 +58,8 @@ class SchemaOrgTest extends GeneratorTest {
 
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getAuthorMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getConfigValue
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getLogoMetadata
 	 */
 	public function testContainsAuthorAndPublisher() {
 		$out = $this->newInstance();
@@ -102,7 +107,9 @@ class SchemaOrgTest extends GeneratorTest {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getImageMetadata
 	 */
 	public function testContainsImageObject() {
-		$out = $this->newInstance();
+        $this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
+
+        $out = $this->newInstance();
 
 		$generator = new SchemaOrg();
 		$generator->init( [], $out );
