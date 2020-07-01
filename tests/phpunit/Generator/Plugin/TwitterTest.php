@@ -99,7 +99,6 @@ class TwitterTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayNotHasKey( 'twitter:image', $out->getHeadItemsArray() );
-		$this->assertNotContains( 'wiki.png', $out->getHeadItemsArray()['twitter:image'] );
 	}
 
 	/**
