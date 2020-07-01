@@ -157,6 +157,9 @@ class WikiSEO {
 
 				if ( $value !== false ) {
 					$result[$row->pp_propname] = $value;
+				} elseif ( $row->pp_propname === 'description' && !empty( $row->pp_propvalue ) ) {
+					// Non-serialized description value from other extension
+					$result[$row->pp_propname] = $row->pp_propvalue;
 				}
 			}
 		}
