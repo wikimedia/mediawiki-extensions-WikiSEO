@@ -12,8 +12,8 @@ class MetaTagTest extends GeneratorTest {
 	 */
 	public function testAddMetadata() {
 		$metadata = [
-			'description' => 'Example Description',
-			'keywords'    => 'Keyword 1, Keyword 2',
+		'description' => 'Example Description',
+		'keywords'    => 'Keyword 1, Keyword 2',
 		];
 
 		$out = $this->newInstance();
@@ -54,10 +54,12 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [
+		$this->assertContains(
+			[
 			'norton-safeweb-site-verification',
 			'norton-key',
-		], $out->getMetaTags() );
+			], $out->getMetaTags()
+		);
 	}
 
 	/**
@@ -134,8 +136,10 @@ class MetaTagTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'fb:app_id', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="fb:app_id" content="0011223344"/>',
-			$out->getHeadItemsArray()['fb:app_id'] );
+		$this->assertEquals(
+			'<meta property="fb:app_id" content="0011223344"/>',
+			$out->getHeadItemsArray()['fb:app_id']
+		);
 	}
 
 	/**
@@ -152,8 +156,10 @@ class MetaTagTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'fb:admins', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="fb:admins" content="0011223344"/>',
-			$out->getHeadItemsArray()['fb:admins'] );
+		$this->assertEquals(
+			'<meta property="fb:admins" content="0011223344"/>',
+			$out->getHeadItemsArray()['fb:admins']
+		);
 	}
 
 	/**
@@ -181,22 +187,47 @@ class MetaTagTest extends GeneratorTest {
 		$out = $this->newInstance();
 
 		$generator = new MetaTag();
-		$generator->init( [
+		$generator->init(
+			[
 			'hreflang_de-de' => 'https://example.de',
 			'hreflang_nl-nl' => 'https://example.nl',
 			'hreflang_en-us' => 'https://example.com',
-		], $out );
+			], $out
+		);
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'hreflang_de-de', $out->getHeadItemsArray() );
 		$this->assertArrayHasKey( 'hreflang_nl-nl', $out->getHeadItemsArray() );
 		$this->assertArrayHasKey( 'hreflang_en-us', $out->getHeadItemsArray() );
 
-		$this->assertContains( 'https://example.de"',
-			$out->getHeadItemsArray()['hreflang_de-de'] );
-		$this->assertContains( 'https://example.nl"',
-			$out->getHeadItemsArray()['hreflang_nl-nl'] );
-		$this->assertContains( 'https://example.com"', $out->getHeadItemsArray()
-		['hreflang_en-us'] );
+		$this->assertContains(
+			'https://example.de"',
+			$out->getHeadItemsArray()['hreflang_de-de']
+		);
+		$this->assertContains(
+			'https://example.nl"',
+			$out->getHeadItemsArray()['hreflang_nl-nl']
+		);
+		$this->assertContains(
+			'https://example.com"', $out->getHeadItemsArray()
+			['hreflang_en-us']
+		);
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addHrefLangs
+	 */
+	public function testAddLanguageLinksWrongFormatted() {
+		$out = $this->newInstance();
+
+		$generator = new MetaTag();
+		$generator->init(
+			[
+			'hrefWRONGlang_de-de' => 'https://example.de',
+			], $out
+		);
+		$generator->addMetadata();
+
+		$this->assertArrayNotHasKey( 'hrefWRONGlang_de-de', $out->getHeadItemsArray() );
 	}
 }

@@ -13,9 +13,9 @@ class TwitterTest extends GeneratorTest {
 	 */
 	public function testAddMetadata() {
 		$metadata = [
-			'description'  => 'Example Description',
-			'keywords'     => 'Keyword 1, Keyword 2',
-			'twitter_site' => 'example',
+		'description'  => 'Example Description',
+		'keywords'     => 'Keyword 1, Keyword 2',
+		'twitter_site' => 'example',
 		];
 
 		$out = $this->newInstance();
@@ -44,8 +44,10 @@ class TwitterTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>',
-			$out->getHeadItemsArray()['twitter:site'] );
+		$this->assertEquals(
+			'<meta property="twitter:site" content="@TestKey"/>',
+			$out->getHeadItemsArray()['twitter:site']
+		);
 	}
 
 	/**
@@ -62,8 +64,10 @@ class TwitterTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="twitter:site" content="@TestKey"/>',
-			$out->getHeadItemsArray()['twitter:site'] );
+		$this->assertEquals(
+			'<meta property="twitter:site" content="@TestKey"/>',
+			$out->getHeadItemsArray()['twitter:site']
+		);
 	}
 
 	/**
@@ -112,8 +116,10 @@ class TwitterTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'twitter:card', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="twitter:card" content="summary_large_image"/>',
-			$out->getHeadItemsArray()['twitter:card'] );
+		$this->assertEquals(
+			'<meta property="twitter:card" content="summary_large_image"/>',
+			$out->getHeadItemsArray()['twitter:card']
+		);
 	}
 
 	/**
@@ -130,7 +136,26 @@ class TwitterTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'twitter:card', $out->getHeadItemsArray() );
-		$this->assertEquals( '<meta property="twitter:card" content="summary"/>',
-			$out->getHeadItemsArray()['twitter:card'] );
+		$this->assertEquals(
+			'<meta property="twitter:card" content="summary"/>',
+			$out->getHeadItemsArray()['twitter:card']
+		);
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
+	 */
+	public function testHandleNotSet() {
+		// Unset default image if set
+		$this->setMwGlobals( 'wgTwitterSiteHandle', null );
+
+		$out = $this->newInstance();
+
+		$generator = new Twitter();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertArrayNotHasKey( 'twitter:site', $out->getHeadItemsArray() );
 	}
 }
