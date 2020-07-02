@@ -321,7 +321,7 @@ class WikiSEOTest extends GeneratorTest {
 	 */
 	private function setProperties( array $props, OutputPage $out ) {
 		foreach ( $props as $key => $value ) {
-			$out->setProperty( $key, serialize( $value ) );
+			$out->setProperty( $key, $value );
 		}
 	}
 
@@ -346,8 +346,7 @@ class WikiSEOTest extends GeneratorTest {
 
 		if ( $propValue !== false ) {
 			foreach ( $propValue as $row ) {
-                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-				$result[$row->pp_propname] = @unserialize( $row->pp_value, [ false ] );
+				$result[$row->pp_propname] = $row->pp_value;
 			}
 		}
 

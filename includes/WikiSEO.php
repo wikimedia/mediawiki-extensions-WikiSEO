@@ -161,11 +161,11 @@ class WikiSEO {
                 // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 				$value = @unserialize( $row->pp_value, [ 'allowed_classes' => false ] );
 
+				// Value was serialized
 				if ( $value !== false ) {
 					$result[$row->pp_propname] = $value;
-				} elseif ( $row->pp_propname === 'description' && !empty( $row->pp_propvalue ) ) {
-					// Non-serialized description value from other extension
-					$result[$row->pp_propname] = $row->pp_propvalue;
+				} else {
+					$result[$row->pp_propname] = $row->pp_value;
 				}
 			}
 		}
@@ -187,7 +187,14 @@ class WikiSEO {
 			$prop = $page->getProperty( $param );
 			if ( $prop !== null ) {
                 // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-				$result[$param] = @unserialize( $prop, [ 'allowed_classes' => false ] );
+				$value = @unserialize( $prop, [ 'allowed_classes' => false ] );
+
+				// Value was serialized
+				if ( $value !== false ) {
+					$prop = $value;
+				}
+
+				$result[$param] = $prop;
 			}
 		}
 
@@ -323,7 +330,7 @@ class WikiSEO {
 	private function saveMetadataToProps( ParserOutput $outputPage ) {
 		foreach ( $this->metadata as $key => $value ) {
 			if ( $outputPage->getProperty( $key ) === false ) {
-				$outputPage->setProperty( $key, serialize( $value ) );
+				$outputPage->setProperty( $key, $value );
 			}
 		}
 	}
