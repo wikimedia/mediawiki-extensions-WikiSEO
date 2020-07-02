@@ -131,8 +131,10 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$nortonSiteVerificationKey = $this->getConfigValue( 'NortonSiteVerificationKey' );
 
 		if ( $nortonSiteVerificationKey !== null ) {
-			$this->outputPage->addMeta( 'norton-safeweb-site-verification',
-				$nortonSiteVerificationKey );
+			$this->outputPage->addMeta(
+				'norton-safeweb-site-verification',
+				$nortonSiteVerificationKey
+			);
 		}
 	}
 
@@ -143,10 +145,14 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$facebookAppId = $this->getConfigValue( 'FacebookAppId' );
 
 		if ( $facebookAppId !== null ) {
-			$this->outputPage->addHeadItem( 'fb:app_id', Html::element( 'meta', [
-				'property' => 'fb:app_id',
-				'content' => $facebookAppId,
-			] ) );
+			$this->outputPage->addHeadItem(
+				'fb:app_id', Html::element(
+					'meta', [
+					'property' => 'fb:app_id',
+					'content' => $facebookAppId,
+					]
+				)
+			);
 		}
 	}
 
@@ -157,10 +163,14 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$facebookAdmins = $this->getConfigValue( 'FacebookAdmins' );
 
 		if ( $facebookAdmins !== null ) {
-			$this->outputPage->addHeadItem( 'fb:admins', Html::element( 'meta', [
-				'property' => 'fb:admins',
-				'content' => $facebookAdmins,
-			] ) );
+			$this->outputPage->addHeadItem(
+				'fb:admins', Html::element(
+					'meta', [
+					'property' => 'fb:admins',
+					'content' => $facebookAdmins,
+					]
+				)
+			);
 		}
 	}
 
@@ -172,12 +182,18 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$language = $this->getConfigValue( 'WikiSeoDefaultLanguage' );
 
 		if ( $language !== null && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
-			$this->outputPage->addHeadItem( $language, Html::element( 'link', [
-				'rel' => 'alternate',
-				'href' => WikiSEO::protocolizeUrl( $this->outputPage->getTitle()->getFullURL(),
-					$this->outputPage->getRequest() ),
-				'hreflang' => $language,
-			] ) );
+			$this->outputPage->addHeadItem(
+				$language, Html::element(
+					'link', [
+					'rel' => 'alternate',
+					'href' => WikiSEO::protocolizeUrl(
+						$this->outputPage->getTitle()->getFullURL(),
+						$this->outputPage->getRequest()
+					),
+					'hreflang' => $language,
+					]
+				)
+			);
 		}
 
 		foreach ( $this->metadata as $metaKey => $url ) {
@@ -185,11 +201,15 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 				continue;
 			}
 
-			$this->outputPage->addHeadItem( $metaKey, Html::element( 'link', [
-				'rel' => 'alternate',
-				'href' => $url,
-				'hreflang' => substr( $metaKey, 9 ),
-			] ) );
+			$this->outputPage->addHeadItem(
+				$metaKey, Html::element(
+					'link', [
+					'rel' => 'alternate',
+					'href' => $url,
+					'hreflang' => substr( $metaKey, 9 ),
+					]
+				)
+			);
 		}
 	}
 }

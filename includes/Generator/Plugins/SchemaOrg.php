@@ -35,12 +35,12 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @var array
 	 */
 	protected $tags = [
-		'type',
-		'description',
-		'keywords',
-		'modified_time',
-		'published_time',
-		'section'
+	'type',
+	'description',
+	'keywords',
+	'modified_time',
+	'published_time',
+	'section'
 	];
 
 	/**
@@ -49,12 +49,12 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @var array
 	 */
 	protected $conversions = [
-		'type' => '@type',
+	'type' => '@type',
 
-		'section' => 'articleSection',
+	'section' => 'articleSection',
 
-		'published_time' => 'datePublished',
-		'modified_time'  => 'dateModified'
+	'published_time' => 'datePublished',
+	'modified_time'  => 'dateModified'
 	];
 
 	/**
@@ -85,11 +85,11 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 		$template = '<script type="application/ld+json">%s</script>';
 
 		$meta = [
-			'@context' => 'http://schema.org',
-			'@type' => $this->getTypeMetadata(),
-			'name' => $this->outputPage->getHTMLTitle(),
-			'headline' => $this->outputPage->getHTMLTitle(),
-			'mainEntityOfPage' => $this->outputPage->getPageTitle(),
+		'@context' => 'http://schema.org',
+		'@type' => $this->getTypeMetadata(),
+		'name' => $this->outputPage->getHTMLTitle(),
+		'headline' => $this->outputPage->getHTMLTitle(),
+		'mainEntityOfPage' => $this->outputPage->getPageTitle(),
 		];
 
 		if ( $this->outputPage->getTitle() !== null ) {
@@ -133,7 +133,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 */
 	private function getImageMetadata() {
 		$data = [
-			'@type' => 'ImageObject',
+		'@type' => 'ImageObject',
 		];
 
 		if ( !isset( $this->metadata['image'] ) ) {
@@ -144,16 +144,14 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 			}
 		}
 
-		if ( isset( $this->metadata['image'] ) ) {
-			$image = $this->metadata['image'];
+		$image = $this->metadata['image'];
 
-			try {
-				$file = $this->getFileObject( $image );
+		try {
+			$file = $this->getFileObject( $image );
 
-				return array_merge( $data, $this->getFileInfo( $file ) );
-			} catch ( InvalidArgumentException $e ) {
-				// Fallthrough
-			}
+			return array_merge( $data, $this->getFileInfo( $file ) );
+		} catch ( InvalidArgumentException $e ) {
+			// Fallthrough
 		}
 
 		// Logo as Fallback
@@ -176,10 +174,10 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 		}
 
 		return [
-			'@type' => 'Organization',
-			'name' => $sitename,
-			'url' => $server,
-			'logo' => $logo,
+		'@type' => 'Organization',
+		'name' => $sitename,
+		'url' => $server,
+		'logo' => $logo,
 		];
 	}
 
@@ -190,7 +188,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 */
 	private function getLogoMetadata() {
 		$data = [
-			'@type' => 'ImageObject',
+		'@type' => 'ImageObject',
 		];
 
 		if ( $this->getConfigValue( 'WikiSeoDisableLogoFallbackImage' ) === true ) {
@@ -221,14 +219,16 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 
 		if ( $searchPage !== null ) {
 			$search =
-				$searchPage->getFullURL( [ 'search' => 'search_term' ], false,
-					sprintf( '%s://', $this->outputPage->getRequest()->getProtocol() ) );
+			$searchPage->getFullURL(
+				[ 'search' => 'search_term' ], false,
+				sprintf( '%s://', $this->outputPage->getRequest()->getProtocol() )
+			);
 			$search = str_replace( 'search_term', '{search_term}', $search );
 
 			return [
-				'@type' => 'SearchAction',
-				'target' => $search,
-				'query-input' => 'required name=search_term',
+			'@type' => 'SearchAction',
+			'target' => $search,
+			'query-input' => 'required name=search_term',
 			];
 		}
 

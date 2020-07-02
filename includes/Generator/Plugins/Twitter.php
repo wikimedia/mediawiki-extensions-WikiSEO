@@ -41,12 +41,14 @@ class Twitter extends OpenGraph {
 	public function __construct() {
 		$this->tags[] = 'twitter_site';
 
-		$this->conversions = array_merge( $this->conversions, [
+		$this->conversions = array_merge(
+			$this->conversions, [
 			'twitter_site' => 'twitter:site',
 			'description' => 'twitter:description',
 			'image' => 'twitter:image',
 			'image_alt' => 'twitter:image:alt'
-		] );
+			]
+		);
 	}
 
 	/**
@@ -61,10 +63,14 @@ class Twitter extends OpenGraph {
 
 		$twitterCardType = $this->getConfigValue( 'TwitterCardType' ) ?? 'summary_large_image';
 
-		$this->outputPage->addHeadItem( 'twitter:card', Html::element( 'meta', [
-			self::$htmlElementPropertyKey => 'twitter:card',
-			self::$htmlElementContentKey => $twitterCardType,
-		] ) );
+		$this->outputPage->addHeadItem(
+			'twitter:card', Html::element(
+				'meta', [
+				self::$htmlElementPropertyKey => 'twitter:card',
+				self::$htmlElementContentKey => $twitterCardType,
+				]
+			)
+		);
 	}
 
 	/**
@@ -78,17 +84,19 @@ class Twitter extends OpenGraph {
 			return;
 		}
 
-		if ( $twitterSiteHandle !== null ) {
-			unset(
-				$this->metadata['twitter_site'],
-				$this->tags['twitter_site'],
-				$this->conversions['twitter_site']
-			);
+		unset(
+			$this->metadata['twitter_site'],
+			$this->tags['twitter_site'],
+			$this->conversions['twitter_site']
+		);
 
-			$this->outputPage->addHeadItem( 'twitter:site', Html::element( 'meta', [
+		$this->outputPage->addHeadItem(
+			'twitter:site', Html::element(
+				'meta', [
 				self::$htmlElementPropertyKey => 'twitter:site',
 				self::$htmlElementContentKey => $twitterSiteHandle,
-			] ) );
-		}
+				]
+			)
+		);
 	}
 }

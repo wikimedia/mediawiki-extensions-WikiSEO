@@ -51,8 +51,12 @@ abstract class AbstractBaseGenerator {
 		try {
 			$value = MediaWikiServices::getInstance()->getMainConfig()->get( $key );
 		} catch ( ConfigException $e ) {
-			wfLogWarning( sprintf( 'Could not get config for "$wg%s". %s', $key,
-				$e->getMessage() ) );
+			wfLogWarning(
+				sprintf(
+					'Could not get config for "$wg%s". %s', $key,
+					$e->getMessage()
+				)
+			);
 			$value = null;
 		}
 
@@ -99,15 +103,15 @@ abstract class AbstractBaseGenerator {
 	 */
 	protected function getFileInfo( File $file ) {
 		$cacheHash =
-			'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
+		'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
 		$width = $file->getWidth();
 		$height = $file->getHeight();
 		$image = WikiSEO::protocolizeUrl( $file->getFullUrl(), $this->outputPage->getRequest() );
 
 		return [
-			'url' => $image . $cacheHash,
-			'width' => $width,
-			'height' => $height,
+		'url' => $image . $cacheHash,
+		'width' => $width,
+		'height' => $height,
 		];
 	}
 
@@ -154,13 +158,15 @@ abstract class AbstractBaseGenerator {
 		// No cached timestamp, load it from the database
 		if ( $timestamp === null ) {
 			$timestamp =
-				MediaWikiServices::getInstance()
-					->getRevisionLookup()
-					->getKnownCurrentRevision( $this->outputPage->getTitle(),
-						$this->outputPage->getRevisionId() );
+			MediaWikiServices::getInstance()
+				->getRevisionLookup()
+				->getKnownCurrentRevision(
+					$this->outputPage->getTitle(),
+					$this->outputPage->getRevisionId()
+				);
 
 			if ( $timestamp === false ) {
-				$timestamp = wfTimestampNow();
+				   $timestamp = wfTimestampNow();
 			} else {
 				$timestamp = $timestamp->getTimestamp() ?? wfTimestampNow();
 			}
