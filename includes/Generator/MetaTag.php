@@ -62,8 +62,15 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->addFacebookAdmins();
 		$this->addHrefLangs();
 
+		// Meta tags already set in the page
+		$outputMeta = [];
+		foreach ( $this->outputPage->getMetaTags() as $metaTag ) {
+			$outputMeta[$metaTag[0]] = $metaTag[1];
+		}
+
 		foreach ( self::$tags as $tag ) {
-			if ( array_key_exists( $tag, $this->metadata ) ) {
+			// Only add tag if it doesn't already exist in the output page
+			if ( array_key_exists( $tag, $this->metadata ) && !array_key_exists( $tag, $outputMeta ) ) {
 				$this->outputPage->addMeta( $tag, $this->metadata[$tag] );
 			}
 		}
