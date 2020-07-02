@@ -213,7 +213,8 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) ); // HACK
+		// HACK
+		$this->assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) );
 	}
 
 	/**
@@ -244,7 +245,8 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) ); // HACK
+		// HACK
+		$this->assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) );
 	}
 
 	/**
