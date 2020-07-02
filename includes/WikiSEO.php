@@ -95,15 +95,19 @@ class WikiSEO {
 	private function setMetadataGenerators() {
 		try {
 			$generators =
-				MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
+			MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
 		} catch ( ConfigException $e ) {
-			wfLogWarning( sprintf( 'Could not get config for "$wgMetadataGenerators", using default. %s',
-				$e->getMessage() ) );
+			wfLogWarning(
+				sprintf(
+					'Could not get config for "$wgMetadataGenerators", using default. %s',
+					$e->getMessage()
+				)
+			);
 
 			$generators = [
-				'OpenGraph',
-				'Twitter',
-				'SchemaOrg',
+			'OpenGraph',
+			'Twitter',
+			'SchemaOrg',
 			];
 		}
 
@@ -125,8 +129,8 @@ class WikiSEO {
 		$pageId = $outputPage->getTitle()->getArticleID();
 
 		$result =
-			$this->loadPagePropsFromDb( $pageId ) ??
-			$this->loadPagePropsFromOutputPage( $outputPage ) ?? [];
+		$this->loadPagePropsFromDb( $pageId ) ??
+		$this->loadPagePropsFromOutputPage( $outputPage ) ?? [];
 
 		$this->setMetadata( $result );
 	}
@@ -136,15 +140,17 @@ class WikiSEO {
 	 *
 	 * @param int $pageId
 	 * @return null | array Null if empty
-	 * @see Validator::$validParams
+	 * @see    Validator::$validParams
 	 */
 	private function loadPagePropsFromDb( int $pageId ) {
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( DB_REPLICA );
 
-		$propValue = $db->select( 'page_props', [ 'pp_propname', 'pp_value' ], [
+		$propValue = $db->select(
+			'page_props', [ 'pp_propname', 'pp_value' ], [
 			'pp_page' => $pageId,
-		], __METHOD__ );
+			], __METHOD__
+		);
 
 		$result = null;
 
@@ -152,7 +158,7 @@ class WikiSEO {
 			$result = [];
 
 			foreach ( $propValue as $row ) {
-				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 				$value = @unserialize( $row->pp_value, [ 'allowed_classes' => false ] );
 
 				if ( $value !== false ) {
@@ -172,7 +178,7 @@ class WikiSEO {
 	 *
 	 * @param OutputPage $page
 	 * @return array|null
-	 * @see Validator::$validParams
+	 * @see    Validator::$validParams
 	 */
 	private function loadPagePropsFromOutputPage( OutputPage $page ) {
 		$result = [];
@@ -180,7 +186,7 @@ class WikiSEO {
 		foreach ( Validator::$validParams as $param ) {
 			$prop = $page->getProperty( $param );
 			if ( $prop !== null ) {
-				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 				$result[$param] = @unserialize( $prop, [ 'allowed_classes' => false ] );
 			}
 		}
@@ -208,7 +214,7 @@ class WikiSEO {
 	 * Gets validated by Validator
 	 *
 	 * @param array $metadataArray
-	 * @see Validator
+	 * @see   Validator
 	 */
 	private function setMetadata( array $metadataArray ) {
 		$validator = new Validator();
@@ -292,15 +298,15 @@ class WikiSEO {
 		}
 
 		switch ( $this->titleMode ) {
-			case 'append':
-				$pageTitle = sprintf( '%s%s%s', $out->getPageTitle(), $this->titleSeparator, $metaTitle );
-				break;
-			case 'prepend':
-				$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $out->getPageTitle() );
-				break;
-			case 'replace':
-			default:
-				$pageTitle = $metaTitle;
+		case 'append':
+			$pageTitle = sprintf( '%s%s%s', $out->getPageTitle(), $this->titleSeparator, $metaTitle );
+			break;
+		case 'prepend':
+			$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $out->getPageTitle() );
+			break;
+		case 'replace':
+		default:
+			$pageTitle = $metaTitle;
 		}
 
 		$pageTitle = preg_replace( "/[\r\n]/", '', $pageTitle );
@@ -337,8 +343,8 @@ class WikiSEO {
 		$tagParser = new TagParser();
 
 		$parsedInput = $tagParser->parseText( $input );
+		$parsedInput = array_merge( $parsedInput, $args );
 		$tags = $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame );
-		$tags = array_merge( $tags, $args );
 
 		$seo->setMetadata( $tags );
 
@@ -369,9 +375,9 @@ class WikiSEO {
 		$fin = $seo->finalize( $parser->getOutput() );
 		if ( !empty( $fin ) ) {
 			return [
-				$fin,
-				'noparse' => true,
-				'isHTML' => true,
+			$fin,
+			'noparse' => true,
+			'isHTML' => true,
 			];
 		}
 
