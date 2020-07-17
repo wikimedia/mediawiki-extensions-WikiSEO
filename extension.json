@@ -20,11 +20,11 @@
 			"description": "Site verification key for Bing Webmaster Center",
 			"value": null
 		},
-		"FacebookAppId":  {
+		"FacebookAppId": {
 			"description": "App Id for Facebook Insights",
 			"value": null
 		},
-		"FacebookAdmins":  {
+		"FacebookAdmins": {
 			"description": "Admin id for Facebook Insights. Multiple ids can be separated by ','",
 			"value": null
 		},
@@ -68,10 +68,10 @@
 			"description": "Language code and area which will set a <link rel='alternate'> for the current page.",
 			"value": null
 		},
-        "WikiSeoDisableLogoFallbackImage": {
-            "description": "Disable setting the sites logo as the default SEO image if no image was provided.",
-            "value": false
-        }
+		"WikiSeoDisableLogoFallbackImage": {
+			"description": "Disable setting the sites logo as the default SEO image if no image was provided.",
+			"value": false
+		}
 	},
 	"MessagesDirs": {
 		"WikiSEO": [
@@ -79,7 +79,7 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"WikiSEOMagic" : "WikiSEO.i18n.magic.php"
+		"WikiSEOMagic": "WikiSEO.i18n.magic.php"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\WikiSEO\\": "includes/"
