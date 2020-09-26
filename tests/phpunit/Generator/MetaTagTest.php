@@ -175,7 +175,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'de-de', $out->getHeadItemsArray() );
-		$this->assertContains( 'hreflang="de-de"', $out->getHeadItemsArray()['de-de'] );
+		$this->assertStringContainsString( 'hreflang="de-de"', $out->getHeadItemsArray()['de-de'] );
 	}
 
 	/**
@@ -200,15 +200,15 @@ class MetaTagTest extends GeneratorTest {
 		$this->assertArrayHasKey( 'hreflang_nl-nl', $out->getHeadItemsArray() );
 		$this->assertArrayHasKey( 'hreflang_en-us', $out->getHeadItemsArray() );
 
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'https://example.de"',
 			$out->getHeadItemsArray()['hreflang_de-de']
 		);
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'https://example.nl"',
 			$out->getHeadItemsArray()['hreflang_nl-nl']
 		);
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'https://example.com"', $out->getHeadItemsArray()
 			['hreflang_en-us']
 		);

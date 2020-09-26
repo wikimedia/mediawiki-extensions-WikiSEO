@@ -134,7 +134,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertNotContains( '&nbsp;', $out->getHTMLTitle() );
+		$this->assertStringNotContainsString( '&nbsp;', $out->getHTMLTitle() );
 	}
 
 	/**
@@ -144,7 +144,7 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$url = '//localhost/Main_Page';
 
-		$this->assertContains( 'http', WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
+		$this->assertStringContainsString( 'http', WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
 	}
 
 	/**
@@ -310,7 +310,7 @@ class WikiSEOTest extends GeneratorTest {
 
 		$errorMessage = wfMessage( 'wiki-seo-empty-attr-parser' )->parse();
 
-		$this->assertContains( $errorMessage, $out->parseAsContent( "{{#seo:}}" ) );
+		$this->assertStringContainsString( $errorMessage, $out->parseAsContent( "{{#seo:}}" ) );
 	}
 
 	/**

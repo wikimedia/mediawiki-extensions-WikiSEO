@@ -31,7 +31,7 @@ class OpenGraphTest extends GeneratorTest {
 		$this->assertArrayHasKey( 'og:description', $out->getHeadItemsArray() );
 		$this->assertArrayHasKey( 'article:tag', $out->getHeadItemsArray() );
 
-		$this->assertContains( $out->getTitle()->getFullURL(), $out->getHeadItemsArray()['og:url'] );
+		$this->assertStringContainsString( $out->getTitle()->getFullURL(), $out->getHeadItemsArray()['og:url'] );
 	}
 
 	/**
@@ -65,7 +65,7 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'article:published_time', $out->getHeadItemsArray() );
-		$this->assertContains(
+		$this->assertStringContainsString(
 			'2012-01-01',
 			$out->getHeadItemsArray()['article:published_time']
 		);
@@ -88,7 +88,7 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
-		$this->assertContains( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
+		$this->assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
 	}
 
 	/**
@@ -106,6 +106,6 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
-		$this->assertContains( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
+		$this->assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
 	}
 }
