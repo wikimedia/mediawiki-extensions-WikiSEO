@@ -15,7 +15,7 @@ class GeneratorTest extends MediaWikiTestCase {
 	 * @return OutputPage
 	 * @see    \OutputPageTest::newInstance()
 	 */
-	protected function newInstance( $config = [], WebRequest $request = null, $options = [] ) {
+	protected function newInstance( $config = [], WebRequest $request = null, $options = [], $title = 'My test page' ) {
 		$context = new RequestContext();
 
 		$context->setConfig(
@@ -41,7 +41,7 @@ class GeneratorTest extends MediaWikiTestCase {
 		);
 
 		if ( !in_array( 'notitle', (array)$options ) ) {
-			$context->setTitle( Title::newFromText( 'My test page' ) );
+			$context->setTitle( Title::newFromText( $title ) );
 		}
 
 		if ( $request ) {

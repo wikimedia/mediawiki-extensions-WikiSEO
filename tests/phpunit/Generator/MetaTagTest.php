@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
+use MediaWiki\MediaWikiServices;
 
 class MetaTagTest extends GeneratorTest {
 	/**
@@ -229,5 +230,43 @@ class MetaTagTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		$this->assertArrayNotHasKey( 'hrefWRONGlang_de-de', $out->getHeadItemsArray() );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
+	 */
+	public function testAddNoIndex() {
+		// TODO Fix
+		$this->markTestSkipped( "Skip test, since it is buggy." );
+		$out = $this->newInstance( [], null, [], 'Special:Login' );
+		$context = new \RequestContext();
+		$title = MediaWikiServices::getInstance()->getSpecialPageFactory()->getPage( 'Login' )->getFullTitle();
+		$context->setTitle( $title );
+
+		$generator = new MetaTag();
+		$generator->init( [], new \OutputPage( $context ) );
+		$generator->addMetadata();
+
+		$this->assertEquals( 'noindex', $out->getRobotPolicy() );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
+	 */
+	public function testAddNoIndexCustomTitle() {
+		// TODO Fix
+		$this->markTestSkipped( "Skip test, since config value is not read." );
+
+		$this->setMwGlobals( 'wgWikiSeoNoindexPageTitles', [
+			'CustomTitle',
+		] );
+
+		$out = $this->newInstance( [], null, [], 'CustomTitle' );
+
+		$generator = new MetaTag();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		$this->assertEquals( 'noindex', $out->getRobotPolicy() );
 	}
 }

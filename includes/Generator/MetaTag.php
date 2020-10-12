@@ -61,6 +61,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->addFacebookAppId();
 		$this->addFacebookAdmins();
 		$this->addHrefLangs();
+		$this->addNoIndex();
 
 		// Meta tags already set in the page
 		$outputMeta = [];
@@ -218,5 +219,64 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 				)
 			);
 		}
+	}
+
+	/**
+	 * Sets the robot policy to noindex
+	 */
+	private function addNoIndex() {
+		if ( $this->shouldAddNoIndex() ) {
+			$this->outputPage->setRobotPolicy( 'noindex' );
+		}
+	}
+
+	/**
+	 * Check a blacklist of URL parameters and values to see if we should add a noindex meta tag
+	 * Based on https://gitlab.com/hydrawiki/extensions/seo/blob/master/SEOHooks.php#L84
+	 *
+	 * @return bool
+	 */
+	private function shouldAddNoIndex() {
+		$blockedURLParamKeys = [
+			'curid', 'diff', 'from', 'group', 'mobileaction', 'oldid',
+			'printable', 'profile', 'redirect', 'redlink', 'stableid'
+		];
+
+		$blockedURLParamKeyValuePairs = [
+			'action' => [
+				'delete', 'edit', 'history', 'info',
+				'pagevalues', 'purge', 'visualeditor', 'watch'
+			],
+			'feed' => [ 'rss' ],
+			'limit' => [ '500' ],
+			'title' => array_merge( [
+				'Category:Noindexed_pages',
+				'MediaWiki:Spam-blacklist',
+				'Special:CreateAccount',
+				'Special:Random',
+				'Special:Search',
+				'Special:ExportRDF',
+				'Special:Login'
+			], $this->getConfigValue( 'WikiSeoNoindexPageTitles' ) ?? [] ),
+			'veaction' => [
+				'edit', 'editsource'
+			]
+		];
+
+		foreach ( $this->outputPage->getRequest()->getValues() as $key => $value ) {
+			if ( in_array( $key, $blockedURLParamKeys, true ) ) {
+				return true;
+			}
+
+			if ( isset( $blockedURLParamKeyValuePairs[$key] ) && in_array(
+					$value,
+					$blockedURLParamKeyValuePairs[$key],
+					true
+				) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

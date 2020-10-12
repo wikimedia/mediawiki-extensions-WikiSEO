@@ -78,6 +78,9 @@ Usage: $wgTwitterCardType = 'summary';
 A default language code with area to generate a `<link rel="alternate" href="current Url" hreflang="xx-xx">` for.  
 Usage: $wgWikiSeoDefaultLanguage = 'de-de';  
 
+### $wgWikiSeoNoindexPageTitles
+An array of page titles where a 'noindex' robot tag should be added.  
+Usage: $wgWikiSeoNoindexPageTitles = [ 'Custom_Title', 'Main_Page' ];
 
 ## Usage
 The extension can be used via the ``{{#seo}}`` parser function. It accepts the following named parameters in any order.
