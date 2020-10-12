@@ -31,7 +31,7 @@ use OutputPage;
  * @package MediaWiki\Extension\WikiSEO\Generator
  */
 class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
-	private static $tags = [ 'description', 'keywords', 'robots', 'google_bot' ];
+	private static $tags = [ 'description', 'keywords', 'google_bot' ];
 
 	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
@@ -226,7 +226,8 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	 */
 	private function addNoIndex() {
 		if ( $this->shouldAddNoIndex() ) {
-			$this->outputPage->setRobotPolicy( 'noindex' );
+			$this->outputPage->setIndexPolicy( 'noindex' );
+			$this->outputPage->setFollowPolicy( 'nofollow' );
 		}
 	}
 
