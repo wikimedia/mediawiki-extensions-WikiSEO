@@ -12,6 +12,11 @@ use WebRequest;
 
 class GeneratorTest extends MediaWikiTestCase {
 	/**
+	 * @param array           $config
+	 * @param WebRequest|null $request
+	 * @param array           $options
+	 * @param string          $title
+	 *
 	 * @return OutputPage
 	 * @see    \OutputPageTest::newInstance()
 	 */
@@ -40,7 +45,7 @@ class GeneratorTest extends MediaWikiTestCase {
 			)
 		);
 
-		if ( !in_array( 'notitle', (array)$options ) ) {
+		if ( !in_array( 'notitle', (array)$options, true ) ) {
 			$context->setTitle( Title::newFromText( $title ) );
 		}
 

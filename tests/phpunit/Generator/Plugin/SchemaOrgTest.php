@@ -23,9 +23,9 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( $metadata, $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'jsonld-metadata', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'jsonld-metadata', $out->getHeadItemsArray() );
 
-		$this->assertStringContainsString( '@type', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( '@type', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -40,7 +40,7 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( 'Organization', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'Organization', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( 'SearchAction', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'SearchAction', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -68,8 +68,8 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( 'author', $out->getHeadItemsArray()['jsonld-metadata'] );
-		$this->assertStringContainsString( 'publisher', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'author', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'publisher', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -83,8 +83,8 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( 'datePublished', $out->getHeadItemsArray()['jsonld-metadata'] );
-		$this->assertStringContainsString( 'dateModified', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'datePublished', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'dateModified', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -102,7 +102,7 @@ class SchemaOrgTest extends GeneratorTest {
 		);
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( '2012-01-01', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( '2012-01-01', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -117,7 +117,7 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
@@ -135,6 +135,6 @@ class SchemaOrgTest extends GeneratorTest {
 		);
 		$generator->addMetadata();
 
-		$this->assertStringContainsString( 'test-type', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'test-type', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 }

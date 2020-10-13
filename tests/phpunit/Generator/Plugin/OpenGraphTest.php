@@ -27,11 +27,11 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->init( $metadata, $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'og:title', $out->getHeadItemsArray() );
-		$this->assertArrayHasKey( 'og:description', $out->getHeadItemsArray() );
-		$this->assertArrayHasKey( 'article:tag', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'og:title', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'og:description', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'article:tag', $out->getHeadItemsArray() );
 
-		$this->assertStringContainsString( $out->getTitle()->getFullURL(), $out->getHeadItemsArray()['og:url'] );
+		self::assertStringContainsString( $out->getTitle()->getFullURL(), $out->getHeadItemsArray()['og:url'] );
 	}
 
 	/**
@@ -45,8 +45,8 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'article:published_time', $out->getHeadItemsArray() );
-		$this->assertArrayHasKey( 'article:modified_time', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'article:published_time', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'article:modified_time', $out->getHeadItemsArray() );
 	}
 
 	/**
@@ -64,12 +64,12 @@ class OpenGraphTest extends GeneratorTest {
 		);
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'article:published_time', $out->getHeadItemsArray() );
-		$this->assertStringContainsString(
+		self::assertArrayHasKey( 'article:published_time', $out->getHeadItemsArray() );
+		self::assertStringContainsString(
 			'2012-01-01',
 			$out->getHeadItemsArray()['article:published_time']
 		);
-		$this->assertArrayHasKey( 'article:modified_time', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'article:modified_time', $out->getHeadItemsArray() );
 	}
 
 	/**
@@ -87,8 +87,8 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
-		$this->assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
+		self::assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
+		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
 	}
 
 	/**
@@ -105,7 +105,7 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
-		$this->assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
+		self::assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
+		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
 	}
 }

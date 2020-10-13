@@ -34,7 +34,7 @@ class ValidatorTest extends MediaWikiTestCase {
 
 		$validatedArray = $this->validator->validateParams( $params );
 
-		$this->assertCount( 4, $validatedArray );
+		self::assertCount( 4, $validatedArray );
 		$this->assertArrayEquals( $params, $validatedArray );
 	}
 
@@ -51,8 +51,8 @@ class ValidatorTest extends MediaWikiTestCase {
 
 		$validatedArray = $this->validator->validateParams( $params );
 
-		$this->assertCount( 0, $validatedArray );
-		$this->assertEmpty( $validatedArray );
+		self::assertCount( 0, $validatedArray );
+		self::assertEmpty( $validatedArray );
 	}
 
 	/**
@@ -77,7 +77,7 @@ class ValidatorTest extends MediaWikiTestCase {
 
 		$validatedArray = $this->validator->validateParams( $params );
 
-		$this->assertCount( 4, $validatedArray );
+		self::assertCount( 4, $validatedArray );
 		$this->assertArrayEquals( $valid, $validatedArray );
 	}
 
@@ -98,7 +98,7 @@ class ValidatorTest extends MediaWikiTestCase {
 
 		$validatedArray = $this->validator->validateParams( $langs );
 
-		$this->assertCount( 2, $validatedArray );
+		self::assertCount( 2, $validatedArray );
 		$this->assertArrayEquals( $valid, $validatedArray );
 	}
 }

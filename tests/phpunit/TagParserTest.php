@@ -35,9 +35,9 @@ class TagParserTest extends MediaWikiTestCase {
 
 		$parsedArgs = $this->tagParser->parseArgs( $args );
 
-		$this->assertCount( 2, $parsedArgs );
-		$this->assertArrayHasKey( 'title', $parsedArgs );
-		$this->assertArrayNotHasKey( 'emptyContent', $parsedArgs );
+		self::assertCount( 2, $parsedArgs );
+		self::assertArrayHasKey( 'title', $parsedArgs );
+		self::assertArrayNotHasKey( 'emptyContent', $parsedArgs );
 	}
 
 	/**
@@ -52,9 +52,9 @@ class TagParserTest extends MediaWikiTestCase {
 
 		$parsedArgs = $this->tagParser->parseArgs( $args );
 
-		$this->assertCount( 1, $parsedArgs );
-		$this->assertArrayHasKey( 'description', $parsedArgs );
-		$this->assertEquals(
+		self::assertCount( 1, $parsedArgs );
+		self::assertArrayHasKey( 'description', $parsedArgs );
+		self::assertEquals(
 			'First Equal separates = Second Equal is included',
 			$parsedArgs['description']
 		);
@@ -74,8 +74,8 @@ EOL;
 
 		$parsedArgs = $this->tagParser->parseText( $text );
 
-		$this->assertCount( 2, $parsedArgs );
-		$this->assertArrayHasKey( 'title', $parsedArgs );
-		$this->assertArrayNotHasKey( 'emptyContent', $parsedArgs );
+		self::assertCount( 2, $parsedArgs );
+		self::assertArrayHasKey( 'title', $parsedArgs );
+		self::assertArrayNotHasKey( 'emptyContent', $parsedArgs );
 	}
 }

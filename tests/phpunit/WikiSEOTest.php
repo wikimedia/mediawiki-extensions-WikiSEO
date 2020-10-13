@@ -36,7 +36,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( $this->replacementTitle, $out->getHTMLTitle() );
+		self::assertEquals( $this->replacementTitle, $out->getHTMLTitle() );
 	}
 
 	/**
@@ -58,7 +58,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals(
+		self::assertEquals(
 			sprintf( '%s - %s', $origTitle, $this->replacementTitle ),
 			$out->getHTMLTitle()
 		);
@@ -83,7 +83,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals(
+		self::assertEquals(
 			sprintf( '%s - %s', $this->replacementTitle, $origTitle ),
 			$out->getHTMLTitle()
 		);
@@ -109,7 +109,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals(
+		self::assertEquals(
 			sprintf( '%sSEP__SEP%s', $origTitle, $this->replacementTitle ),
 			$out->getHTMLTitle()
 		);
@@ -134,7 +134,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertStringNotContainsString( '&nbsp;', $out->getHTMLTitle() );
+		self::assertStringNotContainsString( '&nbsp;', $out->getHTMLTitle() );
 	}
 
 	/**
@@ -144,7 +144,7 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$url = '//localhost/Main_Page';
 
-		$this->assertStringContainsString( 'http', WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
+		self::assertStringContainsString( 'http', WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
 	}
 
 	/**
@@ -154,7 +154,7 @@ class WikiSEOTest extends GeneratorTest {
 		$out = $this->newInstance();
 		$url = 'http://localhost/Main_Page';
 
-		$this->assertEquals( $url, WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
+		self::assertEquals( $url, WikiSEO::protocolizeUrl( $url, $out->getRequest() ) );
 	}
 
 	/**
@@ -181,8 +181,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$result = $this->loadPropForPageId( $page->getId() );
 
-		$this->assertArrayHasKey( 'title', $result );
-		$this->assertArrayHasKey( 'title_mode', $result );
+		self::assertArrayHasKey( 'title', $result );
+		self::assertArrayHasKey( 'title_mode', $result );
 	}
 
 	/**
@@ -214,7 +214,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->addMetadataToPage( $out );
 
 		// HACK
-		$this->assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) );
+		self::assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) );
 	}
 
 	/**
@@ -246,7 +246,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->addMetadataToPage( $out );
 
 		// HACK
-		$this->assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) );
+		self::assertEquals( 'Test Title&nbsp;:: ' . $pageTitle, htmlentities( $out->getHTMLTitle() ) );
 	}
 
 	/**
@@ -270,7 +270,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( 'Title with &', $out->getHTMLTitle() );
+		self::assertEquals( 'Title with &', $out->getHTMLTitle() );
 	}
 
 	/**
@@ -288,7 +288,7 @@ class WikiSEOTest extends GeneratorTest {
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
 
-		$this->assertEquals( 'Title with \'', $out->getHTMLTitle() );
+		self::assertEquals( 'Title with \'', $out->getHTMLTitle() );
 	}
 
 	/**
@@ -310,7 +310,7 @@ class WikiSEOTest extends GeneratorTest {
 
 		$errorMessage = wfMessage( 'wiki-seo-empty-attr-parser' )->parse();
 
-		$this->assertStringContainsString( $errorMessage, $out->parseAsContent( "{{#seo:}}" ) );
+		self::assertStringContainsString( $errorMessage, $out->parseAsContent( "{{#seo:}}" ) );
 	}
 
 	/**
