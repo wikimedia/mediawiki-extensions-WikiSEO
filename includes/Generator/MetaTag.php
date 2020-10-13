@@ -227,13 +227,15 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addNoIndex() {
 		if ( $this->shouldAddNoIndex() ) {
 			$this->outputPage->setIndexPolicy( 'noindex' );
-			$this->outputPage->setFollowPolicy( 'nofollow' );
 		}
 	}
 
 	/**
 	 * Check a blacklist of URL parameters and values to see if we should add a noindex meta tag
 	 * Based on https://gitlab.com/hydrawiki/extensions/seo/blob/master/SEOHooks.php#L84
+	 *
+	 * Special Pages are 'noindex,nofollow' by default
+	 * @see \Article::getRobotPolicy
 	 *
 	 * @return bool
 	 */
@@ -250,19 +252,15 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 			],
 			'feed' => [ 'rss' ],
 			'limit' => [ '500' ],
-			'title' => array_merge( [
-				'Category:Noindexed_pages',
-				'MediaWiki:Spam-blacklist',
-				'Special:CreateAccount',
-				'Special:Random',
-				'Special:Search',
-				'Special:ExportRDF',
-				'Special:Login'
-			], $this->getConfigValue( 'WikiSeoNoindexPageTitles' ) ?? [] ),
+			'title' => $this->getConfigValue( 'WikiSeoNoindexPageTitles' ) ?? [],
 			'veaction' => [
 				'edit', 'editsource'
 			]
 		];
+
+		if ( in_array( $this->outputPage->getTitle()->getText(), $blockedURLParamKeyValuePairs['title'], true ) ) {
+			return true;
+		}
 
 		foreach ( $this->outputPage->getRequest()->getValues() as $key => $value ) {
 			if ( in_array( $key, $blockedURLParamKeys, true ) ) {

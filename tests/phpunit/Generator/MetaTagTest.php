@@ -3,7 +3,6 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
-use MediaWiki\MediaWikiServices;
 
 class MetaTagTest extends GeneratorTest {
 	/**
@@ -23,8 +22,8 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( $metadata, $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [ 'description', 'Example Description' ], $out->getMetaTags() );
-		$this->assertContains( [ 'keywords', 'Keyword 1, Keyword 2' ], $out->getMetaTags() );
+		self::assertContains( [ 'description', 'Example Description' ], $out->getMetaTags() );
+		self::assertContains( [ 'keywords', 'Keyword 1, Keyword 2' ], $out->getMetaTags() );
 	}
 
 	/**
@@ -40,7 +39,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [ 'google-site-verification', 'google-key' ], $out->getMetaTags() );
+		self::assertContains( [ 'google-site-verification', 'google-key' ], $out->getMetaTags() );
 	}
 
 	/**
@@ -55,7 +54,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains(
+		self::assertContains(
 			[
 			'norton-safeweb-site-verification',
 			'norton-key',
@@ -75,7 +74,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [ 'p:domain_verify', 'pinterest-key' ], $out->getMetaTags() );
+		self::assertContains( [ 'p:domain_verify', 'pinterest-key' ], $out->getMetaTags() );
 	}
 
 	/**
@@ -90,7 +89,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [ 'alexaVerifyID', 'alexa-key' ], $out->getMetaTags() );
+		self::assertContains( [ 'alexaVerifyID', 'alexa-key' ], $out->getMetaTags() );
 	}
 
 	/**
@@ -105,7 +104,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [ 'yandex-verification', 'yandex-key' ], $out->getMetaTags() );
+		self::assertContains( [ 'yandex-verification', 'yandex-key' ], $out->getMetaTags() );
 	}
 
 	/**
@@ -120,7 +119,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertContains( [ 'msvalidate.01', 'bing-key' ], $out->getMetaTags() );
+		self::assertContains( [ 'msvalidate.01', 'bing-key' ], $out->getMetaTags() );
 	}
 
 	/**
@@ -136,8 +135,8 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'fb:app_id', $out->getHeadItemsArray() );
-		$this->assertEquals(
+		self::assertArrayHasKey( 'fb:app_id', $out->getHeadItemsArray() );
+		self::assertEquals(
 			'<meta property="fb:app_id" content="0011223344"/>',
 			$out->getHeadItemsArray()['fb:app_id']
 		);
@@ -156,8 +155,8 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'fb:admins', $out->getHeadItemsArray() );
-		$this->assertEquals(
+		self::assertArrayHasKey( 'fb:admins', $out->getHeadItemsArray() );
+		self::assertEquals(
 			'<meta property="fb:admins" content="0011223344"/>',
 			$out->getHeadItemsArray()['fb:admins']
 		);
@@ -175,8 +174,8 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'de-de', $out->getHeadItemsArray() );
-		$this->assertStringContainsString( 'hreflang="de-de"', $out->getHeadItemsArray()['de-de'] );
+		self::assertArrayHasKey( 'de-de', $out->getHeadItemsArray() );
+		self::assertStringContainsString( 'hreflang="de-de"', $out->getHeadItemsArray()['de-de'] );
 	}
 
 	/**
@@ -197,19 +196,19 @@ class MetaTagTest extends GeneratorTest {
 		);
 		$generator->addMetadata();
 
-		$this->assertArrayHasKey( 'hreflang_de-de', $out->getHeadItemsArray() );
-		$this->assertArrayHasKey( 'hreflang_nl-nl', $out->getHeadItemsArray() );
-		$this->assertArrayHasKey( 'hreflang_en-us', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'hreflang_de-de', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'hreflang_nl-nl', $out->getHeadItemsArray() );
+		self::assertArrayHasKey( 'hreflang_en-us', $out->getHeadItemsArray() );
 
-		$this->assertStringContainsString(
+		self::assertStringContainsString(
 			'https://example.de"',
 			$out->getHeadItemsArray()['hreflang_de-de']
 		);
-		$this->assertStringContainsString(
+		self::assertStringContainsString(
 			'https://example.nl"',
 			$out->getHeadItemsArray()['hreflang_nl-nl']
 		);
-		$this->assertStringContainsString(
+		self::assertStringContainsString(
 			'https://example.com"', $out->getHeadItemsArray()
 			['hreflang_en-us']
 		);
@@ -229,34 +228,13 @@ class MetaTagTest extends GeneratorTest {
 		);
 		$generator->addMetadata();
 
-		$this->assertArrayNotHasKey( 'hrefWRONGlang_de-de', $out->getHeadItemsArray() );
+		self::assertArrayNotHasKey( 'hrefWRONGlang_de-de', $out->getHeadItemsArray() );
 	}
 
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
 	 */
 	public function testAddNoIndex() {
-		// TODO Fix
-		$this->markTestSkipped( "Skip test, since it is buggy." );
-		$out = $this->newInstance( [], null, [], 'Special:Login' );
-		$context = new \RequestContext();
-		$title = MediaWikiServices::getInstance()->getSpecialPageFactory()->getPage( 'Login' )->getFullTitle();
-		$context->setTitle( $title );
-
-		$generator = new MetaTag();
-		$generator->init( [], new \OutputPage( $context ) );
-		$generator->addMetadata();
-
-		$this->assertEquals( 'noindex', $out->getRobotPolicy() );
-	}
-
-	/**
-	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
-	 */
-	public function testAddNoIndexCustomTitle() {
-		// TODO Fix
-		$this->markTestSkipped( "Skip test, since config value is not read." );
-
 		$this->setMwGlobals( 'wgWikiSeoNoindexPageTitles', [
 			'CustomTitle',
 		] );
@@ -267,6 +245,6 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		$this->assertEquals( 'noindex', $out->getRobotPolicy() );
+		self::assertStringContainsStringIgnoringCase( 'noindex', $out->getRobotPolicy() );
 	}
 }
