@@ -37,7 +37,7 @@ class WikiSEO {
 	private const MODE_PARSER = 'parser';
 
 	/**
-	 * @var string $mode 'tag' or 'parser' used to determine the error message
+	 * @var string 'tag' or 'parser' used to determine the error message
 	 */
 	private $mode;
 
