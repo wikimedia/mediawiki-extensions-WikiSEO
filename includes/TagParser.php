@@ -35,7 +35,7 @@ class TagParser {
 	 *
 	 * @return array
 	 */
-	public function parseArgs( array $args ) {
+	public function parseArgs( array $args ): array {
 		$results = [];
 
 		foreach ( $args as $arg ) {
@@ -58,11 +58,15 @@ class TagParser {
 	/**
 	 * Parses <seo> tag contents
 	 *
-	 * @param string $text Tag content
+	 * @param string|null $text Tag content
 	 *
 	 * @return array
 	 */
-	public function parseText( $text ) {
+	public function parseText( ?string $text ): array {
+		if ( $text === null ) {
+			return [];
+		}
+
 		$lines = explode( '|', $text );
 
 		return $this->parseArgs( $lines );
@@ -77,7 +81,7 @@ class TagParser {
 	 *
 	 * @return array Parsed wiki texts
 	 */
-	public function expandWikiTextTagArray( array $tags, Parser $parser, PPFrame $frame ) {
+	public function expandWikiTextTagArray( array $tags, Parser $parser, PPFrame $frame ): array {
 		foreach ( $tags as $key => $tag ) {
 			$tags[$key] = $parser->recursiveTagParseFully( $tag, $frame );
 		}

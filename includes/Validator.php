@@ -274,7 +274,7 @@ class Validator {
 	 * @param array $params Raw params
 	 * @return array Validated params
 	 */
-	public function validateParams( array $params ) {
+	public function validateParams( array $params ): array {
 		$validatedParams = [];
 
 		foreach ( $params as $paramKey => $paramData ) {

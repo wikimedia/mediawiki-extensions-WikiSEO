@@ -56,7 +56,7 @@ class Twitter extends OpenGraph {
 	 *
 	 * @return void
 	 */
-	public function addMetadata() {
+	public function addMetadata(): void {
 		$this->addTwitterSiteHandleTag();
 
 		parent::addMetadata();
@@ -77,7 +77,7 @@ class Twitter extends OpenGraph {
 	 * Add the global twitter site handle from $wgTwitterSiteHandle to the meta tags
 	 * If $wgTwitterSiteHandle is not null setting the handle via tag or hook is ignored
 	 */
-	private function addTwitterSiteHandleTag() {
+	private function addTwitterSiteHandleTag(): void {
 		$twitterSiteHandle = $this->getConfigValue( 'TwitterSiteHandle' );
 
 		if ( $twitterSiteHandle === null ) {

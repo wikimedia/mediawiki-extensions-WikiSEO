@@ -22,7 +22,6 @@ namespace MediaWiki\Extension\WikiSEO;
 use Scribunto_LuaLibraryBase;
 
 class SeoLua extends Scribunto_LuaLibraryBase {
-
 	/**
 	 * Registers the callable lua methods
 	 *

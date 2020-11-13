@@ -65,7 +65,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function init( array $metadata, OutputPage $out ) {
+	public function init( array $metadata, OutputPage $out ): void {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
@@ -81,7 +81,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function addMetadata() {
+	public function addMetadata(): void {
 		$template = '<script type="application/ld+json">%s</script>';
 
 		$meta = [
@@ -114,7 +114,10 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 		$meta['publisher'] = $this->getAuthorMetadata();
 		$meta['potentialAction'] = $this->getSearchActionMetadata();
 
-		$this->outputPage->addHeadItem( 'jsonld-metadata', sprintf( $template, json_encode( $meta ) ) );
+		$this->outputPage->addHeadItem(
+			'jsonld-metadata',
+			sprintf( $template, json_encode( $meta ) )
+		);
 	}
 
 	/**
@@ -122,7 +125,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return string
 	 */
-	private function getTypeMetadata() {
+	private function getTypeMetadata(): string {
 		return $this->metadata['type'] ?? 'article';
 	}
 
@@ -131,7 +134,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return array
 	 */
-	private function getImageMetadata() {
+	private function getImageMetadata(): array {
 		$data = [
 			'@type' => 'ImageObject',
 		];
@@ -165,7 +168,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return array
 	 */
-	private function getAuthorMetadata() {
+	private function getAuthorMetadata(): array {
 		$sitename = $this->getConfigValue( 'Sitename' ) ?? '';
 		$server = $this->getConfigValue( 'Server' ) ?? '';
 
@@ -188,7 +191,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return array
 	 */
-	private function getLogoMetadata() {
+	private function getLogoMetadata(): array {
 		$data = [
 			'@type' => 'ImageObject',
 		];
@@ -216,7 +219,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return array
 	 */
-	private function getSearchActionMetadata() {
+	private function getSearchActionMetadata(): array {
 		$searchPage = Title::newFromText( 'Special:Search' );
 
 		if ( $searchPage !== null ) {

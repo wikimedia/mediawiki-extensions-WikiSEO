@@ -35,12 +35,12 @@ interface GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function init( array $metadata, OutputPage $out );
+	public function init( array $metadata, OutputPage $out ): void;
 
 	/**
 	 * Add the metadata to the OutputPage
 	 *
 	 * @return void
 	 */
-	public function addMetadata();
+	public function addMetadata(): void;
 }

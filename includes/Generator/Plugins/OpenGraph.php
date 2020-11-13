@@ -103,7 +103,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function init( array $metadata, OutputPage $out ) {
+	public function init( array $metadata, OutputPage $out ): void {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
@@ -128,7 +128,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function addMetadata() {
+	public function addMetadata(): void {
 		$this->addTitleMeta();
 		$this->addSiteName();
 
@@ -168,7 +168,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	protected function addTitleMeta() {
+	protected function addTitleMeta(): void {
 		$this->outputPage->addHeadItem(
 			$this->titlePropertyName, Html::element(
 				'meta', [
@@ -184,7 +184,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	private function addSiteName() {
+	private function addSiteName(): void {
 		$sitename = $this->getConfigValue( 'Sitename' );
 
 		if ( !isset( $this->metadata['site_name'] ) && $sitename !== null ) {

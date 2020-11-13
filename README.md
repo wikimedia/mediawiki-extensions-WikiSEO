@@ -2,6 +2,8 @@
 
 **Version 2.0 is not a drop-in replacement for v1.2.2 (the last version before this fork).**  
 
+**Version 2.6.2 and onward requires MediaWiki 1.35.0**  
+
 The WikiSEO extension allows you to replace, append or prepend the html title tag content, and allows you to add common SEO meta keywords and a meta description.  
 
 **Extension Page: [Extension:WikiSEO](https://www.mediawiki.org/wiki/Extension:WikiSEO)**
@@ -15,75 +17,8 @@ wfLoadExtension( 'WikiSEO' );
 * Configure as required.
 * Done – Navigate to Special:Version on your wiki to verify that the extension is successfully installed.
 
-## Configuration
-The following variables are in use by this extension.
-
-### $wgWikiSeoDefaultImage
-Set a default image to use if no image is set on the site. If this variable is not set the sites logo will be used.  
-Usage: $wgWikiSeoDefaultImage = 'File:Localfile.jpg';.
-
-### $wgGoogleSiteVerificationKey
-Setting this variable will add a ``<meta name="google-site-verification" content="CODE">`` tag to every page.  
-Usage: $wgGoogleSiteVerificationKey = 'CODE';.
-
-### $wgBingSiteVerificationKey
-Setting this variable will add a ``<meta name="msvalidate.01" content="CODE">`` tag to every page.  
-Usage: $wgBingSiteVerificationKey= 'CODE';.
-
-### $wgFacebookAppID
-Setting this variable will add a ``<meta property="fb:app_id" content="ID">`` tag to every page.  
-Usage: $wgFacebookAppID= 'App_ID';.
-
-### $wgFacebookAdmins
-Setting this variable will add a ``<meta property="fb:admins" content="ID1,ID2,...">`` tag to every page.  
-Usage: $wgFacebookAdmins= 'ID1,ID2,...';.
-
-### $wgYandexSiteVerificationKey
-Setting this variable will add a ``<meta name="yandex-verification" content="CODE">`` tag to every page.  
-Usage: $wgYandexSiteVerificationKey= 'CODE';.
-
-### $wgAlexaSiteVerificationKey
-Setting this variable will add a ``<meta name="alexaVerifyID" content="CODE">`` tag to every page.  
-Usage: $wgAlexaSiteVerificationKey= 'CODE';.
-
-### $wgPinterestSiteVerificationKey
-Setting this variable will add a ``<meta name="p:domain_verify" content="CODE">`` tag to every page.  
-Usage: $wgPinterestSiteVerificationKey= 'CODE';.
-
-### $wgNortonSiteVerificationKey
-Setting this variable will add a ``<meta name="norton-safeweb-site-verification" content="CODE">`` tag to every page.  
-Usage: $wgNortonSiteVerificationKey= 'CODE';.
-
-### $wgTwitterSiteHandle
-*Only used when Twitter generator is loaded.*  
-Setting this variable will add a ``<meta property="twitter:site" content="@SITE_HANDLE">`` tag to every page.  
-Usage: $wgTwitterSiteHandle = '@SITE_HANDLE';.
-
-### $wgMetadataGenerators
-Array containing the metadata generator names to load.  
-Default: ["OpenGraph", "Twitter", "SchemaOrg"].  
-If you only want to change the page title and add 'description', 'keywords', 'robots' tags set $wgMetadataGenerators = [];
-
-### $wgWikiSeoDefaultImage
-Default image. Local image, if not set $wgLogo will be used.
-
-### $wgWikiSeoDisableLogoFallbackImage
-Disables setting `$wgLogo` as the fallback image if no image was set.
-
-### $wgTwitterCardType
-Defaults to `summary_large_image` for the twitter card type.  
-Usage: $wgTwitterCardType = 'summary';
-
-### $wgWikiSeoDefaultLanguage
-A default language code with area to generate a `<link rel="alternate" href="current Url" hreflang="xx-xx">` for.  
-Usage: $wgWikiSeoDefaultLanguage = 'de-de';  
-
-### $wgWikiSeoNoindexPageTitles
-An array of page titles where a 'noindex' robot tag should be added.  
-Usage: $wgWikiSeoNoindexPageTitles = [ 'Custom_Title', 'Main_Page' ];
-
 ## Usage
-The extension can be used via the ``{{#seo}}`` parser function. It accepts the following named parameters in any order.
+The extension can be used via the ``{{#seo}}`` parser function or in Lua modules by using `mw.ext.seo`. It accepts the following named parameters in any order.
 
 * title
   * The title you want to appear in the html title tag
@@ -130,10 +65,10 @@ The extension can be used via the ``{{#seo}}`` parser function. It accepts the f
 
 **tags related to Twitter Cards (see OpenGraph Tags)**
 * twitter_site
-  * If you did not set a global site name through $wgTwitterSiteHandle, you can set a site handle per page. If a global site handle is set this key will be ignored.
+  * If you did not set a global site name through `$wgTwitterSiteHandle`, you can set a site handle per page. If a global site handle is set this key will be ignored.
 
-### Examples
-#### Adding static values
+## Examples
+### Adding static values
 ```
 {{#seo:
  |title=Your page title
@@ -145,7 +80,7 @@ The extension can be used via the ``{{#seo}}`` parser function. It accepts the f
 }}
 ```
 
-#### Adding dynamic values
+### Adding dynamic values
 If you need to include variables or templates you should use the parser function to ensure they are properly parsed. This allows you to use Cargo or Semantic MediaWiki, with Page Forms, for data entry, or for programmatic creation of a page title from existing variables or content...
 ```
 {{#seo:
@@ -156,8 +91,57 @@ If you need to include variables or templates you should use the parser function
  |published_time={{REVISIONYEAR}}-{{REVISIONMONTH}}-{{REVISIONDAY2}}
 }}
 ```
+```
+{{#seo:
+|title_mode=append
+|title=Example SEO Wiki
+|keywords=WikiSEO, SEO, MediaWiki
+|description=An example description for this wiki
+|image=Wiki_Logo.png
+|image_alt=Wiki Logo
+|site_name=Example SEO Wiki
+|locale=en_EN
+|type=website
+|modified_time={{REVISIONYEAR}}-{{REVISIONMONTH}}-{{REVISIONDAY2}}
+|published_time=2020-11-01
+}}
+```
 
-#### Hreflang Attributes
+### Using the lua module
+WikiSEO exposes a lua method as `mw.ext.seo.set`
+
+Example module:
+```lua
+-- Module:SEO
+local seo = {}
+
+--[[
+argTable format:
+{
+  title_mode = 'append',
+  title = 'Example Seo Wiki',
+  keywords = 'WikiSEO, SEO, MediaWiki',
+  -- ...
+}
+]]--
+function seo.set( argTable )
+  mw.ext.seo.set( argTable )
+end
+
+function seo.setStatic()
+  mw.ext.seo.set{
+    title_mode = 'append',
+    title = 'Example Seo Wiki',
+    keywords = 'WikiSEO, SEO, MediaWiki',  
+  }
+end
+
+return seo
+```
+
+The module would now be callable as `{{#invoke:SEO|add|title=ExampleTitle|keywords=WikiSEO, SEO, MediaWiki}}` or `{{#invoke:SEO|addStatic}}`.
+
+### Hreflang Attributes
 ```
 {{#seo:
  |hreflang_de-de=https://example.de/page
@@ -172,6 +156,69 @@ Will generate the following `<link>` elements:
 <link rel="alternate" href="https://website.com/" hreflang="en-us">
 ```
 
+## Configuration
+The following variables are in use by this extension.
+
+### $wgGoogleSiteVerificationKey
+Setting this variable will add a ``<meta name="google-site-verification" content="CODE">`` tag to every page.  
+Usage: $wgGoogleSiteVerificationKey = 'CODE';.
+
+### $wgBingSiteVerificationKey
+Setting this variable will add a ``<meta name="msvalidate.01" content="CODE">`` tag to every page.  
+Usage: $wgBingSiteVerificationKey= 'CODE';.
+
+### $wgFacebookAppID
+Setting this variable will add a ``<meta property="fb:app_id" content="ID">`` tag to every page.  
+Usage: $wgFacebookAppID= 'App_ID';.
+
+### $wgFacebookAdmins
+Setting this variable will add a ``<meta property="fb:admins" content="ID1,ID2,...">`` tag to every page.  
+Usage: $wgFacebookAdmins= 'ID1,ID2,...';.
+
+### $wgYandexSiteVerificationKey
+Setting this variable will add a ``<meta name="yandex-verification" content="CODE">`` tag to every page.  
+Usage: $wgYandexSiteVerificationKey= 'CODE';.
+
+### $wgAlexaSiteVerificationKey
+Setting this variable will add a ``<meta name="alexaVerifyID" content="CODE">`` tag to every page.  
+Usage: $wgAlexaSiteVerificationKey= 'CODE';.
+
+### $wgPinterestSiteVerificationKey
+Setting this variable will add a ``<meta name="p:domain_verify" content="CODE">`` tag to every page.  
+Usage: $wgPinterestSiteVerificationKey= 'CODE';.
+
+### $wgNortonSiteVerificationKey
+Setting this variable will add a ``<meta name="norton-safeweb-site-verification" content="CODE">`` tag to every page.  
+Usage: $wgNortonSiteVerificationKey= 'CODE';.
+
+### $wgTwitterSiteHandle
+*Only used when Twitter generator is loaded.*  
+Setting this variable will add a ``<meta property="twitter:site" content="@SITE_HANDLE">`` tag to every page.  
+Usage: $wgTwitterSiteHandle = '@SITE_HANDLE';.
+
+### $wgMetadataGenerators
+Array containing the metadata generator names to load.  
+Default: ["OpenGraph", "Twitter", "SchemaOrg"].  
+If you only want to change the page title and add 'description', 'keywords', 'robots' tags set $wgMetadataGenerators = [];
+
+### $wgWikiSeoDefaultImage
+Set a default image to use if no image is set on the site. If this variable is not set the sites logo will be used.  
+Usage: $wgWikiSeoDefaultImage = 'File:Localfile.jpg';.
+
+### $wgTwitterCardType
+Defaults to `summary_large_image` for the twitter card type.  
+Usage: $wgTwitterCardType = 'summary';
+
+### $wgWikiSeoDefaultLanguage
+A default language code with area to generate a `<link rel="alternate" href="current Url" hreflang="xx-xx">` for.  
+Usage: $wgWikiSeoDefaultLanguage = 'de-de';  
+
+### $wgWikiSeoDisableLogoFallbackImage
+Disables setting `$wgLogo` as the fallback image if no image was set.
+
+### $wgWikiSeoNoindexPageTitles
+An array of page titles where a 'noindex' robot tag should be added.  
+Usage: $wgWikiSeoNoindexPageTitles = [ 'Custom_Title', 'Main_Page' ];
 
 ## Migrating to v2
 ### Removed tags
@@ -186,9 +233,6 @@ Will generate the following `<link>` elements:
 * twitter:domain
 * article:modified_time / og:updated_time (automatically set)
 
-### Removed configuration settings
-* $wgFacebookAdminIds (use $wgFacebookAppId instead)
-
 ### Removed aliases
 * metakeywords / metak
   * use keywords instead
@@ -197,7 +241,7 @@ Will generate the following `<link>` elements:
 * titlemode / title mode
   * use title_mode instead
 
-### Changed tags
+### Changed argument names
 * article:author -> author
 * article:section -> section
 * article:tag -> keywords

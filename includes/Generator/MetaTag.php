@@ -41,7 +41,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function init( array $metadata, OutputPage $out ) {
+	public function init( array $metadata, OutputPage $out ): void {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 	}
@@ -51,7 +51,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return void
 	 */
-	public function addMetadata() {
+	public function addMetadata(): void {
 		$this->addGoogleSiteVerification();
 		$this->addBingSiteVerification();
 		$this->addYandexSiteVerification();
@@ -80,7 +80,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgGoogleSiteVerificationKey from LocalSettings
 	 */
-	private function addGoogleSiteVerification() {
+	private function addGoogleSiteVerification(): void {
 		$googleSiteVerificationKey = $this->getConfigValue( 'GoogleSiteVerificationKey' );
 
 		if ( $googleSiteVerificationKey !== null ) {
@@ -91,7 +91,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgBingSiteVerificationKey from LocalSettings
 	 */
-	private function addBingSiteVerification() {
+	private function addBingSiteVerification(): void {
 		$bingSiteVerificationKey = $this->getConfigValue( 'BingSiteVerificationKey' );
 
 		if ( $bingSiteVerificationKey !== null ) {
@@ -102,7 +102,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgYandexSiteVerificationKey from LocalSettings
 	 */
-	private function addYandexSiteVerification() {
+	private function addYandexSiteVerification(): void {
 		$yandexSiteVerificationKey = $this->getConfigValue( 'YandexSiteVerificationKey' );
 
 		if ( $yandexSiteVerificationKey !== null ) {
@@ -113,7 +113,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgAlexaSiteVerificationKey from LocalSettings
 	 */
-	private function addAlexaSiteVerification() {
+	private function addAlexaSiteVerification(): void {
 		$alexaSiteVerificationKey = $this->getConfigValue( 'AlexaSiteVerificationKey' );
 
 		if ( $alexaSiteVerificationKey !== null ) {
@@ -124,7 +124,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgPinterestSiteVerificationKey from LocalSettings
 	 */
-	private function addPinterestSiteVerification() {
+	private function addPinterestSiteVerification(): void {
 		$pinterestSiteVerificationKey = $this->getConfigValue( 'PinterestSiteVerificationKey' );
 
 		if ( $pinterestSiteVerificationKey !== null ) {
@@ -135,7 +135,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgNortonSiteVerificationKey from LocalSettings
 	 */
-	private function addNortonSiteVerification() {
+	private function addNortonSiteVerification(): void {
 		$nortonSiteVerificationKey = $this->getConfigValue( 'NortonSiteVerificationKey' );
 
 		if ( $nortonSiteVerificationKey !== null ) {
@@ -149,7 +149,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgFacebookAppId from LocalSettings
 	 */
-	private function addFacebookAppId() {
+	private function addFacebookAppId(): void {
 		$facebookAppId = $this->getConfigValue( 'FacebookAppId' );
 
 		if ( $facebookAppId !== null ) {
@@ -167,7 +167,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Add $wgFacebookAdmins from LocalSettings
 	 */
-	private function addFacebookAdmins() {
+	private function addFacebookAdmins(): void {
 		$facebookAdmins = $this->getConfigValue( 'FacebookAdmins' );
 
 		if ( $facebookAdmins !== null ) {
@@ -186,7 +186,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	 * Sets <link rel="alternate" href="url" hreflang="language-area"> elements
 	 * Will add a link element for the current page if $wgWikiSeoDefaultLanguage is set
 	 */
-	private function addHrefLangs() {
+	private function addHrefLangs(): void {
 		$language = $this->getConfigValue( 'WikiSeoDefaultLanguage' );
 
 		if ( $language !== null && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
@@ -224,7 +224,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * Sets the robot policy to noindex
 	 */
-	private function addNoIndex() {
+	private function addNoIndex(): void {
 		if ( $this->shouldAddNoIndex() ) {
 			$this->outputPage->setIndexPolicy( 'noindex' );
 		}
@@ -239,7 +239,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	 *
 	 * @return bool
 	 */
-	private function shouldAddNoIndex() {
+	private function shouldAddNoIndex(): bool {
 		$blockedURLParamKeys = [
 			'curid', 'diff', 'from', 'group', 'mobileaction', 'oldid',
 			'printable', 'profile', 'redirect', 'redlink', 'stableid'

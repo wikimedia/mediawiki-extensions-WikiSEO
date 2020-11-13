@@ -32,7 +32,7 @@ class Hooks {
 	 *
 	 * @param OutputPage $out
 	 */
-	public static function onBeforePageDisplay( OutputPage $out ) {
+	public static function onBeforePageDisplay( OutputPage $out ): void {
 		$seo = new WikiSEO();
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
@@ -49,7 +49,7 @@ class Hooks {
 	 *
 	 * @throws MWException
 	 */
-	public static function onParserFirstCallInit( Parser $parser ) {
+	public static function onParserFirstCallInit( Parser $parser ): void {
 		$parser->setHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromTag' );
 
 		$parser->setFunctionHook(

@@ -45,9 +45,10 @@ abstract class AbstractBaseGenerator {
 	 * Returns null on if an ConfigException was thrown
 	 *
 	 * @param string $key The config key
+	 *
 	 * @return mixed|null
 	 */
-	protected function getConfigValue( $key ) {
+	protected function getConfigValue( string $key ) {
 		try {
 			$value = MediaWikiServices::getInstance()->getMainConfig()->get( $key );
 		} catch ( ConfigException $e ) {
@@ -72,7 +73,7 @@ abstract class AbstractBaseGenerator {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function getFileObject( string $name ) {
+	protected function getFileObject( string $name ): File {
 		// This should remove the namespace if present
 		$nameSplit = explode( ':', $name );
 		$name = array_pop( $nameSplit );
@@ -101,7 +102,7 @@ abstract class AbstractBaseGenerator {
 	 *
 	 * @return array
 	 */
-	protected function getFileInfo( File $file ) {
+	protected function getFileInfo( File $file ): array {
 		$cacheHash =
 		'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
 		$width = $file->getWidth();
@@ -118,7 +119,7 @@ abstract class AbstractBaseGenerator {
 	/**
 	 * If the metadata key 'image' is set, try to get file info of the local file
 	 */
-	protected function preprocessFileMetadata() {
+	protected function preprocessFileMetadata(): void {
 		if ( isset( $this->metadata['image'] ) ) {
 			try {
 				$file = $this->getFileObject( $this->metadata['image'] );
