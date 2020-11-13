@@ -92,34 +92,12 @@ class WikiSEO {
 		$this->mode = $mode;
 	}
 
-	private function setMetadataGenerators() {
-		try {
-			$generators =
-			MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
-		} catch ( ConfigException $e ) {
-			wfLogWarning(
-				sprintf(
-					'Could not get config for "$wgMetadataGenerators", using default. %s',
-					$e->getMessage()
-				)
-			);
-
-			$generators = [
-			'OpenGraph',
-			'Twitter',
-			'SchemaOrg',
-			];
-		}
-
-		$this->generators = $generators;
-	}
-
 	/**
 	 * Set the metadata by loading the page props from the db or the OutputPage object
 	 *
 	 * @param OutputPage $outputPage
 	 */
-	public function setMetadataFromPageProps( OutputPage $outputPage ) {
+	public function setMetadataFromPageProps( OutputPage $outputPage ): void {
 		if ( $outputPage->getTitle() === null ) {
 			$this->errors[] = wfMessage( 'wiki-seo-missing-page-title' );
 
@@ -133,6 +111,66 @@ class WikiSEO {
 		$this->loadPagePropsFromOutputPage( $outputPage ) ?? [];
 
 		$this->setMetadata( $result );
+	}
+
+	/**
+	 * Set an array with metadata key value pairs
+	 * Gets validated by Validator
+	 *
+	 * @param array $metadataArray
+	 * @see   Validator
+	 */
+	public function setMetadata( array $metadataArray ) {
+		$validator = new Validator();
+		$validMetadata = [];
+
+		foreach ( $validator->validateParams( $metadataArray ) as $k => $v ) {
+			if ( !empty( $v ) ) {
+				$validMetadata[$k] = $v;
+			}
+		}
+
+		$this->metadata = $validMetadata;
+	}
+
+	/**
+	 * Add the metadata array as meta tags to the page
+	 *
+	 * @param OutputPage $out
+	 */
+	public function addMetadataToPage( OutputPage $out ) {
+		$this->modifyPageTitle( $out );
+		$this->instantiateMetadataPlugins();
+
+		foreach ( $this->generatorInstances as $generatorInstance ) {
+			$generatorInstance->init( $this->metadata, $out );
+			$generatorInstance->addMetadata();
+		}
+	}
+
+	/**
+	 * Set active metadata generators defined in wgMetdataGenerators
+	 */
+	private function setMetadataGenerators() {
+		try {
+			$generators =
+				MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
+		} catch ( ConfigException $e ) {
+			wfLogWarning(
+				sprintf(
+					'Could not get config for "$wgMetadataGenerators", using default. %s',
+					$e->getMessage()
+				)
+			);
+
+			$generators = [
+				'OpenGraph',
+				'Twitter',
+				'SchemaOrg',
+			];
+		}
+
+		$this->generators = $generators;
 	}
 
 	/**
@@ -199,41 +237,6 @@ class WikiSEO {
 		}
 
 		return empty( $result ) ? null : $result;
-	}
-
-	/**
-	 * Add the metadata array as meta tags to the page
-	 *
-	 * @param OutputPage $out
-	 */
-	public function addMetadataToPage( OutputPage $out ) {
-		$this->modifyPageTitle( $out );
-		$this->instantiateMetadataPlugins();
-
-		foreach ( $this->generatorInstances as $generatorInstance ) {
-			$generatorInstance->init( $this->metadata, $out );
-			$generatorInstance->addMetadata();
-		}
-	}
-
-	/**
-	 * Set an array with metadata key value pairs
-	 * Gets validated by Validator
-	 *
-	 * @param array $metadataArray
-	 * @see   Validator
-	 */
-	private function setMetadata( array $metadataArray ) {
-		$validator = new Validator();
-		$validMetadata = [];
-
-		foreach ( $validator->validateParams( $metadataArray ) as $k => $v ) {
-			if ( !empty( $v ) ) {
-				$validMetadata[$k] = $v;
-			}
-		}
-
-		$this->metadata = $validMetadata;
 	}
 
 	/**

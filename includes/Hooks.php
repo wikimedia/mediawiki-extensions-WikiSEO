@@ -19,6 +19,7 @@
 
 namespace MediaWiki\Extension\WikiSEO;
 
+use ExtensionRegistry;
 use MWException;
 use OutputPage;
 use Parser;
@@ -55,5 +56,20 @@ class Hooks {
 			'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction',
 			Parser::SFH_OBJECT_ARGS
 		);
+	}
+
+	/**
+	 * Register Lua Library
+	 *
+	 * @param string $engine
+	 * @param array &$extraLibraries
+	 * @return bool
+	 */
+	public static function onScribuntoExternalLibraries( string $engine, array &$extraLibraries ): bool {
+		if ( $engine === 'lua' && ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
+			$extraLibraries['mw.ext.seo'] = SeoLua::class;
+		}
+
+		return true;
 	}
 }

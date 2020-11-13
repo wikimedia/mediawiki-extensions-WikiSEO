@@ -90,7 +90,8 @@
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "MediaWiki\\Extension\\WikiSEO\\Hooks::onParserFirstCallInit",
-		"BeforePageDisplay": "MediaWiki\\Extension\\WikiSEO\\Hooks::onBeforePageDisplay"
+		"BeforePageDisplay": "MediaWiki\\Extension\\WikiSEO\\Hooks::onBeforePageDisplay",
+		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks::onScribuntoExternalLibraries"
 	},
 	"manifest_version": 2
 }
