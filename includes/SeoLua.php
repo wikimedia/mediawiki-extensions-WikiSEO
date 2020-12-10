@@ -56,6 +56,12 @@ class SeoLua extends Scribunto_LuaLibraryBase {
 	public function set(): void {
 		$args = func_get_args();
 
+		if ( !isset( $args[0] ) ) {
+			return;
+		}
+
+		$args = $args[0];
+
 		$validator = new Validator();
 		$validated = $validator->validateParams( $args );
 
