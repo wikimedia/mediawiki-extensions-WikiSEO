@@ -156,6 +156,67 @@ Will generate the following `<link>` elements:
 <link rel="alternate" href="https://website.com/" hreflang="en-us">
 ```
 
+## Title Modes
+Example: Page with title `Example Page`
+
+### Append
+```
+{{#seo:
+ |title_mode=append
+ |title=Appended Title
+}}
+```
+
+HTML Title result: `Example Page - Appended Title`
+
+### Prepend
+```
+{{#seo:
+ |title_mode=prepend
+ |title=Prepended Title
+}}
+```
+
+HTML Title result: `Prepended Title - Example Page`
+
+### Prepend (changed separator)
+```
+{{#seo:
+ |title_mode=prepend
+ |title=Prepended Title
+ |title_separator=<nowiki>&nbsp;>>&nbsp;</nowiki>
+}}
+```
+
+HTML Title result: `Prepended Title >> Example Page`
+
+### Replace (default)
+```
+{{#seo:
+ |title_mode=replace
+ |title=Replaced Title
+}}
+```
+
+HTML Title result: `Replaced Title`
+
+## Hooks
+WikiSEO exposes Hooks that allow to customize the metadata that gets added to the page and saved in page props.
+
+* `WikiSEOPreAddMedatada`
+  * `onWikiSEOPreAddMedatada( &$metadata )`
+  * An array of key-value pairs validated through `Validator::validateParams`
+  * Run right before the instantiation of the metadata generators
+* `WikiSEOPreAddPageProps`
+  * `onWikiSEOPreAddPageProps( &$metadata )`
+  * An array of key-value pairs validated through `Validator::validateParams`
+  * Run right before setting the page props
+* `WikiSEOLuaPreAddPageProps`
+  * `onWikiSEOLuaPreAddPageProps( &$metadata )`
+  * An array of key-value pairs validated through `Validator::validateParams`
+  * Run right before setting the page props
+  * Only run when the lua module is called
+
 ## Configuration
 The following variables are in use by this extension.
 

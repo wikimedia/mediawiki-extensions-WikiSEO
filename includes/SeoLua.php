@@ -19,6 +19,7 @@
 
 namespace MediaWiki\Extension\WikiSEO;
 
+use MediaWiki\MediaWikiServices;
 use Scribunto_LuaLibraryBase;
 
 class SeoLua extends Scribunto_LuaLibraryBase {
@@ -63,6 +64,13 @@ class SeoLua extends Scribunto_LuaLibraryBase {
 
 		$validator = new Validator();
 		$validated = $validator->validateParams( $args );
+
+		MediaWikiServices::getInstance()->getHookContainer()->run(
+			'WikiSEOLuaPreAddPageProps',
+			[
+				&$validated,
+			]
+		);
 
 		foreach ( $validated as $metaKey => $value ) {
 			$this->getParser()->getOutput()->setProperty( $metaKey, $value );

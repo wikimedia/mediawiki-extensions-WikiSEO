@@ -142,6 +142,13 @@ class WikiSEO {
 		$this->modifyPageTitle( $out );
 		$this->instantiateMetadataPlugins();
 
+		MediaWikiServices::getInstance()->getHookContainer()->run(
+			'WikiSEOPreAddMedatada',
+			[
+				&$this->metadata,
+			]
+		);
+
 		foreach ( $this->generatorInstances as $generatorInstance ) {
 			$generatorInstance->init( $this->metadata, $out );
 			$generatorInstance->addMetadata();
@@ -331,6 +338,13 @@ class WikiSEO {
 	 * @param ParserOutput $outputPage
 	 */
 	private function saveMetadataToProps( ParserOutput $outputPage ): void {
+		MediaWikiServices::getInstance()->getHookContainer()->run(
+			'WikiSEOPreAddPageProps',
+			[
+				&$this->metadata,
+			]
+		);
+
 		foreach ( $this->metadata as $key => $value ) {
 			if ( $outputPage->getProperty( $key ) === false ) {
 				$outputPage->setProperty( $key, $value );
