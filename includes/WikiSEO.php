@@ -143,7 +143,7 @@ class WikiSEO {
 		$this->instantiateMetadataPlugins();
 
 		MediaWikiServices::getInstance()->getHookContainer()->run(
-			'WikiSEOPreAddMedatada',
+			'WikiSEOPreAddMetadata',
 			[
 				&$this->metadata,
 			]
