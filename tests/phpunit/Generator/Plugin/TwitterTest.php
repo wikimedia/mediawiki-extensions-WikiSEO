@@ -13,9 +13,9 @@ class TwitterTest extends GeneratorTest {
 	 */
 	public function testAddMetadata() {
 		$metadata = [
-		'description'  => 'Example Description',
-		'keywords'     => 'Keyword 1, Keyword 2',
-		'twitter_site' => 'example',
+			'description'  => 'Example Description',
+			'keywords'     => 'Keyword 1, Keyword 2',
+			'twitter_site' => 'example',
 		];
 
 		$out = $this->newInstance();

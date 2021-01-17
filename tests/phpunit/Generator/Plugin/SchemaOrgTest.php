@@ -13,8 +13,8 @@ class SchemaOrgTest extends GeneratorTest {
 	 */
 	public function testAddMetadata() {
 		$metadata = [
-		'description' => 'Example Description',
-		'type'        => 'website',
+			'description' => 'Example Description',
+			'type'        => 'website',
 		];
 
 		$out = $this->newInstance();
@@ -97,7 +97,7 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator = new SchemaOrg();
 		$generator->init(
 			[
-			'published_time' => '2012-01-01',
+				'published_time' => '2012-01-01',
 			], $out
 		);
 		$generator->addMetadata();
@@ -130,8 +130,8 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator = new SchemaOrg();
 		$generator->init(
 			[
-			'type' => 'test-type',
-			 ], $out
+				'type' => 'test-type',
+			], $out
 		);
 		$generator->addMetadata();
 

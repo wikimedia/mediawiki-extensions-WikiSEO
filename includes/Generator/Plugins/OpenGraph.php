@@ -40,19 +40,19 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @var array
 	 */
 	protected $tags = [
-	'author',
-	'description',
-	'image',
-	'image_width',
-	'image_height',
-	'image_alt',
-	'keywords',
-	'locale',
-	'modified_time',
-	'published_time',
-	'section',
-	'site_name',
-	'type',
+		'author',
+		'description',
+		'image',
+		'image_width',
+		'image_height',
+		'image_alt',
+		'keywords',
+		'locale',
+		'modified_time',
+		'published_time',
+		'section',
+		'site_name',
+		'type',
 	];
 
 	/**
@@ -61,21 +61,21 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @var array
 	 */
 	protected $conversions = [
-	'image'        => 'og:image',
-	'image_width'  => 'og:image:width',
-	'image_height' => 'og:image:height',
-	'image_alt'    => 'og:image:alt',
+		'image'        => 'og:image',
+		'image_width'  => 'og:image:width',
+		'image_height' => 'og:image:height',
+		'image_alt'    => 'og:image:alt',
 
-	'locale'      => 'og:locale',
-	'type'        => 'og:type',
-	'site_name'   => 'og:site_name',
-	'description' => 'og:description',
+		'locale'      => 'og:locale',
+		'type'        => 'og:type',
+		'site_name'   => 'og:site_name',
+		'description' => 'og:description',
 
-	'author'         => 'article:author',
-	'modified_time'  => 'article:modified_time',
-	'published_time' => 'article:published_time',
-	'section'        => 'article:section',
-	'keywords'       => 'article:tag',
+		'author'         => 'article:author',
+		'modified_time'  => 'article:modified_time',
+		'published_time' => 'article:published_time',
+		'section'        => 'article:section',
+		'keywords'       => 'article:tag',
 	];
 
 	/**
@@ -140,8 +140,8 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 			$this->outputPage->addHeadItem(
 				'og:url', Html::element(
 					'meta', [
-					self::$htmlElementPropertyKey => 'og:url',
-					self::$htmlElementContentKey  => $url,
+						self::$htmlElementPropertyKey => 'og:url',
+						self::$htmlElementContentKey  => $url,
 					]
 				)
 			);
@@ -154,8 +154,8 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 				$this->outputPage->addHeadItem(
 					$convertedTag, Html::element(
 						'meta', [
-						self::$htmlElementPropertyKey => $convertedTag,
-						self::$htmlElementContentKey  => $this->metadata[$tag]
+							self::$htmlElementPropertyKey => $convertedTag,
+							self::$htmlElementContentKey  => $this->metadata[$tag]
 						]
 					)
 				);
@@ -172,8 +172,8 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->outputPage->addHeadItem(
 			$this->titlePropertyName, Html::element(
 				'meta', [
-				self::$htmlElementPropertyKey => $this->titlePropertyName,
-				self::$htmlElementContentKey => $this->outputPage->getHTMLTitle(),
+					self::$htmlElementPropertyKey => $this->titlePropertyName,
+					self::$htmlElementContentKey => $this->outputPage->getHTMLTitle(),
 				]
 			)
 		);
@@ -191,8 +191,8 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 			$this->outputPage->addHeadItem(
 				'og:site_name', Html::element(
 					'meta', [
-					self::$htmlElementPropertyKey => 'og:site_name',
-					self::$htmlElementContentKey => $sitename,
+						self::$htmlElementPropertyKey => 'og:site_name',
+						self::$htmlElementContentKey => $sitename,
 					]
 				)
 			);

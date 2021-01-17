@@ -13,7 +13,7 @@ use RequestContext;
  * Class WikiSEOTest
  *
  * @package MediaWiki\Extension\WikiSEO\Tests
- * @group   Database
+ * @group Database
  */
 class WikiSEOTest extends GeneratorTest {
 	private $replacementTitle = 'Replaced Title';
@@ -28,8 +28,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$this->setProperties(
 			[
-			'title' => $this->replacementTitle,
-			'title_mode' => 'replace',
+				'title' => $this->replacementTitle,
+				'title_mode' => 'replace',
 			], $out
 		);
 
@@ -50,8 +50,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$this->setProperties(
 			[
-			'title' => $this->replacementTitle,
-			'title_mode' => 'append',
+				'title' => $this->replacementTitle,
+				'title_mode' => 'append',
 			], $out
 		);
 
@@ -75,8 +75,8 @@ class WikiSEOTest extends GeneratorTest {
 
 		$this->setProperties(
 			[
-			'title' => $this->replacementTitle,
-			'title_mode' => 'prepend',
+				'title' => $this->replacementTitle,
+				'title_mode' => 'prepend',
 			], $out
 		);
 
@@ -100,9 +100,9 @@ class WikiSEOTest extends GeneratorTest {
 
 		$this->setProperties(
 			[
-			'title' => $this->replacementTitle,
-			'title_mode' => 'append',
-			'title_separator' => 'SEP__SEP',
+				'title' => $this->replacementTitle,
+				'title_mode' => 'append',
+				'title_separator' => 'SEP__SEP',
 			], $out
 		);
 
@@ -125,9 +125,9 @@ class WikiSEOTest extends GeneratorTest {
 
 		$this->setProperties(
 			[
-			'title' => $this->replacementTitle,
-			'title_mode' => 'append',
-			'title_separator' => '&nbsp;&nbsp;--&nbsp;&nbsp;',
+				'title' => $this->replacementTitle,
+				'title_mode' => 'append',
+				'title_separator' => '&nbsp;&nbsp;--&nbsp;&nbsp;',
 			], $out
 		);
 
@@ -316,7 +316,7 @@ class WikiSEOTest extends GeneratorTest {
 	/**
 	 * Sets props on outputpage
 	 *
-	 * @param array      $props
+	 * @param array $props
 	 * @param OutputPage $out
 	 */
 	private function setProperties( array $props, OutputPage $out ) {
@@ -328,7 +328,7 @@ class WikiSEOTest extends GeneratorTest {
 	/**
 	 * Loads the page props for a given page id.
 	 *
-	 * @param  int $id
+	 * @param int $id
 	 * @return array
 	 */
 	private function loadPropForPageId( int $id ) {
@@ -336,10 +336,13 @@ class WikiSEOTest extends GeneratorTest {
 		$db = $dbl->getConnection( DB_REPLICA );
 
 		$propValue = $db->select(
-			'page_props', [ 'pp_propname', 'pp_value' ], [
-			'pp_page' => $id,
-			'pp_propname' => Validator::$validParams,
-			], __METHOD__
+			'page_props',
+			[ 'pp_propname', 'pp_value' ],
+			[
+				'pp_page' => $id,
+				'pp_propname' => Validator::$validParams,
+			],
+			__METHOD__
 		);
 
 		$result = [];
@@ -355,7 +358,6 @@ class WikiSEOTest extends GeneratorTest {
 
 	/**
 	 * @inheritDoc
-	 * @return     bool
 	 */
 	public function needsDB() {
 		return true;

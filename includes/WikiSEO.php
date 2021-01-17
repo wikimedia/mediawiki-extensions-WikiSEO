@@ -118,7 +118,7 @@ class WikiSEO {
 	 * Gets validated by Validator
 	 *
 	 * @param array $metadataArray
-	 * @see   Validator
+	 * @see Validator
 	 */
 	public function setMetadata( array $metadataArray ): void {
 		$validator = new Validator();
@@ -184,8 +184,8 @@ class WikiSEO {
 	 * Loads all page props with pp_propname in Validator::$validParams
 	 *
 	 * @param int $pageId
-	 * @return null | array Null if empty
-	 * @see    Validator::$validParams
+	 * @return null|array Null if empty
+	 * @see Validator::$validParams
 	 */
 	private function loadPagePropsFromDb( int $pageId ): ?array {
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
@@ -203,7 +203,7 @@ class WikiSEO {
 			$result = [];
 
 			foreach ( $propValue as $row ) {
-                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 				$value = @unserialize( $row->pp_value, [ 'allowed_classes' => false ] );
 
 				// Value was serialized
@@ -223,7 +223,7 @@ class WikiSEO {
 	 *
 	 * @param OutputPage $page
 	 * @return array|null
-	 * @see    Validator::$validParams
+	 * @see Validator::$validParams
 	 */
 	private function loadPagePropsFromOutputPage( OutputPage $page ): ?array {
 		$result = [];
@@ -231,7 +231,7 @@ class WikiSEO {
 		foreach ( Validator::$validParams as $param ) {
 			$prop = $page->getProperty( $param );
 			if ( $prop !== null ) {
-                // phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
 				$value = @unserialize( $prop, [ 'allowed_classes' => false ] );
 
 				// Value was serialized
@@ -399,9 +399,9 @@ class WikiSEO {
 		$fin = $seo->finalize( $parser->getOutput() );
 		if ( !empty( $fin ) ) {
 			return [
-			$fin,
-			'noparse' => true,
-			'isHTML' => true,
+				$fin,
+				'noparse' => true,
+				'isHTML' => true,
 			];
 		}
 

@@ -12,13 +12,13 @@ use WebRequest;
 
 class GeneratorTest extends MediaWikiTestCase {
 	/**
-	 * @param array           $config
+	 * @param array $config
 	 * @param WebRequest|null $request
-	 * @param array           $options
-	 * @param string          $title
+	 * @param array $options
+	 * @param string $title
 	 *
 	 * @return OutputPage
-	 * @see    \OutputPageTest::newInstance()
+	 * @see \OutputPageTest::newInstance()
 	 */
 	protected function newInstance( $config = [], WebRequest $request = null, $options = [], $title = 'My test page' ) {
 		$context = new RequestContext();

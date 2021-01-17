@@ -12,8 +12,8 @@ class MetaTagTest extends GeneratorTest {
 	 */
 	public function testAddMetadata() {
 		$metadata = [
-		'description' => 'Example Description',
-		'keywords'    => 'Keyword 1, Keyword 2',
+			'description' => 'Example Description',
+			'keywords'    => 'Keyword 1, Keyword 2',
 		];
 
 		$out = $this->newInstance();
@@ -56,8 +56,8 @@ class MetaTagTest extends GeneratorTest {
 
 		self::assertContains(
 			[
-			'norton-safeweb-site-verification',
-			'norton-key',
+				'norton-safeweb-site-verification',
+				'norton-key',
 			], $out->getMetaTags()
 		);
 	}
@@ -189,9 +189,9 @@ class MetaTagTest extends GeneratorTest {
 		$generator = new MetaTag();
 		$generator->init(
 			[
-			'hreflang_de-de' => 'https://example.de',
-			'hreflang_nl-nl' => 'https://example.nl',
-			'hreflang_en-us' => 'https://example.com',
+				'hreflang_de-de' => 'https://example.de',
+				'hreflang_nl-nl' => 'https://example.nl',
+				'hreflang_en-us' => 'https://example.com',
 			], $out
 		);
 		$generator->addMetadata();
@@ -223,7 +223,7 @@ class MetaTagTest extends GeneratorTest {
 		$generator = new MetaTag();
 		$generator->init(
 			[
-			'hrefWRONGlang_de-de' => 'https://example.de',
+				'hrefWRONGlang_de-de' => 'https://example.de',
 			], $out
 		);
 		$generator->addMetadata();

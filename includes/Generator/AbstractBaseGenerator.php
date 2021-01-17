@@ -167,7 +167,7 @@ abstract class AbstractBaseGenerator {
 				);
 
 			if ( $timestamp === false ) {
-				   $timestamp = wfTimestampNow();
+				$timestamp = wfTimestampNow();
 			} else {
 				$timestamp = $timestamp->getTimestamp() ?? wfTimestampNow();
 			}

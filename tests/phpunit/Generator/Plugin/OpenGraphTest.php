@@ -17,8 +17,8 @@ class OpenGraphTest extends GeneratorTest {
 	 */
 	public function testAddMetadata() {
 		$metadata = [
-		'description' => 'Example Description',
-		'keywords'    => 'Keyword 1, Keyword 2',
+			'description' => 'Example Description',
+			'keywords'    => 'Keyword 1, Keyword 2',
 		];
 
 		$out = $this->newInstance();
@@ -59,7 +59,7 @@ class OpenGraphTest extends GeneratorTest {
 		$generator = new OpenGraph();
 		$generator->init(
 			[
-			'published_time' => '2012-01-01',
+				'published_time' => '2012-01-01',
 			], $out
 		);
 		$generator->addMetadata();
