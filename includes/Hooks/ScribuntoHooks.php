@@ -17,46 +17,18 @@
  * @file
  */
 
-namespace MediaWiki\Extension\WikiSEO;
+declare( strict_types=1 );
+
+namespace MediaWiki\Extension\WikiSEO\Hooks;
 
 use ExtensionRegistry;
-use MWException;
-use OutputPage;
-use Parser;
+use MediaWiki\Extension\WikiSEO\SeoLua;
 
-class Hooks {
-	/**
-	 * Extracts the generated SEO HTML comments form the page and adds them as meta tags
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
-	 *
-	 * @param OutputPage $out
-	 */
-	public static function onBeforePageDisplay( OutputPage $out ): void {
-		$seo = new WikiSEO();
-		$seo->setMetadataFromPageProps( $out );
-		$seo->addMetadataToPage( $out );
-	}
-
-	/**
-	 * Register parser hooks.
-	 * <seo> and {{#seo:}}
-	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ParserFirstCallInit
-	 * @see https://www.mediawiki.org/wiki/Manual:Parser_functions
-	 *
-	 * @param Parser $parser
-	 *
-	 * @throws MWException
-	 */
-	public static function onParserFirstCallInit( Parser $parser ): void {
-		$parser->setHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromTag' );
-
-		$parser->setFunctionHook(
-			'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction',
-			Parser::SFH_OBJECT_ARGS
-		);
-	}
+/**
+ * Hooks concerning the scribunto extension
+ * Adds the SEO Lua modlue
+ */
+class ScribuntoHooks {
 
 	/**
 	 * Register Lua Library

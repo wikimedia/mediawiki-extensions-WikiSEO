@@ -91,10 +91,18 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\WikiSEO\\": "includes/"
 	},
+	"HookHandlers": {
+		"ParserHooks": {
+			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ParserHooks"
+		},
+		"PageHooks": {
+			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\PageHooks"
+		}
+	},
 	"Hooks": {
-		"ParserFirstCallInit": "MediaWiki\\Extension\\WikiSEO\\Hooks::onParserFirstCallInit",
-		"BeforePageDisplay": "MediaWiki\\Extension\\WikiSEO\\Hooks::onBeforePageDisplay",
-		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks::onScribuntoExternalLibraries"
+		"ParserFirstCallInit": "ParserHooks",
+		"BeforePageDisplay": "PageHooks",
+		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks::onScribuntoExternalLibraries"
 	},
 	"manifest_version": 2
 }
