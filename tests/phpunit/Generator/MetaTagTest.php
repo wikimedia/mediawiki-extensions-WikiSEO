@@ -209,8 +209,7 @@ class MetaTagTest extends GeneratorTest {
 			$out->getHeadItemsArray()['hreflang_nl-nl']
 		);
 		self::assertStringContainsString(
-			'https://example.com"', $out->getHeadItemsArray()
-			['hreflang_en-us']
+			'https://example.com"', $out->getHeadItemsArray()['hreflang_en-us']
 		);
 	}
 
