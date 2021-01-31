@@ -31,7 +31,7 @@ use OutputPage;
  * @package MediaWiki\Extension\WikiSEO\Generator
  */
 class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
-	private static $tags = [ 'description', 'keywords', 'google_bot' ];
+	protected $tags = [ 'description', 'keywords', 'google_bot' ];
 
 	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
@@ -69,12 +69,19 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 			$outputMeta[$metaTag[0]] = $metaTag[1];
 		}
 
-		foreach ( self::$tags as $tag ) {
+		foreach ( $this->tags as $tag ) {
 			// Only add tag if it doesn't already exist in the output page
 			if ( array_key_exists( $tag, $this->metadata ) && !array_key_exists( $tag, $outputMeta ) ) {
 				$this->outputPage->addMeta( $tag, $this->metadata[$tag] );
 			}
 		}
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getAllowedTagNames(): array {
+		return $this->tags;
 	}
 
 	/**

@@ -31,9 +31,18 @@ use Title;
 
 abstract class AbstractBaseGenerator {
 	/**
+	 * Usually the metadata from the constructor
+	 *
 	 * @var array
 	 */
 	protected $metadata;
+
+	/**
+	 * Valid Tags for this generator
+	 *
+	 * @var array
+	 */
+	protected $tags = [];
 
 	/**
 	 * @var OutputPage
@@ -110,9 +119,9 @@ abstract class AbstractBaseGenerator {
 		$image = WikiSEO::protocolizeUrl( $file->getFullUrl(), $this->outputPage->getRequest() );
 
 		return [
-		'url' => $image . $cacheHash,
-		'width' => $width,
-		'height' => $height,
+			'url' => $image . $cacheHash,
+			'width' => $width,
+			'height' => $height,
 		];
 	}
 

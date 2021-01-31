@@ -164,6 +164,13 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	}
 
 	/**
+	 * @inheritDoc
+	 */
+	public function getAllowedTagNames(): array {
+		return $this->tags;
+	}
+
+	/**
 	 * Add a title meta attribute to the output
 	 *
 	 * @return void

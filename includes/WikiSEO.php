@@ -88,6 +88,7 @@ class WikiSEO {
 		}
 
 		$this->setMetadataGenerators();
+		$this->instantiateMetadataPlugins();
 
 		$this->mode = $mode;
 	}
@@ -124,6 +125,8 @@ class WikiSEO {
 		$validator = new Validator();
 		$validMetadata = [];
 
+		$this->mergeValidTags();
+
 		foreach ( $validator->validateParams( $metadataArray ) as $k => $v ) {
 			if ( !empty( $v ) ) {
 				$validMetadata[$k] = $v;
@@ -140,7 +143,6 @@ class WikiSEO {
 	 */
 	public function addMetadataToPage( OutputPage $out ): void {
 		$this->modifyPageTitle( $out );
-		$this->instantiateMetadataPlugins();
 
 		MediaWikiServices::getInstance()->getHookContainer()->run(
 			'WikiSEOPreAddMetadata',
@@ -350,6 +352,29 @@ class WikiSEO {
 				$outputPage->setProperty( $key, $value );
 			}
 		}
+	}
+
+	/**
+	 * Adds the valid tags from all generator instances to the Validator
+	 */
+	private function mergeValidTags(): void {
+		Validator::$validParams = array_unique(
+			array_merge(
+				Validator::$validParams,
+				array_reduce(
+					array_map(
+						function ( GeneratorInterface $generator ) {
+							return $generator->getAllowedTagNames();
+						},
+						$this->generatorInstances
+					),
+					function ( array $carry, array $item ) {
+						return array_merge( $carry, $item );
+					},
+					[]
+				)
+			)
+		);
 	}
 
 	/**

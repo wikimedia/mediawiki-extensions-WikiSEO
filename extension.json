@@ -52,7 +52,7 @@
 			"value": null
 		},
 		"MetadataGenerators": {
-			"description": "Array with metadata generators",
+			"description": "Array with metadata generators. Valid values are OpenGraph, Twitter, SchemaOrg, Citation",
 			"value": [
 				"OpenGraph",
 				"Twitter",

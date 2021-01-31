@@ -43,4 +43,11 @@ interface GeneratorInterface {
 	 * @return void
 	 */
 	public function addMetadata(): void;
+
+	/**
+	 * The meta tag names allowed by this generator
+	 *
+	 * @return array
+	 */
+	public function getAllowedTagNames(): array;
 }

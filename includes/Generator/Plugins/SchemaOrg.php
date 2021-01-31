@@ -121,6 +121,13 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	}
 
 	/**
+	 * @inheritDoc
+	 */
+	public function getAllowedTagNames(): array {
+		return $this->tags;
+	}
+
+	/**
 	 * Generate proper schema.org type in order to pass validation
 	 *
 	 * @return string
