@@ -91,7 +91,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addGoogleSiteVerification(): void {
 		$googleSiteVerificationKey = $this->getConfigValue( 'GoogleSiteVerificationKey' );
 
-		if ( $googleSiteVerificationKey !== null ) {
+		if ( !empty( $googleSiteVerificationKey ) ) {
 			$this->outputPage->addMeta( 'google-site-verification', $googleSiteVerificationKey );
 		}
 	}
@@ -102,7 +102,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addBingSiteVerification(): void {
 		$bingSiteVerificationKey = $this->getConfigValue( 'BingSiteVerificationKey' );
 
-		if ( $bingSiteVerificationKey !== null ) {
+		if ( !empty( $bingSiteVerificationKey ) ) {
 			$this->outputPage->addMeta( 'msvalidate.01', $bingSiteVerificationKey );
 		}
 	}
@@ -113,7 +113,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addYandexSiteVerification(): void {
 		$yandexSiteVerificationKey = $this->getConfigValue( 'YandexSiteVerificationKey' );
 
-		if ( $yandexSiteVerificationKey !== null ) {
+		if ( !empty( $yandexSiteVerificationKey ) ) {
 			$this->outputPage->addMeta( 'yandex-verification', $yandexSiteVerificationKey );
 		}
 	}
@@ -124,7 +124,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addAlexaSiteVerification(): void {
 		$alexaSiteVerificationKey = $this->getConfigValue( 'AlexaSiteVerificationKey' );
 
-		if ( $alexaSiteVerificationKey !== null ) {
+		if ( !empty( $alexaSiteVerificationKey ) ) {
 			$this->outputPage->addMeta( 'alexaVerifyID', $alexaSiteVerificationKey );
 		}
 	}
@@ -135,7 +135,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addPinterestSiteVerification(): void {
 		$pinterestSiteVerificationKey = $this->getConfigValue( 'PinterestSiteVerificationKey' );
 
-		if ( $pinterestSiteVerificationKey !== null ) {
+		if ( !empty( $pinterestSiteVerificationKey ) ) {
 			$this->outputPage->addMeta( 'p:domain_verify', $pinterestSiteVerificationKey );
 		}
 	}
@@ -146,7 +146,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addNortonSiteVerification(): void {
 		$nortonSiteVerificationKey = $this->getConfigValue( 'NortonSiteVerificationKey' );
 
-		if ( $nortonSiteVerificationKey !== null ) {
+		if ( !empty( $nortonSiteVerificationKey ) ) {
 			$this->outputPage->addMeta(
 				'norton-safeweb-site-verification',
 				$nortonSiteVerificationKey
@@ -160,7 +160,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addNaverSiteVerification(): void {
 		$naverSiteVerificationKey = $this->getConfigValue( 'NaverSiteVerificationKey' );
 
-		if ( $naverSiteVerificationKey !== null ) {
+		if ( !empty( $naverSiteVerificationKey ) ) {
 			$this->outputPage->addMeta(
 				'naver-site-verification',
 				$naverSiteVerificationKey
@@ -174,7 +174,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addFacebookAppId(): void {
 		$facebookAppId = $this->getConfigValue( 'FacebookAppId' );
 
-		if ( $facebookAppId !== null ) {
+		if ( !empty( $facebookAppId ) ) {
 			$this->outputPage->addHeadItem(
 				'fb:app_id', Html::element(
 					'meta', [
@@ -192,7 +192,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addFacebookAdmins(): void {
 		$facebookAdmins = $this->getConfigValue( 'FacebookAdmins' );
 
-		if ( $facebookAdmins !== null ) {
+		if ( !empty( $facebookAdmins ) ) {
 			$this->outputPage->addHeadItem(
 				'fb:admins', Html::element(
 					'meta', [
@@ -211,7 +211,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addHrefLangs(): void {
 		$language = $this->getConfigValue( 'WikiSeoDefaultLanguage' );
 
-		if ( $language !== null && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
+		if ( !empty( $language ) && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
 			$this->outputPage->addHeadItem(
 				$language, Html::element(
 					'link', [
