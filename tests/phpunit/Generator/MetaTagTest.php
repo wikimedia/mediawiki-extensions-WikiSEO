@@ -63,6 +63,26 @@ class MetaTagTest extends GeneratorTest {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNaverSiteVerification
+	 */
+	public function testAddNaverSiteVerification() {
+		$this->setMwGlobals( 'wgNaverSiteVerificationKey', 'naver-key' );
+
+		$out = $this->newInstance();
+
+		$generator = new MetaTag();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		self::assertContains(
+			[
+				'naver-site-verification',
+				'naver-key',
+			], $out->getMetaTags()
+		);
+	}
+
+	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addPinterestSiteVerification
 	 */
 	public function testAddPinterestSiteVerification() {

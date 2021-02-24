@@ -252,6 +252,10 @@ Usage: $wgPinterestSiteVerificationKey= 'CODE';.
 Setting this variable will add a ``<meta name="norton-safeweb-site-verification" content="CODE">`` tag to every page.  
 Usage: $wgNortonSiteVerificationKey= 'CODE';.
 
+### $wgNaverSiteVerificationKey
+Setting this variable will add a ``<meta name="naver-site-verification" content="CODE">`` tag to every page.  
+Usage: $wgNaverSiteVerificationKey = 'CODE';.
+
 ### $wgTwitterSiteHandle
 *Only used when Twitter generator is loaded.*  
 Setting this variable will add a ``<meta property="twitter:site" content="@SITE_HANDLE">`` tag to every page.  

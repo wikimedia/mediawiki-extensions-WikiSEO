@@ -58,6 +58,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->addAlexaSiteVerification();
 		$this->addPinterestSiteVerification();
 		$this->addNortonSiteVerification();
+		$this->addNaverSiteVerification();
 		$this->addFacebookAppId();
 		$this->addFacebookAdmins();
 		$this->addHrefLangs();
@@ -149,6 +150,20 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 			$this->outputPage->addMeta(
 				'norton-safeweb-site-verification',
 				$nortonSiteVerificationKey
+			);
+		}
+	}
+
+	/**
+	 * Add $wgNaverSiteVerificationKey from LocalSettings
+	 */
+	private function addNaverSiteVerification(): void {
+		$naverSiteVerificationKey = $this->getConfigValue( 'NaverSiteVerificationKey' );
+
+		if ( $naverSiteVerificationKey !== null ) {
+			$this->outputPage->addMeta(
+				'naver-site-verification',
+				$naverSiteVerificationKey
 			);
 		}
 	}

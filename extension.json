@@ -47,6 +47,10 @@
 			"description": "Site verification key for Norton Safe Web",
 			"value": null
 		},
+		"NaverSiteVerificationKey": {
+			"description": "Site verification key for the Naver Search Engine",
+			"value": null
+		},
 		"TwitterSiteHandle": {
 			"description": "Twitter Site handle to add globally",
 			"value": null
