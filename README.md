@@ -63,9 +63,24 @@ The extension can be used via the ``{{#seo}}`` parser function or in Lua modules
 * published_time
   * When the article was first published. ISO 8601 Format.
 
-**tags related to Twitter Cards (see OpenGraph Tags)**
+**Tags related to Twitter Cards (see OpenGraph Tags)**
 * twitter_site
   * If you did not set a global site name through `$wgTwitterSiteHandle`, you can set a site handle per page. If a global site handle is set this key will be ignored.
+
+**Tags related to the Citation generator**
+* description
+* keywords
+* citation_type
+* citation_name
+* citation_headline
+* citation_date_published
+* citation_date_created
+* citation_page_start
+* citation_doi
+* citation_author
+* citation_publisher
+* citation_license
+* citation_volume
 
 ## Examples
 ### Adding static values
