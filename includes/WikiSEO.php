@@ -20,6 +20,7 @@
 namespace MediaWiki\Extension\WikiSEO;
 
 use ConfigException;
+use ExtensionDependencyError;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
@@ -30,6 +31,7 @@ use PPFrame;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
+use Title;
 use WebRequest;
 
 class WikiSEO {
@@ -143,6 +145,16 @@ class WikiSEO {
 	 */
 	public function addMetadataToPage( OutputPage $out ): void {
 		$this->modifyPageTitle( $out );
+
+		if ( MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoSaveAutoDescriptionOnView' ) === true ) {
+			$this->loadDescriptionFromApi( $out->getTitle() );
+			$key = 'description';
+			if ( $out->getProperty( $key ) === false &&
+				isset( $this->metadata['description'] ) &&
+				!empty( $this->metadata['description'] ) ) {
+				$out->setProperty( $key, $this->metadata[$key] );
+			}
+		}
 
 		MediaWikiServices::getInstance()->getHookContainer()->run(
 			'WikiSEOPreAddMetadata',
@@ -378,6 +390,33 @@ class WikiSEO {
 	}
 
 	/**
+	 * @param Title $title
+	 * @throws ExtensionDependencyError
+	 */
+	private function loadDescriptionFromApi( Title $title ): void {
+		$autoEnabled = MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoEnableAutoDescription' );
+		if ( (bool)$autoEnabled === false ) {
+			return;
+		}
+
+		if ( isset( $this->metadata['description'] ) &&
+			!in_array( $this->metadata['description'], [ 'textextracts', 'auto' ] ) ) {
+			return;
+		}
+
+		$descriptor = new ApiDescription(
+			$title,
+			MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoTryCleanAutoDescription' ) === true
+		);
+
+		try {
+			$this->metadata['description'] = $descriptor->getDescription();
+		} catch ( ExtensionDependencyError $e ) {
+			wfLogWarning( $e->getMessage() );
+		}
+	}
+
+	/**
 	 * Parse the values input from the <seo> tag extension
 	 *
 	 * @param string|null $input The text content of the tag
@@ -396,6 +435,7 @@ class WikiSEO {
 		$tags = $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame );
 
 		$seo->setMetadata( $tags );
+		$seo->loadDescriptionFromApi( $parser->getTitle() );
 
 		return $seo->finalize( $parser->getOutput() );
 	}
@@ -420,6 +460,7 @@ class WikiSEO {
 		$tagParser = new TagParser();
 
 		$seo->setMetadata( $tagParser->parseArgs( $expandedArgs ) );
+		$seo->loadDescriptionFromApi( $parser->getTitle() );
 
 		$fin = $seo->finalize( $parser->getOutput() );
 		if ( !empty( $fin ) ) {

@@ -211,19 +211,21 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addHrefLangs(): void {
 		$language = $this->getConfigValue( 'WikiSeoDefaultLanguage' );
 
-		if ( !empty( $language ) && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
-			$this->outputPage->addHeadItem(
-				$language, Html::element(
+		if ( !empty( $language ) && $this->outputPage->getTitle() !== null &&
+			in_array( $language, Validator::$isoLanguageCodes, true ) ) {
+				$this->outputPage->addHeadItem(
+					$language, Html::element(
 					'link', [
-					'rel' => 'alternate',
-					'href' => WikiSEO::protocolizeUrl(
-						$this->outputPage->getTitle()->getFullURL(),
-						$this->outputPage->getRequest()
-					),
-					'hreflang' => $language,
+						'rel' => 'alternate',
+						'href' => WikiSEO::protocolizeUrl(
+							$this->outputPage->getTitle()->getFullURL(),
+							$this->outputPage->getRequest()
+						),
+						'hreflang' => $language,
 					]
 				)
-			);
+				);
+
 		}
 
 		foreach ( $this->metadata as $metaKey => $url ) {
@@ -279,6 +281,11 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 				'edit', 'editsource'
 			]
 		];
+
+		if ( $this->outputPage->getTitle() === null ) {
+			// Bail out
+			return false;
+		}
 
 		if ( in_array( $this->outputPage->getTitle()->getText(), $blockedURLParamKeyValuePairs['title'], true ) ) {
 			return true;
