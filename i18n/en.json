@@ -6,5 +6,26 @@
 	"wiki-seo-empty-attr-tag": "Error: &lt;seo&gt; tag must contain at least one non-empty attribute.",
 	"wiki-seo-empty-attr-parser": "Error: <nowiki>{{#seo:}}</nowiki> must contain at least one non-empty attribute.",
 	"wiki-seo-invalid-generator": "Error: $1 is not a valid metadata generator.",
-	"wiki-seo-missing-page-title": "Error: the given page title is invalid."
+	"wiki-seo-missing-page-title": "Error: the given page title is invalid.",
+
+	"pageinfo-header-seo": "Seo properties",
+	"wiki-seo-pageinfo-below": "Information from [https://https://mediaiwki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-param-title":  "Pagetitle:",
+	"wiki-seo-param-title_mode":  "Titlemode:",
+	"wiki-seo-param-title_separator":  "Titleseparator:",
+	"wiki-seo-param-keywords":  "Keywords:",
+	"wiki-seo-param-description":  "Article description:",
+	"wiki-seo-param-robots":  "Crawler mode (robots):",
+	"wiki-seo-param-google_bot":  "GoogleBot modue:",
+	"wiki-seo-param-image":  "Article image:",
+	"wiki-seo-param-image_width":  "Image width:",
+	"wiki-seo-param-image_height":  "Image height:",
+	"wiki-seo-param-image_alt":  "Image alternative text:",
+	"wiki-seo-param-type":  "Articletype:",
+	"wiki-seo-param-site_name":  "Sitename:",
+	"wiki-seo-param-locale":  "Article locale:",
+	"wiki-seo-param-section":  "Article section:",
+	"wiki-seo-param-author":  "Article author:",
+	"wiki-seo-param-published_time":  "Article published date:",
+	"wiki-seo-param-twitter_site":  "Site twitter handle:"
 }

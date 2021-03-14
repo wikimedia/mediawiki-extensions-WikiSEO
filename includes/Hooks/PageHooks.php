@@ -21,15 +21,20 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Hooks;
 
+use IContextSource;
+use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Hook\InfoActionHook;
+use Message;
 use OutputPage;
+use PageProps;
 use Skin;
 
 /**
  * Hooks to run relating the page
  */
-class PageHooks implements BeforePageDisplayHook {
+class PageHooks implements BeforePageDisplayHook, InfoActionHook {
 
 	/**
 	 * Extracts the generated SEO HTML comments form the page and adds them as meta tags
@@ -43,5 +48,49 @@ class PageHooks implements BeforePageDisplayHook {
 		$seo = new WikiSEO();
 		$seo->setMetadataFromPageProps( $out );
 		$seo->addMetadataToPage( $out );
+	}
+
+	/**
+	 * Adds SEO page props as a table to the page when calling with ?action=info
+	 *
+	 * @param IContextSource $context
+	 * @param array &$pageInfo
+	 * @return bool|void
+	 */
+	public function onInfoAction( $context, &$pageInfo ) {
+		$properties = PageProps::getInstance()->getProperties(
+			$context->getTitle(),
+			Validator::$validParams
+		);
+
+		$properties = array_shift( $properties );
+
+		if ( count( $properties ) === 0 ) {
+			return;
+		}
+
+		$pageInfo['header-seo'] = [];
+
+		foreach ( $properties as $param => $value ) {
+			$content = sprintf( '%s', strip_tags( $value ) );
+			// Explodes a comma separated list and maps it into an ul list
+			if ( $param === 'keywords' ) {
+				$content = sprintf( '<ul>%s</ul>', implode( '', array_map( function ( $keyword ) {
+					return sprintf( '<li>%s</li>', trim( strip_tags( $keyword ) ) );
+				}, explode( ',', $value ) ) ) );
+			}
+
+			$pageInfo['header-seo'][] = [
+				new Message( sprintf( 'wiki-seo-param-%s', $param ) ),
+				$content
+			];
+		}
+
+		$belowMessage = new Message( 'wiki-seo-pageinfo-below' );
+
+		$pageInfo['header-seo'][] = [
+			'below',
+			$belowMessage->parse()
+		];
 	}
 }
