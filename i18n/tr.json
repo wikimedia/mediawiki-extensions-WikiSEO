@@ -1,12 +1,33 @@
 {
 	"@metadata": {
 		"authors": [
-			"BaRaN6161 TURK"
+			"BaRaN6161 TURK",
+			"Joseph"
 		]
 	},
 	"wiki-seo-desc": "Anahtar kelimeler ve açıklama gibi sayfa başına meta ayarlarına izin verir, başlığı ve çeşitli site doğrulama etiketlerini değiştirir.",
 	"wiki-seo-empty-attr-tag": "Hata: &lt;seo&gt; etiketi en az bir boş olmayan özellik içermelidir.",
 	"wiki-seo-empty-attr-parser": "Hata: <nowiki>{{#seo:}}</nowiki> en az bir boş olmayan öznitelik içermelidir.",
 	"wiki-seo-invalid-generator": "Hata: $1 geçerli bir meta veri üreticisi değil.",
-	"wiki-seo-missing-page-title": "Hata: verilen sayfa başlığı geçersiz."
+	"wiki-seo-missing-page-title": "Hata: verilen sayfa başlığı geçersiz.",
+	"pageinfo-header-seo": "Seo özellikleri",
+	"wiki-seo-pageinfo-below": "[https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO] hakkında bilgi.",
+	"wiki-seo-param-title": "Sayfa başlığı:",
+	"wiki-seo-param-title_mode": "Başlık modu:",
+	"wiki-seo-param-title_separator": "Başlık ayracı:",
+	"wiki-seo-param-keywords": "Anahtar kelimeler:",
+	"wiki-seo-param-description": "Sayfa tanımı:",
+	"wiki-seo-param-robots": "Web robotu modu:",
+	"wiki-seo-param-google_bot": "GoogleBot modu:",
+	"wiki-seo-param-image": "Sayfa resmi:",
+	"wiki-seo-param-image_width": "Resim genişliği:",
+	"wiki-seo-param-image_height": "Resim yüksekliği:",
+	"wiki-seo-param-image_alt": "Resime alternatif metin:",
+	"wiki-seo-param-type": "Sayfa türü:",
+	"wiki-seo-param-site_name": "Site adı:",
+	"wiki-seo-param-locale": "Sayfa yereli:",
+	"wiki-seo-param-section": "Sayfa bölümü:",
+	"wiki-seo-param-author": "Sayfa yazarı:",
+	"wiki-seo-param-published_time": "Sayfa yayın tarihi:",
+	"wiki-seo-param-twitter_site": "Sitenin twitter değeri:"
 }

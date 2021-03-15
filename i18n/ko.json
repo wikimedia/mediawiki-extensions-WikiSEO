@@ -4,5 +4,19 @@
 			"Ykhwong"
 		]
 	},
-	"wiki-seo-missing-page-title": "오류: 해당 문서 제목은 유효하지 않습니다."
+	"wiki-seo-missing-page-title": "오류: 해당 문서 제목은 유효하지 않습니다.",
+	"wiki-seo-param-title": "문서 제목:",
+	"wiki-seo-param-keywords": "키워드:",
+	"wiki-seo-param-description": "문서 설명:",
+	"wiki-seo-param-robots": "크롤러 모드 (로봇):",
+	"wiki-seo-param-google_bot": "구글봇 모듈:",
+	"wiki-seo-param-image_width": "이미지 너비:",
+	"wiki-seo-param-image_height": "이미지 높이:",
+	"wiki-seo-param-image_alt": "이미지 대체 텍스트:",
+	"wiki-seo-param-type": "문서유형:",
+	"wiki-seo-param-site_name": "사이트 이름:",
+	"wiki-seo-param-locale": "문서 로케일:",
+	"wiki-seo-param-author": "문서 만든이:",
+	"wiki-seo-param-published_time": "문서 게시일:",
+	"wiki-seo-param-twitter_site": "사이트 트위터 핸들:"
 }
