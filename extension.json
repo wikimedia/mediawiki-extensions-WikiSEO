@@ -113,12 +113,15 @@
 		},
 		"PageHooks": {
 			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\PageHooks"
+		},
+		"InfoActionHook": {
+			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\InfoAction"
 		}
 	},
 	"Hooks": {
 		"ParserFirstCallInit": "ParserHooks",
 		"BeforePageDisplay": "PageHooks",
-		"InfoAction": "PageHooks",
+		"InfoAction": "InfoActionHook",
 		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks::onScribuntoExternalLibraries"
 	},
 	"manifest_version": 2
