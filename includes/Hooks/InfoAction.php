@@ -57,6 +57,10 @@ class InfoAction implements InfoActionHook {
 					$content = $this->formatImage( $value );
 					break;
 
+				case 'author':
+					$content = $this->formatAuthor( $value );
+					break;
+
 				default:
 					$content = sprintf( '%s', strip_tags( $value ) );
 					break;
@@ -68,7 +72,7 @@ class InfoAction implements InfoActionHook {
 					'<b>%s</b> (<code>%s</code>)<br>%s',
 					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->plain(),
 					$param,
-					$description->text()
+					$description->parse()
 				);
 			} else {
 				$description = sprintf(
@@ -125,5 +129,28 @@ class InfoAction implements InfoActionHook {
 			'width' => 200,
 			'style' => 'height: auto',
 		] );
+	}
+
+	/**
+	 * Formats the author link into an internal link
+	 *
+	 * @param string $value
+	 * @return string
+	 */
+	private function formatAuthor( $value ): string {
+		$parsed = parse_url( $value );
+		if ( $parsed === false || empty( $parsed['path'] ) ) {
+			return $value;
+		}
+
+		$title = Title::newFromText( $parsed['path'], NS_USER );
+
+		if ( $title === null ) {
+			return $value;
+		}
+
+		return Html::rawElement( 'a', [
+			'href' => $title->getFullURL(),
+		], $title->prefixedText );
 	}
 }

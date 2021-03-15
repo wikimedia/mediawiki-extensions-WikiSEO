@@ -15,7 +15,7 @@
 	"wiki-seo-pageinfo-header-description": "Beschreibung",
 	"wiki-seo-pageinfo-header-content": "Inhalt",
 	"wiki-seo-param-title": "Seitentitel:",
-	"wiki-seo-param-title-description": "Dieses Attribut steuert den Inhalt des <code><title></code> Elements.<br>Es wird weiterhin für die Elemente <code>og:title</code> und <code>twitter:title</code> verwendet.",
+	"wiki-seo-param-title-description": "Dieses Attribut steuert den Inhalt des <code>&lt;title&gt;</code> Elements.<br>Es wird weiterhin für die Elemente <code>og:title</code> und <code>twitter:title</code> verwendet.",
 	"wiki-seo-param-title_mode": "Titelmodus:",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Weitere Informationen]",
 	"wiki-seo-param-title_separator": "Titelseparator:",
