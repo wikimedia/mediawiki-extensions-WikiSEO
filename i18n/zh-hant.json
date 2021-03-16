@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Alistair3149",
 			"Kly"
 		]
 	},
@@ -8,5 +9,7 @@
 	"wiki-seo-empty-attr-tag": "錯誤：&lt;seo&gt; 標籤必須至少包含一個有內容的屬性。",
 	"wiki-seo-empty-attr-parser": "錯誤：<nowiki>{{#seo:}}</nowiki> 必須至少包含一個有內容的屬性。",
 	"wiki-seo-invalid-generator": "錯誤：$1不是有效的詮釋資料產生器。",
-	"wiki-seo-missing-page-title": "錯誤：指定的頁面標題無效。"
+	"wiki-seo-missing-page-title": "錯誤：指定的頁面標題無效。",
+	"pageinfo-header-seo": "搜尋引擎優化屬性",
+	"wiki-seo-pageinfo-below": "資訊來自 [https://https://mediaiwki.org/wiki/Extension:WikiSEO Extension:WikiSEO]."
 }

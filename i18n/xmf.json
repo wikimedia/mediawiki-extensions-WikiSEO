@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Narazeni"
+		]
+	},
+	"wiki-seo-pageinfo-header-description": "ეჭარუა",
+	"wiki-seo-pageinfo-header-content": "დინოხი",
+	"wiki-seo-param-description": "სტატიაშ ეჭარუა:",
+	"wiki-seo-param-image_width": "სურათიშ სიგანა:",
+	"wiki-seo-param-image_height": "სურათიშ სიმაღალა:",
+	"wiki-seo-param-image_alt": "სურათიშ ალტერნეტიული ტექსტი:",
+	"wiki-seo-param-section": "სტატიაშ გჷმნართი:",
+	"wiki-seo-param-author": "სტატიაშ ავტორი:",
+	"wiki-seo-param-published_time": "სტატიაშ გჷმობჟინაფაშ თარიღი:"
+}
