@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kghbln",
-			"Octfx"
+			"Octfx",
+			"Sabelöga"
 		]
 	},
 	"wiki-seo-desc": "Ermöglicht das Festlegen von Meta-Elementen sowie das Anpassen des Seitentitels",
@@ -11,12 +12,12 @@
 	"wiki-seo-invalid-generator": "Fehler: $1 ist kein gültiger Metadatengenerator.",
 	"wiki-seo-missing-page-title": "Fehler: Der angegebene Seitentitel ist nicht gültig.",
 	"pageinfo-header-seo": "SEO-Eigenschaften",
-	"wiki-seo-pageinfo-below": "Informationen von [https://https://mediaiwki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Informationen von [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "Beschreibung",
 	"wiki-seo-pageinfo-header-content": "Inhalt",
 	"wiki-seo-param-title": "Seitentitel:",
 	"wiki-seo-param-title-description": "Dieses Attribut steuert den Inhalt des <code>&lt;title&gt;</code> Elements.<br>Es wird weiterhin für die Elemente <code>og:title</code> und <code>twitter:title</code> verwendet.",
-	"wiki-seo-param-title_mode": "Titelmodus:",
+	"wiki-seo-param-title_mode": "Titelmodus",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Weitere Informationen]",
 	"wiki-seo-param-title_separator": "Titelseparator:",
 	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Weitere Informationen]",

@@ -1,8 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Hmgrmb",
 			"沈澄心"
 		]
 	},
-	"wiki-seo-missing-page-title": "错误：指定的页面标题无效。"
+	"wiki-seo-missing-page-title": "错误：指定的页面标题无效。",
+	"wiki-seo-pageinfo-header-description": "描述",
+	"wiki-seo-pageinfo-header-content": "内容",
+	"wiki-seo-param-title_mode": "标题模式",
+	"wiki-seo-param-title_separator": "标题分离符"
 }

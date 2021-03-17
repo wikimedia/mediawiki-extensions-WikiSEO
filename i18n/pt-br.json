@@ -2,12 +2,41 @@
 	"@metadata": {
 		"authors": [
 			"Eduardo Addad de Oliveira",
-			"Eduardoaddad"
+			"Eduardoaddad",
+			"Sabelöga"
 		]
 	},
 	"wiki-seo-desc": "Permite meta-configurações por página, como palavras-chave e descrição, alterando o título e várias tags de verificação do site.",
 	"wiki-seo-empty-attr-tag": "Eror: &lt;seo&gt; A etiqueta deve conter pelo menos um atributo não vazio.",
 	"wiki-seo-empty-attr-parser": "Errr: <nowiki>{{#seo:}}</nowiki> deve conter pelo menos um atributo não vazio.",
 	"wiki-seo-invalid-generator": "Erro: $1 não é um gerador de metadados válido.",
-	"wiki-seo-missing-page-title": "Erro: o título da página fornecido é inválido."
+	"wiki-seo-missing-page-title": "Erro: o título da página fornecido é inválido.",
+	"pageinfo-header-seo": "Propriedades de SEO",
+	"wiki-seo-pageinfo-below": "Informação de [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-header-description": "Descrição",
+	"wiki-seo-pageinfo-header-content": "Conteúdo",
+	"wiki-seo-param-title": "Título de página:",
+	"wiki-seo-param-title-description": "Este atributo controla o conteúdo do elemento <code><title></code> element.<br>É ainda usado para os elementos <code>og:title</code> e <code>twitter:title</code>.",
+	"wiki-seo-param-title_mode": "Modo de título",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mais Informações]",
+	"wiki-seo-param-title_separator": "Separador de título:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mais Informações]",
+	"wiki-seo-param-keywords": "Palavras-chave:",
+	"wiki-seo-param-keywords-description": "Este atributo controla o conteúdo do elemento <code>&lt;meta type='keywords'&gt;</code>.<br>O conteúdo é usado posteriormente para o elemento <code>article:tag</code>.",
+	"wiki-seo-param-description": "Descrição do artigo:",
+	"wiki-seo-param-description-description": "Este atributo controla o conteúdo do elemento <code>description</code>.<br>É ainda usado para os elementos <code>og:description</code> e <code>twitter:description</code>.",
+	"wiki-seo-param-robots": "Modo rastreador (robôs):",
+	"wiki-seo-param-google_bot": "Módulo GoogleBot:",
+	"wiki-seo-param-image": "Imagem do artigo:",
+	"wiki-seo-param-image-description": "Este atributo controla o conteúdo do elemento <code>og:image</code> e <code>twitter:image</code>.<br>Esta imagem é exibida principalmente como uma miniatura nas redes sociais.",
+	"wiki-seo-param-image_width": "Largura da imagem:",
+	"wiki-seo-param-image_height": "Altura da imagem:",
+	"wiki-seo-param-image_alt": "Texto alternativo da imagem:",
+	"wiki-seo-param-type": "Tipo de artigo:",
+	"wiki-seo-param-site_name": "Nome do site:",
+	"wiki-seo-param-locale": "Idioma do artigo",
+	"wiki-seo-param-section": "Seção do artigo:",
+	"wiki-seo-param-author": "Autor do artigo:",
+	"wiki-seo-param-published_time": "Data de publicação do artigo:",
+	"wiki-seo-param-twitter_site": "Identificador do Twitter do site:"
 }

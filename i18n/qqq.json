@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Sabelöga",
 			"Umherirrender",
 			"Zoranzoki21"
 		]
@@ -11,7 +12,7 @@
 	"wiki-seo-invalid-generator": "Error message if a generator name ($1) is not valid.",
 	"wiki-seo-missing-page-title": "Error message if the page title in output page is null (should not happen).",
 	"pageinfo-header-seo": "Header text for page info",
-	"wiki-seo-pageinfo-below": "Information from [https://https://mediaiwki.org/wiki/Extension:WikiSEO WikiSEO]",
+	"wiki-seo-pageinfo-below": "Information from [https://https://mediawiki.org/wiki/Extension:WikiSEO WikiSEO]",
 	"wiki-seo-pageinfo-header-description": "Description",
 	"wiki-seo-pageinfo-header-content": "Content",
 	"wiki-seo-param-title": "Description for parameter title. HTML Title of page.",
