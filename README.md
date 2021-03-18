@@ -303,15 +303,9 @@ Usage: $wgWikiSeoNoindexPageTitles = [ 'Custom_Title', 'Main_Page' ];
 ### $wgWikiSeoEnableAutoDescription
 Set to true to try to request a description from textextracts, if no description was given, or the description key is set to 'textextracts' or 'auto'.  
 This requires Extension:TextExtracts to be loaded.  
-Note that this feature may require a null edit for new pages, also saving an edit will take slightly longer, as an api call is made to get the description.  
-Page views will not be affected.  
-Usage: $wgWikiSeoEnableAutoDescription = true;
+The description is generated when saving the page after an edit.
 
-### $wgWikiSeoSaveAutoDescriptionOnView
-If this flag is set to true, WikiSEO tries to save a page description to the pages props on view.  
-The save will only occur, if no 'description' key was found in the page props.  
-You can activate this to remove the need for null edits.  
-Usage: $wgWikiSeoSaveAutoDescriptionOnView = true;
+Usage: $wgWikiSeoEnableAutoDescription = true;
 
 ### $wgWikiSeoTryCleanAutoDescription
 Set to true, if WikiSEO should try to remove dangling sentences when using descriptions from textextracts.  

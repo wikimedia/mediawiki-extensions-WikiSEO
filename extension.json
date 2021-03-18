@@ -87,10 +87,6 @@
 			"description": "Set to true to try to request a description from textextracts, if no description was given, or the description key is set to 'textextracts'.",
 			"value": false
 		},
-		"WikiSeoSaveAutoDescriptionOnView": {
-			"description": "If this flag is set to true, WikiSEO tries to save a page description to the pages props on view.",
-			"value": false
-		},
 		"WikiSeoTryCleanAutoDescription": {
 			"description": "Set to true, if WikiSEO should try to remove dangling sentences when using descriptions from textextracts.",
 			"value": false
@@ -121,6 +117,7 @@
 	"Hooks": {
 		"ParserFirstCallInit": "ParserHooks",
 		"BeforePageDisplay": "PageHooks",
+		"MultiContentSave": "PageHooks",
 		"InfoAction": "InfoActionHook",
 		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks::onScribuntoExternalLibraries"
 	},

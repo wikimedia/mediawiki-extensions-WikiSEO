@@ -21,10 +21,12 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO;
 
+use ApiMain;
 use ExtensionDependencyError;
 use ExtensionRegistry;
+use FauxRequest;
 use InvalidArgumentException;
-use MediaWiki\MediaWikiServices;
+use MWException;
 use Title;
 
 class ApiDescription {
@@ -84,12 +86,11 @@ class ApiDescription {
 	 * Returns an empty string on error
 	 *
 	 * @return string
+	 * @throws MWException
 	 */
 	public function getDescriptionFromExtracts(): string {
-		$query = http_build_query( [
+		$query = [
 			'format' => 'json',
-			'utf8' => 1,
-			'formatversion' => 2,
 			'action' => 'query',
 			'prop' => 'extracts',
 			'titles' => $this->title->getDBkey(),
@@ -97,30 +98,27 @@ class ApiDescription {
 			'exintro' => 1,
 			'explaintext' => 1,
 			'exsectionformat' => 'plain'
-		] );
+		];
 
-		$url = sprintf(
-			'%s/api.php?%s',
-			MediaWikiServices::getInstance()->getMainConfig()->get( 'ScriptPath' ),
-			$query
-		);
+		$request = new ApiMain( new FauxRequest( $query ) );
 
-		$response = MediaWikiServices::getInstance()->getHttpRequestFactory()->get( $url );
+		$request->execute();
 
-		if ( $response === null ) {
+		$data = $request->getResult()->getResultData();
+
+		if ( $data === null ) {
 			return '';
 		}
 
-		$result = json_decode( $response, true );
-
-		if ( !isset( $result['batchcomplete'] ) ||
-			$result['batchcomplete'] === false ||
-			!isset( $result['query']['pages'] ) ||
-			empty( $result['query']['pages'] ) ) {
+		if ( !isset( $data['batchcomplete'] ) ||
+			!isset( $data['query']['pages'] ) ||
+			$data['batchcomplete'] === false ||
+			empty( $data['query']['pages'] )
+		) {
 			return '';
 		}
 
-		$text = $result['query']['pages'][0]['extract'] ?? '';
+		$text = array_shift( $data['query']['pages'] )['extract']['*'] ?? '';
 
 		if ( $this->tryCleanSentence === true && substr( $text, -1 ) !== '.' ) {
 			$parts = explode( '.', $text );
@@ -128,7 +126,7 @@ class ApiDescription {
 			$text = sprintf( '%s.', implode( '.', $parts ) );
 		}
 
-		return strip_tags( $text );
+		return preg_replace( '/\n/', ' ', strip_tags( $text ) );
 	}
 
 	/**
