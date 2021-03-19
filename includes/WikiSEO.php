@@ -135,8 +135,9 @@ class WikiSEO {
 		if ( $out !== null ) {
 			if ( isset( $metadataArray['description'] ) &&
 				!in_array( $metadataArray['description'], [ 'auto', 'textextracts' ], true ) ) {
-
-				$out->setExtensionData( 'manualDescription', true );
+				$out->setProperty( 'manualDescription', true );
+			} else {
+				$out->unsetProperty( 'manualDescription' );
 			}
 		}
 

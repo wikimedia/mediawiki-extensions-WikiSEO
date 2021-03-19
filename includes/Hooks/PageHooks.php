@@ -69,7 +69,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 		}
 
 		$autoEnabled = MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoEnableAutoDescription' );
-		if ( (bool)$autoEnabled === false || $output->getExtensionData( 'manualDescription' ) === true ) {
+		if ( (bool)$autoEnabled === false || $output->getProperty( 'manualDescription' ) === true ) {
 			return;
 		}
 
