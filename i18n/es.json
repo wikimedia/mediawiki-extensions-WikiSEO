@@ -2,12 +2,19 @@
 	"@metadata": {
 		"authors": [
 			"Canaan9801",
-			"Fitoschido"
+			"Fitoschido",
+			"Rossnyev"
 		]
 	},
 	"wiki-seo-desc": "Permite meta-ajustes por página, como palabras clave y descripción, cambio de título y varios tags de verificación de sitio.",
 	"wiki-seo-empty-attr-tag": "Error: &It;seo&gt; tag debe contener al menos un atributo no vacío.",
 	"wiki-seo-empty-attr-parser": "Error: <nowiki>{{#seo:}}</nowiki> deber contener al menos un atributo no vacío.",
 	"wiki-seo-invalid-generator": "Error: $1 no es un generador de metadatos valído.",
-	"wiki-seo-missing-page-title": "Error: el título de página indicado no es válido."
+	"wiki-seo-missing-page-title": "Error: el título de página indicado no es válido.",
+	"wiki-seo-pageinfo-below": "Información de [https://mediawiki.org/wiki/extension:WikiSEO Extensión:WikiSEO].",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/extension:WikiSEO#Modos_de título Más_información]",
+	"wiki-seo-param-title_separator": "Separador de títulos",
+	"wiki-seo-param-keywords-description": "Este atributo controla el contenido del elemento &lt;meta tipo='palabras clave'&gt. Ademas, este contenido es  utilizado para el artículo:etiqueta del elemento.",
+	"wiki-seo-param-description-description": "Este atributo controla el contenido de la descripción element. Ademas, este atributo it es utilizado para los elementos <code>og:descripción</code> y <code>twitter: descripción.",
+	"wiki-seo-param-image-description": "Este atributo controla el contenido del og:imagen y twitter:elemento de imagen. Esta imagen es mayoritariamente mostrada como una miniatura de la imagen en los medios de comunicación sociales.<br><br>"
 }
