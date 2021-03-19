@@ -21,25 +21,21 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Hooks;
 
-use CommentStoreComment;
-use ExtensionDependencyError;
-use MediaWiki\Extension\WikiSEO\ApiDescription;
+use DeferrableUpdate;
+use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RenderedRevision;
-use MediaWiki\Storage\Hook\MultiContentSaveHook;
-use MediaWiki\User\UserIdentity;
+use MediaWiki\Storage\Hook\RevisionDataUpdatesHook;
 use OutputPage;
-use ParserOutput;
 use Skin;
-use Status;
 use Title;
 
 /**
  * Hooks to run relating the page
  */
-class PageHooks implements BeforePageDisplayHook, MultiContentSaveHook {
+class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 
 	/**
 	 * Extracts the generated SEO HTML comments form the page and adds them as meta tags
@@ -56,15 +52,16 @@ class PageHooks implements BeforePageDisplayHook, MultiContentSaveHook {
 	}
 
 	/**
+	 * If WikiSeoEnableAutoDescription is enabled _and_ no manual description was defined
+	 * We'll push an deferred DescriptionUpdate
+	 *
+	 * @param Title $title
 	 * @param RenderedRevision $renderedRevision
-	 * @param UserIdentity $user
-	 * @param CommentStoreComment $summary
-	 * @param int $flags
-	 * @param Status $status
+	 * @param DeferrableUpdate[] &$updates
 	 * @return void
-	 * @throws ExtensionDependencyError
+	 * @see DeferredDescriptionUpdate
 	 */
-	public function onMultiContentSave( $renderedRevision, $user, $summary, $flags, $status ): void {
+	public function onRevisionDataUpdates( $title, $renderedRevision, &$updates ): void {
 		$output = $renderedRevision->getRevisionParserOutput();
 
 		if ( $output === null ) {
@@ -76,41 +73,9 @@ class PageHooks implements BeforePageDisplayHook, MultiContentSaveHook {
 			return;
 		}
 
-		$this->saveAutoDescription( $output );
-	}
-
-	/**
-	 * @param ParserOutput $output
-	 * @throws ExtensionDependencyError
-	 */
-	private function saveAutoDescription( ParserOutput $output ): void {
-		$description = $this->loadDescriptionFromApi( $output->getTitleText() );
-
-		if ( $description === null || $description === '' ) {
-			// This will only run for new pages
-			$description = trim( substr( strip_tags( $output->getText() ), 0, 160 ) );
-		}
-
-		$output->setProperty( 'description', $description );
-	}
-
-	/**
-	 * @param string $title
-	 * @return string|null
-	 * @throws ExtensionDependencyError
-	 */
-	private function loadDescriptionFromApi( string $title ): ?string {
-		$descriptor = new ApiDescription(
-			Title::newFromText( $title ),
-			MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoTryCleanAutoDescription' ) === true
+		$updates[] = new DeferredDescriptionUpdate(
+			$title,
+			MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoTryCleanAutoDescription' )
 		);
-
-		try {
-			return $descriptor->getDescription();
-		} catch ( ExtensionDependencyError $e ) {
-			wfLogWarning( $e->getMessage() );
-		}
-
-		return null;
 	}
 }

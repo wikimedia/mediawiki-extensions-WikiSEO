@@ -130,11 +130,14 @@ class WikiSEO {
 
 		$this->mergeValidTags();
 
-		if ( $out !== null &&
-			isset( $metadataArray['description'] ) &&
-			!in_array( $metadataArray['description'], [ 'auto', 'textextracts' ], true )
-		) {
-			$out->setExtensionData( 'manualDescription', true );
+		// We'll set a flag to don't overwrite manual descriptions
+		// If the AutoDescription setting is set
+		if ( $out !== null ) {
+			if ( isset( $metadataArray['description'] ) &&
+				!in_array( $metadataArray['description'], [ 'auto', 'textextracts' ], true ) ) {
+
+				$out->setExtensionData( 'manualDescription', true );
+			}
 		}
 
 		foreach ( $validator->validateParams( $metadataArray ) as $k => $v ) {

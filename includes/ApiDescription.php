@@ -70,6 +70,7 @@ class ApiDescription {
 	 * Request the description
 	 *
 	 * @return string
+	 * @throws MWException
 	 */
 	public function getDescription(): string {
 		switch ( $this->source ) {

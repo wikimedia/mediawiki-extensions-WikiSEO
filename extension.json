@@ -117,7 +117,7 @@
 	"Hooks": {
 		"ParserFirstCallInit": "ParserHooks",
 		"BeforePageDisplay": "PageHooks",
-		"MultiContentSave": "PageHooks",
+		"RevisionDataUpdates": "PageHooks",
 		"InfoAction": "InfoActionHook",
 		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks::onScribuntoExternalLibraries"
 	},
