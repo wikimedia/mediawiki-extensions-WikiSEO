@@ -53,6 +53,9 @@ class GeneratorTest extends MediaWikiTestCase {
 			$context->setRequest( $request );
 		}
 
-		return new OutputPage( $context );
+		$out = new OutputPage( $context );
+		$out->setArticleFlag( true );
+
+		return $out;
 	}
 }

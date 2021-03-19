@@ -208,6 +208,7 @@ class WikiSEOTest extends GeneratorTest {
 		$context = new RequestContext();
 		$context->setTitle( $page['title'] );
 		$out = new OutputPage( $context );
+		$out->setArticleFlag( true );
 
 		$seo = new WikiSEO();
 		$seo->setMetadataFromPageProps( $out );
@@ -240,6 +241,7 @@ class WikiSEOTest extends GeneratorTest {
 		$context = new RequestContext();
 		$context->setTitle( $page['title'] );
 		$out = new OutputPage( $context );
+		$out->setArticleFlag( true );
 
 		$seo = new WikiSEO();
 		$seo->setMetadataFromPageProps( $out );
@@ -265,6 +267,7 @@ class WikiSEOTest extends GeneratorTest {
 		$context = new RequestContext();
 		$context->setTitle( $page['title'] );
 		$out = new OutputPage( $context );
+		$out->setArticleFlag( true );
 
 		$seo = new WikiSEO();
 		$seo->setMetadataFromPageProps( $out );
@@ -283,6 +286,7 @@ class WikiSEOTest extends GeneratorTest {
 		$context = new RequestContext();
 		$context->setTitle( $page['title'] );
 		$out = new OutputPage( $context );
+		$out->setArticleFlag( true );
 
 		$seo = new WikiSEO();
 		$seo->setMetadataFromPageProps( $out );
