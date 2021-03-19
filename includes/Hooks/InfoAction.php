@@ -30,7 +30,7 @@ class InfoAction implements InfoActionHook {
 
 		$properties = array_shift( $properties );
 
-		if ( count( $properties ) === 0 ) {
+		if ( $properties === null || count( $properties ) === 0 ) {
 			return;
 		}
 
