@@ -94,7 +94,7 @@ class ApiDescription {
 			'format' => 'json',
 			'action' => 'query',
 			'prop' => 'extracts',
-			'titles' => $this->title->getDBkey(),
+			'titles' => $this->title->getPrefixedText(),
 			'exchars' => 160,
 			'exintro' => 1,
 			'explaintext' => 1,
