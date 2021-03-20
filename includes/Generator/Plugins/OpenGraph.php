@@ -176,11 +176,17 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @return void
 	 */
 	protected function addTitleMeta(): void {
+		$title = $this->outputPage->getHTMLTitle();
+
+		if ( $this->outputPage->getTitle() !== null ) {
+			$title = $this->outputPage->getTitle()->getPrefixedText() ?? $title;
+		}
+
 		$this->outputPage->addHeadItem(
 			$this->titlePropertyName, Html::element(
 				'meta', [
 					self::$htmlElementPropertyKey => $this->titlePropertyName,
-					self::$htmlElementContentKey => $this->outputPage->getHTMLTitle(),
+					self::$htmlElementContentKey => $title,
 				]
 			)
 		);
