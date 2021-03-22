@@ -19,21 +19,12 @@
 
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
-use Html;
-
 /**
  * Twitter metadata generator
  *
  * @package MediaWiki\Extension\WikiSEO\Generator\Plugins
  */
 class Twitter extends OpenGraph {
-	/**
-	 * Page title property name
-	 *
-	 * @var string
-	 */
-	protected $titlePropertyName = 'twitter:title';
-
 	/**
 	 * Twitter constructor.
 	 * Updates some tag name conversions
@@ -43,10 +34,7 @@ class Twitter extends OpenGraph {
 
 		$this->conversions = array_merge(
 			$this->conversions, [
-			'twitter_site' => 'twitter:site',
-			'description' => 'twitter:description',
-			'image' => 'twitter:image',
-			'image_alt' => 'twitter:image:alt'
+				'twitter_site' => 'twitter:site'
 			]
 		);
 	}
@@ -63,14 +51,7 @@ class Twitter extends OpenGraph {
 
 		$twitterCardType = $this->getConfigValue( 'TwitterCardType' ) ?? 'summary_large_image';
 
-		$this->outputPage->addHeadItem(
-			'twitter:card', Html::element(
-				'meta', [
-				self::$htmlElementPropertyKey => 'twitter:card',
-				self::$htmlElementContentKey => $twitterCardType,
-				]
-			)
-		);
+		$this->outputPage->addMeta( 'twitter:card', $twitterCardType );
 	}
 
 	/**
@@ -78,7 +59,9 @@ class Twitter extends OpenGraph {
 	 * If $wgTwitterSiteHandle is not null setting the handle via tag or hook is ignored
 	 */
 	private function addTwitterSiteHandleTag(): void {
-		$twitterSiteHandle = $this->getConfigValue( 'TwitterSiteHandle' );
+		$twitterSiteHandle = $this->getConfigValue( 'TwitterSiteHandle' ) ??
+			$this->metadata['twitter_site'] ??
+			null;
 
 		if ( $twitterSiteHandle === null ) {
 			return;
@@ -90,13 +73,6 @@ class Twitter extends OpenGraph {
 			$this->conversions['twitter_site']
 		);
 
-		$this->outputPage->addHeadItem(
-			'twitter:site', Html::element(
-				'meta', [
-				self::$htmlElementPropertyKey => 'twitter:site',
-				self::$htmlElementContentKey => $twitterSiteHandle,
-				]
-			)
-		);
+		$this->outputPage->addMeta( 'twitter:site', $twitterSiteHandle );
 	}
 }

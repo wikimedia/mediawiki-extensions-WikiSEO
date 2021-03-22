@@ -24,9 +24,9 @@ class TwitterTest extends GeneratorTest {
 		$generator->init( $metadata, $out );
 		$generator->addMetadata();
 
-		self::assertArrayHasKey( 'twitter:title', $out->getHeadItemsArray() );
-		self::assertArrayHasKey( 'twitter:description', $out->getHeadItemsArray() );
-		self::assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
+		$this->assertArraySubmapSame( [ [
+			'twitter:site', 'example'
+		] ], $out->getMetaTags() );
 	}
 
 	/**
@@ -43,11 +43,9 @@ class TwitterTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		self::assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
-		self::assertEquals(
-			'<meta property="twitter:site" content="@TestKey"/>',
-			$out->getHeadItemsArray()['twitter:site']
-		);
+		$this->assertArraySubmapSame( [ [
+			'twitter:site', '@TestKey'
+		] ], $out->getMetaTags() );
 	}
 
 	/**
@@ -63,46 +61,9 @@ class TwitterTest extends GeneratorTest {
 		$generator->init( [ 'twitter_site' => '@NotAdded' ], $out );
 		$generator->addMetadata();
 
-		self::assertArrayHasKey( 'twitter:site', $out->getHeadItemsArray() );
-		self::assertEquals(
-			'<meta property="twitter:site" content="@TestKey"/>',
-			$out->getHeadItemsArray()['twitter:site']
-		);
-	}
-
-	/**
-	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
-	 */
-	public function testContainsImage() {
-		// Unset default image if set
-		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
-		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
-
-		$out = $this->newInstance();
-
-		$generator = new Twitter();
-		$generator->init( [], $out );
-		$generator->addMetadata();
-
-		self::assertArrayHasKey( 'twitter:image', $out->getHeadItemsArray() );
-		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['twitter:image'] );
-	}
-
-	/**
-	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
-	 */
-	public function testDoesNotContainLogoFallbackImage() {
-		// Unset default image if set
-		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
-		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', true );
-
-		$out = $this->newInstance();
-
-		$generator = new Twitter();
-		$generator->init( [], $out );
-		$generator->addMetadata();
-
-		self::assertArrayNotHasKey( 'twitter:image', $out->getHeadItemsArray() );
+		$this->assertArraySubmapSame( [ [
+			'twitter:site', '@TestKey'
+		] ], $out->getMetaTags() );
 	}
 
 	/**
@@ -115,11 +76,9 @@ class TwitterTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		self::assertArrayHasKey( 'twitter:card', $out->getHeadItemsArray() );
-		self::assertEquals(
-			'<meta property="twitter:card" content="summary_large_image"/>',
-			$out->getHeadItemsArray()['twitter:card']
-		);
+		$this->assertArraySubmapSame( [ [
+			'twitter:card', 'summary_large_image'
+		] ], $out->getMetaTags() );
 	}
 
 	/**
@@ -135,11 +94,9 @@ class TwitterTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		self::assertArrayHasKey( 'twitter:card', $out->getHeadItemsArray() );
-		self::assertEquals(
-			'<meta property="twitter:card" content="summary"/>',
-			$out->getHeadItemsArray()['twitter:card']
-		);
+		$this->assertArraySubmapSame( [ [
+			'twitter:card', 'summary'
+		] ], $out->getMetaTags() );
 	}
 
 	/**
