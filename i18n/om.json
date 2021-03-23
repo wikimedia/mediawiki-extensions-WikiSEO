@@ -4,5 +4,9 @@
 			"Ahrada2016"
 		]
 	},
-	"wiki-seo-pageinfo-below": " [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO] iirraa Odeeffannoo soqi."
+	"wiki-seo-pageinfo-below": " [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO] iirraa Odeeffannoo soqi.",
+	"wiki-seo-param-title": "Matduree fuulaa:",
+	"wiki-seo-param-type": "Gosa keeyyataa:",
+	"wiki-seo-param-site_name": "Maqaa dirree:",
+	"wiki-seo-param-twitter_site": "Harkee dirree Twitterii"
 }

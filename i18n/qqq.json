@@ -15,7 +15,7 @@
 	"wiki-seo-pageinfo-below": "Information from [https://https://mediawiki.org/wiki/Extension:WikiSEO WikiSEO]",
 	"wiki-seo-pageinfo-header-description": "Description",
 	"wiki-seo-pageinfo-header-content": "Content",
-	"wiki-seo-param-title": "Description for parameter title. HTML title of page.",
+	"wiki-seo-param-title": "Description for parameter title. HTML Title of page.",
 	"wiki-seo-param-title-description": "Further description of the parameter. E.g.: This attribute controls the content of the <code>&lt;title&gt;</code> element.",
 	"wiki-seo-param-title_mode": "Description for parameter title_mode. HTML title operation mode (prepend, append, replace)",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Futher Information]",

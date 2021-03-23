@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hanna Tardos"
+		]
+	},
+	"wiki-seo-pageinfo-header-description": "Leírás",
+	"wiki-seo-pageinfo-header-content": "Tartalom",
+	"wiki-seo-param-title": "Lap címe:",
+	"wiki-seo-param-type": "Cikk típusa:",
+	"wiki-seo-param-site_name": "Oldal neve:"
+}

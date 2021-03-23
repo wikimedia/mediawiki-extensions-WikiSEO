@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Hmgrmb",
+			"Lakejason0",
 			"沈澄心"
 		]
 	},
@@ -14,6 +15,7 @@
 	"wiki-seo-param-title_separator": "标题分离符",
 	"wiki-seo-param-keywords": "关键词：",
 	"wiki-seo-param-description": "文章描述：",
+	"wiki-seo-param-robots": "爬虫模式（机器人）：",
 	"wiki-seo-param-image": "文章图片：",
 	"wiki-seo-param-image_width": "图像宽度：",
 	"wiki-seo-param-image_height": "图像高度：",
