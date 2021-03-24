@@ -50,6 +50,13 @@ abstract class AbstractBaseGenerator {
 	protected $outputPage;
 
 	/**
+	 * True if the wiki logo is used as the current fallback image
+	 *
+	 * @var bool
+	 */
+	protected $fallbackImageActive = false;
+
+	/**
 	 * Loads a config value for a given key from the main config
 	 * Returns null on if an ConfigException was thrown
 	 *
@@ -150,6 +157,7 @@ abstract class AbstractBaseGenerator {
 				$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
 				$logo = wfExpandUrl( $logo );
 				$this->metadata['image'] = $logo;
+				$this->fallbackImageActive = true;
 			} catch ( Exception $e ) {
 				// We do nothing
 			}
