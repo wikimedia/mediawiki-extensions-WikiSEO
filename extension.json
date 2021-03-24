@@ -1,8 +1,9 @@
 {
 	"name": "WikiSEO",
-	"version": "2.6.3",
+	"version": "2.6.4",
 	"author": [
-		"Octfx"
+		"Octfx",
+		"..."
 	],
 	"url": "https://www.mediawiki.org/wiki/Extension:WikiSEO",
 	"descriptionmsg": "wiki-seo-desc",

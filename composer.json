@@ -1,6 +1,6 @@
 {
 	"name": "mediawiki/wiki-seo",
-	"version": "2.6.3",
+	"version": "2.6.4",
 	"type": "mediawiki-extension",
 	"description": "Allows per page meta settings like keywords and description, changing the title and various site verification tags.",
 	"homepage": "http://www.mediawiki.org/wiki/Extension:WikiSEO",
