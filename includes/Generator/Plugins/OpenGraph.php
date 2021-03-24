@@ -147,9 +147,24 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 			);
 		}
 
+		$ogImageExists = false;
+		foreach ( $this->outputPage->getMetaTags() as $metaTag ) {
+			$name = array_shift( $metaTag );
+			if ( $name !== null && $name === 'og:image' ) {
+				$ogImageExists = true;
+				break;
+			}
+		}
+
 		foreach ( $this->tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
 				$convertedTag = $this->conversions[$tag];
+
+				// If an og:image is set and we are using the fallback image, we skip our image
+				if ( $convertedTag === 'og:image' && $ogImageExists && $this->fallbackImageActive ) {
+					unset( $this->tags['image_width'], $this->tags['image_height'] );
+					continue;
+				}
 
 				$this->outputPage->addHeadItem(
 					$convertedTag, Html::element(
