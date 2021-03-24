@@ -63,12 +63,20 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			return;
 		}
 
-		if ( $description === '' ) {
+		if ( $description === '' || $description === '…' || $description === "\u2026" ) {
 			return;
 		}
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( $dbl->getWriterIndex() );
+
+		$db->delete(
+			'page_props',
+			[
+				'pp_page' => $this->title->getArticleID(),
+				'pp_propname' => 'description',
+			]
+		);
 
 		$db->insert(
 			'page_props',

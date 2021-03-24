@@ -44,7 +44,7 @@ class GenerateDescription extends Maintenance {
 					continue;
 				}
 
-				if ( !$wikiPage->getTitle()->inNamespaces( $validNamespaces ) ) {
+				if ( $wikiPage->isRedirect() || !$wikiPage->getTitle()->inNamespaces( $validNamespaces ) ) {
 					continue;
 				}
 
