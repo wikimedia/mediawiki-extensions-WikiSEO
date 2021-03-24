@@ -2,16 +2,20 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
-			"Dnshitobu"
+			"Dnshitobu",
+			"Hidrash"
 		]
 	},
 	"wiki-seo-pageinfo-header-description": "Buɣisibu",
 	"wiki-seo-pageinfo-header-content": "Lahabali maa maŋmaŋa",
+	"wiki-seo-param-title": "Sabbbu yaɣili lahabali zuɣu.",
 	"wiki-seo-param-keywords": "Bachikpana:",
 	"wiki-seo-param-image": "Lahabali anfooni",
 	"wiki-seo-param-image_width": "Anfooni yalim:",
 	"wiki-seo-param-image_height": "Anfooni waɣilim:",
 	"wiki-seo-param-image_alt": "Sabbu din ni tooi zani anfooni ŋɔ zaani",
 	"wiki-seo-param-type": "Anfooni waɣilim:",
-	"wiki-seo-param-published_time": "Lahabali yibuna dabisili:"
+	"wiki-seo-param-site_name": "Yaɣili yuli",
+	"wiki-seo-param-published_time": "Lahabali yibuna dabisili:",
+	"wiki-seo-param-twitter_site": "Yaɣili lahabali dibu taachi"
 }

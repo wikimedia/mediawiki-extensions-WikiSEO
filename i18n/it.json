@@ -6,8 +6,11 @@
 	},
 	"wiki-seo-pageinfo-header-description": "Descrizione",
 	"wiki-seo-pageinfo-header-content": "Contenuto",
+	"wiki-seo-param-title": "Titolo della pagina:",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Ulteriori informazioni]",
 	"wiki-seo-param-keywords": "Parole chiave:",
 	"wiki-seo-param-image_width": "Larghezza immagine:",
-	"wiki-seo-param-image_height": "Altezza immagine:"
+	"wiki-seo-param-image_height": "Altezza immagine:",
+	"wiki-seo-param-type": "Tipo di voce:",
+	"wiki-seo-param-site_name": "Nome sito:"
 }

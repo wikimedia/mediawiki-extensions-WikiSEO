@@ -3,6 +3,7 @@
 		"authors": [
 			"Sabelöga",
 			"Umherirrender",
+			"Verdy p",
 			"Zoranzoki21"
 		]
 	},
@@ -22,7 +23,7 @@
 	"wiki-seo-param-title_separator": "Description for parameter title_separator. Title separator used in mode prepend or append.",
 	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Futher Information]",
 	"wiki-seo-param-keywords": "Description for parameter keywords. Meta keywords of the page.",
-	"wiki-seo-param-keywords-description": "Further description of the parameter. E.g.: This attribute controls the content of the <code>keywords</code> and <code>article:tag</code> elements.",
+	"wiki-seo-param-keywords-description": "Cet attribut contrôle le contenu des éléments <code>keywords</code> et <code>article:tag</code>.",
 	"wiki-seo-param-description": "Description for parameter description. Meta description of the page. Also used in OpenGraph.",
 	"wiki-seo-param-description-description": "Further description of the parameter. E.g.: This attribute controls the content of the <code>description</code> and <code>og:description</code> elements.",
 	"wiki-seo-param-robots": "Description for parameter robots. Robot tag content, e.g. nofollow.",

@@ -1,15 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
+			"Gomoko",
 			"Thibaut120094",
 			"Verdy p"
 		]
 	},
 	"wiki-seo-desc": "Permet des méta-paramétrages par page, tels que les mots-clés et la description, la modification du titre et diverses balises de vérification du site.",
-	"wiki-seo-empty-attr-tag": "Erreur : la balise &lt;seo&gt; doit contenir au moins un attribut non-vide.",
-	"wiki-seo-empty-attr-parser": "Erreur : <nowiki>{{#seo:}}</nowiki> doit contenir au moins un attribut non-vide.",
-	"wiki-seo-invalid-generator": "Erreur : $1 n’est pas un générateur valide de métadonnées.",
-	"wiki-seo-missing-page-title": "Erreur : le titre de page indiqué n’est pas valide.",
+	"wiki-seo-empty-attr-tag": "Erreur : la balise &lt;seo&gt; doit contenir au moins un attribut non vide.",
+	"wiki-seo-empty-attr-parser": "Erreur : <nowiki>{{#seo:}}</nowiki> doit contenir au moins un attribut non vide.",
+	"wiki-seo-invalid-generator": "Erreur : $1 n’est pas un générateur valide de métadonnées.",
+	"wiki-seo-missing-page-title": "Erreur : le titre de page indiqué n’est pas valide.",
 	"pageinfo-header-seo": "Propriétés SEO",
 	"wiki-seo-pageinfo-below": "Informations issues de [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "Description",
@@ -21,13 +22,13 @@
 	"wiki-seo-param-title_separator": "Séparateur de titre :",
 	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Plus d’informations]",
 	"wiki-seo-param-keywords": "Mots-clés :",
-	"wiki-seo-param-keywords-description": "Cet attribut contrôle le contenu de l’élément <code>&lt;meta type=\"keywords\"&gt;</code>.<br /> Ce contenu est utilisé également pour l’élément <code>article:tag</code>.",
+	"wiki-seo-param-keywords-description": "Cet attribut contrôle le contenu des éléments <code>keywords</code> et <code>article:tag</code>.",
 	"wiki-seo-param-description": "Description de l’article :",
-	"wiki-seo-param-description-description": "Cet attribut contrôle le contenu de l’élément <code>&lt;description&gt;</code>.<br /> Ce contenu est utilisé également pour les éléments <code>&lt;og:description&gt;</code> et <code>&lt;twitter:description&gt;</code>.",
+	"wiki-seo-param-description-description": "Cet attribut contrôle le contenu des éléments <code>description</code> et <code>og:description</code>.",
 	"wiki-seo-param-robots": "Mode d’exploration (robots) :",
 	"wiki-seo-param-google_bot": "Mode de GoogleBot :",
 	"wiki-seo-param-image": "Image de l’article :",
-	"wiki-seo-param-image-description": "Cet attribut contrôle le contenu des éléments <code>&lt;og:image&gt;</code> et <code>&lt;twitter:image&gt;</code>.<br /> Cette image est utilisée également comme vignette sur les médias sociaux.",
+	"wiki-seo-param-image-description": "Cet attribut contrôle le contenu de l’élément <code>og:image</code>. Cette image est surtout utilisée comme vignette sur les médias sociaux.",
 	"wiki-seo-param-image_width": "Largeur de l’image :",
 	"wiki-seo-param-image_height": "Hauteur de l’image :",
 	"wiki-seo-param-image_alt": "Texte alternatif de l’image :",
