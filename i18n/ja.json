@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Omotecho",
 			"Sabelöga",
 			"Tamaki Wakita"
 		]
@@ -9,7 +10,7 @@
 	"wiki-seo-pageinfo-header-description": "説明",
 	"wiki-seo-pageinfo-header-content": "コンテンツ",
 	"wiki-seo-param-title": "ページ名:",
-	"wiki-seo-param-title-description": "この属性は <code><title></code> 要素のコンテンツを制御します.<br>さらに further used for the <code>og:title</code> と <code>twitter:title</code> 要素にも使われます。",
+	"wiki-seo-param-title-description": "この属性は <code>&lt;title&gt;</code> 要素のコンテンツを制御します。",
 	"wiki-seo-param-title_mode": "題名モード",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes More_information]",
 	"wiki-seo-param-title_separator": "タイトル区切り文字",
@@ -22,6 +23,7 @@
 	"wiki-seo-param-image-description": "この属性は <code>og:image</code> と <code>twitter:image</code> 要素のコンテンツを制御します。<br>この画像は主にショーシャルメディアにサムネイルとして表示されます。",
 	"wiki-seo-param-image_width": "画像の幅",
 	"wiki-seo-param-image_height": "画像の高さ:",
+	"wiki-seo-param-type": "記事の種類：",
 	"wiki-seo-param-site_name": "サイト名:",
 	"wiki-seo-param-section": "記事の章",
 	"wiki-seo-param-author": "記事の著者:",
