@@ -63,6 +63,8 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			return;
 		}
 
+		$description = trim( $description ?? '' );
+
 		if ( $description === '' || $description === '…' || $description === "\u2026" ) {
 			return;
 		}
