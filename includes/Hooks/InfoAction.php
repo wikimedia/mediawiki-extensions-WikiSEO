@@ -116,22 +116,22 @@ class InfoAction implements InfoActionHook {
 	/**
 	 * Explodes a comma separated list and maps it into an ul list
 	 *
-	 * @param string $value
+	 * @param string|null $value
 	 * @return string
 	 */
-	private function formatKeywords( $value ): string {
+	private function formatKeywords( ?string $value ): string {
 		return sprintf( '<ul>%s</ul>', implode( '', array_map( static function ( $keyword ) {
 			return sprintf( '<li>%s</li>', trim( strip_tags( $keyword ) ) );
-		}, explode( ',', $value ) ) ) );
+		}, explode( ',', $value ?? '' ) ) ) );
 	}
 
 	/**
 	 * Formats an image to a 200px thumbnail for display
 	 *
-	 * @param string $value
+	 * @param string|null $value
 	 * @return string
 	 */
-	private function formatImage( $value ): string {
+	private function formatImage( ?string $value ): string {
 		$title = Title::newFromText( $value, NS_FILE );
 
 		if ( $title === null || $title->exists() === false || $title->inNamespace( NS_FILE ) === false ) {
@@ -151,11 +151,11 @@ class InfoAction implements InfoActionHook {
 	/**
 	 * Formats the author link into an internal link
 	 *
-	 * @param string $value
+	 * @param string|null $value
 	 * @return string
 	 */
-	private function formatAuthor( $value ): string {
-		$parsed = parse_url( $value );
+	private function formatAuthor( ?string $value ): string {
+		$parsed = parse_url( $value ?? '' );
 		if ( $parsed === false || empty( $parsed['path'] ) ) {
 			return $value;
 		}
