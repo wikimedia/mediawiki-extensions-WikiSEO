@@ -107,6 +107,10 @@ class SchemaOrgTest extends GeneratorTest {
 
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getImageMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::preprocessFileMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getFileInfo
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getFileObject
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getRevisionTimestamp
 	 */
 	public function testContainsImageObject() {
 		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );

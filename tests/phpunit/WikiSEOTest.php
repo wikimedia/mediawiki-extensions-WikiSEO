@@ -19,8 +19,11 @@ class WikiSEOTest extends GeneratorTest {
 	private $replacementTitle = 'Replaced Title';
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadataFromPageProps
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromDb
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromOutputPage
 	 */
 	public function testModifyTitleReplace() {
 		$seo = new WikiSEO();
@@ -40,8 +43,11 @@ class WikiSEOTest extends GeneratorTest {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadataFromPageProps
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromDb
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromOutputPage
 	 */
 	public function testModifyTitleAppend() {
 		$seo = new WikiSEO();
@@ -65,8 +71,11 @@ class WikiSEOTest extends GeneratorTest {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadataFromPageProps
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromDb
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromOutputPage
 	 */
 	public function testModifyTitlePrepend() {
 		$seo = new WikiSEO();
@@ -90,8 +99,11 @@ class WikiSEOTest extends GeneratorTest {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadataFromPageProps
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromDb
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromOutputPage
 	 */
 	public function testModifyTitleAppendChangedSeparator() {
 		$seo = new WikiSEO();
@@ -116,8 +128,11 @@ class WikiSEOTest extends GeneratorTest {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadataFromPageProps
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::modifyPageTitle
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::addMetadataToPage
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromDb
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::loadPagePropsFromOutputPage
 	 */
 	public function testModifyTitleHtmlEntities() {
 		$seo = new WikiSEO();
@@ -161,7 +176,10 @@ class WikiSEOTest extends GeneratorTest {
 	 * Tests the parser setting and saving page props
 	 *
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadata
 	 * @covers \MediaWiki\Extension\WikiSEO\TagParser::parseArgs
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::finalize
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::makeErrorHtml
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::saveMetadataToProps
 	 * @throws \MWException
 	 */
