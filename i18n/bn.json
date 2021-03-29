@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"R4356th"
+		]
+	},
+	"wiki-seo-pageinfo-header-description": "বিবরণ",
+	"wiki-seo-pageinfo-header-content": "বিষয়বস্তু",
+	"wiki-seo-param-title": "পাতার শিরোনাম:",
+	"wiki-seo-param-keywords": "মূলশব্দসমূহ",
+	"wiki-seo-param-image_width": "চিত্রের প্রস্থ:",
+	"wiki-seo-param-image_height": "চিত্রের উচ্চতা:",
+	"wiki-seo-param-site_name": "সাইটের নাম:"
+}

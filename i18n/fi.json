@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joquliina"
+		]
+	},
+	"wiki-seo-pageinfo-header-description": "Kuvaus",
+	"wiki-seo-pageinfo-header-content": "Sisältö",
+	"wiki-seo-param-title": "Sivun otsikko:",
+	"wiki-seo-param-keywords": "Avainsanat:",
+	"wiki-seo-param-image_width": "Kuvan leveys:",
+	"wiki-seo-param-image_height": "Kuvan korkeus:",
+	"wiki-seo-param-type": "Artikkelin tyyppi:"
+}
