@@ -6,8 +6,15 @@
 	},
 	"pageinfo-header-seo": "Leecalloolee SEO",
 	"wiki-seo-pageinfo-below": " [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO] iirraa Odeeffannoo soqi.",
+	"wiki-seo-pageinfo-header-content": "Qabiyyee",
 	"wiki-seo-param-title": "Matduree fuulaa:",
+	"wiki-seo-param-title_separator": "Fo'aa matduree:",
+	"wiki-seo-param-description": "Ibsa keeyyataa:",
+	"wiki-seo-param-image": "Suuraa keeyyataa:",
+	"wiki-seo-param-image_width": "Bal'ina suuraa:",
+	"wiki-seo-param-image_height": "Hpjjaa suuraa:",
 	"wiki-seo-param-type": "Gosa keeyyataa:",
 	"wiki-seo-param-site_name": "Maqaa dirree:",
+	"wiki-seo-param-section": "Kutaa keeyyataa:",
 	"wiki-seo-param-twitter_site": "Harkee dirree Twitterii"
 }
