@@ -21,7 +21,7 @@
 	"wiki-seo-param-title_separator": "Titelskiljare:",
 	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mer information]",
 	"wiki-seo-param-keywords": "Nyckelord:",
-	"wiki-seo-param-keywords-description": "Detta attribut styr innehållet i elementet <code>&lt;meta type='keywords'&gt;</code>.<br>Innehållet används vidare för elementet <code>article:tag</code>.",
+	"wiki-seo-param-keywords-description": "Detta attribut styr innehållet i elementen <code>keywords</code> och <code>article:tag</code> elements.",
 	"wiki-seo-param-description": "Artikelbeskrivning:",
 	"wiki-seo-param-description-description": "Detta attribut styr innehållet i elementet <code>description</code>.<br>Det används vidare för elementen <code>og:description</code> och <code>twitter:description</code>.",
 	"wiki-seo-param-robots": "Crawler-läge (robotar):",

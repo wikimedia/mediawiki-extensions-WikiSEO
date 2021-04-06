@@ -7,6 +7,12 @@
 	"wiki-seo-pageinfo-header-description": "Leírás",
 	"wiki-seo-pageinfo-header-content": "Tartalom",
 	"wiki-seo-param-title": "Lap címe:",
+	"wiki-seo-param-keywords": "Kulcsszavak:",
+	"wiki-seo-param-description": "Cikkleírás:",
+	"wiki-seo-param-image_width": "Képszélesség:",
+	"wiki-seo-param-image_height": "Képmagasság:",
 	"wiki-seo-param-type": "Cikk típusa:",
-	"wiki-seo-param-site_name": "Oldal neve:"
+	"wiki-seo-param-site_name": "Oldal neve:",
+	"wiki-seo-param-author": "Cikk szerzője:",
+	"wiki-seo-param-published_time": "Cikk megjelenési dátum:"
 }

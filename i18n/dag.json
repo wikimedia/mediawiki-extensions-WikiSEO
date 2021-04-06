@@ -1,21 +1,31 @@
 {
 	"@metadata": {
 		"authors": [
+			"Achiri Bitamsimli",
 			"Amire80",
 			"Dnshitobu",
-			"Hidrash"
+			"Hidrash",
+			"Ruky Wunpini",
+			"Sir Amugi"
 		]
 	},
+	"wiki-seo-pageinfo-below": "Lahabali din nya",
 	"wiki-seo-pageinfo-header-description": "Buɣisibu",
 	"wiki-seo-pageinfo-header-content": "Lahabali maa maŋmaŋa",
 	"wiki-seo-param-title": "Sabbbu yaɣili lahabali zuɣu.",
-	"wiki-seo-param-keywords": "Bachikpana:",
+	"wiki-seo-param-title_mode-description": "https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes",
+	"wiki-seo-param-title_separator": "Yuli kpani walgira",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes More Information]‎",
+	"wiki-seo-param-keywords": "Bachikpana",
+	"wiki-seo-param-description": "Satarli buɣsibu",
 	"wiki-seo-param-image": "Lahabali anfooni",
-	"wiki-seo-param-image_width": "Anfooni yalim:",
+	"wiki-seo-param-image_width": "Anfooni yaliŋ:",
 	"wiki-seo-param-image_height": "Anfooni waɣilim:",
 	"wiki-seo-param-image_alt": "Sabbu din ni tooi zani anfooni ŋɔ zaani",
-	"wiki-seo-param-type": "Anfooni waɣilim:",
+	"wiki-seo-param-type": "Lahibali balibu",
 	"wiki-seo-param-site_name": "Yaɣili yuli",
-	"wiki-seo-param-published_time": "Lahabali yibuna dabisili:",
+	"wiki-seo-param-section": "Satarli yaɣali",
+	"wiki-seo-param-author": "Satarli lana",
+	"wiki-seo-param-published_time": "Lahabali pohim zuɣu pabu dabisili:",
 	"wiki-seo-param-twitter_site": "Yaɣili lahabali dibu taachi"
 }

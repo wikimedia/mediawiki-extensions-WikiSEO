@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"RFScott"
+		]
+	},
+	"wiki-seo-desc": "Тамача мета-дякасал ая: анако-хэсэ, гисурэн, заголовок, тэгасал.",
+	"wiki-seo-param-title": "Страница гэрбуни:",
+	"wiki-seo-param-title-description": "Тэй атрибут<code>&lt;title&gt;</code> элементэвэ далайни.",
+	"wiki-seo-param-description-description": "Эй атрибут <code>description</code>, <code>og:description</code> элементсалба далайни.",
+	"wiki-seo-param-image-description": "Неду картинкава далами мутэйни <code>og:image</code>. Тэй картинка социальнай сетегоани.",
+	"wiki-seo-param-type": "Статья дуруни:",
+	"wiki-seo-param-site_name": "Сайт гэрбуни:"
+}
