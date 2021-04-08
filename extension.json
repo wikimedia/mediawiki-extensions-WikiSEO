@@ -109,10 +109,16 @@
 			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ParserHooks"
 		},
 		"PageHooks": {
-			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\PageHooks"
+			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\PageHooks",
+			"services": [
+				"MainConfig"
+			]
 		},
 		"InfoActionHook": {
-			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\InfoAction"
+			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\InfoAction",
+			"services": [
+				"RepoGroup"
+			]
 		}
 	},
 	"Hooks": {

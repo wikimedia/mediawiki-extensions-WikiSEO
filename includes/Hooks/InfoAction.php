@@ -25,12 +25,25 @@ use Html;
 use IContextSource;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Hook\InfoActionHook;
-use MediaWiki\MediaWikiServices;
 use Message;
 use PageProps;
+use RepoGroup;
 use Title;
 
 class InfoAction implements InfoActionHook {
+	/**
+	 * @var RepoGroup
+	 */
+	private $repoGroup;
+
+	/**
+	 * InfoAction constructor.
+	 *
+	 * @param RepoGroup $repoGroup
+	 */
+	public function __construct( RepoGroup $repoGroup ) {
+		$this->repoGroup = $repoGroup;
+	}
 
 	/**
 	 * Adds SEO page props as a table to the page when calling with ?action=info
@@ -138,7 +151,7 @@ class InfoAction implements InfoActionHook {
 			return $value;
 		}
 
-		$file = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title->getDBkey() );
+		$file = $this->repoGroup->findFile( $title->getDBkey() );
 
 		return Html::rawElement( 'img', [
 			'src' => $file->transform( [ 'width' => 200 ] )->getUrl(),

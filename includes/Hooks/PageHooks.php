@@ -21,11 +21,11 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Hooks;
 
+use Config;
 use DeferrableUpdate;
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Hook\BeforePageDisplayHook;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Storage\Hook\RevisionDataUpdatesHook;
 use OutputPage;
@@ -36,6 +36,19 @@ use Title;
  * Hooks to run relating the page
  */
 class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
+	/**
+	 * @var Config
+	 */
+	private $mainConfig;
+
+	/**
+	 * PageHooks constructor.
+	 *
+	 * @param Config $config
+	 */
+	public function __construct( Config $config ) {
+		$this->mainConfig = $config;
+	}
 
 	/**
 	 * Extracts the generated SEO HTML comments form the page and adds them as meta tags
@@ -68,14 +81,14 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 			return;
 		}
 
-		$autoEnabled = MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoEnableAutoDescription' );
+		$autoEnabled = $this->mainConfig->get( 'WikiSeoEnableAutoDescription' );
 		if ( (bool)$autoEnabled === false || $output->getProperty( 'manualDescription' ) === true ) {
 			return;
 		}
 
 		$updates[] = new DeferredDescriptionUpdate(
 			$title,
-			MediaWikiServices::getInstance()->getMainConfig()->get( 'WikiSeoTryCleanAutoDescription' )
+			$this->mainConfig->get( 'WikiSeoTryCleanAutoDescription' )
 		);
 	}
 }
