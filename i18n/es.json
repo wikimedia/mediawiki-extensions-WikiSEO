@@ -11,7 +11,7 @@
 	"wiki-seo-empty-attr-parser": "Error: <nowiki>{{#seo:}}</nowiki> deber contener al menos un atributo no vacío.",
 	"wiki-seo-invalid-generator": "Error: $1 no es un generador de metadatos valído.",
 	"wiki-seo-missing-page-title": "Error: el título de página indicado no es válido.",
-	"wiki-seo-pageinfo-below": "Información de [https://mediawiki.org/wiki/extension:WikiSEO Extensión:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Información de [https://www.mediawiki.org/wiki/extension:WikiSEO Extensión:WikiSEO].",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/extension:WikiSEO#Modos_de título Más_información]",
 	"wiki-seo-param-title_separator": "Separador de títulos",
 	"wiki-seo-param-keywords-description": "Este atributo controla el contenido del elemento &lt;meta tipo='palabras clave'&gt. Ademas, este contenido es  utilizado para el artículo:etiqueta del elemento.",

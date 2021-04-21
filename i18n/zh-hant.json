@@ -12,7 +12,7 @@
 	"wiki-seo-invalid-generator": "錯誤：$1不是有效的詮釋資料產生器。",
 	"wiki-seo-missing-page-title": "錯誤：指定的頁面標題無效。",
 	"pageinfo-header-seo": "搜尋引擎優化屬性",
-	"wiki-seo-pageinfo-below": "資訊來自 [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "資訊來自 [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "描述",
 	"wiki-seo-pageinfo-header-content": "內容",
 	"wiki-seo-param-title": "頁面標題：",

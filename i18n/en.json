@@ -8,7 +8,7 @@
 	"wiki-seo-invalid-generator": "Error: $1 is not a valid metadata generator.",
 	"wiki-seo-missing-page-title": "Error: the given page title is invalid.",
 	"pageinfo-header-seo": "SEO properties",
-	"wiki-seo-pageinfo-below": "Information from [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Information from [https://www.mediawiki.org/wiki/Extension:WikiSEO WikiSEO]",
 	"wiki-seo-pageinfo-header-description": "Description",
 	"wiki-seo-pageinfo-header-content": "Content",
 	"wiki-seo-param-title": "Page title:",

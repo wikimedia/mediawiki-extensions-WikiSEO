@@ -11,7 +11,7 @@
 	"wiki-seo-invalid-generator": "Fel: $1 är inte en giltig metadatagenerator.",
 	"wiki-seo-missing-page-title": "Fel: Den angivna sidtiteln är ogiltig.",
 	"pageinfo-header-seo": "Se egenskaper",
-	"wiki-seo-pageinfo-below": "Information från [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Information från [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "Beskrivning",
 	"wiki-seo-pageinfo-header-content": "Innehåll",
 	"wiki-seo-param-title": "Sidtitel:",

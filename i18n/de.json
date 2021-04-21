@@ -12,7 +12,7 @@
 	"wiki-seo-invalid-generator": "Fehler: $1 ist kein gültiger Metadatengenerator.",
 	"wiki-seo-missing-page-title": "Fehler: Der angegebene Seitentitel ist nicht gültig.",
 	"pageinfo-header-seo": "SEO-Eigenschaften",
-	"wiki-seo-pageinfo-below": "Informationen von [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Informationen von [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "Beschreibung",
 	"wiki-seo-pageinfo-header-content": "Inhalt",
 	"wiki-seo-param-title": "Seitentitel:",

@@ -13,7 +13,7 @@
 	"wiki-seo-invalid-generator": "Erro: $1 não é um gerador de metadados válido.",
 	"wiki-seo-missing-page-title": "Erro: o título da página fornecido é inválido.",
 	"pageinfo-header-seo": "Propriedades de SEO",
-	"wiki-seo-pageinfo-below": "Informação de [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Informação de [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "Descrição",
 	"wiki-seo-pageinfo-header-content": "Conteúdo",
 	"wiki-seo-param-title": "Título de página:",

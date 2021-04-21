@@ -6,7 +6,7 @@
 	},
 	"wiki-seo-missing-page-title": "오류: 해당 문서 제목은 유효하지 않습니다.",
 	"pageinfo-header-seo": "SEO 속성",
-	"wiki-seo-pageinfo-below": "[https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]의 정보입니다.",
+	"wiki-seo-pageinfo-below": "[https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]의 정보입니다.",
 	"wiki-seo-pageinfo-header-description": "설명",
 	"wiki-seo-pageinfo-header-content": "내용",
 	"wiki-seo-param-title": "문서 제목:",

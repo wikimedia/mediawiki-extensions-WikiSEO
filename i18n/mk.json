@@ -10,7 +10,7 @@
 	"wiki-seo-invalid-generator": "Грешка: $1 не е важечки создавач на метаподатоци.",
 	"wiki-seo-missing-page-title": "Грешка: наведената страница е неважечка.",
 	"pageinfo-header-seo": "Својства на SEO",
-	"wiki-seo-pageinfo-below": "Информации од [https://mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
+	"wiki-seo-pageinfo-below": "Информации од [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO].",
 	"wiki-seo-pageinfo-header-description": "Опис",
 	"wiki-seo-pageinfo-header-content": "Содржина",
 	"wiki-seo-param-title": "Наслов на страница:",
