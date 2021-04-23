@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Achiri Bitamsimli",
+			"Adam Tuferu",
 			"Amire80",
 			"Dnshitobu",
 			"Hidrash",
@@ -10,7 +11,7 @@
 		]
 	},
 	"pageinfo-header-seo": "SEO nɛɛma",
-	"wiki-seo-pageinfo-below": "Lahabali din nya",
+	"wiki-seo-pageinfo-below": "Lahabali din yirina [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]",
 	"wiki-seo-pageinfo-header-description": "Buɣisibu",
 	"wiki-seo-pageinfo-header-content": "Lahabali maa maŋmaŋa",
 	"wiki-seo-param-title": "Sabbbu yaɣili lahabali zuɣu.",
