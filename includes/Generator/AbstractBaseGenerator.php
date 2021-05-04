@@ -26,7 +26,6 @@ use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
-use RepoGroup;
 use Title;
 
 abstract class AbstractBaseGenerator {
@@ -96,13 +95,8 @@ abstract class AbstractBaseGenerator {
 
 		$title = Title::newFromText( sprintf( 'File:%s', $name ) );
 
-		if ( method_exists( MediaWikiServices::class, 'getRepoGroup' ) ) {
-			// MediaWiki 1.34+
-			$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
-				->findFile( $title );
-		} else {
-			$file = RepoGroup::singleton()->getLocalRepo()->findFile( $title );
-		}
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
+			->findFile( $title );
 
 		if ( $file === false ) {
 			throw new InvalidArgumentException( sprintf( 'File %s not found.', $name ) );
