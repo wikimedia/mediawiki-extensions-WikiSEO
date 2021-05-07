@@ -379,12 +379,12 @@ class WikiSEO {
 				Validator::$validParams,
 				array_reduce(
 					array_map(
-						function ( GeneratorInterface $generator ) {
+						static function ( GeneratorInterface $generator ) {
 							return $generator->getAllowedTagNames();
 						},
 						$this->generatorInstances
 					),
-					function ( array $carry, array $item ) {
+					static function ( array $carry, array $item ) {
 						return array_merge( $carry, $item );
 					},
 					[]
