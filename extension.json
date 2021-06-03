@@ -57,12 +57,8 @@
 			"value": null
 		},
 		"MetadataGenerators": {
-			"description": "Array with metadata generators. Valid values are OpenGraph, Twitter, SchemaOrg, Citation",
-			"value": [
-				"OpenGraph",
-				"Twitter",
-				"SchemaOrg"
-			]
+			"description": "Array with metadata generators. Valid values are OpenGraph, Twitter, SchemaOrg, Citation. Defaults to all three generators if empty.",
+			"value": []
 		},
 		"WikiSeoDefaultImage": {
 			"description": "Default image. Local image, if not set $wgLogo will be used.",
@@ -92,6 +88,9 @@
 			"description": "Set to true, if WikiSEO should try to remove dangling sentences when using descriptions from textextracts.",
 			"value": false
 		}
+	},
+	"ConfigRegistry": {
+		"WikiSEO": "GlobalVarConfig::newInstance"
 	},
 	"MessagesDirs": {
 		"WikiSEO": [

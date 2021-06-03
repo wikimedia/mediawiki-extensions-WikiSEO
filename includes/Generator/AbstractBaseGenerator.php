@@ -17,8 +17,11 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO\Generator;
 
+use Config;
 use ConfigException;
 use Exception;
 use File;
@@ -56,6 +59,13 @@ abstract class AbstractBaseGenerator {
 	protected $fallbackImageActive = false;
 
 	/**
+	 * The WikiSEO Config object
+	 *
+	 * @var Config
+	 */
+	private static $config;
+
+	/**
 	 * Loads a config value for a given key from the main config
 	 * Returns null on if an ConfigException was thrown
 	 *
@@ -64,8 +74,12 @@ abstract class AbstractBaseGenerator {
 	 * @return mixed|null
 	 */
 	protected function getConfigValue( string $key ) {
+		if ( self::$config === null ) {
+			self::$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikiSEO' );
+		}
+
 		try {
-			$value = MediaWikiServices::getInstance()->getMainConfig()->get( $key );
+			$value = self::$config->get( $key );
 		} catch ( ConfigException $e ) {
 			wfLogWarning(
 				sprintf(
@@ -148,7 +162,7 @@ abstract class AbstractBaseGenerator {
 			}
 
 			try {
-				$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
+				$logo = $this->getConfigValue( 'Logo' );
 				$logo = wfExpandUrl( $logo );
 				$this->metadata['image'] = $logo;
 				$this->fallbackImageActive = true;

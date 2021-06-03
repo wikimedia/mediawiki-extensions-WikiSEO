@@ -179,9 +179,21 @@ class WikiSEO {
 	 * Set active metadata generators defined in wgMetdataGenerators
 	 */
 	private function setMetadataGenerators(): void {
+		$defaultGenerators = [
+			'OpenGraph',
+			'Twitter',
+			'SchemaOrg',
+		];
+
 		try {
-			$generators =
-				MediaWikiServices::getInstance()->getMainConfig()->get( 'MetadataGenerators' );
+			$generators = MediaWikiServices::getInstance()
+				->getConfigFactory()
+				->makeConfig( 'WikiSEO' )
+				->get( 'MetadataGenerators' );
+
+			if ( empty( $generators ) ) {
+				$generators = $defaultGenerators;
+			}
 		} catch ( ConfigException $e ) {
 			wfLogWarning(
 				sprintf(
@@ -190,11 +202,7 @@ class WikiSEO {
 				)
 			);
 
-			$generators = [
-				'OpenGraph',
-				'Twitter',
-				'SchemaOrg',
-			];
+			$generators = $defaultGenerators;
 		}
 
 		$this->generators = $generators;

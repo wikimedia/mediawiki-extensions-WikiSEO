@@ -277,9 +277,10 @@ Setting this variable will add a ``<meta property="twitter:site" content="@SITE_
 Usage: $wgTwitterSiteHandle = '@SITE_HANDLE';.
 
 ### $wgMetadataGenerators
-Array containing the metadata generator names to load.  
-Default: ["OpenGraph", "Twitter", "SchemaOrg"].  
-If you only want to change the page title and add 'description', 'keywords', 'robots' tags set $wgMetadataGenerators = [];
+Array containing the metadata generator classes to load.  
+Custom generators can be added by appending the class name without the namespace to this array.
+WikiSEO prepends the following namespace to the classname: `MediaWiki\Extension\WikiSEO\Generator\Plugins\`.  
+Default: ["OpenGraph", "Twitter", "SchemaOrg"].
 
 ### $wgWikiSeoDefaultImage
 Set a default image to use if no image is set on the site. If this variable is not set the sites logo will be used.  
