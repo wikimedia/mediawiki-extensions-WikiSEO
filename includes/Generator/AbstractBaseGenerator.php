@@ -91,7 +91,7 @@ abstract class AbstractBaseGenerator {
 	protected function getFileObject( string $name ): File {
 		// This should remove the namespace if present
 		$nameSplit = explode( ':', $name );
-		$name = array_pop( $nameSplit );
+		$name = array_pop( $nameSplit ) ?? '';
 
 		$title = Title::newFromText( sprintf( 'File:%s', $name ) );
 
