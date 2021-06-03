@@ -29,6 +29,13 @@ use MWException;
 use PageProps;
 use Title;
 
+/**
+ * This runs through the onRevisionDataUpdates hook but only if $wgWikiSeoEnableAutoDescription is enabled
+ * and no manual description was set
+ *
+ * The goal of this class is to automatically set a description for each page after if has been edited.
+ * Currently, only TextExtracts is available
+ */
 class DeferredDescriptionUpdate implements DeferrableUpdate {
 
 	/**
@@ -42,20 +49,29 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 	private $clean;
 
 	/**
-	 * Do an deferred update to the specified title.
+	 * Current description property from ParserOutput
+	 *
+	 * @var string
+	 */
+	private $currentDescription;
+
+	/**
+	 * Do a deferred update to the specified title.
 	 * Usually runs when RevisionDataUpdates occurs
 	 *
 	 * @param Title $title
+	 * @param string|null $currentDescription
 	 * @param bool $cleanDescription
 	 */
-	public function __construct( Title $title, bool $cleanDescription = false ) {
+	public function __construct( Title $title, ?string $currentDescription, bool $cleanDescription = false ) {
 		$this->title = $title;
+		$this->currentDescription = $currentDescription ?? '';
 		$this->clean = $cleanDescription;
 	}
 
 	/**
 	 * We do have to manually set the page properties, as we have no way of getting the parser or outputpage
-	 * in an deferred update
+	 * in a deferred update
 	 */
 	public function doUpdate(): void {
 		try {
@@ -65,8 +81,11 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 		}
 
 		$apiDescription = trim( $apiDescription ?? '' );
+		$emptyLikeDescriptions = [ '', '…', '\u2026' ];
 
-		if ( $apiDescription === '' || $apiDescription === '…' || $apiDescription === "\u2026" ) {
+		// If API response is empty like, or current description is equal to api description, exit early
+		if ( in_array( $apiDescription, $emptyLikeDescriptions, true ) ||
+			strcmp( $this->currentDescription, $apiDescription ) === 0 ) {
 			return;
 		}
 
@@ -75,6 +94,7 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			$propertyDescriptions = MediaWikiServices::getInstance()->getPageProps()
 				->getProperties( $this->title, 'description' );
 		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
 			$propertyDescriptions = PageProps::getInstance()->getProperties( $this->title, 'description' );
 		}
 

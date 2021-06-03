@@ -17,6 +17,8 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use Html;
@@ -52,6 +54,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		'published_time',
 		'section',
 		'site_name',
+		'title',
 		'type',
 	];
 
@@ -68,6 +71,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 
 		'locale'      => 'og:locale',
 		'type'        => 'og:type',
+		'title'       => 'og:title',
 		'site_name'   => 'og:site_name',
 		'description' => 'og:description',
 
@@ -86,16 +90,6 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	protected $titlePropertyName = 'og:title';
 
 	/**
-	 * @var array
-	 */
-	protected $metadata;
-
-	/**
-	 * @var OutputPage
-	 */
-	protected $outputPage;
-
-	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
 	 *
 	 * @param array $metadata All metadata
@@ -107,20 +101,10 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
-		if ( !isset( $this->metadata['image'] ) ) {
-			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
-
-			if ( $defaultImage !== null ) {
-				$this->metadata['image'] = $defaultImage;
-			}
-		}
+		$this->setFallbackImageIfEnabled();
 
 		$this->preprocessFileMetadata();
-		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
-
-		if ( !isset( $this->metadata['published_time'] ) ) {
-			$this->metadata['published_time'] = $this->metadata['modified_time'];
-		}
+		$this->setModifiedPublishedTime();
 	}
 
 	/**
@@ -181,7 +165,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAllowedTagNames(): array {
+	public function getAllowedParameterNames(): array {
 		return $this->tags;
 	}
 
@@ -194,7 +178,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$title = $this->outputPage->getHTMLTitle();
 
 		if ( $this->outputPage->getTitle() !== null ) {
-			$title = $this->outputPage->getTitle()->getPrefixedText() ?? $title;
+			$title = $this->outputPage->getTitle()->getPrefixedText() ?? $this->metadata['title'] ?? $title;
 		}
 
 		$this->outputPage->addHeadItem(

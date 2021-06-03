@@ -17,11 +17,14 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO\Generator;
 
 use Html;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 
 /**
@@ -86,7 +89,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAllowedTagNames(): array {
+	public function getAllowedParameterNames(): array {
 		return $this->tags;
 	}
 
@@ -216,21 +219,45 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addHrefLangs(): void {
 		$language = $this->getConfigValue( 'WikiSeoDefaultLanguage' );
 
-		if ( !empty( $language ) && $this->outputPage->getTitle() !== null &&
-			in_array( $language, Validator::$isoLanguageCodes, true ) ) {
+		$title = $this->outputPage->getTitle();
+		if ( !empty( $language ) && $title !== null && in_array( $language, Validator::$isoLanguageCodes, true ) ) {
+			$subpage = $title->getSubpageText();
+			$languageUtils = MediaWikiServices::getInstance()->getLanguageNameUtils();
+			$languageFactory = MediaWikiServices::getInstance()->getLanguageFactory();
+
+			// Title might be a page containing a translation.
+			// Change the language and add an alternate link To the root page with the defined default language
+			if ( $title->isSubpage() && $languageUtils->isSupportedLanguage( $subpage ) ) {
 				$this->outputPage->addHeadItem(
 					$language, Html::element(
-					'link', [
+					'link',
+						[
+							'rel' => 'alternate',
+							'href' => WikiSEO::protocolizeUrl(
+								$title->getBaseTitle()->getFullURL(),
+								$this->outputPage->getRequest()
+							),
+							'hreflang' => $language,
+						]
+					)
+				);
+
+				$language = $languageFactory->getLanguage( $subpage )->getHtmlCode();
+			}
+
+			$this->outputPage->addHeadItem(
+				$language, Html::element(
+				'link',
+					[
 						'rel' => 'alternate',
 						'href' => WikiSEO::protocolizeUrl(
-							$this->outputPage->getTitle()->getFullURL(),
+							$title->getFullURL(),
 							$this->outputPage->getRequest()
 						),
 						'hreflang' => $language,
 					]
 				)
-				);
-
+			);
 		}
 
 		foreach ( $this->metadata as $metaKey => $url ) {

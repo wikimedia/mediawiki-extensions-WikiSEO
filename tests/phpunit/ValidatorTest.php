@@ -3,9 +3,9 @@
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
 use MediaWiki\Extension\WikiSEO\Validator;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 
-class ValidatorTest extends MediaWikiTestCase {
+class ValidatorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var Validator
 	 */
@@ -51,8 +51,7 @@ class ValidatorTest extends MediaWikiTestCase {
 
 		$validatedArray = $this->validator->validateParams( $params );
 
-		self::assertCount( 0, $validatedArray );
-		self::assertEmpty( $validatedArray );
+		self::assertSame( [], $validatedArray );
 	}
 
 	/**

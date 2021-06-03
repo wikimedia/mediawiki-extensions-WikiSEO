@@ -17,6 +17,8 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO;
 
 /**
@@ -25,7 +27,16 @@ namespace MediaWiki\Extension\WikiSEO;
  * @package MediaWiki\Extension\WikiSEO
  */
 class Validator {
-	public static $validParams = [
+	/**
+	 * Valid parameter names across all generators
+	 * @see WikiSEO::mergeValidTags()
+	 *
+	 * @var string[]
+	 */
+	public static $validParameterNames = [
+		// This needs to be the first entry see getValidParams()
+		'hreflang_%',
+
 		'title',
 		'title_mode',
 		'title_separator',
@@ -47,7 +58,6 @@ class Validator {
 		'published_time',
 
 		'twitter_site',
-		'hreflang_%'
 	];
 
 	/**
@@ -269,23 +279,37 @@ class Validator {
 	];
 
 	/**
-	 * Removes all params that are not in §valid_params
+	 * Removes all params that are not in $validParameterNames
 	 *
 	 * @param array $params Raw params
 	 * @return array Validated params
 	 */
-	public function validateParams( array $params ): array {
+	public static function validateParams( array $params ): array {
 		$validatedParams = [];
+		$validParams = static::getValidParams();
 
 		foreach ( $params as $paramKey => $paramData ) {
-			$valid = in_array( $paramKey, static::$validParams, true ) ||
-				in_array( substr( $paramKey, 9 ), static::$isoLanguageCodes, true );
-
-			if ( $valid ) {
+			if ( in_array( $paramKey, $validParams, true ) ) {
 				$validatedParams[$paramKey] = $paramData;
 			}
 		}
 
 		return $validatedParams;
+	}
+
+	/**
+	 * Returns an array containing valid parameter names for use in WikiSEO
+	 *
+	 * @return string[]
+	 */
+	public static function getValidParams(): array {
+		$params = self::$validParameterNames;
+
+		$hreflang = array_shift( $params );
+		$params += array_map( static function ( $langCode ) use ( $hreflang ) {
+			return sprintf( $hreflang . 's', $langCode );
+		}, self::$isoLanguageCodes );
+
+		return $params;
 	}
 }

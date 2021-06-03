@@ -49,5 +49,5 @@ interface GeneratorInterface {
 	 *
 	 * @return array
 	 */
-	public function getAllowedTagNames(): array;
+	public function getAllowedParameterNames(): array;
 }

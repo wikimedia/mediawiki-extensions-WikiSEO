@@ -17,6 +17,8 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use Exception;
@@ -69,11 +71,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
-		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
-
-		if ( !isset( $this->metadata['published_time'] ) ) {
-			$this->metadata['published_time'] = $this->metadata['modified_time'];
-		}
+		$this->setModifiedPublishedTime();
 	}
 
 	/**
@@ -123,7 +121,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAllowedTagNames(): array {
+	public function getAllowedParameterNames(): array {
 		return $this->tags;
 	}
 
@@ -133,7 +131,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @return string
 	 */
 	private function getTypeMetadata(): string {
-		return $this->metadata['type'] ?? 'article';
+		return $this->metadata['type'] ?? 'Article';
 	}
 
 	/**
@@ -146,13 +144,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 			'@type' => 'ImageObject',
 		];
 
-		if ( !isset( $this->metadata['image'] ) ) {
-			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
-
-			if ( $defaultImage !== null ) {
-				$this->metadata['image'] = $defaultImage;
-			}
-		}
+		$this->setFallbackImageIfEnabled();
 
 		if ( isset( $this->metadata['image'] ) ) {
 			$image = $this->metadata['image'];

@@ -3,14 +3,14 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
 use HashConfig;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use MultiConfig;
 use OutputPage;
 use RequestContext;
 use Title;
 use WebRequest;
 
-class GeneratorTest extends MediaWikiTestCase {
+class GeneratorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param array $config
 	 * @param WebRequest|null $request

@@ -17,15 +17,20 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO\Generator;
 
+use Config;
 use ConfigException;
 use Exception;
+use ExtensionRegistry;
 use File;
 use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
+use PageImages\PageImages;
 use Title;
 
 abstract class AbstractBaseGenerator {
@@ -56,6 +61,13 @@ abstract class AbstractBaseGenerator {
 	protected $fallbackImageActive = false;
 
 	/**
+	 * The WikiSEO Config object
+	 *
+	 * @var Config
+	 */
+	private static $config;
+
+	/**
 	 * Loads a config value for a given key from the main config
 	 * Returns null on if an ConfigException was thrown
 	 *
@@ -64,8 +76,12 @@ abstract class AbstractBaseGenerator {
 	 * @return mixed|null
 	 */
 	protected function getConfigValue( string $key ) {
+		if ( self::$config === null ) {
+			self::$config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikiSEO' );
+		}
+
 		try {
-			$value = MediaWikiServices::getInstance()->getMainConfig()->get( $key );
+			$value = self::$config->get( $key );
 		} catch ( ConfigException $e ) {
 			wfLogWarning(
 				sprintf(
@@ -91,7 +107,7 @@ abstract class AbstractBaseGenerator {
 	protected function getFileObject( string $name ): File {
 		// This should remove the namespace if present
 		$nameSplit = explode( ':', $name );
-		$name = array_pop( $nameSplit );
+		$name = array_pop( $nameSplit ) ?? '';
 
 		$title = Title::newFromText( sprintf( 'File:%s', $name ) );
 
@@ -114,7 +130,7 @@ abstract class AbstractBaseGenerator {
 	 */
 	protected function getFileInfo( File $file ): array {
 		$cacheHash =
-		'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
+			'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
 		$width = $file->getWidth();
 		$height = $file->getHeight();
 		$image = WikiSEO::protocolizeUrl( $file->getFullUrl(), $this->outputPage->getRequest() );
@@ -148,10 +164,12 @@ abstract class AbstractBaseGenerator {
 			}
 
 			try {
-				$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
-				$logo = wfExpandUrl( $logo );
-				$this->metadata['image'] = $logo;
-				$this->fallbackImageActive = true;
+				$logo = $this->getWikiLogo();
+
+				if ( $logo !== false ) {
+					$this->metadata['image'] = $logo;
+					$this->fallbackImageActive = true;
+				}
 			} catch ( Exception $e ) {
 				// We do nothing
 			}
@@ -170,12 +188,12 @@ abstract class AbstractBaseGenerator {
 		// No cached timestamp, load it from the database
 		if ( $timestamp === null ) {
 			$timestamp =
-			MediaWikiServices::getInstance()
-				->getRevisionLookup()
-				->getKnownCurrentRevision(
-					$this->outputPage->getTitle(),
-					$this->outputPage->getRevisionId()
-				);
+				MediaWikiServices::getInstance()
+					->getRevisionLookup()
+					->getKnownCurrentRevision(
+						$this->outputPage->getTitle(),
+						$this->outputPage->getRevisionId()
+					);
 
 			if ( $timestamp === false ) {
 				$timestamp = wfTimestampNow();
@@ -185,5 +203,87 @@ abstract class AbstractBaseGenerator {
 		}
 
 		return wfTimestamp( TS_ISO_8601, $timestamp );
+	}
+
+	/**
+	 * Sets a fallback image if no '|image=' parameter was given AND the page does not have a page image
+	 *
+	 * @return void
+	 */
+	protected function setFallbackImageIfEnabled(): void {
+		$continue = true;
+
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
+			$continue = PageImages::getPageImage( $this->outputPage->getTitle() ) === false;
+		}
+
+		if ( !isset( $this->metadata['image'] ) && $continue ) {
+			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
+
+			if ( $defaultImage !== null ) {
+				$this->metadata['image'] = $defaultImage;
+			}
+		}
+	}
+
+	/**
+	 * Tries to return the expanded url to the wiki's logo based on $wgLogos or $wgLogo
+	 * If nothing was found, or no url could be generated, returns false
+	 *
+	 * @return string|false
+	 * @throws Exception
+	 */
+	protected function getWikiLogo() {
+		$logos = $this->getConfigValue( 'Logos' );
+		if ( $logos === false || !is_array( $logos ) ) {
+			$logo = $this->getConfigValue( 'Logo' );
+
+			if ( is_string( $logo ) ) {
+				// MW 1.39+
+				if ( method_exists( MediaWikiServices::getInstance(), 'getUrlUtils' ) ) {
+					return MediaWikiServices::getInstance()->getUrlUtils()->expand( $logo ) ?? false;
+				} else {
+					return wfExpandUrl( $logo );
+				}
+			}
+
+			return false;
+		}
+
+		foreach ( $logos as $path ) {
+			if ( !is_string( $path ) ) {
+				continue;
+			}
+
+			$parts = explode( '.', $path );
+			$ext = array_pop( $parts ) ?? '';
+			if ( in_array( strtolower( $ext ), [ 'jpg', 'jpeg', 'png', 'gif', 'webp' ], true ) ) {
+				// MW 1.39+
+				if ( method_exists( MediaWikiServices::getInstance(), 'getUrlUtils' ) ) {
+					return MediaWikiServices::getInstance()->getUrlUtils()->expand( $path ) ?? false;
+				} else {
+					return wfExpandUrl( $path );
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Sets modified_time and published_time metadata, if it has not been disabled by setting their values to '-'
+	 *
+	 * @return void
+	 */
+	protected function setModifiedPublishedTime(): void {
+		if ( !isset( $this->metadata['modified_time'] ) && ( $this->metadata['modified_time'] ?? '' ) !== '-' ) {
+			$this->metadata['modified_time'] = $this->getRevisionTimestamp();
+		} elseif ( ( $this->metadata['modified_time'] ?? '' ) === '-' ) {
+			unset( $this->metadata['modified_time'] );
+		}
+
+		if ( !isset( $this->metadata['published_time'] ) && isset( $this->metadata['modified_time'] ) ) {
+			$this->metadata['published_time'] = $this->metadata['modified_time'];
+		}
 	}
 }

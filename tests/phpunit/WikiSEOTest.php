@@ -362,7 +362,7 @@ class WikiSEOTest extends GeneratorTest {
 			[ 'pp_propname', 'pp_value' ],
 			[
 				'pp_page' => $id,
-				'pp_propname' => Validator::$validParams,
+				'pp_propname' => Validator::$validParameterNames,
 			],
 			__METHOD__
 		);

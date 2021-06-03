@@ -2,6 +2,7 @@
 
 declare( strict_types=1 );
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
+use MediaWiki\MediaWikiServices;
 
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
@@ -33,11 +34,30 @@ class GenerateDescription extends Maintenance {
 
 		$validNamespaces = array_map( static function ( $ns ) {
 			return (int)( $ns );
-		}, explode( ',', $this->getArg() ) );
+		}, explode( ',', $this->getArg( 0, '' ) ) );
+
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.38+
+			$pageProps = MediaWikiServices::getInstance()->getPageProps();
+		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
+			$pageProps = PageProps::getInstance();
+		}
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+		} else {
+			$wikiPageFactory = null;
+		}
 
 		foreach ( $it as $batch ) {
 			foreach ( $batch as $page ) {
-				$wikiPage = WikiPage::newFromID( $page->page_id );
+				if ( $wikiPageFactory !== null ) {
+					// MW 1.36+
+					$wikiPage = $wikiPageFactory->newFromID( $page->page_id );
+				} else {
+					$wikiPage = WikiPage::newFromID( $page->page_id );
+				}
 
 				if ( $wikiPage === null || $wikiPage->getTitle() === null ) {
 					$this->error( sprintf( "Page with id %s is null", $page->page_id ) );
@@ -48,7 +68,7 @@ class GenerateDescription extends Maintenance {
 					continue;
 				}
 
-				$properties = PageProps::getInstance()->getProperties(
+				$properties = $pageProps->getProperties(
 					$wikiPage->getTitle(),
 					[
 						'manualDescription',
@@ -81,6 +101,7 @@ class GenerateDescription extends Maintenance {
 
 				( new DeferredDescriptionUpdate(
 					$wikiPage->getTitle(),
+					null,
 					$this->getOption( 'cleanSentence', false )
 				) )->doUpdate();
 			}

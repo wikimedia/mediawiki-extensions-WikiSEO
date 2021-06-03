@@ -6,7 +6,7 @@ Tag only title
 <seo>
 |title=SeoWiki
 </seo>
-!! html+tidy
+!! html
 !! end
 
 
@@ -14,7 +14,7 @@ Tag only title
 Tag only title internal
 !! wikitext
 <seo title="SeoWiki"></seo>
-!! html+tidy
+!! html
 !! end
 
 
@@ -22,7 +22,7 @@ Tag only title internal
 Tag only title internal self-closing
 !! wikitext
 <seo title="SeoWiki" />
-!! html+tidy
+!! html
 !! end
 
 
@@ -30,7 +30,7 @@ Tag only title internal self-closing
 Tag empty
 !! wikitext
 <seo></seo>
-!! html+tidy
+!! html
 <div class="errorbox">Error: &lt;seo&gt; tag must contain at least one non-empty attribute.</div>
 !! end
 
@@ -39,7 +39,7 @@ Tag empty
 Tag empty self-closing
 !! wikitext
 <seo />
-!! html+tidy
+!! html
 <div class="errorbox">Error: &lt;seo&gt; tag must contain at least one non-empty attribute.</div>
 !! end
 
@@ -48,7 +48,7 @@ Tag empty self-closing
 Parser empty
 !! wikitext
 {{#seo:}}
-!! html+tidy
+!! html
 <div class="errorbox">Error: {{#seo:}} must contain at least one non-empty attribute.</div>
 !! end
 
@@ -67,7 +67,7 @@ Tag internal a lot of args
 |locale=en_EN
 |published_time=2012-01-01
 </seo>
-!! html+tidy
+!! html
 !! end
 
 
@@ -85,7 +85,7 @@ type="WebPage"
 locale="en_EN"
 published_time="2012-01-01">
 </seo>
-!! html+tidy
+!! html
 !! end
 
 
@@ -103,5 +103,5 @@ type="WebPage "
 locale="en_EN"
 published_time="2012-01-01"
 />
-!! html+tidy
+!! html
 !! end

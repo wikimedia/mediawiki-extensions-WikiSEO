@@ -25,6 +25,7 @@ use Html;
 use IContextSource;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Hook\InfoActionHook;
+use MediaWiki\MediaWikiServices;
 use Message;
 use PageProps;
 use RepoGroup;
@@ -53,10 +54,19 @@ class InfoAction implements InfoActionHook {
 	 * @return bool|void
 	 */
 	public function onInfoAction( $context, &$pageInfo ) {
-		$properties = PageProps::getInstance()->getProperties(
-			$context->getTitle(),
-			Validator::$validParams
-		);
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.36+
+			$properties = MediaWikiServices::getInstance()->getPageProps()->getProperties(
+				$context->getTitle(),
+				Validator::getValidParams()
+			);
+		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
+			$properties = PageProps::getInstance()->getProperties(
+				$context->getTitle(),
+				Validator::getValidParams()
+			);
+		}
 
 		$properties = array_shift( $properties );
 
@@ -68,11 +78,11 @@ class InfoAction implements InfoActionHook {
 			[
 				sprintf(
 					'<h3>%s</h3>',
-					( new Message( 'wiki-seo-pageinfo-header-description' ) )->plain()
+					( new Message( 'wiki-seo-pageinfo-header-description' ) )->escaped()
 				),
 				sprintf(
 					'<h3>%s</h3>',
-					( new Message( 'wiki-seo-pageinfo-header-content' ) )->plain()
+					( new Message( 'wiki-seo-pageinfo-header-content' ) )->escaped()
 				),
 			]
 		];
@@ -100,14 +110,14 @@ class InfoAction implements InfoActionHook {
 			if ( $description->exists() ) {
 				$description = sprintf(
 					'<b>%s</b> (<code>%s</code>)<br>%s',
-					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->plain(),
+					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->escaped(),
 					$param,
 					$description->parse()
 				);
 			} else {
 				$description = sprintf(
 					'<b>%s</b> (<code>%s</code>)',
-					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->text(),
+					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->escaped(),
 					$param
 				);
 			}

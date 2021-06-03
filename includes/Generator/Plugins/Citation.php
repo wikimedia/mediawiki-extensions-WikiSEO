@@ -17,6 +17,8 @@
  * @file
  */
 
+declare( strict_types=1 );
+
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
 use MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator;
@@ -105,7 +107,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAllowedTagNames(): array {
+	public function getAllowedParameterNames(): array {
 		return $this->tags;
 	}
 
