@@ -54,6 +54,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		'published_time',
 		'section',
 		'site_name',
+		'title',
 		'type',
 	];
 
@@ -70,6 +71,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 
 		'locale'      => 'og:locale',
 		'type'        => 'og:type',
+		'title'       => 'og:title',
 		'site_name'   => 'og:site_name',
 		'description' => 'og:description',
 
@@ -196,7 +198,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$title = $this->outputPage->getHTMLTitle();
 
 		if ( $this->outputPage->getTitle() !== null ) {
-			$title = $this->outputPage->getTitle()->getPrefixedText() ?? $title;
+			$title = $this->outputPage->getTitle()->getPrefixedText() ?? $this->metadata['title'] ?? $title;
 		}
 
 		$this->outputPage->addHeadItem(
