@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"DDPAT",
 			"Piramidion"
 		]
 	},
@@ -8,5 +9,33 @@
 	"wiki-seo-empty-attr-tag": "Помилка: тег &lt;seo&gt; повинен містити принаймні один непорожній атрибут.",
 	"wiki-seo-empty-attr-parser": "Помилка: <nowiki>{{#seo:}}</nowiki> має містити принаймні один непорожній атрибут.",
 	"wiki-seo-invalid-generator": "Помилка: $1 не є дійсним генератором метаданих.",
-	"wiki-seo-missing-page-title": "Помилка: вказана назва сторінки є недійсною."
+	"wiki-seo-missing-page-title": "Помилка: вказана назва сторінки є недійсною.",
+	"pageinfo-header-seo": "Властивості SEO",
+	"wiki-seo-pageinfo-below": "Інформація з [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "Опис",
+	"wiki-seo-pageinfo-header-content": "Вміст",
+	"wiki-seo-param-title": "Назва сторінки:",
+	"wiki-seo-param-title-description": "Цей атрибут керує вмістом елемента <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Режим заголовка",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Більше інформації]",
+	"wiki-seo-param-title_separator": "Роздільник заголовків:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Більше інформації]",
+	"wiki-seo-param-keywords": "Ключові слова:",
+	"wiki-seo-param-keywords-description": "Цей атрибут керує вмістом елементів <code>keywords</code> та <code>article:tag</code>.",
+	"wiki-seo-param-description": "Описи статей:",
+	"wiki-seo-param-description-description": "Цей атрибут керує вмістом елементів <code>description</code> та <code>og:description</code>.",
+	"wiki-seo-param-robots": "Режим сканування (роботи):",
+	"wiki-seo-param-google_bot": "Модуль GoogleBot:",
+	"wiki-seo-param-image": "Зображення статті:",
+	"wiki-seo-param-image-description": "Цей атрибут керує вмістом елемента <code>og:image</code>. Це зображення загалом відображається як ескіз у соціальних мережах.",
+	"wiki-seo-param-image_width": "Ширина зображення:",
+	"wiki-seo-param-image_height": "Висота зображення:",
+	"wiki-seo-param-image_alt": "Альтернативний текст зображення:",
+	"wiki-seo-param-type": "Тип сторінки:",
+	"wiki-seo-param-site_name": "Назва сайту:",
+	"wiki-seo-param-locale": "Мова статті:",
+	"wiki-seo-param-section": "Розділ статті:",
+	"wiki-seo-param-author": "Автор статті:",
+	"wiki-seo-param-published_time": "Дата публікації статті:",
+	"wiki-seo-param-twitter_site": "Ручка сайту Twitter:"
 }
