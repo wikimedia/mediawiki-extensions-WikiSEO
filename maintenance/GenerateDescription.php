@@ -39,7 +39,7 @@ class GenerateDescription extends Maintenance {
 			foreach ( $batch as $page ) {
 				$wikiPage = WikiPage::newFromID( $page->page_id );
 
-				if ( $wikiPage === null || $wikiPage->getTitle() === null ) {
+				if ( $wikiPage === null ) {
 					$this->error( sprintf( "Page with id %s is null", $page->page_id ) );
 					continue;
 				}

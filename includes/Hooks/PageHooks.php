@@ -82,7 +82,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 		}
 
 		$autoEnabled = $this->mainConfig->get( 'WikiSeoEnableAutoDescription' );
-		if ( (bool)$autoEnabled === false || $output->getProperty( 'manualDescription' ) === true ) {
+		if ( !$autoEnabled || $output->getProperty( 'manualDescription' ) === true ) {
 			return;
 		}
 
