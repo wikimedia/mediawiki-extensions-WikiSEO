@@ -3,9 +3,9 @@
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
 use MediaWiki\Extension\WikiSEO\TagParser;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 
-class TagParserTest extends MediaWikiTestCase {
+class TagParserTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var TagParser
 	 */

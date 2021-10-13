@@ -3,9 +3,9 @@
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
 use MediaWiki\Extension\WikiSEO\Validator;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 
-class ValidatorTest extends MediaWikiTestCase {
+class ValidatorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @var Validator
 	 */
