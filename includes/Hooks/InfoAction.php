@@ -147,7 +147,7 @@ class InfoAction implements InfoActionHook {
 	private function formatImage( ?string $value ): string {
 		$title = Title::newFromText( $value, NS_FILE );
 
-		if ( $title === null || !$title->exists() || $title->inNamespace( NS_FILE ) === false ) {
+		if ( $title === null || !$title->exists() || !$title->inNamespace( NS_FILE ) ) {
 			return $value;
 		}
 
