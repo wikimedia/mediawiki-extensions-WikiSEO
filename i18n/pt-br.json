@@ -3,6 +3,7 @@
 		"authors": [
 			"Eduardo Addad de Oliveira",
 			"Eduardoaddad",
+			"Juan90264",
 			"Mariagarbin",
 			"Sabelöga"
 		]
@@ -23,7 +24,7 @@
 	"wiki-seo-param-title_separator": "Separador de título:",
 	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mais Informações]",
 	"wiki-seo-param-keywords": "Palavras-chave:",
-	"wiki-seo-param-keywords-description": "Este atributo controla o conteúdo do elemento <code>&lt;meta type='keywords'&gt;</code>.<br>O conteúdo é usado posteriormente para o elemento <code>article:tag</code>.",
+	"wiki-seo-param-keywords-description": "Este atributo controla o conteúdo dos elementos <code>keywords</code> e <code>article:tag</code>.",
 	"wiki-seo-param-description": "Descrição do artigo:",
 	"wiki-seo-param-description-description": "Este atributo controla o conteúdo do elemento <code>description</code> e <code>og:description</code>.",
 	"wiki-seo-param-robots": "Modo rastreador (robôs):",
