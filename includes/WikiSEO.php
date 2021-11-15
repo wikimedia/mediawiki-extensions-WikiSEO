@@ -26,13 +26,16 @@ use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
+use PageProps;
 use Parser;
 use ParserOutput;
 use PPFrame;
 use ReflectionClass;
 use ReflectionException;
 use RuntimeException;
+use Title;
 use WebRequest;
+use Wikimedia\AtEase\AtEase;
 
 class WikiSEO {
 	private const MODE_TAG = 'tag';
@@ -107,10 +110,8 @@ class WikiSEO {
 			return;
 		}
 
-		$pageId = $outputPage->getTitle()->getArticleID();
-
 		$result =
-		$this->loadPagePropsFromDb( $pageId ) ??
+		$this->loadPagePropsFromDb( $outputPage->getTitle() ) ??
 		$this->loadPagePropsFromOutputPage( $outputPage ) ?? [];
 
 		$this->setMetadata( $result );
@@ -127,23 +128,34 @@ class WikiSEO {
 	 * @see Validator
 	 */
 	public function setMetadata( array $metadataArray, ParserOutput $out = null ): void {
-		$validator = new Validator();
 		$validMetadata = [];
-
-		$this->mergeValidTags();
 
 		// We'll set a flag to don't overwrite manual descriptions
 		// If the AutoDescription setting is set
 		if ( $out !== null ) {
-			if ( isset( $metadataArray['description'] ) &&
-				!in_array( $metadataArray['description'], [ 'auto', 'textextracts' ], true ) ) {
-				$out->setProperty( 'manualDescription', true );
+			if ( isset( $metadataArray['manualDescription'] ) &&
+				!in_array( $metadataArray['manualDescription'], [ 'auto', 'textextracts' ], true ) ) {
+
+				// MW 1.38+
+				if ( method_exists( $out, 'setPageProperty' ) ) {
+					$out->setPageProperty( 'manualDescription', true );
+				} else {
+					$out->setProperty( 'manualDescription', true );
+				}
+
+				$metadataArray['description'] = $metadataArray['manualDescription'];
+				unset( $metadataArray['manualDescription'] );
 			} else {
-				$out->unsetProperty( 'manualDescription' );
+				// MW 1.38+
+				if ( method_exists( $out, 'unsetPageProperty' ) ) {
+					$out->unsetPageProperty( 'manualDescription' );
+				} else {
+					$out->unsetProperty( 'manualDescription' );
+				}
 			}
 		}
 
-		foreach ( $validator->validateParams( $metadataArray ) as $k => $v ) {
+		foreach ( Validator::validateParams( $metadataArray ) as $k => $v ) {
 			if ( !empty( $v ) ) {
 				$validMetadata[$k] = $v;
 			}
@@ -176,7 +188,8 @@ class WikiSEO {
 	}
 
 	/**
-	 * Set active metadata generators defined in wgMetdataGenerators
+	 * Set active metadata generators defined in $wgMetdataGenerators
+	 * And merges all valid parameter names from the generator to the validator
 	 */
 	private function setMetadataGenerators(): void {
 		$defaultGenerators = [
@@ -206,40 +219,42 @@ class WikiSEO {
 		}
 
 		$this->generators = $generators;
+		$this->mergeValidParameterNames();
 	}
 
 	/**
-	 * Loads all page props with pp_propname in Validator::$validParams
+	 * Loads all page props for the given page with pp_propnames in Validator::getValidParams()
 	 *
-	 * @param int $pageId
+	 * @param Title $title
 	 * @return null|array Null if empty
-	 * @see Validator::$validParams
+	 * @see Validator::getValidParams()
 	 */
-	private function loadPagePropsFromDb( int $pageId ): ?array {
-		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $dbl->getConnection( DB_REPLICA );
-
-		$propValue = $db->select(
-			'page_props', [ 'pp_propname', 'pp_value' ], [
-			'pp_page' => $pageId,
-			], __METHOD__
+	private function loadPagePropsFromDb( Title $title ): ?array {
+		$properties = PageProps::getInstance()->getProperties(
+			$title,
+			Validator::getValidParams()
 		);
 
-		$result = null;
+		$properties = array_shift( $properties );
 
-		if ( $propValue !== false ) {
-			$result = [];
+		if ( $properties === null || count( $properties ) === 0 ) {
+			return null;
+		}
 
-			foreach ( $propValue as $row ) {
-				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-				$value = @unserialize( $row->pp_value, [ 'allowed_classes' => false ] );
+		$result = [];
 
-				// Value was serialized
-				if ( $value !== false ) {
-					$result[$row->pp_propname] = $value;
-				} else {
-					$result[$row->pp_propname] = $row->pp_value;
-				}
+		foreach ( $properties as $key => $value ) {
+			AtEase::suppressWarnings();
+			// TODO: Remove this sometime in the future
+			// Values were serialized between v2.3.1 and v2.4.1
+			$valueUnserialized = unserialize( $value, [ 'allowed_classes' => false ] );
+			AtEase::restoreWarnings();
+
+			// Value was serialized
+			if ( $valueUnserialized !== false ) {
+				$result[$key] = $valueUnserialized;
+			} else {
+				$result[$key] = $value;
 			}
 		}
 
@@ -247,20 +262,23 @@ class WikiSEO {
 	}
 
 	/**
-	 * Tries to load the page props from OutputPage with keys from Validator::$validParams
+	 * Tries to load the page props from OutputPage with keys from Validator::getValidParams()
+	 *
+	 * @see Validator::getValidParams()
 	 *
 	 * @param OutputPage $page
 	 * @return array|null
-	 * @see Validator::$validParams
 	 */
 	private function loadPagePropsFromOutputPage( OutputPage $page ): ?array {
 		$result = [];
 
-		foreach ( Validator::$validParams as $param ) {
+		foreach ( Validator::getValidParams() as $param ) {
 			$prop = $page->getProperty( $param );
+
 			if ( $prop !== null ) {
-				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
-				$value = @unserialize( $prop, [ 'allowed_classes' => false ] );
+				AtEase::suppressWarnings();
+				$value = unserialize( $prop, [ 'allowed_classes' => false ] );
+				AtEase::restoreWarnings();
 
 				// Value was serialized
 				if ( $value !== false ) {
@@ -343,15 +361,18 @@ class WikiSEO {
 		}
 
 		switch ( $this->titleMode ) {
-		case 'append':
-			$pageTitle = sprintf( '%s%s%s', $out->getPageTitle(), $this->titleSeparator, $metaTitle );
-			break;
-		case 'prepend':
-			$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $out->getPageTitle() );
-			break;
-		case 'replace':
-		default:
-			$pageTitle = $metaTitle;
+			case 'append':
+				$pageTitle = sprintf( '%s%s%s', $out->getPageTitle(), $this->titleSeparator, $metaTitle );
+				break;
+
+			case 'prepend':
+				$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $out->getPageTitle() );
+				break;
+
+			case 'replace':
+			default:
+				$pageTitle = $metaTitle;
+				break;
 		}
 
 		$pageTitle = preg_replace( "/[\r\n]/", '', $pageTitle );
@@ -374,23 +395,32 @@ class WikiSEO {
 		);
 
 		foreach ( $this->metadata as $key => $value ) {
-			if ( $outputPage->getProperty( $key ) === false ) {
-				$outputPage->setProperty( $key, $value );
+			// MW 1.38+
+			if ( method_exists( $outputPage, 'setPageProperty' ) &&
+				method_exists( $outputPage, 'getPageProperty' ) ) {
+				if ( $outputPage->getPageProperty( $key ) === false ) {
+					$outputPage->setPageProperty( $key, $value );
+				}
+			} else {
+				if ( $outputPage->getProperty( $key ) === false ) {
+					$outputPage->setProperty( $key, $value );
+				}
 			}
 		}
 	}
 
 	/**
-	 * Adds the valid tags from all generator instances to the Validator
+	 * Adds valid tags from all generator instances to the Validator
+	 * Automatically called after instantiating all active generators
 	 */
-	private function mergeValidTags(): void {
-		Validator::$validParams = array_unique(
+	private function mergeValidParameterNames(): void {
+		Validator::$validParameterNames = array_unique(
 			array_merge(
-				Validator::$validParams,
+				Validator::$validParameterNames,
 				array_reduce(
 					array_map(
 						static function ( GeneratorInterface $generator ) {
-							return $generator->getAllowedTagNames();
+							return $generator->getAllowedParameterNames();
 						},
 						$this->generatorInstances
 					),
@@ -421,6 +451,12 @@ class WikiSEO {
 		$parsedInput = array_merge( $parsedInput, $args );
 		$tags = $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame );
 
+		if ( isset( $tags['description'] ) ) {
+			$tags['manualDescription'] = $tags['description'];
+			unset( $tags['description'] );
+		}
+		$tags = array_merge( $seo->loadPagePropsFromDb( $frame->getTitle() ) ?? [], $tags );
+
 		$seo->setMetadata( $tags, $parser->getOutput() );
 
 		return $seo->finalize( $parser->getOutput() );
@@ -445,7 +481,15 @@ class WikiSEO {
 		$seo = new WikiSEO( self::MODE_PARSER );
 		$tagParser = new TagParser();
 
-		$seo->setMetadata( $tagParser->parseArgs( $expandedArgs ), $parser->getOutput() );
+		$args = $tagParser->parseArgs( $expandedArgs );
+		if ( isset( $args['description'] ) ) {
+			$args['manualDescription'] = $args['description'];
+			unset( $args['description'] );
+		}
+
+		$args = array_merge( $seo->loadPagePropsFromDb( $frame->getTitle() ) ?? [], $args );
+
+		$seo->setMetadata( $args, $parser->getOutput() );
 
 		$fin = $seo->finalize( $parser->getOutput() );
 		if ( !empty( $fin ) ) {

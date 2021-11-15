@@ -26,8 +26,16 @@ use Exception;
 use ExtensionDependencyError;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use PageProps;
 use Title;
 
+/**
+ * This runs through the onRevisionDataUpdates hook but only if $wgWikiSeoEnableAutoDescription is enabled
+ * and no manual description was set
+ *
+ * The goal of this class is to automatically set a description for each page after if has been edited.
+ * Currently, only TextExtracts is available
+ */
 class DeferredDescriptionUpdate implements DeferrableUpdate {
 
 	/**
@@ -41,55 +49,106 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 	private $clean;
 
 	/**
-	 * Do an deferred update to the specified title.
+	 * Current description property from ParserOutput
+	 *
+	 * @var string
+	 */
+	private $currentDescription;
+
+	/**
+	 * Do a deferred update to the specified title.
 	 * Usually runs when RevisionDataUpdates occurs
 	 *
 	 * @param Title $title
+	 * @param string|null $currentDescription
 	 * @param bool $cleanDescription
 	 */
-	public function __construct( Title $title, bool $cleanDescription = false ) {
+	public function __construct( Title $title, ?string $currentDescription, bool $cleanDescription = false ) {
 		$this->title = $title;
+		$this->currentDescription = $currentDescription ?? '';
 		$this->clean = $cleanDescription;
 	}
 
 	/**
 	 * We do have to manually set the page properties, as we have no way of getting the parser or outputpage
-	 * in an deferred update
+	 * in a deferred update
 	 */
 	public function doUpdate(): void {
 		try {
-			$description = $this->loadDescriptionFromApi();
+			$apiDescription = $this->loadDescriptionFromApi();
 		} catch ( Exception $e ) {
 			return;
 		}
 
-		$description = trim( $description ?? '' );
+		$apiDescription = trim( $apiDescription ?? '' );
+		$emptyLikeDescriptions = [ '', '…', '\u2026' ];
 
-		if ( $description === '' || $description === '…' || $description === "\u2026" ) {
+		// If API response is empty like, or current description is equal to api description, exit early
+		if ( in_array( $apiDescription, $emptyLikeDescriptions, true ) ||
+			strcmp( $this->currentDescription, $apiDescription ) === 0 ) {
 			return;
 		}
+
+		$propertyDescription = PageProps::getInstance()->getProperties( $this->title, 'description' );
+		$propertyDescription = array_shift( $propertyDescription ) ?? [];
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( $dbl->getWriterIndex() );
 
-		$db->delete(
-			'page_props',
-			[
-				'pp_page' => $this->title->getArticleID(),
-				'pp_propname' => 'description',
-			]
-		);
+		// Flag indicating if an insert or update should happen
+		$shouldInsert = false;
+		switch ( true ) {
+			case count( $propertyDescription ) > 1:
+				// There are multiple page props with the name 'description' present
+				// This shouldn't happen, but we'll try to clean it here
+				$db->delete(
+					'page_props',
+					[
+						'pp_page' => $this->title->getArticleID(),
+						'pp_propname' => 'description',
+					]
+				);
+			// Intentional fall-through, as deleting all 'description' props requires inserting a new row
+			case empty( $propertyDescription ):
+				$shouldInsert = true;
+				break;
 
-		$db->insert(
-			'page_props',
-			[
-				'pp_page' => $this->title->getArticleID(),
-				'pp_propname' => 'description',
-				'pp_value' => $description,
-				'pp_sortkey' => null,
-			],
-			__METHOD__
-		);
+			default:
+				break;
+		}
+
+		if ( count( $propertyDescription ) === 1 ) {
+			// Sanity check
+			$descriptionEqual = strcmp( $propertyDescription, $apiDescription ) === 0;
+			if ( $descriptionEqual ) {
+				return;
+			}
+		}
+
+		if ( $shouldInsert ) {
+			$db->insert(
+				'page_props',
+				[
+					'pp_page' => $this->title->getArticleID(),
+					'pp_propname' => 'description',
+					'pp_value' => $apiDescription,
+					'pp_sortkey' => null,
+				],
+				__METHOD__
+			);
+		} else {
+			$db->update(
+				'page_props',
+				[
+					'pp_value' => $apiDescription,
+				],
+				[
+					'pp_page' => $this->title->getArticleID(),
+					'pp_propname' => 'description',
+				],
+				__METHOD__
+			);
+		}
 	}
 
 	/**

@@ -66,7 +66,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 
 	/**
 	 * If WikiSeoEnableAutoDescription is enabled _and_ no manual description was defined
-	 * We'll push an deferred DescriptionUpdate
+	 * We'll push a deferred DescriptionUpdate
 	 *
 	 * @param Title $title
 	 * @param RenderedRevision $renderedRevision
@@ -88,6 +88,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 
 		$updates[] = new DeferredDescriptionUpdate(
 			$title,
+			$output->getProperty( 'description' ),
 			$this->mainConfig->get( 'WikiSeoTryCleanAutoDescription' )
 		);
 	}

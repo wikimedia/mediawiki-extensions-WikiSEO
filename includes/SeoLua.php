@@ -64,8 +64,7 @@ class SeoLua extends Scribunto_LuaLibraryBase {
 
 		$args = $args[0];
 
-		$validator = new Validator();
-		$validated = $validator->validateParams( $args );
+		$validated = Validator::validateParams( $args );
 
 		MediaWikiServices::getInstance()->getHookContainer()->run(
 			'WikiSEOLuaPreAddPageProps',
@@ -74,8 +73,14 @@ class SeoLua extends Scribunto_LuaLibraryBase {
 			]
 		);
 
+		$out = $this->getParser()->getOutput();
 		foreach ( $validated as $metaKey => $value ) {
-			$this->getParser()->getOutput()->setProperty( $metaKey, $value );
+			// MW 1.38+
+			if ( method_exists( $out, 'setPageProperty' ) ) {
+				$out->setPageProperty( $metaKey, $value );
+			} else {
+				$out->setProperty( $metaKey, $value );
+			}
 		}
 	}
 }

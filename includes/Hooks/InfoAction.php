@@ -55,7 +55,7 @@ class InfoAction implements InfoActionHook {
 	public function onInfoAction( $context, &$pageInfo ) {
 		$properties = PageProps::getInstance()->getProperties(
 			$context->getTitle(),
-			Validator::$validParams
+			Validator::getValidParams()
 		);
 
 		$properties = array_shift( $properties );

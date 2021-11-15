@@ -37,7 +37,7 @@ class ApiDescription {
 	private $title;
 
 	/**
-	 * Flag to try remove dangling sentences
+	 * Flag to try to remove dangling sentences
 	 *
 	 * @var bool
 	 */
@@ -127,7 +127,7 @@ class ApiDescription {
 			$text = sprintf( '%s.', implode( '.', $parts ) );
 		}
 
-		return preg_replace( '/\n/', ' ', strip_tags( $text ) );
+		return str_replace( "\n", ' ', strip_tags( $text ) );
 	}
 
 	/**

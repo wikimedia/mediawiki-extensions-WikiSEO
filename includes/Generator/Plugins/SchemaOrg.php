@@ -125,7 +125,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
 	 * @inheritDoc
 	 */
-	public function getAllowedTagNames(): array {
+	public function getAllowedParameterNames(): array {
 		return $this->tags;
 	}
 
