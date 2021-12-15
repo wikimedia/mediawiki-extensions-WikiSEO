@@ -33,7 +33,7 @@ class GenerateDescription extends Maintenance {
 
 		$validNamespaces = array_map( static function ( $ns ) {
 			return (int)( $ns );
-		}, explode( ',', $this->getArg() ) );
+		}, explode( ',', $this->getArg( 0, '' ) ) );
 
 		foreach ( $it as $batch ) {
 			foreach ( $batch as $page ) {
@@ -81,6 +81,7 @@ class GenerateDescription extends Maintenance {
 
 				( new DeferredDescriptionUpdate(
 					$wikiPage->getTitle(),
+					null,
 					$this->getOption( 'cleanSentence', false )
 				) )->doUpdate();
 			}

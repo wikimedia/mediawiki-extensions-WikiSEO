@@ -51,7 +51,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 	}
 
 	/**
-	 * Extracts the generated SEO HTML comments form the page and adds them as meta tags
+	 * Queries the page properties for WikiSEO data and adds it as meta tags
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/BeforePageDisplay
 	 *
