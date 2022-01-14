@@ -213,19 +213,41 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	private function addHrefLangs(): void {
 		$language = $this->getConfigValue( 'WikiSeoDefaultLanguage' );
 
-		if ( !empty( $language ) && $this->outputPage->getTitle() !== null &&
+		$title = $this->outputPage->getTitle();
+		if ( !empty( $language ) && $title !== null &&
 			in_array( $language, Validator::$isoLanguageCodes, true ) ) {
+				// Title might be a page containing a translation. Change the language and add an alternate link
+				// To the root page with the defined default language
+				if ( $title->isSubpage() && in_array( $title->getSubpageText(), Validator::$isoLanguageCodes, true ) ) {
+					$this->outputPage->addHeadItem(
+						$language, Html::element(
+						'link',
+							[
+								'rel' => 'alternate',
+								'href' => WikiSEO::protocolizeUrl(
+									$title->getRootTitle()->getFullURL(),
+									$this->outputPage->getRequest()
+								),
+								'hreflang' => $language,
+							]
+						)
+					);
+
+					$language = $title->getPageLanguage()->getHtmlCode();
+				}
+
 				$this->outputPage->addHeadItem(
 					$language, Html::element(
-					'link', [
-						'rel' => 'alternate',
-						'href' => WikiSEO::protocolizeUrl(
-							$this->outputPage->getTitle()->getFullURL(),
-							$this->outputPage->getRequest()
-						),
-						'hreflang' => $language,
-					]
-				)
+					'link',
+						[
+							'rel' => 'alternate',
+							'href' => WikiSEO::protocolizeUrl(
+								$title->getFullURL(),
+								$this->outputPage->getRequest()
+							),
+							'hreflang' => $language,
+						]
+					)
 				);
 
 		}
