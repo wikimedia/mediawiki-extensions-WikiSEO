@@ -229,7 +229,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 						[
 							'rel' => 'alternate',
 							'href' => WikiSEO::protocolizeUrl(
-								$title->getRootTitle()->getFullURL(),
+								$title->getBaseTitle()->getFullURL(),
 								$this->outputPage->getRequest()
 							),
 							'hreflang' => $language,
