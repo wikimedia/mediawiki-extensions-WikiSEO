@@ -13,6 +13,7 @@ class OpenGraphTest extends GeneratorTest {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addSiteName
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getConfigValue
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setFallbackImageIfEnabled
 	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::protocolizeUrl
 	 */
 	public function testAddMetadata() {
@@ -78,6 +79,7 @@ class OpenGraphTest extends GeneratorTest {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getFileInfo
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getFileObject
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setFallbackImageIfEnabled
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addMetadata
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addTitleMeta
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addSiteName
@@ -100,6 +102,7 @@ class OpenGraphTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::preprocessFileMetadata
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setFallbackImageIfEnabled
 	 */
 	public function testDefaultImage() {
 		$this->setMwGlobals( 'wgWikiSeoDefaultImage', 'wiki.png' );

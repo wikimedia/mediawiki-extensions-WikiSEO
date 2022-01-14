@@ -200,4 +200,32 @@ abstract class AbstractBaseGenerator {
 
 		return wfTimestamp( TS_ISO_8601, $timestamp );
 	}
+
+	/**
+	 * Sets a fallback image if no '|image=' parameter was given AND the page does not have a page image
+	 *
+	 * @return void
+	 */
+	protected function setFallbackImageIfEnabled(): void {
+		$pageImages = 'PageImages\PageImages';
+		$continue = true;
+
+		if ( class_exists( $pageImages ) && is_callable( [ $pageImages, 'getPageImage' ] ) ) {
+			// @phan-suppress-next-line PhanUndeclaredClassInCallable
+			$continue = call_user_func(
+				[ $pageImages, 'getPageImage' ],
+				$this->outputPage->getTitle()
+			) === false;
+		}
+
+		// Not using === results in a phan warning, but using === also results in one?
+		// @phan-suppress-next-line PhanSuspiciousValueComparison
+		if ( !isset( $this->metadata['image'] ) && $continue === true ) {
+			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
+
+			if ( $defaultImage !== null ) {
+				$this->metadata['image'] = $defaultImage;
+			}
+		}
+	}
 }

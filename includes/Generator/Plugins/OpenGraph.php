@@ -111,13 +111,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
-		if ( !isset( $this->metadata['image'] ) ) {
-			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
-
-			if ( $defaultImage !== null ) {
-				$this->metadata['image'] = $defaultImage;
-			}
-		}
+		$this->setFallbackImageIfEnabled();
 
 		$this->preprocessFileMetadata();
 		$this->metadata['modified_time'] = $this->getRevisionTimestamp();

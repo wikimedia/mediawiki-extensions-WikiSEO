@@ -148,13 +148,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 			'@type' => 'ImageObject',
 		];
 
-		if ( !isset( $this->metadata['image'] ) ) {
-			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
-
-			if ( $defaultImage !== null ) {
-				$this->metadata['image'] = $defaultImage;
-			}
-		}
+		$this->setFallbackImageIfEnabled();
 
 		if ( isset( $this->metadata['image'] ) ) {
 			$image = $this->metadata['image'];
