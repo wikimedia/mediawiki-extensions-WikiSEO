@@ -25,6 +25,7 @@ use Html;
 use IContextSource;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Hook\InfoActionHook;
+use MediaWiki\MediaWikiServices;
 use Message;
 use PageProps;
 use RepoGroup;
@@ -53,10 +54,18 @@ class InfoAction implements InfoActionHook {
 	 * @return bool|void
 	 */
 	public function onInfoAction( $context, &$pageInfo ) {
-		$properties = PageProps::getInstance()->getProperties(
-			$context->getTitle(),
-			Validator::getValidParams()
-		);
+		// MW 1.38+
+		if ( method_exists( MediaWikiServices::getInstance(), 'getPageProps' ) ) {
+			$properties = MediaWikiServices::getInstance()->getPageProps()->getProperties(
+				$context->getTitle(),
+				Validator::getValidParams()
+			);
+		} else {
+			$properties = PageProps::getInstance()->getProperties(
+				$context->getTitle(),
+				Validator::getValidParams()
+			);
+		}
 
 		$properties = array_shift( $properties );
 

@@ -39,5 +39,10 @@
 	},
 	"extra": {
 		"installer-name": "WikiSEO"
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
 	}
 }
