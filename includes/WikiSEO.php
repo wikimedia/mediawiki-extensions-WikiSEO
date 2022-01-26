@@ -508,7 +508,8 @@ class WikiSEO {
 			];
 		}
 
-		return [ '' ];
+		// See https://github.com/octfx/wiki-seo/issues/30
+		return [ '​' ];
 	}
 
 	/**
