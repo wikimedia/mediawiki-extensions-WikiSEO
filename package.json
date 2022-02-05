@@ -1,4 +1,5 @@
 {
+	"name": "WikiSEO",
 	"private": true,
 	"scripts": {
 		"test": "grunt test"
