@@ -406,8 +406,7 @@ class WikiSEO {
 			// MW 1.38+
 			if ( method_exists( $outputPage, 'setPageProperty' ) &&
 				method_exists( $outputPage, 'getPageProperty' ) ) {
-				// T301915
-				if ( ( $outputPage->getPageProperty( $key ) ?? false ) === false ) {
+				if ( $outputPage->getPageProperty( $key ) === null ) {
 					$outputPage->setPageProperty( $key, $value );
 				}
 			} else {
