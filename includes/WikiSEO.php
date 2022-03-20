@@ -230,8 +230,8 @@ class WikiSEO {
 	 * @see Validator::getValidParams()
 	 */
 	private function loadPagePropsFromDb( Title $title ): ?array {
-		// MW 1.38+
-		if ( method_exists( MediaWikiServices::getInstance(), 'getPageProps' ) ) {
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.36+
 			$properties = MediaWikiServices::getInstance()->getPageProps()->getProperties(
 				$title,
 				Validator::getValidParams()

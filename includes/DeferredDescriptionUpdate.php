@@ -89,7 +89,13 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			return;
 		}
 
-		$propertyDescription = PageProps::getInstance()->getProperties( $this->title, 'description' );
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.36+
+			$propertyDescription = MediaWikiServices::getInstance()->getPageProps()
+				->getProperties( $this->title, 'description' );
+		} else {
+			$propertyDescription = PageProps::getInstance()->getProperties( $this->title, 'description' );
+		}
 		$propertyDescription = array_shift( $propertyDescription ) ?? [];
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();

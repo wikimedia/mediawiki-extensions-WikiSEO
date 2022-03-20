@@ -2,6 +2,7 @@
 
 declare( strict_types=1 );
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
+use MediaWiki\MediaWikiServices;
 
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
@@ -35,6 +36,13 @@ class GenerateDescription extends Maintenance {
 			return (int)( $ns );
 		}, explode( ',', $this->getArg( 0, '' ) ) );
 
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.38+
+			$pageProps = MediaWikiServices::getInstance()->getPageProps();
+		} else {
+			$pageProps = PageProps::getInstance();
+		}
+
 		foreach ( $it as $batch ) {
 			foreach ( $batch as $page ) {
 				$wikiPage = WikiPage::newFromID( $page->page_id );
@@ -48,7 +56,7 @@ class GenerateDescription extends Maintenance {
 					continue;
 				}
 
-				$properties = PageProps::getInstance()->getProperties(
+				$properties = $pageProps->getProperties(
 					$wikiPage->getTitle(),
 					[
 						'manualDescription',

@@ -54,8 +54,8 @@ class InfoAction implements InfoActionHook {
 	 * @return bool|void
 	 */
 	public function onInfoAction( $context, &$pageInfo ) {
-		// MW 1.38+
-		if ( method_exists( MediaWikiServices::getInstance(), 'getPageProps' ) ) {
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.36+
 			$properties = MediaWikiServices::getInstance()->getPageProps()->getProperties(
 				$context->getTitle(),
 				Validator::getValidParams()
