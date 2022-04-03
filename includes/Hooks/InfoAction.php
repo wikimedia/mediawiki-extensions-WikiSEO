@@ -77,11 +77,11 @@ class InfoAction implements InfoActionHook {
 			[
 				sprintf(
 					'<h3>%s</h3>',
-					( new Message( 'wiki-seo-pageinfo-header-description' ) )->plain()
+					( new Message( 'wiki-seo-pageinfo-header-description' ) )->escaped()
 				),
 				sprintf(
 					'<h3>%s</h3>',
-					( new Message( 'wiki-seo-pageinfo-header-content' ) )->plain()
+					( new Message( 'wiki-seo-pageinfo-header-content' ) )->escaped()
 				),
 			]
 		];
