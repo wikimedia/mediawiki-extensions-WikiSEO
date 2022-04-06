@@ -109,14 +109,14 @@ class InfoAction implements InfoActionHook {
 			if ( $description->exists() ) {
 				$description = sprintf(
 					'<b>%s</b> (<code>%s</code>)<br>%s',
-					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->plain(),
+					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->escaped(),
 					$param,
 					$description->parse()
 				);
 			} else {
 				$description = sprintf(
 					'<b>%s</b> (<code>%s</code>)',
-					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->text(),
+					( new Message( sprintf( 'wiki-seo-param-%s', $param ) ) )->escaped(),
 					$param
 				);
 			}

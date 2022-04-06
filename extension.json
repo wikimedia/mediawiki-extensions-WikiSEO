@@ -97,6 +97,15 @@
 			"i18n"
 		]
 	},
+	"RawHtmlMessages": [
+		"wiki-seo-pageinfo-header-description",
+		"wiki-seo-param-title-description",
+		"wiki-seo-param-title_mode-description",
+		"wiki-seo-param-title_separator-description",
+		"wiki-seo-param-keywords-description",
+		"wiki-seo-param-description-description",
+		"wiki-seo-param-image-description"
+	],
 	"ExtensionMessagesFiles": {
 		"WikiSEOMagic": "WikiSEO.i18n.magic.php"
 	},
