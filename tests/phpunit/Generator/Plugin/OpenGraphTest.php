@@ -96,7 +96,7 @@ class OpenGraphTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		self::assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
-		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['og:image'] );
+		self::assertStringContainsString( 'change-your-logo.svg', $out->getHeadItemsArray()['og:image'] );
 	}
 
 	/**
