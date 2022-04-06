@@ -252,18 +252,7 @@ class WikiSEO {
 		$result = [];
 
 		foreach ( $properties as $key => $value ) {
-			AtEase::suppressWarnings();
-			// TODO: Remove this sometime in the future
-			// Values were serialized between v2.3.1 and v2.4.1
-			$valueUnserialized = unserialize( $value, [ 'allowed_classes' => false ] );
-			AtEase::restoreWarnings();
-
-			// Value was serialized
-			if ( $valueUnserialized !== false ) {
-				$result[$key] = $valueUnserialized;
-			} else {
-				$result[$key] = $value;
-			}
+			$result[$key] = $value;
 		}
 
 		return empty( $result ) ? null : $result;
