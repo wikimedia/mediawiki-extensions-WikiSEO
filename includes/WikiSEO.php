@@ -32,7 +32,6 @@ use ParserOutput;
 use PPFrame;
 use ReflectionClass;
 use ReflectionException;
-use RuntimeException;
 use Title;
 use WebRequest;
 use Wikimedia\AtEase\AtEase;
@@ -85,13 +84,8 @@ class WikiSEO {
 	 * Loads generator names from LocalSettings
 	 *
 	 * @param string $mode the parser mode
-	 * @throws RuntimeException
 	 */
 	public function __construct( $mode = self::MODE_PARSER ) {
-		if ( !function_exists( 'json_encode' ) ) {
-			throw new RuntimeException( "WikiSEO required 'ext-json' to be installed." );
-		}
-
 		$this->setMetadataGenerators();
 		$this->instantiateMetadataPlugins();
 
