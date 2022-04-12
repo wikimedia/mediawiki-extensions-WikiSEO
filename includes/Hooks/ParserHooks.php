@@ -21,6 +21,7 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Hooks;
 
+use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Hook\ParserFirstCallInitHook;
 use MWException;
 use Parser;
@@ -42,10 +43,14 @@ class ParserHooks implements ParserFirstCallInitHook {
 	 * @throws MWException
 	 */
 	public function onParserFirstCallInit( $parser ) {
-		$parser->setHook( 'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromTag' );
+		$parser->setHook(
+			'seo',
+			[ WikiSEO::class, 'fromTag' ]
+		);
 
 		$parser->setFunctionHook(
-			'seo', 'MediaWiki\Extension\WikiSEO\WikiSEO::fromParserFunction',
+			'seo',
+			[ WikiSEO::class, 'fromParserFunction' ],
 			Parser::SFH_OBJECT_ARGS
 		);
 	}
