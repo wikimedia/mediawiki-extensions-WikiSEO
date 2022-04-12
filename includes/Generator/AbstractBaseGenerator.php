@@ -24,11 +24,13 @@ namespace MediaWiki\Extension\WikiSEO\Generator;
 use Config;
 use ConfigException;
 use Exception;
+use ExtensionRegistry;
 use File;
 use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
+use PageImages\PageImages;
 use Title;
 
 abstract class AbstractBaseGenerator {
@@ -207,20 +209,13 @@ abstract class AbstractBaseGenerator {
 	 * @return void
 	 */
 	protected function setFallbackImageIfEnabled(): void {
-		$pageImages = 'PageImages\PageImages';
 		$continue = true;
 
-		if ( class_exists( $pageImages ) && is_callable( [ $pageImages, 'getPageImage' ] ) ) {
-			// @phan-suppress-next-line PhanUndeclaredClassInCallable
-			$continue = call_user_func(
-				[ $pageImages, 'getPageImage' ],
-				$this->outputPage->getTitle()
-			) === false;
+		if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
+			$continue = PageImages::getPageImage( $this->outputPage->getTitle() ) === false;
 		}
 
-		// Not using === results in a phan warning, but using === also results in one?
-		// @phan-suppress-next-line PhanSuspiciousValueComparison
-		if ( !isset( $this->metadata['image'] ) && $continue === true ) {
+		if ( !isset( $this->metadata['image'] ) && $continue ) {
 			$defaultImage = $this->getConfigValue( 'WikiSeoDefaultImage' );
 
 			if ( $defaultImage !== null ) {
