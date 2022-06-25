@@ -42,10 +42,21 @@ class GenerateDescription extends Maintenance {
 		} else {
 			$pageProps = PageProps::getInstance();
 		}
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+		} else {
+			$wikiPageFactory = null;
+		}
 
 		foreach ( $it as $batch ) {
 			foreach ( $batch as $page ) {
-				$wikiPage = WikiPage::newFromID( $page->page_id );
+				if ( $wikiPageFactory !== null ) {
+					// MW 1.36+
+					$wikiPage = $wikiPageFactory->newFromID( $page->page_id );
+				} else {
+					$wikiPage = WikiPage::newFromID( $page->page_id );
+				}
 
 				if ( $wikiPage === null ) {
 					$this->error( sprintf( "Page with id %s is null", $page->page_id ) );
