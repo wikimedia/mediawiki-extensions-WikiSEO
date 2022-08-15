@@ -1,14 +1,31 @@
 {
 	"@metadata": {
 		"authors": [
-			"R4356th"
+			"R4356th",
+			"আজিজ"
 		]
 	},
+	"wiki-seo-invalid-generator": "ত্রুটি: $1 কেনও বৈধ অধিউপাত্ত উৎপাদক নয়৷",
+	"wiki-seo-missing-page-title": "ত্রুটি: প্রদত্ত পাতার শিরোনামটি অবৈধ৷",
+	"pageinfo-header-seo": "এসইও বৈশিষ্ট্য",
+	"wiki-seo-pageinfo-below": "[https://www.mediawiki.org/wiki/Extension:WikiSEO বর্ধিতাংশ:উইকিএসইও] থেকে তথ্য",
 	"wiki-seo-pageinfo-header-description": "বিবরণ",
 	"wiki-seo-pageinfo-header-content": "বিষয়বস্তু",
 	"wiki-seo-param-title": "পাতার শিরোনাম:",
-	"wiki-seo-param-keywords": "মূলশব্দসমূহ",
+	"wiki-seo-param-title-description": "এই গুণাগুণটি <code>&lt;শিরোনাম&gt;</code> উপাদানের বিষয়বস্তু নিয়ন্ত্রণ করে।",
+	"wiki-seo-param-title_mode": "শিরোনাম রীতি",
+	"wiki-seo-param-title_separator": "শিরোনাম বিভাজক:",
+	"wiki-seo-param-keywords": "মুখ্যশব্দসমূহ:",
+	"wiki-seo-param-keywords-description": "এই গুণাগুণটি <code>মুখ্যশব্দ</code> এবং <code>নিবন্ধ:ট্যাগ</code> উপাদানসমূহের বিষয়বস্তু নিয়ন্ত্রণ করে।",
+	"wiki-seo-param-description": "নিবন্ধের বিবরণ:",
+	"wiki-seo-param-image": "নিবন্ধ চিত্র:",
 	"wiki-seo-param-image_width": "চিত্রের প্রস্থ:",
 	"wiki-seo-param-image_height": "চিত্রের উচ্চতা:",
-	"wiki-seo-param-site_name": "সাইটের নাম:"
+	"wiki-seo-param-image_alt": "ছবির বিকল্প পাঠ্য:",
+	"wiki-seo-param-type": "নিবন্ধের ধরন:",
+	"wiki-seo-param-site_name": "সাইটের নাম:",
+	"wiki-seo-param-section": "নিবন্ধ অনুচ্ছেদ:",
+	"wiki-seo-param-author": "নিবন্ধ লেখক:",
+	"wiki-seo-param-published_time": "নিবন্ধ প্রকাশের তারিখ:",
+	"wiki-seo-param-twitter_site": "সাইট টুইটার হ্যান্ডেল:"
 }
