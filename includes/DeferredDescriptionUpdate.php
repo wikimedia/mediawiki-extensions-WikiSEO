@@ -89,8 +89,13 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			return;
 		}
 
-		$propertyDescription = PageProps::getInstance()->getProperties( $this->title, 'description' );
-		$propertyDescription = array_shift( $propertyDescription ) ?? [];
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.36+
+			$propertyDescriptions = MediaWikiServices::getInstance()->getPageProps()
+				->getProperties( $this->title, 'description' );
+		} else {
+			$propertyDescriptions = PageProps::getInstance()->getProperties( $this->title, 'description' );
+		}
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( $dbl->getWriterIndex() );
@@ -98,7 +103,7 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 		// Flag indicating if an insert or update should happen
 		$shouldInsert = false;
 		switch ( true ) {
-			case count( $propertyDescription ) > 1:
+			case count( $propertyDescriptions ) > 1:
 				// There are multiple page props with the name 'description' present
 				// This shouldn't happen, but we'll try to clean it here
 				$db->delete(
@@ -109,7 +114,7 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 					]
 				);
 			// Intentional fall-through, as deleting all 'description' props requires inserting a new row
-			case empty( $propertyDescription ):
+			case empty( $propertyDescriptions ):
 				$shouldInsert = true;
 				break;
 
@@ -117,9 +122,10 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 				break;
 		}
 
-		if ( count( $propertyDescription ) === 1 ) {
+		if ( count( $propertyDescriptions ) === 1 ) {
+			$prop = array_shift( $propertyDescriptions );
 			// Sanity check
-			$descriptionEqual = strcmp( $propertyDescription, $apiDescription ) === 0;
+			$descriptionEqual = strcmp( $prop ?? '', $apiDescription ) === 0;
 			if ( $descriptionEqual ) {
 				return;
 			}
