@@ -26,6 +26,7 @@ use Exception;
 use ExtensionDependencyError;
 use MediaWiki\MediaWikiServices;
 use MWException;
+use PageProps;
 use Title;
 
 class DeferredDescriptionUpdate implements DeferrableUpdate {
@@ -58,38 +59,83 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 	 */
 	public function doUpdate(): void {
 		try {
-			$description = $this->loadDescriptionFromApi();
+			$apiDescription = $this->loadDescriptionFromApi();
 		} catch ( Exception $e ) {
 			return;
 		}
 
-		$description = trim( $description ?? '' );
+		$apiDescription = trim( $apiDescription ?? '' );
 
-		if ( $description === '' || $description === '…' || $description === "\u2026" ) {
+		if ( $apiDescription === '' || $apiDescription === '…' || $apiDescription === "\u2026" ) {
 			return;
+		}
+
+		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
+			// MW 1.36+
+			$propertyDescriptions = MediaWikiServices::getInstance()->getPageProps()
+				->getProperties( $this->title, 'description' );
+		} else {
+			$propertyDescriptions = PageProps::getInstance()->getProperties( $this->title, 'description' );
 		}
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( $dbl->getWriterIndex() );
 
-		$db->delete(
-			'page_props',
-			[
-				'pp_page' => $this->title->getArticleID(),
-				'pp_propname' => 'description',
-			]
-		);
+		// Flag indicating if an insert or update should happen
+		$shouldInsert = false;
+		switch ( true ) {
+			case count( $propertyDescriptions ) > 1:
+				// There are multiple page props with the name 'description' present
+				// This shouldn't happen, but we'll try to clean it here
+				$db->delete(
+					'page_props',
+					[
+						'pp_page' => $this->title->getArticleID(),
+						'pp_propname' => 'description',
+					]
+				);
+			// Intentional fall-through, as deleting all 'description' props requires inserting a new row
+			case empty( $propertyDescriptions ):
+				$shouldInsert = true;
+				break;
 
-		$db->insert(
-			'page_props',
-			[
-				'pp_page' => $this->title->getArticleID(),
-				'pp_propname' => 'description',
-				'pp_value' => $description,
-				'pp_sortkey' => null,
-			],
-			__METHOD__
-		);
+			default:
+				break;
+		}
+
+		if ( count( $propertyDescriptions ) === 1 ) {
+			$prop = array_shift( $propertyDescriptions );
+			// Sanity check
+			$descriptionEqual = strcmp( $prop ?? '', $apiDescription ) === 0;
+			if ( $descriptionEqual ) {
+				return;
+			}
+		}
+
+		if ( $shouldInsert ) {
+			$db->insert(
+				'page_props',
+				[
+					'pp_page' => $this->title->getArticleID(),
+					'pp_propname' => 'description',
+					'pp_value' => $apiDescription,
+					'pp_sortkey' => null,
+				],
+				__METHOD__
+			);
+		} else {
+			$db->update(
+				'page_props',
+				[
+					'pp_value' => $apiDescription,
+				],
+				[
+					'pp_page' => $this->title->getArticleID(),
+					'pp_propname' => 'description',
+				],
+				__METHOD__
+			);
+		}
 	}
 
 	/**
