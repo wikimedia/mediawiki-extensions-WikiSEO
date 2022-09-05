@@ -123,8 +123,9 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 		}
 
 		if ( count( $propertyDescriptions ) === 1 ) {
+			$prop = array_shift( $propertyDescriptions );
 			// Sanity check
-			$descriptionEqual = strcmp( $propertyDescriptions[0], $apiDescription ) === 0;
+			$descriptionEqual = strcmp( $prop ?? '', $apiDescription ) === 0;
 			if ( $descriptionEqual ) {
 				return;
 			}
