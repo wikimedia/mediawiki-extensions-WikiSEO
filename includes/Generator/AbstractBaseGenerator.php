@@ -164,10 +164,12 @@ abstract class AbstractBaseGenerator {
 			}
 
 			try {
-				$logo = $this->getConfigValue( 'Logo' );
-				$logo = wfExpandUrl( $logo );
-				$this->metadata['image'] = $logo;
-				$this->fallbackImageActive = true;
+				$logo = $this->getWikiLogo();
+
+				if ( $logo !== false ) {
+					$this->metadata['image'] = $logo;
+					$this->fallbackImageActive = true;
+				}
 			} catch ( Exception $e ) {
 				// We do nothing
 			}
@@ -222,5 +224,39 @@ abstract class AbstractBaseGenerator {
 				$this->metadata['image'] = $defaultImage;
 			}
 		}
+	}
+
+	/**
+	 * Tries to return the expanded url to the wiki's logo based on $wgLogos or $wgLogo
+	 * If nothing was found, or no url could be generated, returns false
+	 *
+	 * @return string|false
+	 * @throws Exception
+	 */
+	protected function getWikiLogo() {
+		$logos = $this->getConfigValue( 'Logos' );
+		if ( $logos === false || !is_array( $logos ) ) {
+			$logo = $this->getConfigValue( 'Logo' );
+
+			if ( is_string( $logo ) ) {
+				return wfExpandUrl( $logo );
+			}
+
+			return false;
+		}
+
+		foreach ( $logos as $path ) {
+			if ( !is_string( $path ) ) {
+				continue;
+			}
+
+			$parts = explode( '.', $path );
+			$ext = array_pop( $parts ) ?? '';
+			if ( in_array( strtolower( $ext ), [ 'jpg', 'jpeg', 'png', 'gif', 'webp' ], true ) ) {
+				return wfExpandUrl( $path );
+			}
+		}
+
+		return false;
 	}
 }

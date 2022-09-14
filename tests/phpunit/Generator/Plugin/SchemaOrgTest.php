@@ -114,6 +114,8 @@ class SchemaOrgTest extends GeneratorTest {
 	 */
 	public function testContainsImageObject() {
 		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
+		$this->setMwGlobals( 'wgLogos', false );
+		$this->setMwGlobals( 'wgLogo', '/resources/assets/wiki.png' );
 
 		$out = $this->newInstance();
 
@@ -121,7 +123,7 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		self::assertStringContainsString( 'change-your-logo.svg', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**

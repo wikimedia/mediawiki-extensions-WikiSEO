@@ -26,7 +26,6 @@ use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
-use MediaWiki\MediaWikiServices;
 use OutputPage;
 use Title;
 
@@ -204,9 +203,12 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 		}
 
 		try {
-			$logo = MediaWikiServices::getInstance()->getMainConfig()->get( 'Logo' );
-			$logo = wfExpandUrl( $logo );
-			$data['url'] = $logo;
+			$logo = $this->getWikiLogo();
+			if ( $logo !== false ) {
+				$data['url'] = $logo;
+			} else {
+				$data = [];
+			}
 		} catch ( Exception $e ) {
 			// Uh oh either there was a ConfigException or there was an error expanding the URL.
 			// We'll bail out.
