@@ -32,6 +32,9 @@ The extension can be used via the ``{{#seo}}`` parser function or in Lua modules
   * A text description for the meta description tag
 * robots
   * Controls the behavior of search engine crawling and indexing
+  * Assumes the following order: index policy, follow policy
+  * Example: robots=index,nofollow / noindex,follow / index,follow / etc.
+  * Invalid: robots=follow,index
 * googlebot
   * Controls the behavior of the google crawler
 * hreflang_xx-xx[]

@@ -34,7 +34,7 @@ use OutputPage;
  * @package MediaWiki\Extension\WikiSEO\Generator
  */
 class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
-	protected $tags = [ 'description', 'keywords', 'google_bot' ];
+	protected $tags = [ 'description', 'keywords', 'robots', 'google_bot' ];
 
 	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
@@ -74,6 +74,11 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		}
 
 		foreach ( $this->tags as $tag ) {
+			// Set through addNoIndex
+			if ( $tag === 'robots' ) {
+				continue;
+			}
+
 			// Only add tag if it doesn't already exist in the output page
 			if ( array_key_exists( $tag, $this->metadata ) && !array_key_exists( $tag, $outputMeta ) ) {
 				$this->outputPage->addMeta( $tag, $this->metadata[$tag] );
@@ -276,7 +281,13 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 	 * Sets the robot policy to noindex
 	 */
 	private function addNoIndex(): void {
-		if ( $this->shouldAddNoIndex() ) {
+		if ( !empty( $this->metadata['robots'] ) ) {
+			// We assume the following order: index policy, follow policy
+			$parts = array_map( 'trim', explode( ',', $this->metadata['robots'] ) );
+
+			$this->outputPage->setIndexPolicy( $parts[0] ?? '' );
+			$this->outputPage->setFollowPolicy( $parts[1] ?? '' );
+		} elseif ( $this->shouldAddNoIndex() ) {
 			$this->outputPage->setIndexPolicy( 'noindex' );
 		}
 	}
