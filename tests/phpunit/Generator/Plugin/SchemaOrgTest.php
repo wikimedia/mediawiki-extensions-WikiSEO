@@ -121,7 +121,7 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
-		self::assertStringContainsString( 'wiki.png', $out->getHeadItemsArray()['jsonld-metadata'] );
+		self::assertStringContainsString( 'change-your-logo.svg', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 
 	/**
