@@ -101,6 +101,24 @@ class TwitterTest extends GeneratorTest {
 
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addMetadata
+	 */
+	public function testSummaryTypeOverride() {
+		// Unset default image if set
+		$this->setMwGlobals( 'wgTwitterCardType', 'summary' );
+
+		$out = $this->newInstance();
+
+		$generator = new Twitter();
+		$generator->init( [ 'twitter_card' => 'override_card' ], $out );
+		$generator->addMetadata();
+
+		$this->assertArraySubmapSame( [ [
+			'twitter:card', 'override_card'
+		] ], $out->getMetaTags() );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addMetadata
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
 	 */
 	public function testHandleNotSet() {
