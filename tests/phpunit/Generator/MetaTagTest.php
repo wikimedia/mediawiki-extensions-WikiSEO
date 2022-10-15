@@ -266,4 +266,31 @@ class MetaTagTest extends GeneratorTest {
 
 		self::assertStringContainsStringIgnoringCase( 'noindex', $out->getRobotPolicy() );
 	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
+	 */
+	public function testAddNoIndexThroughParser() {
+		$out = $this->newInstance();
+
+		$generator = new MetaTag();
+		$generator->init( [ 'robots' => 'noindex' ], $out );
+		$generator->addMetadata();
+
+		self::assertEquals( 'noindex', $out->getIndexPolicy() );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
+	 */
+	public function testAddNoIndexNoFollowThroughParser() {
+		$out = $this->newInstance();
+
+		$generator = new MetaTag();
+		$generator->init( [ 'robots' => 'noindex,nofollow' ], $out );
+		$generator->addMetadata();
+
+		self::assertEquals( 'noindex', $out->getIndexPolicy() );
+		self::assertEquals( 'nofollow', $out->getFollowPolicy() );
+	}
 }
