@@ -66,6 +66,8 @@ The extension can be used via the ``{{#seo}}`` parser function or in Lua modules
 **Tags related to Twitter Cards (see OpenGraph Tags)**
 * twitter_site
   * If you did not set a global site name through `$wgTwitterSiteHandle`, you can set a site handle per page. If a global site handle is set this key will be ignored.
+* twitter_card
+  * Allows per page overriding of `$wgWikiSEOTwitterCardType`
 
 **Tags related to the Citation generator**
 * description

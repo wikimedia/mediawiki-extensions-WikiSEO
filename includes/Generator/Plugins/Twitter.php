@@ -31,10 +31,12 @@ class Twitter extends OpenGraph {
 	 */
 	public function __construct() {
 		$this->tags[] = 'twitter_site';
+		$this->tags[] = 'twitter_card';
 
 		$this->conversions = array_merge(
 			$this->conversions, [
-				'twitter_site' => 'twitter:site'
+				'twitter_site' => 'twitter:site',
+				'twitter_card' => 'twitter:card'
 			]
 		);
 	}
@@ -50,6 +52,9 @@ class Twitter extends OpenGraph {
 		parent::addMetadata();
 
 		$twitterCardType = $this->getConfigValue( 'TwitterCardType' ) ?? 'summary_large_image';
+		if ( !empty( $this->metadata['twitter_card'] ) ) {
+			$twitterCardType = $this->metadata['twitter_card'];
+		}
 
 		$this->outputPage->addMeta( 'twitter:card', $twitterCardType );
 	}
