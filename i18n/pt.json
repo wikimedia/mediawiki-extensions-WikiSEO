@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"wiki-seo-desc": "Permite configurações meta do HTML por página, como palavras-chave e descrição, alterar o título e várias etiquetas de verificação do ''site''.",
+	"wiki-seo-empty-attr-tag": "Erro: a tag &lt;seo&gt; tem de conter pelo menos um atributo não vazio.",
+	"wiki-seo-empty-attr-parser": "Erro: <nowiki>{{#seo:}}</nowiki> tem de conter pelo menos um atributo não vazio.",
+	"wiki-seo-invalid-generator": "Erro: $1 não é um gerador de metadados válido.",
+	"wiki-seo-missing-page-title": "Erro: o título de página fornecido é inválido.",
+	"pageinfo-header-seo": "Propriedades de SEO",
+	"wiki-seo-pageinfo-below": "Informações de [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "Descrição",
+	"wiki-seo-pageinfo-header-content": "Conteúdo",
+	"wiki-seo-param-title": "Título da página:",
+	"wiki-seo-param-title-description": "Este atributo controla o conteúdo do elemento <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Modo de título",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mais informações]",
+	"wiki-seo-param-title_separator": "Separador de título:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mais informações]",
+	"wiki-seo-param-keywords": "Palavras-chave:",
+	"wiki-seo-param-keywords-description": "Este atributo controla o conteúdo dos elementos <code>keywords</code> e <code>article:tag</code>.",
+	"wiki-seo-param-description": "Descrição do artigo:",
+	"wiki-seo-param-description-description": "Este atributo controla o conteúdo dos elementos <code>description</code> e <code>og:description</code>.",
+	"wiki-seo-param-robots": "Modo de batedor (robôs):",
+	"wiki-seo-param-google_bot": "Modo de GoogleBot:",
+	"wiki-seo-param-image": "Imagem do artigo:",
+	"wiki-seo-param-image-description": "Este atributo controla o conteúdo do elemento <code>og:image</code>. Esta imagem é apresentada principalmente como miniatura nas redes sociais.",
+	"wiki-seo-param-image_width": "Largura da imagem:",
+	"wiki-seo-param-image_height": "Altura da imagem:",
+	"wiki-seo-param-image_alt": "Texto alternativo da imagem:",
+	"wiki-seo-param-type": "Tipo do artigo:",
+	"wiki-seo-param-site_name": "Nome do ''site'':",
+	"wiki-seo-param-locale": "Localização do artigo:",
+	"wiki-seo-param-section": "Secção do artigo:",
+	"wiki-seo-param-author": "Autor do artigo:",
+	"wiki-seo-param-published_time": "Data de publicação do artigo:",
+	"wiki-seo-param-twitter_site": "Identificador no Twitter do ''site'':"
+}
