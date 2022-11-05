@@ -134,7 +134,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @return string
 	 */
 	private function getTypeMetadata(): string {
-		return $this->metadata['type'] ?? 'article';
+		return $this->metadata['type'] ?? 'Article';
 	}
 
 	/**

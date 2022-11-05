@@ -231,6 +231,7 @@ class WikiSEO {
 				Validator::getValidParams()
 			);
 		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
 			$properties = PageProps::getInstance()->getProperties(
 				$title,
 				Validator::getValidParams()

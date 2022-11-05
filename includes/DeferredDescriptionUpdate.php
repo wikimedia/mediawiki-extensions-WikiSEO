@@ -94,6 +94,7 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			$propertyDescriptions = MediaWikiServices::getInstance()->getPageProps()
 				->getProperties( $this->title, 'description' );
 		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
 			$propertyDescriptions = PageProps::getInstance()->getProperties( $this->title, 'description' );
 		}
 

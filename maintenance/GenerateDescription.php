@@ -40,6 +40,7 @@ class GenerateDescription extends Maintenance {
 			// MW 1.38+
 			$pageProps = MediaWikiServices::getInstance()->getPageProps();
 		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
 			$pageProps = PageProps::getInstance();
 		}
 		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
