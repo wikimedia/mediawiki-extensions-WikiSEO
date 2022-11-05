@@ -61,6 +61,7 @@ class InfoAction implements InfoActionHook {
 				Validator::getValidParams()
 			);
 		} else {
+			// @phan-suppress-next-line PhanUndeclaredStaticMethod
 			$properties = PageProps::getInstance()->getProperties(
 				$context->getTitle(),
 				Validator::getValidParams()
