@@ -26,6 +26,7 @@ use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
+use PageImages\PageImages;
 use PageProps;
 use Parser;
 use ParserOutput;
@@ -352,13 +353,15 @@ class WikiSEO {
 			$this->titleMode = $this->metadata['title_mode'];
 		}
 
+		$strippedTitle = strip_tags( $out->getPageTitle() );
+
 		switch ( $this->titleMode ) {
 			case 'append':
-				$pageTitle = sprintf( '%s%s%s', $out->getPageTitle(), $this->titleSeparator, $metaTitle );
+				$pageTitle = sprintf( '%s%s%s', $strippedTitle, $this->titleSeparator, $metaTitle );
 				break;
 
 			case 'prepend':
-				$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $out->getPageTitle() );
+				$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $strippedTitle );
 				break;
 
 			case 'replace':
@@ -392,6 +395,10 @@ class WikiSEO {
 				method_exists( $outputPage, 'getPageProperty' ) ) {
 				if ( $outputPage->getPageProperty( $key ) === null ) {
 					$outputPage->setPageProperty( $key, $value );
+				}
+
+				if ( $key === 'image' ) {
+					$outputPage->setPageProperty( PageImages::PROP_NAME_FREE, $value );
 				}
 			} else {
 				if ( $outputPage->getProperty( $key ) === false ) {

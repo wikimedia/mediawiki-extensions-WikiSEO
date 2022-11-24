@@ -87,6 +87,10 @@
 		"WikiSeoTryCleanAutoDescription": {
 			"description": "Set to true, if WikiSEO should try to remove dangling sentences when using descriptions from textextracts.",
 			"value": false
+		},
+		"WikiSeoOverwritePageImage": {
+			"description": "Set to true to enable overwriting the image set by extension PageImages",
+			"value": false
 		}
 	},
 	"ConfigRegistry": {

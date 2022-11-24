@@ -90,16 +90,6 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	protected $titlePropertyName = 'og:title';
 
 	/**
-	 * @var array
-	 */
-	protected $metadata;
-
-	/**
-	 * @var OutputPage
-	 */
-	protected $outputPage;
-
-	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
 	 *
 	 * @param array $metadata All metadata
@@ -114,11 +104,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->setFallbackImageIfEnabled();
 
 		$this->preprocessFileMetadata();
-		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
-
-		if ( !isset( $this->metadata['published_time'] ) ) {
-			$this->metadata['published_time'] = $this->metadata['modified_time'];
-		}
+		$this->setModifiedPublishedTime();
 	}
 
 	/**

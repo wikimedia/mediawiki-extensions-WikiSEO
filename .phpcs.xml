@@ -3,7 +3,6 @@
 	<rule ref="./vendor/mediawiki/mediawiki-codesniffer/MediaWiki">
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationPrivate" />
 		<exclude name="MediaWiki.Commenting.PropertyDocumentation.MissingDocumentationProtected" />
-		<exclude name="MediaWiki.PHPUnit.AssertEmpty.AssertEmptyUsed" />
 	</rule>
 	<file>.</file>
 	<arg name="extensions" value="php"/>
