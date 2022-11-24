@@ -51,8 +51,7 @@ class ValidatorTest extends MediaWikiIntegrationTestCase {
 
 		$validatedArray = $this->validator->validateParams( $params );
 
-		self::assertCount( 0, $validatedArray );
-		self::assertEmpty( $validatedArray );
+		self::assertSame( [], $validatedArray );
 	}
 
 	/**
