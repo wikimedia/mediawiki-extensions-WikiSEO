@@ -352,13 +352,15 @@ class WikiSEO {
 			$this->titleMode = $this->metadata['title_mode'];
 		}
 
+		$strippedTitle = strip_tags( $out->getPageTitle() );
+
 		switch ( $this->titleMode ) {
 			case 'append':
-				$pageTitle = sprintf( '%s%s%s', $out->getPageTitle(), $this->titleSeparator, $metaTitle );
+				$pageTitle = sprintf( '%s%s%s', $strippedTitle, $this->titleSeparator, $metaTitle );
 				break;
 
 			case 'prepend':
-				$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $out->getPageTitle() );
+				$pageTitle = sprintf( '%s%s%s', $metaTitle, $this->titleSeparator, $strippedTitle );
 				break;
 
 			case 'replace':
