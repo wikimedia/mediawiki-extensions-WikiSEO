@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
+			"Amire80",
 			"דגש",
 			"דגש חזק"
 		]
 	},
-	"wiki-seo-missing-page-title": "שגיאה: כותרת העמוד שניתנה לא חוקית."
+	"wiki-seo-missing-page-title": "שגיאה: כותרת העמוד שניתנה לא חוקית.",
+	"wiki-seo-param-title": "כותרת הדף:"
 }
