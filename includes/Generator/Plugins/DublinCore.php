@@ -33,7 +33,25 @@ class DublinCore extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @var array
 	 */
 	protected $tags = [
+		'author',
+		'description',
 		'dc.identifier.wikidata',
+		'locale',
+		'site_name',
+		'title',
+	];
+
+	/**
+	 * Tag name conversions for this generator
+	 *
+	 * @var array
+	 */
+	protected $conversions = [
+		'author'      => 'DC.creator',
+		'description' => 'DC.description',
+		'locale'      => 'DC.language',
+		'title'       => 'DC.title',
+		'site_name'   => 'DC.publisher',
 	];
 
 	/**
@@ -42,6 +60,11 @@ class DublinCore extends AbstractBaseGenerator implements GeneratorInterface {
 	public function init( array $metadata, OutputPage $out ): void {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
+
+		$out->addLink( [
+			'rel' => 'schema.DC',
+			'href' => 'http://purl.org/dc/clients/1.1/',
+		] );
 	}
 
 	/**
@@ -50,7 +73,9 @@ class DublinCore extends AbstractBaseGenerator implements GeneratorInterface {
 	public function addMetadata(): void {
 		foreach ( $this->tags as $tag ) {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
-				$this->outputPage->addMeta( $tag, $this->metadata[$tag] );
+				$tagName = $this->conversions[$tag] ?? $tag;
+
+				$this->outputPage->addMeta( $tagName, $this->metadata[$tag] );
 			}
 		}
 	}

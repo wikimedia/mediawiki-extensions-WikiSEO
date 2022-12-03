@@ -87,6 +87,14 @@ The extension can be used via the ``{{#seo}}`` parser function or in Lua modules
 * citation_license
 * citation_volume
 
+** Tags related to the Dublin Core generator**
+* description
+* title
+* author
+* locale
+* site_name
+* dc.identifier.wikidata
+
 ## Examples
 ### Adding static values
 ```
@@ -285,7 +293,8 @@ Usage: $wgTwitterSiteHandle = '@SITE_HANDLE';.
 Array containing the metadata generator classes to load.  
 Custom generators can be added by appending the class name without the namespace to this array.
 WikiSEO prepends the following namespace to the classname: `MediaWiki\Extension\WikiSEO\Generator\Plugins\`.  
-Default: ["OpenGraph", "Twitter", "SchemaOrg"].
+Default: ["OpenGraph", "Twitter", "SchemaOrg"].  
+Available Generators: OpenGraph, Twitter, SchemaOrg, Citation, DublinCore
 
 ### $wgWikiSeoDefaultImage
 Set a default image to use if no image is set on the site. If this variable is not set the sites logo will be used.  
@@ -366,7 +375,8 @@ The properties publisher and author will be set to Organization with the name se
 ``dateModified`` will be automatically set by fetching the latest revision timestamp. If no published_time is set, datePublished will be set to the latest revision timestamp.
 
 ### OpenGraph
-``article:modified_time`` will be automatically set by fetching the latest revision timestamp. If no ``published_time`` is set, ``article:published_time`` will be set to the latest revision timestamp.
+``article:modified_time`` will be automatically set by fetching the latest revision timestamp. If no ``published_time`` is set, ``article:published_time`` will be set to the latest revision timestamp.  
+This can be disabled on a per-page basis by setting `modified_time=-` through the parser.
 
 ## Extending this extension
 Metadata generators live in the ``includes/Generator/Plugins`` directory.  
