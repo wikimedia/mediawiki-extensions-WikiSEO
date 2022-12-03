@@ -75,6 +75,7 @@ class SchemaOrgTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setModifiedPublishedTime
 	 */
 	public function testContainsRevisionTimestamp() {
 		$out = $this->newInstance();
@@ -90,6 +91,7 @@ class SchemaOrgTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setModifiedPublishedTime
 	 */
 	public function testContainsPublishedTimestampManual() {
 		$out = $this->newInstance();
@@ -142,5 +144,23 @@ class SchemaOrgTest extends GeneratorTest {
 		$generator->addMetadata();
 
 		self::assertStringContainsString( 'test-type', $out->getHeadItemsArray()['jsonld-metadata'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setModifiedPublishedTime
+	 */
+	public function testUnsetModifiedTime() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init(
+			[
+				'modified_time' => '-',
+			], $out
+		);
+		$generator->addMetadata();
+
+		self::assertStringNotContainsString( 'dateModified', $out->getHeadItemsArray()['jsonld-metadata'] );
 	}
 }

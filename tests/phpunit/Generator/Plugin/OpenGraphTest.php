@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph;
+use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
 class OpenGraphTest extends GeneratorTest {
@@ -38,6 +39,7 @@ class OpenGraphTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setModifiedPublishedTime
 	 */
 	public function testRevisionTimestamp() {
 		$out = $this->newInstance();
@@ -53,6 +55,7 @@ class OpenGraphTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::getRevisionTimestamp
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setModifiedPublishedTime
 	 */
 	public function testPublishedTimestampManual() {
 		$out = $this->newInstance();
@@ -216,5 +219,23 @@ class OpenGraphTest extends GeneratorTest {
 
 		self::assertArrayHasKey( 'og:image', $out->getHeadItemsArray() );
 		self::assertStringContainsString( '2x_version.webp', $out->getHeadItemsArray()['og:image'] );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setModifiedPublishedTime
+	 */
+	public function testUnsetModifiedTime() {
+		$out = $this->newInstance();
+
+		$generator = new SchemaOrg();
+		$generator->init(
+			[
+				'modified_time' => '-',
+			], $out
+		);
+		$generator->addMetadata();
+
+		self::assertArrayNotHasKey( 'article:modified_time', $out->getHeadItemsArray() );
 	}
 }

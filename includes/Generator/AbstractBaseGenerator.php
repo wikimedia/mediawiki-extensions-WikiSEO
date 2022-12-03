@@ -259,4 +259,21 @@ abstract class AbstractBaseGenerator {
 
 		return false;
 	}
+
+	/**
+	 * Sets modified_time and published_time metadata, if it has not been disabled by setting their values to '-'
+	 *
+	 * @return void
+	 */
+	protected function setModifiedPublishedTime(): void {
+		if ( !isset( $this->metadata['modified_time'] ) && ( $this->metadata['modified_time'] ?? '' ) !== '-' ) {
+			$this->metadata['modified_time'] = $this->getRevisionTimestamp();
+		} elseif ( ( $this->metadata['modified_time'] ?? '' ) === '-' ) {
+			unset( $this->metadata['modified_time'] );
+		}
+
+		if ( !isset( $this->metadata['published_time'] ) && isset( $this->metadata['modified_time'] ) ) {
+			$this->metadata['published_time'] = $this->metadata['modified_time'];
+		}
+	}
 }

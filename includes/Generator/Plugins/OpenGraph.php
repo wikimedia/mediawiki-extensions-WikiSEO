@@ -114,11 +114,7 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->setFallbackImageIfEnabled();
 
 		$this->preprocessFileMetadata();
-		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
-
-		if ( !isset( $this->metadata['published_time'] ) ) {
-			$this->metadata['published_time'] = $this->metadata['modified_time'];
-		}
+		$this->setModifiedPublishedTime();
 	}
 
 	/**

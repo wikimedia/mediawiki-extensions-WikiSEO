@@ -70,11 +70,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->metadata = $metadata;
 		$this->outputPage = $out;
 
-		$this->metadata['modified_time'] = $this->getRevisionTimestamp();
-
-		if ( !isset( $this->metadata['published_time'] ) ) {
-			$this->metadata['published_time'] = $this->metadata['modified_time'];
-		}
+		$this->setModifiedPublishedTime();
 	}
 
 	/**
