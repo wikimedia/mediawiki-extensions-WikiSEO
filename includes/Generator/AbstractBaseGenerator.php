@@ -239,7 +239,12 @@ abstract class AbstractBaseGenerator {
 			$logo = $this->getConfigValue( 'Logo' );
 
 			if ( is_string( $logo ) ) {
-				return wfExpandUrl( $logo );
+				// MW 1.39+
+				if ( method_exists( MediaWikiServices::getInstance(), 'getUrlUtils' ) ) {
+					return MediaWikiServices::getInstance()->getUrlUtils()->expand( $logo ) ?? false;
+				} else {
+					return wfExpandUrl( $logo );
+				}
 			}
 
 			return false;
@@ -253,7 +258,12 @@ abstract class AbstractBaseGenerator {
 			$parts = explode( '.', $path );
 			$ext = array_pop( $parts ) ?? '';
 			if ( in_array( strtolower( $ext ), [ 'jpg', 'jpeg', 'png', 'gif', 'webp' ], true ) ) {
-				return wfExpandUrl( $path );
+				// MW 1.39+
+				if ( method_exists( MediaWikiServices::getInstance(), 'getUrlUtils' ) ) {
+					return MediaWikiServices::getInstance()->getUrlUtils()->expand( $path ) ?? false;
+				} else {
+					return wfExpandUrl( $path );
+				}
 			}
 		}
 
