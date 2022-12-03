@@ -90,16 +90,6 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 	protected $titlePropertyName = 'og:title';
 
 	/**
-	 * @var array
-	 */
-	protected $metadata;
-
-	/**
-	 * @var OutputPage
-	 */
-	protected $outputPage;
-
-	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
 	 *
 	 * @param array $metadata All metadata
