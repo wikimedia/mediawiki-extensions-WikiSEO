@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"wiki-seo-desc": "Permitte meta-parametros per pagina como parolas-clave e description, cambiar le titulo, e varie etiquettas de verification del sito.",
+	"wiki-seo-empty-attr-tag": "Error: le etiquetta &lt;seo&gt; debe continer al minus un attributo non vacue.",
+	"wiki-seo-empty-attr-parser": "Error: <nowiki>{{#seo:}}</nowiki> debe continer al minus un attributo non vacue.",
+	"wiki-seo-invalid-generator": "Error: $1 non es un generator valide de metadatos.",
+	"wiki-seo-missing-page-title": "Error: le titulo de pagina date non es valide.",
+	"pageinfo-header-seo": "Proprietates SEO",
+	"wiki-seo-pageinfo-below": "Information de [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "Description",
+	"wiki-seo-pageinfo-header-content": "Contento",
+	"wiki-seo-param-title": "Titulo del pagina:",
+	"wiki-seo-param-title-description": "Iste attributo controla le contento del elemento <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Modo de titulo",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Plus information]",
+	"wiki-seo-param-title_separator": "Separator de titulo:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Plus information]",
+	"wiki-seo-param-keywords": "Parolas-clave:",
+	"wiki-seo-param-keywords-description": "Iste attributo controla le contento del elementos <code>keywords</code> e <code>article:tag</code>.",
+	"wiki-seo-param-description": "Description del articulo:",
+	"wiki-seo-param-description-description": "Iste attributo controla le contento del elementos <code>description</code> e <code>og:description</code>.",
+	"wiki-seo-param-robots": "Modo de indexator (robots):",
+	"wiki-seo-param-google_bot": "Modo de GoogleBot:",
+	"wiki-seo-param-image": "Imagine de articulo:",
+	"wiki-seo-param-image-description": "Iste attributo controla le contento del elemento <code>og:image</code>. Iste imagine appare principalmente como miniatura sur le medios social.",
+	"wiki-seo-param-image_width": "Latitude del imagine:",
+	"wiki-seo-param-image_height": "Altitude del imagine:",
+	"wiki-seo-param-image_alt": "Texto alternative del imagine:",
+	"wiki-seo-param-type": "Typo de articulo:",
+	"wiki-seo-param-site_name": "Nomine del sito:",
+	"wiki-seo-param-locale": "Localitate del articulo:",
+	"wiki-seo-param-section": "Section del articulo:",
+	"wiki-seo-param-author": "Autor del articulo:",
+	"wiki-seo-param-published_time": "Data de publication del articulo:",
+	"wiki-seo-param-twitter_site": "Pseudonymo Twitter del sito:"
+}
