@@ -1,0 +1,40 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"wiki-seo-desc": "Omogoča metanastavitve po straneh, kot so ključne besede in opis, spreminjanje naslova in različne oznake za preverjanje projekta.",
+	"wiki-seo-empty-attr-tag": "Napaka: Značka &lt;seo&gt; mora vsebovati vsaj en neprazen atribut.",
+	"wiki-seo-empty-attr-parser": "Napaka: <nowiki>{{#seo:}}</nowiki> mora vsebovati vsaj en neprazen atribut.",
+	"wiki-seo-invalid-generator": "Napaka: $1 ni veljaven generator metapodatkov.",
+	"wiki-seo-missing-page-title": "Napaka: Navedeni naslov strani ni veljaven.",
+	"pageinfo-header-seo": "Lastnosti SEO",
+	"wiki-seo-pageinfo-below": "Informacije iz [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "Opis",
+	"wiki-seo-pageinfo-header-content": "Vsebina",
+	"wiki-seo-param-title": "Naslov strani:",
+	"wiki-seo-param-title-description": "Ta atribut nadzoruje vsebino elementa <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Način naslova",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Več informacij]",
+	"wiki-seo-param-title_separator": "Ločilo naslova:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Več informacij]",
+	"wiki-seo-param-keywords": "Ključne besede:",
+	"wiki-seo-param-keywords-description": "Ta atribut nadzoruje vsebino elementov <code>keywords</code> in <code>article:tag</code>.",
+	"wiki-seo-param-description": "Opis članka:",
+	"wiki-seo-param-description-description": "Ta atribut nadzoruje vsebino elementov <code>description</code> in <code>og:description</code>.",
+	"wiki-seo-param-robots": "Način za pajke (robote):",
+	"wiki-seo-param-google_bot": "Način za GoogleBot:",
+	"wiki-seo-param-image": "SLika članka:",
+	"wiki-seo-param-image-description": "Ta atribut nadzoruje vsebino elementa <code>og:image</code>. Ta slika je večinoma prikazana kot sličica v družbenih omrežjih.",
+	"wiki-seo-param-image_width": "Širina slike:",
+	"wiki-seo-param-image_height": "Višina slike:",
+	"wiki-seo-param-image_alt": "Alternativno besedilo slike:",
+	"wiki-seo-param-type": "Vrsta članka:",
+	"wiki-seo-param-site_name": "Ime projekta:",
+	"wiki-seo-param-locale": "Lokalni članek:",
+	"wiki-seo-param-section": "Razdelek članka:",
+	"wiki-seo-param-author": "Avtor članka:",
+	"wiki-seo-param-published_time": "Datum objave članka:",
+	"wiki-seo-param-twitter_site": "Twitter ročica projekta:"
+}
