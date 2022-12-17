@@ -82,11 +82,18 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 		}
 
 		$autoEnabled = $this->mainConfig->get( 'WikiSeoEnableAutoDescription' );
-		if ( !$autoEnabled || $output->getProperty( 'manualDescription' ) === true ) {
-			return;
+
+		if ( method_exists( $output, 'getPageProperty' ) ) {
+			$currentDescription = $output->getPageProperty( 'description' );
+			$manualDescription = $output->getPageProperty( 'manualDescription' );
+		} else {
+			$currentDescription = $output->getProperty( 'description' );
+			$manualDescription = $output->getProperty( 'manualDescription' );
 		}
 
-		$currentDescription = $output->getProperty( 'description' );
+		if ( !$autoEnabled || $manualDescription === true ) {
+			return;
+		}
 
 		$updates[] = new DeferredDescriptionUpdate(
 			$title,
