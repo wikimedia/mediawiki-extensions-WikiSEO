@@ -26,6 +26,7 @@ use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
+use PageImages\PageImages;
 use PageProps;
 use Parser;
 use ParserOutput;
@@ -394,6 +395,10 @@ class WikiSEO {
 				method_exists( $outputPage, 'getPageProperty' ) ) {
 				if ( $outputPage->getPageProperty( $key ) === null ) {
 					$outputPage->setPageProperty( $key, $value );
+				}
+
+				if ( $key === 'image' ) {
+					$outputPage->setPageProperty( PageImages::PROP_NAME_FREE, $value );
 				}
 			} else {
 				if ( $outputPage->getProperty( $key ) === false ) {

@@ -23,12 +23,15 @@ namespace MediaWiki\Extension\WikiSEO\Hooks;
 
 use Config;
 use DeferrableUpdate;
+use ExtensionRegistry;
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
+use MediaWiki\Extension\WikiSEO\OverwritePageImageProp;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Hook\BeforePageDisplayHook;
 use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Storage\Hook\RevisionDataUpdatesHook;
 use OutputPage;
+use ParserOutput;
 use Skin;
 use Title;
 
@@ -81,15 +84,12 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 			return;
 		}
 
+		$this->overwritePageImageProp( $title, $output, $updates );
+
 		$autoEnabled = $this->mainConfig->get( 'WikiSeoEnableAutoDescription' );
 
-		if ( method_exists( $output, 'getPageProperty' ) ) {
-			$currentDescription = $output->getPageProperty( 'description' );
-			$manualDescription = $output->getPageProperty( 'manualDescription' );
-		} else {
-			$currentDescription = $output->getProperty( 'description' );
-			$manualDescription = $output->getProperty( 'manualDescription' );
-		}
+		$currentDescription = $this->getPageProperty( $output, 'description' );
+		$manualDescription = $this->getPageProperty( $output, 'manualDescription' );
 
 		if ( !$autoEnabled || $manualDescription === true ) {
 			return;
@@ -100,5 +100,41 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 			$currentDescription !== false ? $currentDescription : null,
 			$this->mainConfig->get( 'WikiSeoTryCleanAutoDescription' )
 		);
+	}
+
+	/**
+	 * Overwrite page prop 'page_imgaes_free' if PageImages is loaded and 'wgWikiSeoOverwritePageImage' is true
+	 *
+	 * @param Title $title
+	 * @param ParserOutput $output
+	 * @param array &$updates
+	 * @return void
+	 */
+	private function overwritePageImageProp( Title $title, ParserOutput $output, &$updates ) {
+		if ( !$this->mainConfig->get( 'WikiSeoOverwritePageImage' ) ||
+			$output->getPageProperty( 'image' ) === null ||
+			!ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
+			return;
+		}
+
+		$updates[] = new OverwritePageImageProp(
+			$title,
+			$this->getPageProperty( $output, 'image' )
+		);
+	}
+
+	/**
+	 * TODO: Remove when min version is set to 1.39
+	 *
+	 * @param ParserOutput $output
+	 * @param string $propName
+	 * @return mixed
+	 */
+	private function getPageProperty( ParserOutput $output, string $propName ) {
+		if ( method_exists( $output, 'getPageProperty' ) ) {
+			return $output->getPageProperty( $propName );
+		}
+
+		return $output->getProperty( $propName );
 	}
 }

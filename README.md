@@ -327,6 +327,10 @@ Set to true, if WikiSEO should try to remove dangling sentences when using descr
 This will remove all characters after the last found dot.  
 Usage: $wgWikiSeoTryCleanAutoDescription = true;
 
+### $wgWikiSeoOverwritePageImage
+Set to true to enable overwriting the iamge set by extension PageImages.    
+Usage: $wgWikiSeoOverwritePageImage = true;
+
 ## Migrating to v2
 ### Removed tags
 * DC.date.created
