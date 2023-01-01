@@ -22,6 +22,7 @@ declare( strict_types=1 );
 namespace MediaWiki\Extension\WikiSEO;
 
 use ConfigException;
+use ExtensionRegistry;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
@@ -397,7 +398,8 @@ class WikiSEO {
 					$outputPage->setPageProperty( $key, $value );
 				}
 
-				if ( $key === 'image' ) {
+				if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) &&
+					$key === 'image' ) {
 					$outputPage->setPageProperty( PageImages::PROP_NAME_FREE, $value );
 				}
 			} else {
