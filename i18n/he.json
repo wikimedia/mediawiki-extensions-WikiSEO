@@ -7,5 +7,6 @@
 		]
 	},
 	"wiki-seo-missing-page-title": "שגיאה: כותרת העמוד שניתנה לא חוקית.",
-	"wiki-seo-param-title": "כותרת הדף:"
+	"wiki-seo-param-title": "כותרת הדף:",
+	"wiki-seo-param-site_name": "שם האתר:"
 }
