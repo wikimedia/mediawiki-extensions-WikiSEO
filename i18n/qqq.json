@@ -39,5 +39,8 @@
 	"wiki-seo-param-section": "Description for parameter section. Overall section of the article, used in OpenGraph.",
 	"wiki-seo-param-author": "Description for parameter author. Author of the article.",
 	"wiki-seo-param-published_time": "Description for parameter published_time. Time the article was published.",
-	"wiki-seo-param-twitter_site": "Description for parameter twitter_site. Twitter handle of the site."
+	"wiki-seo-param-twitter_site": "Description for parameter twitter_site. Twitter handle of the site.",
+	"wiki-seo-api-imagick-missing": "Error message if Imagick is not installed",
+	"wiki-seo-api-title-empty": "Error message if the 'title' parameter is empty",
+	"wiki-seo-api-image-error": "Error message if the social media image could not be generated"
 }

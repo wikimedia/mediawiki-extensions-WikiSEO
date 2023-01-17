@@ -25,6 +25,7 @@ use Html;
 use MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\MediaWikiServices;
 use OutputPage;
 
 /**
@@ -144,10 +145,21 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 			if ( array_key_exists( $tag, $this->metadata ) ) {
 				$convertedTag = $this->conversions[$tag];
 
-				// If an og:image is set and we are using the fallback image, we skip our image
-				if ( $convertedTag === 'og:image' && $ogImageExists && $this->fallbackImageActive ) {
-					unset( $this->tags['image_width'], $this->tags['image_height'] );
-					continue;
+				// If an og:image is set, and we are using the fallback image, we skip our image
+				if ( $convertedTag === 'og:image' ) {
+					if ( $this->getConfigValue( 'WikiSeoEnableSocialImages' ) ) {
+						$this->metadata['image_width'] = $this->getConfigValue( 'WikiSeoSocialImageWidth' );
+						$this->metadata['image_height'] = $this->getConfigValue( 'WikiSeoSocialImageHeight' );
+						$this->metadata['image'] = MediaWikiServices::getInstance()->getUrlUtils()->expand(
+							sprintf(
+								'/rest.php/wikiseo/v1/socialmediaimage%s',
+								$this->outputPage->getTitle()->getLinkURL()
+							)
+						);
+					} elseif ( $ogImageExists && $this->fallbackImageActive ) {
+						unset( $this->tags['image_width'], $this->tags['image_height'] );
+						continue;
+					}
 				}
 
 				$this->outputPage->addHeadItem(
