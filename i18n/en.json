@@ -34,5 +34,8 @@
 	"wiki-seo-param-section": "Article section:",
 	"wiki-seo-param-author": "Article author:",
 	"wiki-seo-param-published_time": "Article published date:",
-	"wiki-seo-param-twitter_site": "Site Twitter handle:"
+	"wiki-seo-param-twitter_site": "Site Twitter handle:",
+	"wiki-seo-api-imagick-missing": "PHP Imagick is missing",
+	"wiki-seo-api-title-empty": "Title parameter is empty",
+	"wiki-seo-api-image-error": "Could not generate social media image"
 }
