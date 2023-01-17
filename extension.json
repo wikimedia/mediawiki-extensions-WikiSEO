@@ -91,6 +91,38 @@
 		"WikiSeoOverwritePageImage": {
 			"description": "Set to true to enable overwriting the image set by extension PageImages",
 			"value": false
+		},
+		"WikiSeoEnableSocialImages": {
+			"description": "Generate dedicated social media icons for pages",
+			"value": false
+		},
+		"WikiSeoSocialImageIcon": {
+			"description": "The icon/watermark to add to the social media image",
+			"value": null
+		},
+		"WikiSeoSocialImageWidth": {
+			"description": "Width of the social media image",
+			"value": 1200
+		},
+		"WikiSeoSocialImageHeight": {
+			"description": "Height of the social media image",
+			"value": 620
+		},
+		"WikiSeoSocialImageTextColor": {
+			"description": "Color of the text on the social image",
+			"value": "#ffffff"
+		},
+		"WikiSeoSocialImageShowAuthor": {
+			"description": "Show the author of the current page revision",
+			"value": true
+		},
+		"WikiSeoSocialImageShowLogo": {
+			"description": "Show the Wiki logo in the top right corner",
+			"value": true
+		},
+		"WikiSeoSocialImageBackgroundColor": {
+			"description": "Default background color if no page image is found",
+			"value": "#14181f"
 		}
 	},
 	"ConfigRegistry": {
@@ -140,5 +172,12 @@
 		"InfoAction": "InfoActionHook",
 		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks::onScribuntoExternalLibraries"
 	},
+
+	"RestRoutes": [
+		{
+			"path": "/wikiseo/v1/socialmediaimage/{title}",
+			"class": "MediaWiki\\Extension\\WikiSEO\\Api\\RestSocialMediaImage"
+		}
+	],
 	"manifest_version": 2
 }

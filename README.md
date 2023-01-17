@@ -331,6 +331,30 @@ Usage: $wgWikiSeoTryCleanAutoDescription = true;
 Set to true to enable overwriting the iamge set by extension PageImages.    
 Usage: $wgWikiSeoOverwritePageImage = true;
 
+### $wgWikiSeoEnableSocialImages
+Generate dedicated social media icons for pages
+
+### $wgWikiSeoSocialImageIcon
+The icon/watermark to add to the social media image. Use a local file name
+
+### $wgWikiSeoSocialImageWidth
+Width of the social media image
+
+### $wgWikiSeoSocialImageHeight
+Height of the social media image
+
+### $wgWikiSeoSocialImageTextColor
+Color of the text on the social image
+
+### $wgWikiSeoSocialImageShowAuthor
+Show the author of the current page revision
+
+### $wgWikiSeoSocialImageShowLogo
+Show the Wiki logo in the top right corner
+
+### $wgWikiSeoSocialImageBackgroundColor
+Default background color if no page image is found
+
 ## Migrating to v2
 ### Removed tags
 * DC.date.created
