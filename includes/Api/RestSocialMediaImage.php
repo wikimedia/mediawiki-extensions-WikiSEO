@@ -253,35 +253,6 @@ class RestSocialMediaImage extends SimpleHandler {
 	}
 
 	/**
-	 * Convert a code point to UTF8
-	 *
-	 * @param mixed $c
-	 * @return string
-	 * @throws Exception
-	 */
-	private function utf8( $c ) {
-		if ( $c <= 0x7F ) {
-			return chr( $c );
-		}
-		if ( $c <= 0x7FF ) {
-			return chr( ( $c >> 6 ) + 192 ) . chr( ( $c & 63 ) + 128 );
-		}
-		if ( $c <= 0xFFFF ) {
-			return chr( ( $c >> 12 ) + 224 ) .
-				chr( ( ( $c >> 6 ) & 63 ) + 128 ) .
-				chr( ( $c & 63 ) + 128 );
-		}
-		if ( $c <= 0x1FFFFF ) {
-			return chr( ( $c >> 18 ) + 240 ) .
-				chr( ( ( $c >> 12 ) & 63 ) + 128 ) .
-				chr( ( ( $c >> 6 ) & 63 ) + 128 ) .
-				chr( ( $c & 63 ) + 128 );
-		} else {
-			throw new Exception( 'Could not represent in UTF-8: ' . $c );
-		}
-	}
-
-	/**
 	 * Write the text to the image
 	 *
 	 * @param Imagick $imagick
@@ -295,26 +266,36 @@ class RestSocialMediaImage extends SimpleHandler {
 		$width = $this->config->get( 'WikiSeoSocialImageWidth' );
 		$height = $this->config->get( 'WikiSeoSocialImageHeight' );
 
-		$titleSize = 60;
-		$subtitleSize = (int)( $titleSize * 0.6 );
-		$namespaceSize = 30;
-		$leftMargin = 88;
+		$titleSize = 56;
+		$subtitleSize = 32;
+		$namespaceSize = 32;
+		$leftMargin = 62;
+		$bottomMargin = 62;
+		$ySpacing = 16;
 
 		$materialIcons = new ImagickDraw();
 		$materialIcons->setFillColor( $textColor );
 		$materialIcons->setFont( 'extensions/WikiSEO/assets/fonts/MaterialIcons/MaterialIconsOutlined-Regular.otf' );
-		$materialIcons->setFontSize( 30 );
+		$materialIcons->setFontSize( 32 );
+		$materialIcons->setFillColor( new ImagickPixel( '#dddddd' ) );
 
 		$roboto = new ImagickDraw();
 		$roboto->setFillColor( $textColor );
+		$roboto->setFillColor( new ImagickPixel( '#dddddd' ) );
 
 		$rev = MediaWikiServices::getInstance()->getRevisionLookup()->getKnownCurrentRevision( $title );
 
 		// Last Modified
 		if ( is_object( $rev ) ) {
-			$imagick->annotateImage( $materialIcons, $leftMargin, $height - 56, 0, $this->utf8( 0xe923 ) );
+			$imagick->annotateImage(
+				$materialIcons,
+				$leftMargin,
+				$height - ( $bottomMargin - 6 ),
+				0,
+				$this->utf8( 0xe923 )
+			);
 
-			$leftMargin += $imagick->queryFontMetrics( $materialIcons, $this->utf8( 0xe923 ) )['textWidth'] + 10;
+			$leftMargin += $imagick->queryFontMetrics( $materialIcons, $this->utf8( 0xe923 ) )['textWidth'] + 8;
 
 			$roboto->setFont( 'extensions/WikiSEO/assets/fonts/Roboto/Roboto-Medium.ttf' );
 			$roboto->setFontSize( $subtitleSize );
@@ -324,7 +305,7 @@ class RestSocialMediaImage extends SimpleHandler {
 			$imagick->annotateImage(
 				$roboto,
 				$leftMargin,
-				$height - 60,
+				$height - $bottomMargin,
 				0,
 				$timestamp
 			);
@@ -334,10 +315,16 @@ class RestSocialMediaImage extends SimpleHandler {
 		$contributors = $this->getContributors( $title );
 
 		if ( !empty( $contributors ) ) {
-			$leftMargin += $imagick->queryFontMetrics( $roboto, $timestamp ?? '' )['textWidth'] + 36;
-			$imagick->annotateImage( $materialIcons, $leftMargin, $height - 56, 0, $this->utf8( 0xe7fd ) );
+			$leftMargin += $imagick->queryFontMetrics( $roboto, $timestamp ?? '' )['textWidth'] + 40;
+			$imagick->annotateImage(
+				$materialIcons,
+				$leftMargin,
+				$height - ( $bottomMargin - 6 ),
+				0,
+				$this->utf8( 0xe7fd )
+			);
 
-			$leftMargin += $imagick->queryFontMetrics( $materialIcons, $this->utf8( 0xe7fd ) )['textWidth'] + 10;
+			$leftMargin += $imagick->queryFontMetrics( $materialIcons, $this->utf8( 0xe7fd ) )['textWidth'] + 8;
 
 			$contribsShow = array_splice( $contributors, 0, 2 );
 
@@ -352,19 +339,21 @@ class RestSocialMediaImage extends SimpleHandler {
 				$text .= ' +' . count( $contributors );
 			}
 
-			$roboto->setFontSize( 36 );
+			$roboto->setFontSize( $subtitleSize );
 			$imagick->annotateImage(
 				$roboto,
 				$leftMargin,
-				$height - 60,
+				$height - $bottomMargin,
 				0,
 				$text
 			);
 		}
 
 		// Page Title
-		$roboto->setFont( 'extensions/WikiSEO/assets/fonts/Roboto/Roboto-Bold.ttf' );
+		$leftMargin = 62;
+		$roboto->setFont( 'extensions/WikiSEO/assets/fonts/Roboto/Roboto-Medium.ttf' );
 		$roboto->setFontSize( $titleSize );
+		$roboto->setFillColor( $textColor );
 
 		[ $lines, $lineHeight ] = $this->wordWrapAnnotation(
 			$imagick,
@@ -376,22 +365,21 @@ class RestSocialMediaImage extends SimpleHandler {
 		$lines = array_reverse( $lines );
 
 		foreach ( $lines as $i => $iValue ) {
-			$imagick->annotateImage( $roboto, 80, $height - 130 - $i * $lineHeight, 0, $iValue );
+			$imagick->annotateImage(
+				$roboto,
+				$leftMargin, $height - $bottomMargin - $subtitleSize - $ySpacing - ( $i * $lineHeight ), 0, $iValue );
 		}
-
-		$size = $imagick->queryFontMetrics( $roboto, $title->getText() );
 
 		// Namespace
 		$roboto->setFont( 'extensions/WikiSEO/assets/fonts/Roboto/Roboto-Light.ttf' );
 		$roboto->setFontSize( $namespaceSize );
-		$yOffset = ( $lineHeight * ( count( $lines ) + 1 ) );
-		if ( $yOffset === 0 ) {
-			$yOffset = 130;
-		}
+
+		$yOffset = ( ( count( $lines ) - 1 ) * $titleSize ) + $ySpacing;
+
 		$imagick->annotateImage(
 			$roboto,
-			80,
-			$height - $size['textHeight'] - $yOffset,
+			$leftMargin,
+			$height - $bottomMargin - $subtitleSize - $titleSize - $ySpacing - $yOffset + 4,
 			0,
 			$title->getNsText()
 		);
@@ -465,7 +453,7 @@ class RestSocialMediaImage extends SimpleHandler {
 		}
 
 		$circle = new Imagick();
-		$iconSize = 82;
+		$iconSize = 80;
 		$circle->newImage( $iconSize, $iconSize, 'none' );
 		$circle->setImageFormat( 'png' );
 		$circle->setImageMatte( true );
@@ -487,7 +475,7 @@ class RestSocialMediaImage extends SimpleHandler {
 		$iconIm->compositeimage( $circle, Imagick::COMPOSITE_DSTIN, -1, -1 );
 
 		$x = $this->config->get( 'WikiSeoSocialImageWidth' ) - $iconIm->getImageWidth() - 80;
-		$y = $this->config->get( 'WikiSeoSocialImageHeight' ) - $iconIm->getImageHeight() - 50;
+		$y = $this->config->get( 'WikiSeoSocialImageHeight' ) - $iconIm->getImageHeight() - 48;
 
 		$imagick->compositeImage( $iconIm, Imagick::COMPOSITE_OVER, $x, $y );
 	}
@@ -532,5 +520,34 @@ class RestSocialMediaImage extends SimpleHandler {
 			return $contributor['name'];
 		}, array_filter( $contributors, static function ( $contributor ) { return is_array( $contributor );
 		} ) );
+	}
+
+	/**
+	 * Convert a code point to UTF8
+	 *
+	 * @param mixed $c
+	 * @return string
+	 * @throws Exception
+	 */
+	private function utf8( $c ) {
+		if ( $c <= 0x7F ) {
+			return chr( $c );
+		}
+		if ( $c <= 0x7FF ) {
+			return chr( ( $c >> 6 ) + 192 ) . chr( ( $c & 63 ) + 128 );
+		}
+		if ( $c <= 0xFFFF ) {
+			return chr( ( $c >> 12 ) + 224 ) .
+				chr( ( ( $c >> 6 ) & 63 ) + 128 ) .
+				chr( ( $c & 63 ) + 128 );
+		}
+		if ( $c <= 0x1FFFFF ) {
+			return chr( ( $c >> 18 ) + 240 ) .
+				chr( ( ( $c >> 12 ) & 63 ) + 128 ) .
+				chr( ( ( $c >> 6 ) & 63 ) + 128 ) .
+				chr( ( $c & 63 ) + 128 );
+		} else {
+			throw new Exception( 'Could not represent in UTF-8: ' . $c );
+		}
 	}
 }
