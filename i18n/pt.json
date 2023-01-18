@@ -36,5 +36,8 @@
 	"wiki-seo-param-section": "Secção do artigo:",
 	"wiki-seo-param-author": "Autor do artigo:",
 	"wiki-seo-param-published_time": "Data de publicação do artigo:",
-	"wiki-seo-param-twitter_site": "Identificador no Twitter do ''site'':"
+	"wiki-seo-param-twitter_site": "Identificador no Twitter do ''site'':",
+	"wiki-seo-api-imagick-missing": "O PHP Imagick está em falta",
+	"wiki-seo-api-title-empty": "O parâmetro do título está vazio",
+	"wiki-seo-api-image-error": "Não foi possível gerar a imagem das redes sociais"
 }

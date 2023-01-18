@@ -36,5 +36,8 @@
 	"wiki-seo-param-section": "Section del articulo:",
 	"wiki-seo-param-author": "Autor del articulo:",
 	"wiki-seo-param-published_time": "Data de publication del articulo:",
-	"wiki-seo-param-twitter_site": "Pseudonymo Twitter del sito:"
+	"wiki-seo-param-twitter_site": "Pseudonymo Twitter del sito:",
+	"wiki-seo-api-imagick-missing": "PHP Imagick manca",
+	"wiki-seo-api-title-empty": "Le parametro de titulo es vacue",
+	"wiki-seo-api-image-error": "Impossibile generar imagine de medios social"
 }
