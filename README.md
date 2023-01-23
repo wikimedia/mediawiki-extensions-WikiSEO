@@ -1,8 +1,6 @@
 # MediaWiki WikiSEO extension
 
-**Version 2.0 is not a drop-in replacement for v1.2.2 (the last version before this fork).**  
-
-**Version 2.6.2 and onward requires MediaWiki 1.35.0**  
+**Starting from 2023-01-23, WikiSEO requires MediaWiki 1.39.0**
 
 The WikiSEO extension allows you to replace, append or prepend the html title tag content, and allows you to add common SEO meta keywords and a meta description.  
 
@@ -16,6 +14,42 @@ wfLoadExtension( 'WikiSEO' );
 ```
 * Configure as required.
 * Done – Navigate to Special:Version on your wiki to verify that the extension is successfully installed.
+
+## Configuration
+The following variables are in use by this extension.
+
+| Variable                             | Description                                                                                                                                                                                                                                                                | Usage                                                          |
+|--------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
+| Site / App Keys                      |                                                                                                                                                                                                                                                                            |                                                                |
+| $wgGoogleSiteVerificationKey         | Setting this variable will add a `<meta name="google-site-verification" content="CODE">` tag to every page.                                                                                                                                                                | $wgGoogleSiteVerificationKey = 'CODE';                         |
+| $wgBingSiteVerificationKey           | Setting this variable will add a `<meta name="msvalidate.01" content="CODE">` tag to every page.                                                                                                                                                                           | $wgBingSiteVerificationKey= 'CODE';                            |
+| $wgFacebookAppID                     | Setting this variable will add a `<meta property="fb:app_id" content="ID">` tag to every page.                                                                                                                                                                             | $wgFacebookAppID= 'App_ID';                                    |
+| $wgFacebookAdmins                    | Setting this variable will add a `<meta property="fb:admins" content="ID1,ID2,...">` tag to every page.                                                                                                                                                                    | $wgFacebookAdmins= 'ID1,ID2,...';                              |
+| $wgYandexSiteVerificationKey         | Setting this variable will add a `<meta name="yandex-verification" content="CODE">` tag to every page.                                                                                                                                                                     | $wgYandexSiteVerificationKey= 'CODE';                          |
+| $wgAlexaSiteVerificationKey          | Setting this variable will add a `<meta name="alexaVerifyID" content="CODE">` tag to every page.                                                                                                                                                                           | $wgAlexaSiteVerificationKey= 'CODE';                           |
+| $wgPinterestSiteVerificationKey      | Setting this variable will add a `<meta name="p:domain_verify" content="CODE">` tag to every page.                                                                                                                                                                         | $wgPinterestSiteVerificationKey= 'CODE';                       |
+| $wgNortonSiteVerificationKey         | Setting this variable will add a `<meta name="norton-safeweb-site-verification" content="CODE">` tag to every page.                                                                                                                                                        | $wgNortonSiteVerificationKey= 'CODE';                          |
+| $wgNaverSiteVerificationKey          | Setting this variable will add a `<meta name="naver-site-verification" content="CODE">` tag to every page.                                                                                                                                                                 | $wgNaverSiteVerificationKey = 'CODE';                          |
+| General Options                      |                                                                                                                                                                                                                                                                            |                                                                |
+| $wgMetadataGenerators                | Array containing the metadata generator classes to load. Custom generators can be added by appending the class name without the namespace to this array.                                                                                                                   | $wgMetadataGenerators = ["OpenGraph", "Twitter", "SchemaOrg"]  |
+| $wgTwitterSiteHandle                 | Only used when Twitter generator is loaded. Setting this variable will add a <meta property="twitter:site" content="@SITE_HANDLE"> tag to every page.                                                                                                                      | $wgTwitterSiteHandle = '@SITE_HANDLE';                         |
+| $wgWikiSeoDefaultImage               | Set a default image to use if no image is set on the site. If this variable is not set the sites logo will be used.                                                                                                                                                        | $wgWikiSeoDefaultImage = 'File:Localfile.jpg';                 |
+| $wgTwitterCardType                   | Defaults to summary_large_image for the twitter card type.                                                                                                                                                                                                                 | $wgTwitterCardType = 'summary';                                |
+| $wgWikiSeoDefaultLanguage            | A default language code with area to generate a <link rel="alternate" href="current Url" hreflang="xx-xx"> for.                                                                                                                                                            | $wgWikiSeoDefaultLanguage = 'de-de';                           |
+| $wgWikiSeoDisableLogoFallbackImage   | Disables setting $wgLogo as the fallback image if no image was set.                                                                                                                                                                                                        |                                                                |
+| $wgWikiSeoNoindexPageTitles          | An array of page titles where a 'noindex' robot tag should be added.                                                                                                                                                                                                       | $wgWikiSeoNoindexPageTitles = [ 'Custom_Title', 'Main_Page' ]; |
+| $wgWikiSeoEnableAutoDescription      | Set to true to try to request a description from textextracts, if no description was given, or the description key is set to 'textextracts' or 'auto'. This requires Extension:TextExtracts to be loaded. The description is generated when saving the page after an edit. | $wgWikiSeoEnableAutoDescription = true;                        |
+| $wgWikiSeoTryCleanAutoDescription    | Set to true, if WikiSEO should try to remove dangling sentences when using descriptions from textextracts. This will remove all characters after the last found dot.                                                                                                       | $wgWikiSeoTryCleanAutoDescription = true;                      |
+| $wgWikiSeoOverwritePageImage         | Set to true to enable overwriting the iamge set by extension PageImages.                                                                                                                                                                                                   | $wgWikiSeoOverwritePageImage = true;                           |
+| Social Media Images                  |                                                                                                                                                                                                                                                                            |                                                                |
+| $wgWikiSeoEnableSocialImages         | Generate dedicated social media icons for pages                                                                                                                                                                                                                            | $wgWikiSeoEnableSocialImages = true;                           |
+| $wgWikiSeoSocialImageIcon            | The icon/watermark to add to the social media image. Use a local file name                                                                                                                                                                                                 | $wgWikiSeoSocialImageIcon = LocalFile.jpg;                     |
+| $wgWikiSeoSocialImageWidth           | Width of the social media image                                                                                                                                                                                                                                            | $wgWikiSeoSocialImageWidth = 1200;                             |
+| $wgWikiSeoSocialImageHeight          | Height of the social media image                                                                                                                                                                                                                                           | $wgWikiSeoSocialImageHeight = 620;                             |
+| $wgWikiSeoSocialImageTextColor       | Color of the text on the social image                                                                                                                                                                                                                                      | $wgWikiSeoSocialImageTextColor = #fff;                         |
+| $wgWikiSeoSocialImageShowAuthor      | Show the author of the current page revision                                                                                                                                                                                                                               | $wgWikiSeoSocialImageShowAuthor = true;                        |
+| $wgWikiSeoSocialImageShowLogo        | Show the Wiki logo in the top right corner                                                                                                                                                                                                                                 | $wgWikiSeoSocialImageShowLogo = true;                          |
+| $wgWikiSeoSocialImageBackgroundColor | Default background color if no page image is found                                                                                                                                                                                                                         |                                                                |
 
 ## Usage
 The extension can be used via the ``{{#seo}}`` parser function or in Lua modules by using `mw.ext.seo`. It accepts the following named parameters in any order.
@@ -244,116 +278,7 @@ WikiSEO exposes Hooks that allow to customize the metadata that gets added to th
   * An array of key-value pairs validated through `Validator::validateParams`
   * Run right before setting the page props
   * Only run when the lua module is called
-
-## Configuration
-The following variables are in use by this extension.
-
-### $wgGoogleSiteVerificationKey
-Setting this variable will add a ``<meta name="google-site-verification" content="CODE">`` tag to every page.  
-Usage: $wgGoogleSiteVerificationKey = 'CODE';.
-
-### $wgBingSiteVerificationKey
-Setting this variable will add a ``<meta name="msvalidate.01" content="CODE">`` tag to every page.  
-Usage: $wgBingSiteVerificationKey= 'CODE';.
-
-### $wgFacebookAppID
-Setting this variable will add a ``<meta property="fb:app_id" content="ID">`` tag to every page.  
-Usage: $wgFacebookAppID= 'App_ID';.
-
-### $wgFacebookAdmins
-Setting this variable will add a ``<meta property="fb:admins" content="ID1,ID2,...">`` tag to every page.  
-Usage: $wgFacebookAdmins= 'ID1,ID2,...';.
-
-### $wgYandexSiteVerificationKey
-Setting this variable will add a ``<meta name="yandex-verification" content="CODE">`` tag to every page.  
-Usage: $wgYandexSiteVerificationKey= 'CODE';.
-
-### $wgAlexaSiteVerificationKey
-Setting this variable will add a ``<meta name="alexaVerifyID" content="CODE">`` tag to every page.  
-Usage: $wgAlexaSiteVerificationKey= 'CODE';.
-
-### $wgPinterestSiteVerificationKey
-Setting this variable will add a ``<meta name="p:domain_verify" content="CODE">`` tag to every page.  
-Usage: $wgPinterestSiteVerificationKey= 'CODE';.
-
-### $wgNortonSiteVerificationKey
-Setting this variable will add a ``<meta name="norton-safeweb-site-verification" content="CODE">`` tag to every page.  
-Usage: $wgNortonSiteVerificationKey= 'CODE';.
-
-### $wgNaverSiteVerificationKey
-Setting this variable will add a ``<meta name="naver-site-verification" content="CODE">`` tag to every page.  
-Usage: $wgNaverSiteVerificationKey = 'CODE';.
-
-### $wgTwitterSiteHandle
-*Only used when Twitter generator is loaded.*  
-Setting this variable will add a ``<meta property="twitter:site" content="@SITE_HANDLE">`` tag to every page.  
-Usage: $wgTwitterSiteHandle = '@SITE_HANDLE';.
-
-### $wgMetadataGenerators
-Array containing the metadata generator classes to load.  
-Custom generators can be added by appending the class name without the namespace to this array.
-WikiSEO prepends the following namespace to the classname: `MediaWiki\Extension\WikiSEO\Generator\Plugins\`.  
-Default: ["OpenGraph", "Twitter", "SchemaOrg"].  
-Available Generators: OpenGraph, Twitter, SchemaOrg, Citation, DublinCore
-
-### $wgWikiSeoDefaultImage
-Set a default image to use if no image is set on the site. If this variable is not set the sites logo will be used.  
-Usage: $wgWikiSeoDefaultImage = 'File:Localfile.jpg';.
-
-### $wgTwitterCardType
-Defaults to `summary_large_image` for the twitter card type.  
-Usage: $wgTwitterCardType = 'summary';
-
-### $wgWikiSeoDefaultLanguage
-A default language code with area to generate a `<link rel="alternate" href="current Url" hreflang="xx-xx">` for.  
-Usage: $wgWikiSeoDefaultLanguage = 'de-de';  
-
-### $wgWikiSeoDisableLogoFallbackImage
-Disables setting `$wgLogo` as the fallback image if no image was set.
-
-### $wgWikiSeoNoindexPageTitles
-An array of page titles where a 'noindex' robot tag should be added.  
-Usage: $wgWikiSeoNoindexPageTitles = [ 'Custom_Title', 'Main_Page' ];
-
-### $wgWikiSeoEnableAutoDescription
-Set to true to try to request a description from textextracts, if no description was given, or the description key is set to 'textextracts' or 'auto'.  
-This requires Extension:TextExtracts to be loaded.  
-The description is generated when saving the page after an edit.
-
-Usage: $wgWikiSeoEnableAutoDescription = true;
-
-### $wgWikiSeoTryCleanAutoDescription
-Set to true, if WikiSEO should try to remove dangling sentences when using descriptions from textextracts.  
-This will remove all characters after the last found dot.  
-Usage: $wgWikiSeoTryCleanAutoDescription = true;
-
-### $wgWikiSeoOverwritePageImage
-Set to true to enable overwriting the iamge set by extension PageImages.    
-Usage: $wgWikiSeoOverwritePageImage = true;
-
-### $wgWikiSeoEnableSocialImages
-Generate dedicated social media icons for pages
-
-### $wgWikiSeoSocialImageIcon
-The icon/watermark to add to the social media image. Use a local file name
-
-### $wgWikiSeoSocialImageWidth
-Width of the social media image
-
-### $wgWikiSeoSocialImageHeight
-Height of the social media image
-
-### $wgWikiSeoSocialImageTextColor
-Color of the text on the social image
-
-### $wgWikiSeoSocialImageShowAuthor
-Show the author of the current page revision
-
-### $wgWikiSeoSocialImageShowLogo
-Show the Wiki logo in the top right corner
-
-### $wgWikiSeoSocialImageBackgroundColor
-Default background color if no page image is found
+                                                                                                                                                                                                                   | $wgWikiSeoSocialImageBackgroundColor = #14181f;                |
 
 ## Migrating to v2
 ### Removed tags

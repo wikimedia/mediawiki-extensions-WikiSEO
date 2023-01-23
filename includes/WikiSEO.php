@@ -28,7 +28,6 @@ use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PageImages\PageImages;
-use PageProps;
 use Parser;
 use ParserOutput;
 use PPFrame;
@@ -132,22 +131,12 @@ class WikiSEO {
 			if ( isset( $metadataArray['manualDescription'] ) &&
 				!in_array( $metadataArray['manualDescription'], [ 'auto', 'textextracts' ], true ) ) {
 
-				// MW 1.38+
-				if ( method_exists( $out, 'setPageProperty' ) ) {
-					$out->setPageProperty( 'manualDescription', true );
-				} else {
-					$out->setProperty( 'manualDescription', true );
-				}
+				$out->setPageProperty( 'manualDescription', true );
 
 				$metadataArray['description'] = $metadataArray['manualDescription'];
 				unset( $metadataArray['manualDescription'] );
 			} else {
-				// MW 1.38+
-				if ( method_exists( $out, 'unsetPageProperty' ) ) {
-					$out->unsetPageProperty( 'manualDescription' );
-				} else {
-					$out->unsetProperty( 'manualDescription' );
-				}
+				$out->unsetPageProperty( 'manualDescription' );
 			}
 		}
 
@@ -226,19 +215,10 @@ class WikiSEO {
 	 * @see Validator::getValidParams()
 	 */
 	private function loadPagePropsFromDb( Title $title ): ?array {
-		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
-			// MW 1.36+
-			$properties = MediaWikiServices::getInstance()->getPageProps()->getProperties(
-				$title,
-				Validator::getValidParams()
-			);
-		} else {
-			// @phan-suppress-next-line PhanUndeclaredStaticMethod
-			$properties = PageProps::getInstance()->getProperties(
-				$title,
-				Validator::getValidParams()
-			);
-		}
+		$properties = MediaWikiServices::getInstance()->getPageProps()->getProperties(
+			$title,
+			Validator::getValidParams()
+		);
 
 		$properties = array_shift( $properties );
 
@@ -391,21 +371,13 @@ class WikiSEO {
 		);
 
 		foreach ( $this->metadata as $key => $value ) {
-			// MW 1.38+
-			if ( method_exists( $outputPage, 'setPageProperty' ) &&
-				method_exists( $outputPage, 'getPageProperty' ) ) {
-				if ( $outputPage->getPageProperty( $key ) === null ) {
-					$outputPage->setPageProperty( $key, $value );
-				}
+			if ( $outputPage->getPageProperty( $key ) === null ) {
+				$outputPage->setPageProperty( $key, $value );
+			}
 
-				if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) &&
-					$key === 'image' ) {
-					$outputPage->setPageProperty( PageImages::PROP_NAME_FREE, $value );
-				}
-			} else {
-				if ( $outputPage->getProperty( $key ) === false ) {
-					$outputPage->setProperty( $key, $value );
-				}
+			if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) &&
+				$key === 'image' ) {
+				$outputPage->setPageProperty( PageImages::PROP_NAME_FREE, $value );
 			}
 		}
 	}

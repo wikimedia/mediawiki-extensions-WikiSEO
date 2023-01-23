@@ -88,8 +88,8 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 
 		$autoEnabled = $this->mainConfig->get( 'WikiSeoEnableAutoDescription' );
 
-		$currentDescription = $this->getPageProperty( $output, 'description' );
-		$manualDescription = $this->getPageProperty( $output, 'manualDescription' );
+		$currentDescription = $output->getPageProperty( 'description' );
+		$manualDescription = $output->getPageProperty( 'manualDescription' );
 
 		if ( !$autoEnabled || $manualDescription === true ) {
 			return;
@@ -119,22 +119,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 
 		$updates[] = new OverwritePageImageProp(
 			$title,
-			$this->getPageProperty( $output, 'image' )
+			$output->getPageProperty( 'image' )
 		);
-	}
-
-	/**
-	 * TODO: Remove when min version is set to 1.39
-	 *
-	 * @param ParserOutput $output
-	 * @param string $propName
-	 * @return mixed
-	 */
-	private function getPageProperty( ParserOutput $output, string $propName ) {
-		if ( method_exists( $output, 'getPageProperty' ) ) {
-			return $output->getPageProperty( $propName );
-		}
-
-		return $output->getProperty( $propName );
 	}
 }
