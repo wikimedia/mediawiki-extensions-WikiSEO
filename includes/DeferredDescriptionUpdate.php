@@ -26,7 +26,6 @@ use Exception;
 use ExtensionDependencyError;
 use MediaWiki\MediaWikiServices;
 use MWException;
-use PageProps;
 use Title;
 
 /**
@@ -89,14 +88,8 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			return;
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
-			// MW 1.36+
-			$propertyDescriptions = MediaWikiServices::getInstance()->getPageProps()
-				->getProperties( $this->title, 'description' );
-		} else {
-			// @phan-suppress-next-line PhanUndeclaredStaticMethod
-			$propertyDescriptions = PageProps::getInstance()->getProperties( $this->title, 'description' );
-		}
+		$propertyDescriptions = MediaWikiServices::getInstance()->getPageProps()
+			->getProperties( $this->title, 'description' );
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( $dbl->getWriterIndex() );

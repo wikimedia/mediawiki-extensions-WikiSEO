@@ -75,12 +75,7 @@ class SeoLua extends Scribunto_LuaLibraryBase {
 
 		$out = $this->getParser()->getOutput();
 		foreach ( $validated as $metaKey => $value ) {
-			// MW 1.38+
-			if ( method_exists( $out, 'setPageProperty' ) ) {
-				$out->setPageProperty( $metaKey, $value );
-			} else {
-				$out->setProperty( $metaKey, $value );
-			}
+			$out->setPageProperty( $metaKey, $value );
 		}
 	}
 }

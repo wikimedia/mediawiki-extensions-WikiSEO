@@ -36,28 +36,12 @@ class GenerateDescription extends Maintenance {
 			return (int)( $ns );
 		}, explode( ',', $this->getArg( 0, '' ) ) );
 
-		if ( method_exists( MediaWikiServices::class, 'getPageProps' ) ) {
-			// MW 1.38+
-			$pageProps = MediaWikiServices::getInstance()->getPageProps();
-		} else {
-			// @phan-suppress-next-line PhanUndeclaredStaticMethod
-			$pageProps = PageProps::getInstance();
-		}
-		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-			// MW 1.36+
-			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
-		} else {
-			$wikiPageFactory = null;
-		}
+		$pageProps = MediaWikiServices::getInstance()->getPageProps();
+		$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
 
 		foreach ( $it as $batch ) {
 			foreach ( $batch as $page ) {
-				if ( $wikiPageFactory !== null ) {
-					// MW 1.36+
-					$wikiPage = $wikiPageFactory->newFromID( $page->page_id );
-				} else {
-					$wikiPage = WikiPage::newFromID( $page->page_id );
-				}
+				$wikiPage = $wikiPageFactory->newFromID( $page->page_id );
 
 				if ( $wikiPage === null ) {
 					$this->error( sprintf( "Page with id %s is null", $page->page_id ) );
