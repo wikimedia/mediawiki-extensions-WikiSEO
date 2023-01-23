@@ -30,9 +30,8 @@ class RestSocialMediaImage extends SimpleHandler {
 	private Config $config;
 
 	/**
-	 * In this example we're returning one ore more properties
-	 * of wgExampleFooStuff. In a more realistic example, this
-	 * method would probably
+	 * Generates the social media image based on the provided title and the title's page props
+	 *
 	 * @return Response
 	 * @throws LocalizedHttpException
 	 */
@@ -51,7 +50,62 @@ class RestSocialMediaImage extends SimpleHandler {
 
 		$this->config = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'WikiSEO' );
 
+		if ( $this->config->get( 'WikiSeoEnableSocialImages' ) === false ) {
+			$this->makeError( 'wiki-seo-api-disabled', 503 );
+		}
+
+		try {
+			$out = $this->createImage( $this->createBackground( $title ), $title );
+		} catch ( Exception $e ) {
+			$this->makeError( 'wiki-seo-api-image-error', 500 );
+		}
+
+		$response = $this->getResponseFactory()->create();
+		$response->setHeader( 'Content-Type', 'image/jpeg' );
+
+		try {
+			$stream = new StringStream( $out->getImageBlob() );
+			$response->setBody( $stream );
+		} catch ( Exception $e ) {
+			$this->makeError( 'wiki-seo-api-image-error', 500 );
+		}
+
+		return $response;
+	}
+
+	/** @inheritDoc */
+	public function getParamSettings(): array {
+		return [
+			'title' => [
+				self::PARAM_SOURCE => 'path',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => true,
+			],
+			'background' => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+			],
+			'backgroundColor' => [
+				self::PARAM_SOURCE => 'query',
+				ParamValidator::PARAM_TYPE => 'string',
+				ParamValidator::PARAM_REQUIRED => false,
+			],
+		];
+	}
+
+	/**
+	 * Creates the image background
+	 * Either a local file, or a flat color provided by $wgWikiSeoSocialImageBackgroundColor
+	 *
+	 * @param Title $title
+	 * @return Imagick|ImagickPixel|null
+	 * @throws ImagickPixelException
+	 */
+	private function createBackground( Title $title ) {
+		$params = $this->getValidatedParams();
 		$background = null;
+
 		if ( isset( $params['background'] ) ) {
 			$props = [
 				'background' => $params['background'],
@@ -78,34 +132,20 @@ class RestSocialMediaImage extends SimpleHandler {
 			}
 		}
 
-		try {
-			if ( $background === null ) {
-				$background = new ImagickPixel( $this->config->get( 'WikiSeoSocialImageBackgroundColor' ) );
+		if ( $background === null ) {
+			$background = new ImagickPixel( $this->config->get( 'WikiSeoSocialImageBackgroundColor' ) );
 
-				if ( isset( $params['backgroundColor'] ) ) {
-					$background = new ImagickPixel( $params['backgroundColor'] );
-				}
+			if ( isset( $params['backgroundColor'] ) ) {
+				$background = new ImagickPixel( $params['backgroundColor'] );
 			}
-
-			$out = $this->createImage( $background, $title );
-		} catch ( Exception $e ) {
-			$this->makeError( 'wiki-seo-api-image-error', 500 );
 		}
 
-		$response = $this->getResponseFactory()->create();
-		$response->setHeader( 'Content-Type', 'image/jpeg' );
-
-		try {
-			$stream = new StringStream( $out->getImageBlob() );
-			$response->setBody( $stream );
-		} catch ( Exception $e ) {
-			$this->makeError( 'wiki-seo-api-image-error', 500 );
-		}
-
-		return $response;
+		return $background;
 	}
 
 	/**
+	 * Combines all parts into one image
+	 *
 	 * @param Imagick|ImagickPixel $background
 	 * @param Title $title
 	 * @return Imagick
@@ -135,37 +175,6 @@ class RestSocialMediaImage extends SimpleHandler {
 		return $imagick;
 	}
 
-	/** @inheritDoc */
-	public function getParamSettings(): array {
-		return [
-			'title' => [
-				self::PARAM_SOURCE => 'path',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => true,
-			],
-			'background' => [
-				self::PARAM_SOURCE => 'query',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-			],
-			'backgroundColor' => [
-				self::PARAM_SOURCE => 'query',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-			],
-			'author' => [
-				self::PARAM_SOURCE => 'query',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-			],
-			'icon' => [
-				self::PARAM_SOURCE => 'query',
-				ParamValidator::PARAM_TYPE => 'string',
-				ParamValidator::PARAM_REQUIRED => false,
-			],
-		];
-	}
-
 	/**
 	 * @param string $message
 	 * @param int $status
@@ -181,6 +190,8 @@ class RestSocialMediaImage extends SimpleHandler {
 	}
 
 	/**
+	 * Initialize the image object with the provided width, height, and background image/color
+	 *
 	 * @param mixed $background
 	 * @return Imagick
 	 * @throws ImagickException
@@ -202,6 +213,8 @@ class RestSocialMediaImage extends SimpleHandler {
 	}
 
 	/**
+	 * If we are working with an image, resize the background image to the dimensions of the image
+	 *
 	 * @param Imagick $imagick
 	 * @param Imagick|ImagickPixel $background
 	 * @return void
@@ -232,6 +245,8 @@ class RestSocialMediaImage extends SimpleHandler {
 	}
 
 	/**
+	 * Add a dark-to-light gradient at the bottom, ensures readability
+	 *
 	 * @param Imagick $imagick
 	 * @return void
 	 * @throws ImagickException
@@ -253,7 +268,7 @@ class RestSocialMediaImage extends SimpleHandler {
 	}
 
 	/**
-	 * Write the text to the image
+	 * Write the title, namespace, last modified date, and contributors to the image
 	 *
 	 * @param Imagick $imagick
 	 * @param ImagickPixel $textColor
@@ -523,7 +538,7 @@ class RestSocialMediaImage extends SimpleHandler {
 	}
 
 	/**
-	 * Convert a code point to UTF8
+	 * Convert a code point to UTF8 - Needed to correctly handle the material icon font
 	 *
 	 * @param mixed $c
 	 * @return string
