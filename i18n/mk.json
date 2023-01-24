@@ -36,5 +36,8 @@
 	"wiki-seo-param-section": "Поднаслов на статијата:",
 	"wiki-seo-param-author": "Автор на статијата:",
 	"wiki-seo-param-published_time": "Датум на објавување на статијата:",
-	"wiki-seo-param-twitter_site": "Твитерска ознака на мрежното место:"
+	"wiki-seo-param-twitter_site": "Твитерска ознака на мрежното место:",
+	"wiki-seo-api-imagick-missing": "Недостасува PHP Imagick",
+	"wiki-seo-api-title-empty": "Параметарот за наслов е празен",
+	"wiki-seo-api-image-error": "Не можев да создадам слика за друштвени медиуми"
 }

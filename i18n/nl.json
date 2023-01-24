@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"wiki-seo-api-imagick-missing": "PHP Imagick ontbreekt",
+	"wiki-seo-api-title-empty": "Titelparameter is leeg",
+	"wiki-seo-api-image-error": "Kon geen afbeelding voor sociale media genereren"
+}

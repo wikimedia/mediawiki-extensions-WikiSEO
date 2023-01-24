@@ -5,7 +5,8 @@
 			"Fitoschido",
 			"Rossnyev",
 			"DarkGames26",
-			"SpikeShroom"
+			"SpikeShroom",
+			"JDíaz32"
 		]
 	},
 	"wiki-seo-desc": "Permite meta-ajustes por página, como palabras clave y descripción, cambio de título, y varios tags de verificación de sitio.",
@@ -40,5 +41,8 @@
 	"wiki-seo-param-section": "Sección del artículo:",
 	"wiki-seo-param-author": "Autor del artículo:",
 	"wiki-seo-param-published_time": "Fecha de publicación del artículo:",
-	"wiki-seo-param-twitter_site": "Manejador de Twitter del sitio:"
+	"wiki-seo-param-twitter_site": "Manejador de Twitter del sitio:",
+	"wiki-seo-api-imagick-missing": "Falta PHP Imagick",
+	"wiki-seo-api-title-empty": "El parámetro de título está vacío.",
+	"wiki-seo-api-image-error": "No se pudo generar la imagen de las redes sociales"
 }
