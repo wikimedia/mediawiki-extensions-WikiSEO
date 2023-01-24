@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Justman10000",
 			"Kghbln",
 			"Octfx",
 			"Sabelöga"
@@ -39,6 +40,7 @@
 	"wiki-seo-param-author": "Artikelautor:",
 	"wiki-seo-param-published_time": "Veröffentlichungsdatum des Artikels:",
 	"wiki-seo-param-twitter_site": "Twitter-Handle der Webseite:",
+	"wiki-seo-api-disabled": "Bilderzeugung ist deaktiviert, setze $wgWikiSeoEnableSocialImages = true",
 	"wiki-seo-api-imagick-missing": "PHP Imagick fehlt",
 	"wiki-seo-api-title-empty": "Titelparameter ist leer",
 	"wiki-seo-api-image-error": "Social-Media-Bild konnte nicht generiert werden"

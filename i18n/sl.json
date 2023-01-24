@@ -37,6 +37,7 @@
 	"wiki-seo-param-author": "Avtor članka:",
 	"wiki-seo-param-published_time": "Datum objave članka:",
 	"wiki-seo-param-twitter_site": "Twitter ročica projekta:",
+	"wiki-seo-api-disabled": "Generiranje slik je onemogočeno, nastavite $wgWikiSeoEnableSocialImages = true",
 	"wiki-seo-api-imagick-missing": "PHP Imagick manjka",
 	"wiki-seo-api-title-empty": "Parameter naslova je prazen",
 	"wiki-seo-api-image-error": "Ni bilo mogoče ustvariti slike za družbeno omrežje."
