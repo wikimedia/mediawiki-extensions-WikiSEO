@@ -152,8 +152,8 @@ class OpenGraph extends AbstractBaseGenerator implements GeneratorInterface {
 						$this->metadata['image_height'] = $this->getConfigValue( 'WikiSeoSocialImageHeight' );
 						$this->metadata['image'] = MediaWikiServices::getInstance()->getUrlUtils()->expand(
 							sprintf(
-								'/rest.php/wikiseo/v1/socialmediaimage%s',
-								$this->outputPage->getTitle()->getLinkURL()
+								'/rest.php/wikiseo/v1/socialmediaimage/%s',
+								urlencode( ltrim( $this->outputPage->getTitle()->getLinkURL(), '/' ) )
 							)
 						);
 					} elseif ( $ogImageExists && $this->fallbackImageActive ) {
