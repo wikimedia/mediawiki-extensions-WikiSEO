@@ -42,7 +42,7 @@ class RestSocialMediaImage extends SimpleHandler {
 
 		$params = $this->getValidatedParams();
 
-		$title = MediaWikiServices::getInstance()->getTitleFactory()->newFromText( $params['title'] );
+		$title = MediaWikiServices::getInstance()->getTitleFactory()->newFromText( urldecode( $params['title'] ) );
 
 		if ( $title === null ) {
 			$this->makeError( 'wiki-seo-api-title-empty', 400 );
