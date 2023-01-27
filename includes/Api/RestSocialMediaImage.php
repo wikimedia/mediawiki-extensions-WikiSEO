@@ -31,6 +31,17 @@ class RestSocialMediaImage extends SimpleHandler {
 	private Config $config;
 
 	/**
+	 * @var array
+	 */
+	private $supportedMimes = [
+		'image/png',
+		'image/jpeg',
+		'image/jpg',
+		'image/gif',
+		'image/webp'
+	];
+
+	/**
 	 * Generates the social media image based on the provided title and the title's page props
 	 *
 	 * @return Response
@@ -130,7 +141,7 @@ class RestSocialMediaImage extends SimpleHandler {
 			);
 			$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()->findFile( $background );
 
-			if ( $file !== false ) {
+			if ( $file !== false && in_array( $file->getMimeType(), $this->supportedMimes, true ) ) {
 				$background = new Imagick();
 				$thumb = $file->transform(
 					[ 'width' => (int)( $this->config->get( 'WikiSeoSocialImageWidth' ) / 2 ) ],
