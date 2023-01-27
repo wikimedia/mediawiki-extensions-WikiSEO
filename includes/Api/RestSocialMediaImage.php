@@ -6,6 +6,7 @@ use ApiMain;
 use Config;
 use Exception;
 use FauxRequest;
+use File;
 use Imagick;
 use ImagickDraw;
 use ImagickDrawException;
@@ -68,6 +69,8 @@ class RestSocialMediaImage extends SimpleHandler {
 			$response->setBody( $stream );
 		} catch ( Exception $e ) {
 			$this->makeError( 'wiki-seo-api-image-error', 500 );
+		} finally {
+			$out->clear();
 		}
 
 		return $response;
@@ -114,6 +117,12 @@ class RestSocialMediaImage extends SimpleHandler {
 			$props = MediaWikiServices::getInstance()->getPageProps()->getProperties( $title, 'page_image_free' );
 		}
 
+		if ( empty( $props ) && $title->getNamespace() === NS_FILE ) {
+			$props = [
+				'background' => $title->getText(),
+			];
+		}
+
 		if ( !empty( $props ) ) {
 			$background = MediaWikiServices::getInstance()->getTitleFactory()->makeTitle(
 				NS_FILE,
@@ -123,11 +132,17 @@ class RestSocialMediaImage extends SimpleHandler {
 
 			if ( $file !== false ) {
 				$background = new Imagick();
+				$thumb = $file->transform(
+					[ 'width' => (int)( $this->config->get( 'WikiSeoSocialImageWidth' ) / 2 ) ],
+					File::RENDER_NOW
+				);
 
-				try {
-					$background->readImage( $file->getLocalRefPath() );
-				} catch ( ImagickException $e ) {
-					$background = null;
+				if ( $thumb !== false ) {
+					try {
+						$background->readImage( $thumb->getLocalCopyPath() );
+					} catch ( ImagickException $e ) {
+						$background = null;
+					}
 				}
 			}
 		}
@@ -242,6 +257,7 @@ class RestSocialMediaImage extends SimpleHandler {
 		}
 
 		$imagick->compositeImage( $background, Imagick::COMPOSITE_OVER, 0, 0 );
+		$background->clear();
 	}
 
 	/**
@@ -265,6 +281,7 @@ class RestSocialMediaImage extends SimpleHandler {
 			0,
 			$this->config->get( 'WikiSeoSocialImageHeight' ) / 2
 		);
+		$overlay->clear();
 	}
 
 	/**
@@ -398,6 +415,9 @@ class RestSocialMediaImage extends SimpleHandler {
 			0,
 			$title->getNsText()
 		);
+
+		$roboto->clear();
+		$materialIcons->clear();
 	}
 
 	/**
@@ -493,6 +513,8 @@ class RestSocialMediaImage extends SimpleHandler {
 		$y = $this->config->get( 'WikiSeoSocialImageHeight' ) - $iconIm->getImageHeight() - 48;
 
 		$imagick->compositeImage( $iconIm, Imagick::COMPOSITE_OVER, $x, $y );
+
+		$iconIm->clear();
 	}
 
 	/**
@@ -525,7 +547,7 @@ class RestSocialMediaImage extends SimpleHandler {
 			return [];
 		}
 
-		$contributors = array_shift( $data['query']['pages'] )['contributors'];
+		$contributors = array_shift( $data['query']['pages'] )['contributors'] ?? null;
 
 		if ( $contributors === null ) {
 			return [];
