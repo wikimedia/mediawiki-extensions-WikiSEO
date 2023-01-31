@@ -3,7 +3,8 @@
 		"authors": [
 			"Kghbln",
 			"Octfx",
-			"Sabelöga"
+			"Sabelöga",
+			"Justman10000"
 		]
 	},
 	"wiki-seo-desc": "Ermöglicht das Festlegen von Meta-Elementen sowie das Anpassen des Seitentitels",
@@ -39,6 +40,7 @@
 	"wiki-seo-param-author": "Artikelautor:",
 	"wiki-seo-param-published_time": "Veröffentlichungsdatum des Artikels:",
 	"wiki-seo-param-twitter_site": "Twitter-Handle der Webseite:",
+	"wiki-seo-api-disabled": "Bilderzeugung ist deaktiviert, setze $wgWikiSeoEnableSocialImages = true",
 	"wiki-seo-api-imagick-missing": "PHP Imagick fehlt",
 	"wiki-seo-api-title-empty": "Titelparameter ist leer",
 	"wiki-seo-api-image-error": "Social-Media-Bild konnte nicht generiert werden"

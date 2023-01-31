@@ -36,6 +36,7 @@
 	"wiki-seo-param-author": "Autor artykułu:",
 	"wiki-seo-param-published_time": "Data opublikowania artykułu:",
 	"wiki-seo-param-twitter_site": "Nick witryny na Twitterze:",
+	"wiki-seo-api-disabled": "Generowanie obrazów jest wyłączone, ustaw $wgWikiSeoEnableSocialImages = true",
 	"wiki-seo-api-imagick-missing": "Brak PHP Imagick",
 	"wiki-seo-api-title-empty": "Parametr tytułu jest pusty",
 	"wiki-seo-api-image-error": "Nie udało się wygenerować obrazu dla mediów społecznościowych"
