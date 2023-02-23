@@ -38,5 +38,9 @@
 	"wiki-seo-param-section": "條目段落：",
 	"wiki-seo-param-author": "條目作者：",
 	"wiki-seo-param-published_time": "條目發布日期：",
-	"wiki-seo-param-twitter_site": "網站 Twitter Handle："
+	"wiki-seo-param-twitter_site": "網站 Twitter Handle：",
+	"wiki-seo-api-disabled": "產生圖像被禁用，請設定 $wgWikiSeoEnableSocialImages = true",
+	"wiki-seo-api-imagick-missing": "缺少 PHP Imagick",
+	"wiki-seo-api-title-empty": "標題參數為空",
+	"wiki-seo-api-image-error": "無法產生社交媒體圖片"
 }
