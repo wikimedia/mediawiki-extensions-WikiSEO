@@ -34,10 +34,12 @@ class TagParser {
 	 * Parses key value pairs of format 'key=value'
 	 *
 	 * @param array $args Key value pairs to parse
+	 * @param Parser $parser
+	 * @param PPFrame $frame
 	 *
 	 * @return array
 	 */
-	public function parseArgs( array $args ): array {
+	public function parseArgs( array $args, Parser $parser, PPFrame $frame ): array {
 		$results = [];
 
 		foreach ( $args as $arg ) {
@@ -50,28 +52,32 @@ class TagParser {
 			}
 		}
 
-		return array_filter(
+		$results = array_filter(
 			$results, static function ( $value, $key ) {
 				return mb_strlen( $value ) > 0 && mb_strlen( $key ) > 0;
 			}, ARRAY_FILTER_USE_BOTH
 		);
+
+		return $this->expandWikiTextTagArray( $results, $parser, $frame );
 	}
 
 	/**
 	 * Parses <seo> tag contents
 	 *
 	 * @param string|null $text Tag content
+	 * @param Parser $parser
+	 * @param PPFrame $frame
 	 *
 	 * @return array
 	 */
-	public function parseText( ?string $text ): array {
+	public function parseText( ?string $text, Parser $parser, PPFrame $frame ): array {
 		if ( $text === null ) {
 			return [];
 		}
 
 		$lines = explode( '|', $text );
 
-		return $this->parseArgs( $lines );
+		return $this->parseArgs( $lines, $parser, $frame );
 	}
 
 	/**

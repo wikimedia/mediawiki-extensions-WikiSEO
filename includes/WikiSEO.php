@@ -420,9 +420,9 @@ class WikiSEO {
 		$seo = new WikiSEO( self::MODE_TAG );
 		$tagParser = new TagParser();
 
-		$parsedInput = $tagParser->parseText( $input );
-		$parsedInput = array_merge( $parsedInput, $args );
-		$tags = $tagParser->expandWikiTextTagArray( $parsedInput, $parser, $frame );
+		$parsedInput = $tagParser->parseText( $input, $parser, $frame );
+		$tags = array_merge( $parsedInput, $args );
+		$tags = $tagParser->expandWikiTextTagArray( $tags, $parser, $frame );
 
 		if ( isset( $tags['description'] ) ) {
 			$tags['manualDescription'] = $tags['description'];
@@ -454,7 +454,7 @@ class WikiSEO {
 		$seo = new WikiSEO( self::MODE_PARSER );
 		$tagParser = new TagParser();
 
-		$args = $tagParser->parseArgs( $expandedArgs );
+		$args = $tagParser->parseArgs( $expandedArgs, $parser, $frame );
 		if ( isset( $args['description'] ) ) {
 			$args['manualDescription'] = $args['description'];
 			unset( $args['description'] );
