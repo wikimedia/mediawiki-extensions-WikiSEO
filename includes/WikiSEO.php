@@ -88,7 +88,6 @@ class WikiSEO {
 	 */
 	public function __construct( $mode = self::MODE_PARSER ) {
 		$this->setMetadataGenerators();
-		$this->instantiateMetadataPlugins();
 
 		$this->mode = $mode;
 	}
@@ -204,6 +203,7 @@ class WikiSEO {
 		}
 
 		$this->generators = $generators;
+		$this->instantiateMetadataPlugins();
 		$this->mergeValidParameterNames();
 	}
 
