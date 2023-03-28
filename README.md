@@ -109,17 +109,27 @@ The extension can be used via the ``{{#seo}}`` parser function or in Lua modules
 **Tags related to the Citation generator**
 * description
 * keywords
-* citation_type
-* citation_name
-* citation_headline
-* citation_date_published
-* citation_date_created
-* citation_page_start
-* citation_doi
 * citation_author
-* citation_publisher
+* citation_conference_title
+* citation_creation_date (previously citation_date_created)
+* citation_doi
+* citation_firstpage (previously citation_page_start)
+* citation_headline
+* citation_isbn
+* citation_issn
+* citation_issue
+* citation_journal_title
+* citation_lastpage
 * citation_license
+* citation_name
+* citation_pdf_url
+* citation_publication_date (previously citation_date_published)
+* citation_publisher
+* citation_title
+* citation_type
 * citation_volume
+
+Multiple authors should be separated by `;`.
 
 ** Tags related to the Dublin Core generator**
 * description

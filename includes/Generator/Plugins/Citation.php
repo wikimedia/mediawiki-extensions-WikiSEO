@@ -36,16 +36,24 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	protected $tags = [
 		'description',
 		'keywords',
-		'citation_type',
-		'citation_name',
-		'citation_headline',
-		'citation_date_published',
-		'citation_date_created',
-		'citation_page_start',
-		'citation_doi',
 		'citation_author',
-		'citation_publisher',
+		'citation_conference_title',
+		'citation_creation_date',
+		'citation_doi',
+		'citation_firstpage',
+		'citation_headline',
+		'citation_isbn',
+		'citation_issn',
+		'citation_issue',
+		'citation_journal_title',
+		'citation_lastpage',
 		'citation_license',
+		'citation_name',
+		'citation_pdf_url',
+		'citation_publication_date',
+		'citation_publisher',
+		'citation_title',
+		'citation_type',
 		'citation_volume',
 	];
 
@@ -61,6 +69,23 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @inheritDoc
 	 */
 	public function addMetadata(): void {
+		$this->addJsonLD();
+		$this->addMetaTags();
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function getAllowedParameterNames(): array {
+		return $this->tags;
+	}
+
+	/**
+	 * Adds ld+json metadata
+	 *
+	 * @return void
+	 */
+	private function addJsonLD(): void {
 		$template = '<script type="application/ld+json">%s</script>';
 
 		$jsonLd = [
@@ -70,10 +95,10 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 					'@type' => $this->metadata['citation_type'] ?? 'ScholarlyArticle',
 					'name' => $this->metadata['citation_name'] ?? null,
 					'headline' => $this->metadata['citation_headline'] ?? null,
-					'datePublished' => $this->metadata['citation_date_published'] ?? null,
-					'dateCreated' => $this->metadata['citation_date_created'] ?? null,
+					'datePublished' => $this->metadata['citation_publication_date'] ?? null,
+					'dateCreated' => $this->metadata['citation_creation_date'] ?? null,
 					'isPartOf' => $this->getIsPartOf(),
-					'pageStart' => $this->metadata['citation_page_start'] ?? null,
+					'pageStart' => $this->metadata['citation_firstpage'] ?? null,
 					'sameAs' => $this->metadata['citation_doi'] ?? null,
 					'description' => $this->metadata['description'] ?? null,
 					'copyrightHolder' => $this->metadata['citation_author'] ?? null,
@@ -105,10 +130,20 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	}
 
 	/**
-	 * @inheritDoc
+	 * Adds <meta> citation data
+	 *
+	 * @return void
 	 */
-	public function getAllowedParameterNames(): array {
-		return $this->tags;
+	private function addMetaTags(): void {
+		foreach ( $this->tags as $tag ) {
+			if ( $tag === 'citation_author' ) {
+				foreach ( explode( ';', $this->metadata[$tag] ) as $part ) {
+					$this->outputPage->addMeta( $tag, $part );
+				}
+			} else {
+				$this->outputPage->addMeta( $tag, $this->metadata[$tag] );
+			}
+		}
 	}
 
 	/**
