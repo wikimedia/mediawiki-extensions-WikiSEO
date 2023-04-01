@@ -136,6 +136,10 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	 */
 	private function addMetaTags(): void {
 		foreach ( $this->tags as $tag ) {
+			if ( !array_key_exists( $tag, $this->metadata ) ) {
+				continue;
+			}
+
 			if ( $tag === 'citation_author' ) {
 				foreach ( explode( ';', $this->metadata[$tag] ) as $part ) {
 					$this->outputPage->addMeta( $tag, $part );
