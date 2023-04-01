@@ -142,7 +142,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 
 			if ( $tag === 'citation_author' ) {
 				foreach ( explode( ';', $this->metadata[$tag] ) as $part ) {
-					$this->outputPage->addMeta( $tag, $part );
+					$this->outputPage->addMeta( $tag, trim( $part ) );
 				}
 			} else {
 				$this->outputPage->addMeta( $tag, $this->metadata[$tag] );
