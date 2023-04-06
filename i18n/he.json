@@ -3,10 +3,12 @@
 		"authors": [
 			"Amire80",
 			"דגש",
-			"דגש חזק"
+			"דגש חזק",
+			"Dee"
 		]
 	},
 	"wiki-seo-missing-page-title": "שגיאה: כותרת הדף שניתנה אינה תקינה.",
 	"wiki-seo-param-title": "כותרת הדף:",
-	"wiki-seo-param-site_name": "שם האתר:"
+	"wiki-seo-param-site_name": "שם האתר:",
+	"wiki-seo-api-title-empty": "פרמטר הכותרת ריק"
 }
