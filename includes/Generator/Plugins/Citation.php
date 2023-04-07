@@ -35,7 +35,6 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	 */
 	protected $tags = [
 		'description',
-		'keywords',
 		'citation_author',
 		'citation_conference_title',
 		'citation_creation_date',
@@ -46,6 +45,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 		'citation_issn',
 		'citation_issue',
 		'citation_journal_title',
+		'citation_keywords',
 		'citation_lastpage',
 		'citation_license',
 		'citation_name',
@@ -105,7 +105,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 					'license' => $this->metadata['citation_license'] ?? null,
 
 					'publisher' => $this->getPublisher(),
-					'keywords' => $this->metadata['keywords'] ?? null,
+					'keywords' => $this->metadata['citation_keywords'] ?? null,
 
 					'author' => []
 				]
@@ -136,7 +136,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	 */
 	private function addMetaTags(): void {
 		foreach ( $this->tags as $tag ) {
-			if ( !array_key_exists( $tag, $this->metadata ) || in_array( $tag, [ 'description', 'keywords' ], true ) ) {
+			if ( !array_key_exists( $tag, $this->metadata ) || $tag === 'description' ) {
 				continue;
 			}
 
