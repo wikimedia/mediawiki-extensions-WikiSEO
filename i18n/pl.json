@@ -24,6 +24,7 @@
 	"wiki-seo-param-description": "Opis artykułu:",
 	"wiki-seo-param-description-description": "Ten atrybut kontroluje zawartość znaczników <code>description</code> oraz <code>og:description</code>.",
 	"wiki-seo-param-robots": "Tryb indeksowania (roboty):",
+	"wiki-seo-param-google_bot": "Tryb GoogleBota:",
 	"wiki-seo-param-image": "Ilustracja artykułu:",
 	"wiki-seo-param-image-description": "Ten atrybut kontroluje zawartość znacznika <code>og:image</code>. Podany tu obraz jest głównie wykorzystywany jako miniatura w mediach społecznościowych.",
 	"wiki-seo-param-image_width": "Szerokość obrazu:",
