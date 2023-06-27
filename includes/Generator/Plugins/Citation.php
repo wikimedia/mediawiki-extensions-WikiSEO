@@ -36,6 +36,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	protected $tags = [
 		'description',
 		'citation_author',
+		'citation_abstract_html_url',
 		'citation_conference_title',
 		'citation_creation_date',
 		'citation_doi',
