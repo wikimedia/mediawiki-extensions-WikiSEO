@@ -142,6 +142,7 @@ class ApiDescription {
 						[
 							'msg' => 'TextExtracts not loaded',
 							'type' => 'missing-extensions',
+							'missing' => 'TextExtracts',
 						]
 					] );
 				}
