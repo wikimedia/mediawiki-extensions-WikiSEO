@@ -31,7 +31,6 @@ use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PageImages\PageImages;
-use Title;
 
 abstract class AbstractBaseGenerator {
 	/**
@@ -109,10 +108,12 @@ abstract class AbstractBaseGenerator {
 		$nameSplit = explode( ':', $name );
 		$name = array_pop( $nameSplit ) ?? '';
 
-		$title = Title::newFromText( sprintf( 'File:%s', $name ) );
+		$title = MediaWikiServices::getInstance()->getTitleFactory()->makeTitle(
+			NS_FILE,
+			$name
+		);
 
-		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
-			->findFile( $title );
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()->findFile( $title );
 
 		if ( $file === false ) {
 			throw new InvalidArgumentException( sprintf( 'File %s not found.', $name ) );
@@ -130,7 +131,7 @@ abstract class AbstractBaseGenerator {
 	 */
 	protected function getFileInfo( File $file ): array {
 		$cacheHash =
-		'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
+			'?version=' . md5( $file->getTimestamp() . $file->getWidth() . $file->getHeight() );
 		$width = $file->getWidth();
 		$height = $file->getHeight();
 		$image = WikiSEO::protocolizeUrl( $file->getFullUrl(), $this->outputPage->getRequest() );
@@ -188,12 +189,12 @@ abstract class AbstractBaseGenerator {
 		// No cached timestamp, load it from the database
 		if ( $timestamp === null ) {
 			$timestamp =
-			MediaWikiServices::getInstance()
-				->getRevisionLookup()
-				->getKnownCurrentRevision(
-					$this->outputPage->getTitle(),
-					$this->outputPage->getRevisionId()
-				);
+				MediaWikiServices::getInstance()
+					->getRevisionLookup()
+					->getKnownCurrentRevision(
+						$this->outputPage->getTitle(),
+						$this->outputPage->getRevisionId()
+					);
 
 			if ( $timestamp === false ) {
 				$timestamp = wfTimestampNow();
