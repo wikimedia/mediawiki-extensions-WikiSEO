@@ -34,7 +34,7 @@ use OutputPage;
  * @package MediaWiki\Extension\WikiSEO\Generator
  */
 class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
-	protected $tags = [ 'description', 'keywords', 'robots', 'google_bot' ];
+	protected $tags = [ 'description', 'keywords', 'robots', 'googlebot' ];
 
 	/**
 	 * Initialize the generator with all metadata and the page to output the metadata onto
