@@ -178,7 +178,7 @@ class InfoAction implements InfoActionHook {
 			return $value;
 		}
 
-		$title = Title::newFromText( $parsed['path'], NS_USER );
+		$title = Title::newFromText( ltrim( $parsed['path'], '/' ), NS_USER );
 
 		if ( $title === null ) {
 			return $value;
@@ -186,6 +186,6 @@ class InfoAction implements InfoActionHook {
 
 		return Html::rawElement( 'a', [
 			'href' => $title->getFullURL(),
-		], $title->prefixedText );
+		], $title->getPrefixedText() ?? $title->getText() );
 	}
 }

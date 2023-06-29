@@ -86,7 +86,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 			'@type' => $this->getTypeMetadata(),
 			'name' => $this->outputPage->getHTMLTitle(),
 			'headline' => $this->outputPage->getHTMLTitle(),
-			'mainEntityOfPage' => $this->outputPage->getPageTitle(),
+			'mainEntityOfPage' => strip_tags( $this->outputPage->getPageTitle() ),
 		];
 
 		if ( $this->outputPage->getTitle() !== null ) {
