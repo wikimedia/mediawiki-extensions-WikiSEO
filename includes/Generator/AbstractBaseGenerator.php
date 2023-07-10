@@ -113,7 +113,7 @@ abstract class AbstractBaseGenerator {
 			$name
 		);
 
-		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()->findFile( $title );
+		$file = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
 
 		if ( $file === false ) {
 			throw new InvalidArgumentException( sprintf( 'File %s not found.', $name ) );

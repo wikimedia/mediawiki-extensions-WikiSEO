@@ -139,7 +139,7 @@ class RestSocialMediaImage extends SimpleHandler {
 				NS_FILE,
 				array_pop( $props )
 			);
-			$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()->findFile( $background );
+			$file = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $background );
 
 			if ( $file !== false && in_array( $file->getMimeType(), $this->supportedMimes, true ) ) {
 				$background = new Imagick();
