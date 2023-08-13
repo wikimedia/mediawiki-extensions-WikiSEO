@@ -22,7 +22,7 @@
 	"wiki-seo-param-description": "Article description:",
 	"wiki-seo-param-description-description": "This attribute controls the content of the <code>description</code> and <code>og:description</code> elements.",
 	"wiki-seo-param-robots": "Crawler mode (robots):",
-	"wiki-seo-param-google_bot": "GoogleBot modue:",
+	"wiki-seo-param-google_bot": "GoogleBot module:",
 	"wiki-seo-param-image": "Article image:",
 	"wiki-seo-param-image-description": "This attribute controls the content of the <code>og:image</code> element. This image is mostly displayed as a thumbnail on social media.",
 	"wiki-seo-param-image_width": "Image width:",
