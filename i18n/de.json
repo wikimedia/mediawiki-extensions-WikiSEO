@@ -27,7 +27,7 @@
 	"wiki-seo-param-description": "Artikelbeschreibung:",
 	"wiki-seo-param-description-description": "Dieses Attribut steuert den Inhalt der Elemente <code>description</code> und <code>og:description</code>.",
 	"wiki-seo-param-robots": "Crawlermodus (Robots):",
-	"wiki-seo-param-google_bot": "GoogleBot-Modus:",
+	"wiki-seo-param-google_bot": "GoogleBot-Modul:",
 	"wiki-seo-param-image": "Artikelbild:",
 	"wiki-seo-param-image-description": "Dieses Attribut steuert den Inhalt des Elements <code>og:image</code>. Dieses Bild wird meist als Vorschaubild in sozialen Medien angezeigt.",
 	"wiki-seo-param-image_width": "Bildbreite:",

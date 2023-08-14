@@ -26,7 +26,7 @@
 	"wiki-seo-param-description": "Description de l’article :",
 	"wiki-seo-param-description-description": "Cet attribut contrôle le contenu des éléments <code>description</code> et <code>og:description</code>.",
 	"wiki-seo-param-robots": "Mode d’exploration (robots) :",
-	"wiki-seo-param-google_bot": "Mode de GoogleBot :",
+	"wiki-seo-param-google_bot": "Module de GoogleBot :",
 	"wiki-seo-param-image": "Image de l’article :",
 	"wiki-seo-param-image-description": "Cet attribut contrôle le contenu de l’élément <code>og:image</code>. Cette image est surtout utilisée comme vignette sur les médias sociaux.",
 	"wiki-seo-param-image_width": "Largeur de l’image :",
