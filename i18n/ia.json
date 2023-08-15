@@ -24,7 +24,7 @@
 	"wiki-seo-param-description": "Description del articulo:",
 	"wiki-seo-param-description-description": "Iste attributo controla le contento del elementos <code>description</code> e <code>og:description</code>.",
 	"wiki-seo-param-robots": "Modo de indexator (robots):",
-	"wiki-seo-param-google_bot": "Modo de GoogleBot:",
+	"wiki-seo-param-google_bot": "Modulo de GoogleBot:",
 	"wiki-seo-param-image": "Imagine de articulo:",
 	"wiki-seo-param-image-description": "Iste attributo controla le contento del elemento <code>og:image</code>. Iste imagine appare principalmente como miniatura sur le medios social.",
 	"wiki-seo-param-image_width": "Latitude del imagine:",

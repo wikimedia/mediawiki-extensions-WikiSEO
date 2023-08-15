@@ -24,7 +24,7 @@
 	"wiki-seo-param-description": "Opis članka:",
 	"wiki-seo-param-description-description": "Ta atribut nadzoruje vsebino elementov <code>description</code> in <code>og:description</code>.",
 	"wiki-seo-param-robots": "Način za pajke (robote):",
-	"wiki-seo-param-google_bot": "Način za GoogleBot:",
+	"wiki-seo-param-google_bot": "Modul za GoogleBot:",
 	"wiki-seo-param-image": "SLika članka:",
 	"wiki-seo-param-image-description": "Ta atribut nadzoruje vsebino elementa <code>og:image</code>. Ta slika je večinoma prikazana kot sličica v družbenih omrežjih.",
 	"wiki-seo-param-image_width": "Širina slike:",

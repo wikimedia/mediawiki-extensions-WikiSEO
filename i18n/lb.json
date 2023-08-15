@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
-	"wiki-seo-param-title": "Titel vun der Säit:"
+	"wiki-seo-param-title": "Titel vun der Säit:",
+	"wiki-seo-param-google_bot": "GoogleBot-Modüll:"
 }
