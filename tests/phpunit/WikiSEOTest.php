@@ -377,11 +377,4 @@ class WikiSEOTest extends GeneratorTest {
 
 		return $result;
 	}
-
-	/**
-	 * @inheritDoc
-	 */
-	public function needsDB() {
-		return true;
-	}
 }
