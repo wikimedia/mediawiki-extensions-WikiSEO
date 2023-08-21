@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"GuoPC",
 			"Gzombiejun",
 			"Hmgrmb",
 			"Lakejason0",
@@ -27,7 +28,7 @@
 	"wiki-seo-param-description": "文章描述：",
 	"wiki-seo-param-description-description": "该属性控制 <code>description</code> and <code>og:description</code> 元素的内容。",
 	"wiki-seo-param-robots": "爬虫模式（机器人）：",
-	"wiki-seo-param-google_bot": "GoogleBot 模式：",
+	"wiki-seo-param-google_bot": "GoogleBot 模块：",
 	"wiki-seo-param-image": "文章图片：",
 	"wiki-seo-param-image-description": "该属性控制 <code>og:image</code> 元素的内容。该图像主要用于在社交媒体上作缩略图显示。",
 	"wiki-seo-param-image_width": "图像宽度：",
