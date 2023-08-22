@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"R4356th",
-			"আজিজ"
+			"আজিজ",
+			"আফতাবুজ্জামান"
 		]
 	},
 	"wiki-seo-invalid-generator": "ত্রুটি: $1 কেনও বৈধ অধিউপাত্ত উৎপাদক নয়৷",
@@ -18,6 +19,7 @@
 	"wiki-seo-param-keywords": "মুখ্যশব্দসমূহ:",
 	"wiki-seo-param-keywords-description": "এই গুণাগুণটি <code>মুখ্যশব্দ</code> এবং <code>নিবন্ধ:ট্যাগ</code> উপাদানসমূহের বিষয়বস্তু নিয়ন্ত্রণ করে।",
 	"wiki-seo-param-description": "নিবন্ধের বিবরণ:",
+	"wiki-seo-param-google_bot": "গুগলবট মডিউল:",
 	"wiki-seo-param-image": "নিবন্ধ চিত্র:",
 	"wiki-seo-param-image_width": "চিত্রের প্রস্থ:",
 	"wiki-seo-param-image_height": "চিত্রের উচ্চতা:",
