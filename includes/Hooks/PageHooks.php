@@ -24,6 +24,7 @@ namespace MediaWiki\Extension\WikiSEO\Hooks;
 use Config;
 use DeferrableUpdate;
 use ExtensionRegistry;
+use Html;
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
 use MediaWiki\Extension\WikiSEO\OverwritePageImageProp;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
@@ -120,6 +121,43 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 		$updates[] = new OverwritePageImageProp(
 			$title,
 			$output->getPageProperty( 'image' )
+		);
+	}
+
+	/**
+	 * Sets, or overwrites, the '<link rel="canonical"' tag within the page HTML head,
+	 * if the "canonical" parameter was set.
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/OutputPageAfterGetHeadLinksArray
+	 *
+	 * @param string[] &$tags
+	 * @param OutputPage $output
+	 */
+	public function onOutputPageAfterGetHeadLinksArray( &$tags, OutputPage $output ) {
+		$seo = new WikiSEO();
+		$seo->setMetadataFromPageProps( $output );
+		$canonicalTitle = $seo->getMetadataValue( 'canonical' );
+		if ( empty( $canonicalTitle ) ) {
+			return;
+		}
+
+		// Annoyingly, when MediaWiki adds a canonical link (when
+		// $wgEnableCanonicalServerLink is true), it uses a numeric
+		// key for it, rather than an obvious key like 'canonical'.
+		// So in order to overwrite it,
+		// we have to manually find this tag in the array.
+		$canonicalKey = 'canonical';
+		foreach ( $tags as $key => $tag ) {
+			if ( strpos( $tag, '<link rel="canonical"' ) !== false ) {
+				$canonicalKey = $key;
+				break;
+			}
+		}
+		$tags[$canonicalKey] = Html::element(
+			'link', [
+				'rel' => 'canonical',
+				'href' => $canonicalTitle
+			]
 		);
 	}
 }

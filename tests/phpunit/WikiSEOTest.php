@@ -6,6 +6,7 @@ use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use OutputPage;
 use RequestContext;
 
@@ -333,6 +334,33 @@ class WikiSEOTest extends GeneratorTest {
 		$errorMessage = wfMessage( 'wiki-seo-empty-attr-parser' )->parse();
 
 		self::assertStringContainsString( $errorMessage, $out->parseAsContent( "{{#seo:}}" ) );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::getMetadataValue
+	 * @return void
+	 */
+	public function testGetMetadataValueNull() {
+		RequestContext::getMain()->setTitle( Title::makeTitle( NS_MAIN, 'Foo' ) );
+		$out = new OutputPage( RequestContext::getMain() );
+		$seo = new WikiSEO();
+		$seo->setMetadataFromPageProps( $out );
+
+		$this->assertNull( $seo->getMetadataValue( 'title' ) );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::getMetadataValue
+	 * @return void
+	 */
+	public function testGetMetadataValue() {
+		RequestContext::getMain()->setTitle( Title::makeTitle( NS_MAIN, 'Foo' ) );
+		$out = new OutputPage( RequestContext::getMain() );
+		$out->setProperty( 'title', 'Foo' );
+		$seo = new WikiSEO();
+		$seo->setMetadataFromPageProps( $out );
+
+		$this->assertEquals( 'Foo', $seo->getMetadataValue( 'title' ) );
 	}
 
 	/**

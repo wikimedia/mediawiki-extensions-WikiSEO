@@ -72,7 +72,9 @@ The extension can be used via the ``{{#seo}}`` parser function or in Lua modules
 * googlebot
   * Controls the behavior of the google crawler
 * hreflang_xx-xx[]
-  * Adds `<link rel="alternate" href="url" hreflang="xx-xx">` elements 
+  * Adds `<link rel="alternate" href="url" hreflang="xx-xx">` elements
++* canonical
++  * Adds a `<link rel="canonical" href="url">` element
 
 **Tags related to the Open Graph protocol**  
 * type

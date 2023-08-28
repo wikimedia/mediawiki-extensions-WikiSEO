@@ -149,6 +149,17 @@ class WikiSEO {
 	}
 
 	/**
+	 * Get a value from the $metadata array, given a key (or null if
+	 * no value exists).
+	 *
+	 * @param string $key
+	 * @return string|null
+	 */
+	public function getMetadataValue( $key ) {
+		return $this->metadata[$key] ?? null;
+	}
+
+	/**
 	 * Add the metadata array as meta tags to the page
 	 *
 	 * @param OutputPage $out

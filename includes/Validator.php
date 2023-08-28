@@ -43,6 +43,7 @@ class Validator {
 
 		'keywords',
 		'description',
+		'canonical',
 
 		'robots',
 		'googlebot',
