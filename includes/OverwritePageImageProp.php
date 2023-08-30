@@ -28,7 +28,7 @@ class OverwritePageImageProp implements DeferrableUpdate {
 	public function __construct( Title $title, string $pageImage ) {
 		$this->title = $title;
 
-		if ( strpos( $pageImage, ':' ) !== -1 ) {
+		if ( !empty( $pageImage ) && str_contains( $pageImage, ':' ) ) {
 			$pageImage = explode( ':', $pageImage )[1];
 		}
 
@@ -41,6 +41,10 @@ class OverwritePageImageProp implements DeferrableUpdate {
 	 * @return void
 	 */
 	public function doUpdate() {
+		if ( empty( $this->pageImage ) ) {
+			return;
+		}
+
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
 		$db = $dbl->getConnection( $dbl->getWriterIndex() );
 

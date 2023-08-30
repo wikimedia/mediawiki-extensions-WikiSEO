@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
+use MediaWiki\Html\Html;
 
 class MetaTagTest extends GeneratorTest {
 	/**
@@ -155,9 +156,16 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
+		$appId = Html::element( 'meta',
+			[
+				'property' => 'fb:app_id',
+				'content' => '0011223344',
+			]
+		);
+
 		self::assertArrayHasKey( 'fb:app_id', $out->getHeadItemsArray() );
 		self::assertEquals(
-			'<meta property="fb:app_id" content="0011223344">',
+			$appId,
 			$out->getHeadItemsArray()['fb:app_id']
 		);
 	}
@@ -175,9 +183,16 @@ class MetaTagTest extends GeneratorTest {
 		$generator->init( [], $out );
 		$generator->addMetadata();
 
+		$admins = Html::element( 'meta',
+			[
+				'property' => 'fb:admins',
+				'content' => '0011223344',
+			]
+		);
+
 		self::assertArrayHasKey( 'fb:admins', $out->getHeadItemsArray() );
 		self::assertEquals(
-			'<meta property="fb:admins" content="0011223344">',
+			$admins,
 			$out->getHeadItemsArray()['fb:admins']
 		);
 	}

@@ -8,6 +8,7 @@ use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use OutputPage;
+use ParserOutput;
 use RequestContext;
 
 /**
@@ -334,6 +335,34 @@ class WikiSEOTest extends GeneratorTest {
 		$errorMessage = wfMessage( 'wiki-seo-empty-attr-parser' )->parse();
 
 		self::assertStringContainsString( $errorMessage, $out->parseAsContent( "{{#seo:}}" ) );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadataFromPageProps
+	 * @return void
+	 */
+	public function testSetMetadataFromPagePropsNoTitle() {
+		$outMock = $this->getMockBuilder( OutputPage::class )->disableOriginalConstructor()->getMock();
+		$outMock->expects( $this->once() )->method( 'getTitle' )->willReturn( null );
+		$outMock->expects( $this->never() )->method( 'getProperty' );
+
+		$seo = new WikiSEO();
+		$seo->setMetadataFromPageProps( $outMock );
+	}
+
+	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\WikiSEO::setMetadata
+	 * @return void
+	 */
+	public function testSetMetadataManualDescription() {
+		$outMock = $this->getMockBuilder( ParserOutput::class )->disableOriginalConstructor()->getMock();
+		$outMock->expects( $this->once() )->method( 'setPageProperty' )->with( 'manualDescription', true );
+		$outMock->expects( $this->never() )->method( 'getProperty' );
+
+		$seo = new WikiSEO();
+		$seo->setMetadata( [
+			'manualDescription' => 'Foo Desc',
+		], $outMock );
 	}
 
 	/**
