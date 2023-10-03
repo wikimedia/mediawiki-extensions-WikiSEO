@@ -10,6 +10,9 @@ use MediaWikiIntegrationTestCase;
 use Wikimedia\Rdbms\DBConnRef;
 use Wikimedia\Rdbms\LoadBalancer;
 
+/**
+ * @group Database
+ */
 class OverwritePageImagePropTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\OverwritePageImageProp

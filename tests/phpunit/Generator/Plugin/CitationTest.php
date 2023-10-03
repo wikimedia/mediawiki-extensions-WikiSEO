@@ -7,6 +7,9 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\Citation;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
+/**
+ * @group Database
+ */
 class CitationTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Citation::init

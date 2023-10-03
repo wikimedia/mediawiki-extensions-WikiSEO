@@ -5,6 +5,9 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
+/**
+ * @group Database
+ */
 class SchemaOrgTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg::init

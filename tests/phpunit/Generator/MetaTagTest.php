@@ -5,6 +5,9 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\Html\Html;
 
+/**
+ * @group Database
+ */
 class MetaTagTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init

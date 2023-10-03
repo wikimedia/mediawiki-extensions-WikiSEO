@@ -34,7 +34,5 @@ class ApiDescriptionTest extends \MediaWikiIntegrationTestCase {
 
 		$desc = new ApiDescription( Title::makeTitle( NS_MAIN, 'Foo' ) );
 		$this->assertEquals( 'extracts', $desc->getDescription() );
-
-		dd( $desc->getDescriptionFromExtracts() );
 	}
 }

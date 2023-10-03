@@ -243,7 +243,7 @@ class WikiSEO {
 			$result[$key] = $value;
 		}
 
-		return empty( $result ) ? null : $result;
+		return $result;
 	}
 
 	/**

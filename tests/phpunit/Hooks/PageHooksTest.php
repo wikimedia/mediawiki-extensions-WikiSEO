@@ -12,6 +12,9 @@ use MWException;
 use OutputPage;
 use RequestContext;
 
+/**
+ * @group Database
+ */
 class PageHooksTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Hooks\PageHooks::onOutputPageAfterGetHeadLinksArray

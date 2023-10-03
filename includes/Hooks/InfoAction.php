@@ -25,9 +25,9 @@ use Html;
 use IContextSource;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Hook\InfoActionHook;
-use MediaWiki\Page\PageProps;
 use MediaWiki\Title\TitleFactory;
 use Message;
+use PageProps;
 use RepoGroup;
 
 class InfoAction implements InfoActionHook {

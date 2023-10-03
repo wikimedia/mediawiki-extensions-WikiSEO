@@ -5,6 +5,9 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
+/**
+ * @group Database
+ */
 class TwitterTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init

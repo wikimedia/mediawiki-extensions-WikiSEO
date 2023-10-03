@@ -6,6 +6,9 @@ use MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
 
+/**
+ * @group Database
+ */
 class OpenGraphTest extends GeneratorTest {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init

@@ -10,6 +10,9 @@ use RequestContext;
 use Title;
 use WebRequest;
 
+/**
+ * @group Database
+ */
 class GeneratorTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param array $config
