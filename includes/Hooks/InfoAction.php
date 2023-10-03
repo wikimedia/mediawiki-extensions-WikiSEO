@@ -46,7 +46,7 @@ class InfoAction implements InfoActionHook {
 	 * @param PageProps $pageProps
 	 * @param TitleFactory $titleFactory
 	 */
-	public function __construct( RepoGroup $repoGroup, PageProps $pageProps, TitleFactory $titleFactory ) {
+	public function __construct( $repoGroup, $pageProps, $titleFactory ) {
 		$this->repoGroup = $repoGroup;
 		$this->pageProps = $pageProps;
 		$this->titleFactory = $titleFactory;
