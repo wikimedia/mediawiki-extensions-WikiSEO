@@ -160,14 +160,16 @@ class InfoAction implements InfoActionHook {
 
 		$file = $this->repoGroup->findFile( $title->getDBkey() );
 
-		$transform = $file->transform( [ 'width' => 200 ] );
-		if ( $transform ) {
-			return Html::rawElement( 'img', [
-				'src' => $transform->getUrl(),
-				'alt' => $title->getBaseText(),
-				'width' => 200,
-				'style' => 'height: auto',
-			] );
+		if ( $file ) {
+			$transform = $file->transform( [ 'width' => 200 ] );
+			if ( $transform ) {
+				return Html::rawElement( 'img', [
+					'src' => $transform->getUrl(),
+					'alt' => $title->getBaseText(),
+					'width' => 200,
+					'style' => 'height: auto',
+				] );
+			}
 		}
 
 		return $value;
