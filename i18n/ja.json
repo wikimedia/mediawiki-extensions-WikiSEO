@@ -4,7 +4,8 @@
 			"Omotecho",
 			"Sabelöga",
 			"Tamaki Wakita",
-			"しぃ"
+			"しぃ",
+			"Ant176"
 		]
 	},
 	"wiki-seo-desc": "キーワードや説明文などのページごとのメタ設定、タイトルの変更、各種サイト検証タグなどを可能にします。",
@@ -25,7 +26,7 @@
 	"wiki-seo-param-keywords": "キーワード:",
 	"wiki-seo-param-keywords-description": "この属性は <code>keywords</code> と<code>article:tag</code> の要素のコンテンツを制御します。",
 	"wiki-seo-param-description": "記事の説明:",
-	"wiki-seo-param-description-description": "この属性は <code>description</code> および <code>og:description</code> 要素のコンテンツを制御しま",
+	"wiki-seo-param-description-description": "この属性は <code>description</code> および <code>og:description</code> 要素のコンテンツを制御します。",
 	"wiki-seo-param-robots": "クローラーモード（ロボット）:",
 	"wiki-seo-param-google_bot": "GoogleBot モジュール:",
 	"wiki-seo-param-image": "記事の画像:",
