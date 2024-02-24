@@ -58,7 +58,6 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->addGoogleSiteVerification();
 		$this->addBingSiteVerification();
 		$this->addYandexSiteVerification();
-		$this->addAlexaSiteVerification();
 		$this->addPinterestSiteVerification();
 		$this->addNortonSiteVerification();
 		$this->addNaverSiteVerification();
@@ -123,17 +122,6 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 
 		if ( !empty( $yandexSiteVerificationKey ) ) {
 			$this->outputPage->addMeta( 'yandex-verification', $yandexSiteVerificationKey );
-		}
-	}
-
-	/**
-	 * Add $wgAlexaSiteVerificationKey from LocalSettings
-	 */
-	private function addAlexaSiteVerification(): void {
-		$alexaSiteVerificationKey = $this->getConfigValue( 'AlexaSiteVerificationKey' );
-
-		if ( !empty( $alexaSiteVerificationKey ) ) {
-			$this->outputPage->addMeta( 'alexaVerifyID', $alexaSiteVerificationKey );
 		}
 	}
 

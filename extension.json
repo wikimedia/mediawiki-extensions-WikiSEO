@@ -36,10 +36,6 @@
 			"description": "Site verification key for Yandex Webmasters",
 			"value": null
 		},
-		"AlexaSiteVerificationKey": {
-			"description": "Site verification key for Alexa Console",
-			"value": null
-		},
 		"PinterestSiteVerificationKey": {
 			"description": "Site verification key for Pinterest Console",
 			"value": null

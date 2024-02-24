@@ -102,21 +102,6 @@ class MetaTagTest extends GeneratorTest {
 	}
 
 	/**
-	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addAlexaSiteVerification
-	 */
-	public function testAddAlexaSiteVerification() {
-		$this->setMwGlobals( 'wgAlexaSiteVerificationKey', 'alexa-key' );
-
-		$out = $this->newInstance();
-
-		$generator = new MetaTag();
-		$generator->init( [], $out );
-		$generator->addMetadata();
-
-		self::assertContains( [ 'alexaVerifyID', 'alexa-key' ], $out->getMetaTags() );
-	}
-
-	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addYandexSiteVerification
 	 */
 	public function testAddYandexSiteVerification() {
