@@ -79,7 +79,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @return void
 	 */
 	public function addMetadata(): void {
-		$template = '<script type="application/ld+json">%s</script>';
+		$template = '<script type="application/ld+json" nonce="%s">%s</script>';
 
 		$meta = [
 			'@context' => 'http://schema.org',
@@ -113,7 +113,11 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 
 		$this->outputPage->addHeadItem(
 			'jsonld-metadata',
-			sprintf( $template, json_encode( $meta ) )
+			sprintf(
+				$template,
+				json_encode( $meta ),
+				$this->outputPage->getCSP()->getNonce()
+			)
 		);
 	}
 

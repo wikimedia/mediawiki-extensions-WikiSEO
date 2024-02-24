@@ -87,7 +87,7 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	 * @return void
 	 */
 	private function addJsonLD(): void {
-		$template = '<script type="application/ld+json">%s</script>';
+		$template = '<script type="application/ld+json" nonce="%s">%s</script>';
 
 		$jsonLd = [
 			'@context' => 'https://schema.org',
@@ -126,7 +126,11 @@ class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 
 		$this->outputPage->addHeadItem(
 			'jsonld-metadata-citation',
-			sprintf( $template, json_encode( $jsonLd ) )
+			sprintf(
+				$template,
+				$this->outputPage->getCSP()->getNonce(),
+				json_encode( $jsonLd )
+			)
 		);
 	}
 
