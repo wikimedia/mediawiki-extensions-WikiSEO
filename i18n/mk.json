@@ -24,7 +24,7 @@
 	"wiki-seo-param-description": "Опис на статијата:",
 	"wiki-seo-param-description-description": "Овој атрибут управува со содржината на елементите <code>description</code> и <code>og:description</code>.",
 	"wiki-seo-param-robots": "Ползачки режим (роботи):",
-	"wiki-seo-param-google_bot": "Режим на GoogleBot:",
+	"wiki-seo-param-google_bot": "Модул на GoogleBot:",
 	"wiki-seo-param-image": "Слика на статијата:",
 	"wiki-seo-param-image-description": "Овој атрибут управува со содржината на елементот <code>og:image</code>. Оваа слика претежно се прикажува како минијатура на друштвените медиуми.",
 	"wiki-seo-param-image_width": "Ширина на сликата:",
