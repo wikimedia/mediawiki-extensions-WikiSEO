@@ -9,6 +9,9 @@ use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\ApiDescription;
 use MediaWiki\Title\Title;
 
+/**
+ * @group Database
+ */
 class ApiDescriptionTest extends \MediaWikiIntegrationTestCase {
 
 	/**
