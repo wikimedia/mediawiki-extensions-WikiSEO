@@ -35,7 +35,6 @@ use ReflectionClass;
 use ReflectionException;
 use Title;
 use WebRequest;
-use Wikimedia\AtEase\AtEase;
 
 class WikiSEO {
 	private const MODE_TAG = 'tag';
@@ -261,9 +260,8 @@ class WikiSEO {
 			$prop = $page->getProperty( $param );
 
 			if ( $prop !== null ) {
-				AtEase::suppressWarnings();
-				$value = unserialize( $prop, [ 'allowed_classes' => false ] );
-				AtEase::restoreWarnings();
+				// phpcs:ignore Generic.PHP.NoSilencedErrors.Discouraged
+				$value = @unserialize( $prop, [ 'allowed_classes' => false ] );
 
 				// Value was serialized
 				if ( $value !== false ) {
