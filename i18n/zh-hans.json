@@ -5,10 +5,11 @@
 			"Gzombiejun",
 			"Hmgrmb",
 			"Lakejason0",
-			"沈澄心"
+			"沈澄心",
+			"LittlePaw365"
 		]
 	},
-	"wiki-seo-desc": "允许设置每个页面的meta信息，如关键词、描述，标题和各网站验证标签。",
+	"wiki-seo-desc": "允许每个页面的关键词和描述等meta设置、标题更改和多种网站验证标签。",
 	"wiki-seo-empty-attr-tag": "错误：&lt;seo&gt; 标签必须至少包含一个非空属性。",
 	"wiki-seo-empty-attr-parser": "错误：<nowiki>{{#seo:}}</nowiki> 标签必须至少包含一个非空属性。",
 	"wiki-seo-invalid-generator": "错误： $1不是有效的 meta 数据生成器。",
