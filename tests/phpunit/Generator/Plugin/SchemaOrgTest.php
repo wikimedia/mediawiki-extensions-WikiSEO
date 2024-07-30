@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
+use MediaWiki\MainConfigNames;
 
 /**
  * @group Database
@@ -118,9 +119,11 @@ class SchemaOrgTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getRevisionTimestamp
 	 */
 	public function testContainsImageObject() {
-		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
-		$this->setMwGlobals( 'wgLogos', false );
-		$this->setMwGlobals( 'wgLogo', '/resources/assets/wiki.png' );
+		$this->overrideConfigValues( [
+			'WikiSeoDisableLogoFallbackImage' => false,
+			MainConfigNames::Logos => false,
+			MainConfigNames::Logo => '/resources/assets/wiki.png',
+		] );
 
 		$out = $this->newInstance();
 

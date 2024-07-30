@@ -38,7 +38,7 @@ class TwitterTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::getConfigValue
 	 */
 	public function testAddTwitterSiteHandle() {
-		$this->setMwGlobals( 'wgTwitterSiteHandle', '@TestKey' );
+		$this->overrideConfigValue( 'TwitterSiteHandle', '@TestKey' );
 
 		$out = $this->newInstance();
 
@@ -56,7 +56,7 @@ class TwitterTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addTwitterSiteHandleTag
 	 */
 	public function testIgnoreMetaIfGlobal() {
-		$this->setMwGlobals( 'wgTwitterSiteHandle', '@TestKey' );
+		$this->overrideConfigValue( 'TwitterSiteHandle', '@TestKey' );
 
 		$out = $this->newInstance();
 
@@ -89,7 +89,7 @@ class TwitterTest extends GeneratorTestBase {
 	 */
 	public function testSummaryType() {
 		// Unset default image if set
-		$this->setMwGlobals( 'wgTwitterCardType', 'summary' );
+		$this->overrideConfigValue( 'TwitterCardType', 'summary' );
 
 		$out = $this->newInstance();
 
@@ -107,7 +107,7 @@ class TwitterTest extends GeneratorTestBase {
 	 */
 	public function testSummaryTypeOverride() {
 		// Unset default image if set
-		$this->setMwGlobals( 'wgTwitterCardType', 'summary' );
+		$this->overrideConfigValue( 'TwitterCardType', 'summary' );
 
 		$out = $this->newInstance();
 
@@ -126,7 +126,7 @@ class TwitterTest extends GeneratorTestBase {
 	 */
 	public function testHandleNotSet() {
 		// Unset default image if set
-		$this->setMwGlobals( 'wgTwitterSiteHandle', null );
+		$this->overrideConfigValue( 'TwitterSiteHandle', null );
 
 		$out = $this->newInstance();
 

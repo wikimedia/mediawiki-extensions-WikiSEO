@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
+use MediaWiki\MainConfigNames;
 
 /**
  * @group Database
@@ -92,10 +93,12 @@ class OpenGraphTest extends GeneratorTestBase {
 	 */
 	public function testContainsImage() {
 		// Unset default image if set
-		$this->setMwGlobals( 'wgWikiSeoDefaultImage', null );
-		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', false );
-		$this->setMwGlobals( 'wgLogos', false );
-		$this->setMwGlobals( 'wgLogo', '/resources/assets/wiki.png' );
+		$this->overrideConfigValues( [
+			'WikiSeoDefaultImage' => null,
+			'WikiSeoDisableLogoFallbackImage' => false,
+			MainConfigNames::Logos => false,
+			MainConfigNames::Logo => '/resources/assets/wiki.png',
+		] );
 
 		$out = $this->newInstance();
 
@@ -113,8 +116,10 @@ class OpenGraphTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator::setFallbackImageIfEnabled
 	 */
 	public function testDefaultImage() {
-		$this->setMwGlobals( 'wgWikiSeoDefaultImage', 'wiki.png' );
-		$this->setMwGlobals( 'wgWikiSeoDisableLogoFallbackImage', true );
+		$this->overrideConfigValues( [
+			'WikiSeoDefaultImage' => 'wiki.png',
+			'WikiSeoDisableLogoFallbackImage' => true,
+		] );
 
 		$out = $this->newInstance();
 
@@ -139,15 +144,15 @@ class OpenGraphTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addSiteName
 	 */
 	public function testWgLogosImage() {
-		$this->setMwGlobals( 'wgLogos', [
-			'1x' => "path/to/1x_version.png",
-			'1.5x' => "path/to/1.5x_version.png",
-			'2x' => "path/to/2x_version.png",
-			'svg' => "path/to/svg_version.svg",
-			'icon' => "path/to/icon.png",
+		$this->overrideConfigValue( MainConfigNames::Logos, [
+			'1x' => 'path/to/1x_version.png',
+			'1.5x' => 'path/to/1.5x_version.png',
+			'2x' => 'path/to/2x_version.png',
+			'svg' => 'path/to/svg_version.svg',
+			'icon' => 'path/to/icon.png',
 			'wordmark' => [
-				'src' => "path/to/wordmark_version.png",
-				'1x' => "path/to/wordmark_version.svg",
+				'src' => 'path/to/wordmark_version.png',
+				'1x' => 'path/to/wordmark_version.svg',
 				'width' => 135,
 				'height' => 20,
 			],
@@ -176,12 +181,12 @@ class OpenGraphTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addSiteName
 	 */
 	public function testWgLogosImageAllSvg() {
-		$this->setMwGlobals( 'wgLogos', [
-			'1x' => "path/to/1x_version.svg",
-			'1.5x' => "path/to/1.5x_version.svg",
-			'2x' => "path/to/2x_version.svg",
-			'svg' => "path/to/svg_version.svg",
-			'icon' => "path/to/icon.svg",
+		$this->overrideConfigValue( MainConfigNames::Logos, [
+			'1x' => 'path/to/1x_version.svg',
+			'1.5x' => 'path/to/1.5x_version.svg',
+			'2x' => 'path/to/2x_version.svg',
+			'svg' => 'path/to/svg_version.svg',
+			'icon' => 'path/to/icon.svg',
 		] );
 
 		$out = $this->newInstance();
@@ -206,12 +211,12 @@ class OpenGraphTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addSiteName
 	 */
 	public function testWgLogosImageOneUsable() {
-		$this->setMwGlobals( 'wgLogos', [
-			'1x' => "path/to/1x_version.svg",
-			'1.5x' => "path/to/1.5x_version.svg",
-			'2x' => "path/to/2x_version.webp",
-			'svg' => "path/to/svg_version.svg",
-			'icon' => "path/to/icon.svg",
+		$this->overrideConfigValue( MainConfigNames::Logos, [
+			'1x' => 'path/to/1x_version.svg',
+			'1.5x' => 'path/to/1.5x_version.svg',
+			'2x' => 'path/to/2x_version.webp',
+			'svg' => 'path/to/svg_version.svg',
+			'icon' => 'path/to/icon.svg',
 		] );
 
 		$out = $this->newInstance();

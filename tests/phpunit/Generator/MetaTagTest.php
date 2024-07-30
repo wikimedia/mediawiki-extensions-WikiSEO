@@ -35,7 +35,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addGoogleSiteVerification
 	 */
 	public function testAddGoogleSiteKey() {
-		$this->setMwGlobals( 'wgGoogleSiteVerificationKey', 'google-key' );
+		$this->overrideConfigValue( 'GoogleSiteVerificationKey', 'google-key' );
 
 		$out = $this->newInstance();
 
@@ -50,7 +50,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNortonSiteVerification
 	 */
 	public function testAddNortonSiteVerification() {
-		$this->setMwGlobals( 'wgNortonSiteVerificationKey', 'norton-key' );
+		$this->overrideConfigValue( 'NortonSiteVerificationKey', 'norton-key' );
 
 		$out = $this->newInstance();
 
@@ -70,7 +70,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNaverSiteVerification
 	 */
 	public function testAddNaverSiteVerification() {
-		$this->setMwGlobals( 'wgNaverSiteVerificationKey', 'naver-key' );
+		$this->overrideConfigValue( 'NaverSiteVerificationKey', 'naver-key' );
 
 		$out = $this->newInstance();
 
@@ -90,7 +90,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addPinterestSiteVerification
 	 */
 	public function testAddPinterestSiteVerification() {
-		$this->setMwGlobals( 'wgPinterestSiteVerificationKey', 'pinterest-key' );
+		$this->overrideConfigValue( 'PinterestSiteVerificationKey', 'pinterest-key' );
 
 		$out = $this->newInstance();
 
@@ -105,7 +105,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addYandexSiteVerification
 	 */
 	public function testAddYandexSiteVerification() {
-		$this->setMwGlobals( 'wgYandexSiteVerificationKey', 'yandex-key' );
+		$this->overrideConfigValue( 'YandexSiteVerificationKey', 'yandex-key' );
 
 		$out = $this->newInstance();
 
@@ -120,7 +120,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addBingSiteVerification
 	 */
 	public function testAddBingSiteVerification() {
-		$this->setMwGlobals( 'wgBingSiteVerificationKey', 'bing-key' );
+		$this->overrideConfigValue( 'BingSiteVerificationKey', 'bing-key' );
 
 		$out = $this->newInstance();
 
@@ -136,7 +136,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addFacebookAppId
 	 */
 	public function testAddFacebookAppId() {
-		$this->setMwGlobals( 'wgFacebookAppId', '0011223344' );
+		$this->overrideConfigValue( 'FacebookAppId', '0011223344' );
 
 		$out = $this->newInstance();
 
@@ -163,7 +163,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addFacebookAdmins
 	 */
 	public function testAddFacebookAdmins() {
-		$this->setMwGlobals( 'wgFacebookAdmins', '0011223344' );
+		$this->overrideConfigValue( 'FacebookAdmins', '0011223344' );
 
 		$out = $this->newInstance();
 
@@ -189,7 +189,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addHrefLangs
 	 */
 	public function testAddDefaultLanguageLink() {
-		$this->setMwGlobals( 'wgWikiSeoDefaultLanguage', 'de-de' );
+		$this->overrideConfigValue( 'WikiSeoDefaultLanguage', 'de-de' );
 
 		$out = $this->newInstance();
 
@@ -205,7 +205,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addHrefLangs
 	 */
 	public function testAddLanguageLinks() {
-		$this->setMwGlobals( 'wgWikiSeoDefaultLanguage', 'de-de' );
+		$this->overrideConfigValue( 'WikiSeoDefaultLanguage', 'de-de' );
 
 		$out = $this->newInstance();
 
@@ -257,7 +257,7 @@ class MetaTagTest extends GeneratorTestBase {
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addNoIndex
 	 */
 	public function testAddNoIndex() {
-		$this->setMwGlobals( 'wgWikiSeoNoindexPageTitles', [
+		$this->overrideConfigValue( 'WikiSeoNoindexPageTitles', [
 			'CustomTitle',
 		] );
 
