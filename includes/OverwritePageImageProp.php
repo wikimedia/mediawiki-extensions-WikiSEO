@@ -23,9 +23,9 @@ class OverwritePageImageProp implements DeferrableUpdate {
 
 	/**
 	 * @param Title $title
-	 * @param string $pageImage
+	 * @param mixed|string $pageImage
 	 */
-	public function __construct( Title $title, string $pageImage ) {
+	public function __construct( Title $title, $pageImage ) {
 		$this->title = $title;
 
 		if ( !empty( $pageImage ) && str_contains( $pageImage, ':' ) ) {
