@@ -112,16 +112,14 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 	 * @return void
 	 */
 	private function overwritePageImageProp( Title $title, ParserOutput $output, &$updates ) {
-		if ( !$this->mainConfig->get( 'WikiSeoOverwritePageImage' ) ||
-			$output->getPageProperty( 'image' ) === null ||
+		$imageProp = $output->getPageProperty( 'image' );
+
+		if ( $imageProp === null || !$this->mainConfig->get( 'WikiSeoOverwritePageImage' ) ||
 			!ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
 			return;
 		}
 
-		$updates[] = new OverwritePageImageProp(
-			$title,
-			$output->getPageProperty( 'image' )
-		);
+		$updates[] = new OverwritePageImageProp( $title, $imageProp );
 	}
 
 	/**

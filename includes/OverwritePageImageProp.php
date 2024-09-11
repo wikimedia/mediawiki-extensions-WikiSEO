@@ -46,7 +46,7 @@ class OverwritePageImageProp implements DeferrableUpdate {
 		}
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $dbl->getConnection( $dbl->getWriterIndex() );
+		$db = $dbl->getConnection( DB_PRIMARY );
 
 		$db->update(
 			'page_props',

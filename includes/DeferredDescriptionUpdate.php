@@ -92,7 +92,7 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 			->getProperties( $this->title, 'description' );
 
 		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
-		$db = $dbl->getConnection( $dbl->getWriterIndex() );
+		$db = $dbl->getConnection( DB_PRIMARY );
 
 		// Flag indicating if an insert or update should happen
 		$shouldInsert = false;

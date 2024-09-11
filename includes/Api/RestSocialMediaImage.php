@@ -141,7 +141,10 @@ class RestSocialMediaImage extends SimpleHandler {
 			);
 			$file = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $background );
 
-			if ( $file !== false && in_array( $file->getMimeType(), $this->supportedMimes, true ) ) {
+			if ( $file !== false &&
+				in_array( $file->getMimeType(), $this->supportedMimes, true ) &&
+				!in_array( $file->getExtension(), [ 'mp4', 'webm' ] )
+			) {
 				$background = new Imagick();
 				$thumb = $file->transform(
 					[ 'width' => (int)( $this->config->get( 'WikiSeoSocialImageWidth' ) / 2 ) ],
