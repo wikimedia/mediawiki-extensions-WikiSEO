@@ -105,7 +105,8 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 					[
 						'pp_page' => $this->title->getArticleID(),
 						'pp_propname' => 'description',
-					]
+					],
+					__METHOD__
 				);
 			// Intentional fall-through, as deleting all 'description' props requires inserting a new row
 			case empty( $propertyDescriptions ):
