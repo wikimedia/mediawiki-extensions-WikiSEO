@@ -3,12 +3,12 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter;
-use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
 
 /**
  * @group Database
  */
-class TwitterTest extends GeneratorTest {
+class TwitterTest extends GeneratorTestBase {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\Twitter::addMetadata

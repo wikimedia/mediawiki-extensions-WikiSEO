@@ -8,7 +8,7 @@ use MediaWiki\Html\Html;
 /**
  * @group Database
  */
-class MetaTagTest extends GeneratorTest {
+class MetaTagTest extends GeneratorTestBase {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addMetadata

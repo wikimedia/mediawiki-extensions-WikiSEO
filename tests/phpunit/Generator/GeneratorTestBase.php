@@ -13,7 +13,7 @@ use WebRequest;
 /**
  * @group Database
  */
-class GeneratorTest extends MediaWikiIntegrationTestCase {
+class GeneratorTestBase extends MediaWikiIntegrationTestCase {
 	/**
 	 * @param array $config
 	 * @param WebRequest|null $request

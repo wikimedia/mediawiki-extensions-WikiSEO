@@ -3,12 +3,12 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\DublinCore;
-use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
 
 /**
  * @group Database
  */
-class DublinCoreTest extends GeneratorTest {
+class DublinCoreTest extends GeneratorTestBase {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\DublinCore::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\DublinCore::addMetadata
