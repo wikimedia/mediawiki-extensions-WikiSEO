@@ -4,12 +4,12 @@ namespace MediaWiki\Extension\WikiSEO\Tests\Generator\Plugin;
 
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph;
 use MediaWiki\Extension\WikiSEO\Generator\Plugins\SchemaOrg;
-use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
 
 /**
  * @group Database
  */
-class OpenGraphTest extends GeneratorTest {
+class OpenGraphTest extends GeneratorTestBase {
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::init
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\Plugins\OpenGraph::addMetadata

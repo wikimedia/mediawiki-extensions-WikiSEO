@@ -144,6 +144,9 @@
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\WikiSEO\\": "includes/"
 	},
+	"TestAutoloadNamespaces": {
+		"MediaWiki\\Extension\\WikiSEO\\Tests\\": "tests/phpunit/"
+	},
 	"HookHandlers": {
 		"ParserHooks": {
 			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ParserHooks"

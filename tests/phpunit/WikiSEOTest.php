@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
-use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTest;
+use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
@@ -17,7 +17,7 @@ use RequestContext;
  * @package MediaWiki\Extension\WikiSEO\Tests
  * @group Database
  */
-class WikiSEOTest extends GeneratorTest {
+class WikiSEOTest extends GeneratorTestBase {
 	private $replacementTitle = 'Replaced Title';
 
 	/**
