@@ -23,7 +23,9 @@ class GeneratorTestBase extends MediaWikiIntegrationTestCase {
 	 * @return OutputPage
 	 * @see \OutputPageTest::newInstance()
 	 */
-	protected function newInstance( $config = [], WebRequest $request = null, $options = [], $title = 'My test page' ) {
+	protected function newInstance(
+		$config = [], ?WebRequest $request = null, $options = [], $title = 'My test page'
+	) {
 		$context = new RequestContext();
 
 		$context->setConfig(

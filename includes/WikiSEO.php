@@ -121,7 +121,7 @@ class WikiSEO {
 	 * The reason is, if a description was provided and does not equal 'auto' or 'textextracts' we want to use it.
 	 * @see Validator
 	 */
-	public function setMetadata( array $metadataArray, ParserOutput $out = null ): void {
+	public function setMetadata( array $metadataArray, ?ParserOutput $out = null ): void {
 		$validMetadata = [];
 
 		// We'll set a flag to don't overwrite manual descriptions
