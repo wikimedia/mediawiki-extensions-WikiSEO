@@ -3,7 +3,6 @@
 namespace MediaWiki\Extension\WikiSEO\Tests;
 
 use MediaWiki\Extension\WikiSEO\TagParser;
-use MediaWiki\MediaWikiServices;
 use MediaWikiIntegrationTestCase;
 use Parser;
 use ParserOptions;
@@ -23,7 +22,7 @@ class TagParserTest extends MediaWikiIntegrationTestCase {
 		parent::setUp();
 		$this->tagParser = new TagParser();
 
-		$factory = MediaWikiServices::getInstance()->getParserFactory();
+		$factory = $this->getServiceContainer()->getParserFactory();
 		$parser = $factory->create();
 		$parser->setOptions( ParserOptions::newFromAnon() );
 
