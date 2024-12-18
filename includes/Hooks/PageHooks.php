@@ -92,7 +92,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 		$currentDescription = $output->getPageProperty( 'description' );
 		$manualDescription = $output->getPageProperty( 'manualDescription' );
 
-		if ( !$autoEnabled || $manualDescription === true ) {
+		if ( !$autoEnabled || $manualDescription ) {
 			return;
 		}
 

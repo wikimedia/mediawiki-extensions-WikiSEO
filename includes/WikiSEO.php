@@ -130,7 +130,7 @@ class WikiSEO {
 			if ( isset( $metadataArray['manualDescription'] ) &&
 				!in_array( $metadataArray['manualDescription'], [ 'auto', 'textextracts' ], true ) ) {
 
-				$out->setPageProperty( 'manualDescription', true );
+				$out->setPageProperty( 'manualDescription', '1' );
 
 				$metadataArray['description'] = $metadataArray['manualDescription'];
 				unset( $metadataArray['manualDescription'] );
