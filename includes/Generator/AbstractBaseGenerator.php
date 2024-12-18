@@ -215,7 +215,13 @@ abstract class AbstractBaseGenerator {
 		$continue = true;
 
 		if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
-			$continue = PageImages::getPageImage( $this->outputPage->getTitle() ) === false;
+			$services = MediaWikiServices::getInstance();
+			if ( $services->hasService( 'PageImages.PageImages' ) ) {
+				$continue = $services->getService( 'PageImages.PageImages' )
+					->getImage( $this->outputPage->getTitle() ) === null;
+			} else {
+				$continue = PageImages::getPageImage( $this->outputPage->getTitle() ) === false;
+			}
 		}
 
 		if ( !isset( $this->metadata['image'] ) && $continue ) {
