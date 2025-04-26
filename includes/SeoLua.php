@@ -21,10 +21,10 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO;
 
+use MediaWiki\Extension\Scribunto\Engines\LuaCommon\LibraryBase;
 use MediaWiki\MediaWikiServices;
-use Scribunto_LuaLibraryBase;
 
-class SeoLua extends Scribunto_LuaLibraryBase {
+class SeoLua extends LibraryBase {
 	/**
 	 * Registers the callable lua methods
 	 *
