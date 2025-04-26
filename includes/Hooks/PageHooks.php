@@ -24,17 +24,17 @@ namespace MediaWiki\Extension\WikiSEO\Hooks;
 use Config;
 use DeferrableUpdate;
 use ExtensionRegistry;
-use Html;
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
 use MediaWiki\Extension\WikiSEO\OverwritePageImageProp;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\Hook\BeforePageDisplayHook;
+use MediaWiki\Html\Html;
 use MediaWiki\Revision\RenderedRevision;
 use MediaWiki\Storage\Hook\RevisionDataUpdatesHook;
+use MediaWiki\Title\Title;
 use OutputPage;
 use ParserOutput;
 use Skin;
-use Title;
 
 /**
  * Hooks to run relating the page

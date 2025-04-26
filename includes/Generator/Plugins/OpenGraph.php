@@ -21,10 +21,10 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Generator\Plugins;
 
-use Html;
 use MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 

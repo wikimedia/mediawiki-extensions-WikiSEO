@@ -25,8 +25,8 @@ use DeferrableUpdate;
 use Exception;
 use ExtensionDependencyError;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use MWException;
-use Title;
 
 /**
  * This runs through the onRevisionDataUpdates hook but only if $wgWikiSeoEnableAutoDescription is enabled

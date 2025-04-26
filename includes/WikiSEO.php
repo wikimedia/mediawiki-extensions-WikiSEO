@@ -26,6 +26,7 @@ use ExtensionRegistry;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\Generator\MetaTag;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use OutputPage;
 use PageImages\PageImages;
 use Parser;
@@ -33,7 +34,6 @@ use ParserOutput;
 use PPFrame;
 use ReflectionClass;
 use ReflectionException;
-use Title;
 use WebRequest;
 
 class WikiSEO {

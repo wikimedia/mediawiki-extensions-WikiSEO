@@ -3,11 +3,11 @@
 namespace MediaWiki\Extension\WikiSEO\Tests\Generator;
 
 use HashConfig;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use MultiConfig;
 use OutputPage;
 use RequestContext;
-use Title;
 use WebRequest;
 
 /**

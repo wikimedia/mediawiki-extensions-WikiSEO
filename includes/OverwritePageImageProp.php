@@ -6,8 +6,8 @@ namespace MediaWiki\Extension\WikiSEO;
 
 use DeferrableUpdate;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 use PageImages\PageImages;
-use Title;
 
 class OverwritePageImageProp implements DeferrableUpdate {
 

@@ -26,8 +26,8 @@ use InvalidArgumentException;
 use MediaWiki\Extension\WikiSEO\Generator\AbstractBaseGenerator;
 use MediaWiki\Extension\WikiSEO\Generator\GeneratorInterface;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\Title\Title;
 use OutputPage;
-use Title;
 
 class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 	/**

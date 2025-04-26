@@ -21,13 +21,13 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Hooks;
 
-use Html;
 use IContextSource;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Hook\InfoActionHook;
+use MediaWiki\Html\Html;
+use MediaWiki\Page\PageProps;
 use MediaWiki\Title\TitleFactory;
 use Message;
-use PageProps;
 use RepoGroup;
 
 class InfoAction implements InfoActionHook {

@@ -21,9 +21,9 @@ declare( strict_types=1 );
 
 namespace MediaWiki\Extension\WikiSEO\Generator;
 
-use Html;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
+use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 

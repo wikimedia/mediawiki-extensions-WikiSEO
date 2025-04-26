@@ -24,10 +24,10 @@ namespace MediaWiki\Extension\WikiSEO;
 use ApiMain;
 use ExtensionDependencyError;
 use ExtensionRegistry;
-use FauxRequest;
 use InvalidArgumentException;
+use MediaWiki\Request\FauxRequest;
+use MediaWiki\Title\Title;
 use MWException;
-use Title;
 
 class ApiDescription {
 
