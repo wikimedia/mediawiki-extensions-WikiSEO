@@ -5,7 +5,6 @@ namespace MediaWiki\Extension\WikiSEO\Tests;
 use MediaWiki\Extension\WikiSEO\Tests\Generator\GeneratorTestBase;
 use MediaWiki\Extension\WikiSEO\Validator;
 use MediaWiki\Extension\WikiSEO\WikiSEO;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 use OutputPage;
 use ParserOutput;
@@ -412,7 +411,7 @@ class WikiSEOTest extends GeneratorTestBase {
 	 * @return array
 	 */
 	private function loadPropForPageId( int $id ) {
-		$dbl = MediaWikiServices::getInstance()->getDBLoadBalancer();
+		$dbl = $this->getServiceContainer()->getDBLoadBalancer();
 		$db = $dbl->getConnection( DB_REPLICA );
 
 		$propValue = $db->select(
