@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kareyac"
+			"Kareyac",
+			"MidnightLG"
 		]
 	},
+	"wiki-seo-desc": "Позволяет настроить мета теги для каждой страницы, такие как keywords и description, изменить title, а также различные теги для верификации сайта.",
 	"wiki-seo-pageinfo-header-description": "Описание",
 	"wiki-seo-param-keywords": "Ключевые слова:"
 }
