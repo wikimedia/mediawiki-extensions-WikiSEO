@@ -104,14 +104,14 @@ abstract class AbstractBaseGenerator {
 	 * @throws InvalidArgumentException
 	 */
 	protected function getFileObject( string $name ): File {
-		// This should remove the namespace if present
-		$nameSplit = explode( ':', $name );
-		$name = array_pop( $nameSplit ) ?? '';
-
-		$title = MediaWikiServices::getInstance()->getTitleFactory()->makeTitle(
+		$title = MediaWikiServices::getInstance()->getTitleFactory()->makeTitleSafe(
 			NS_FILE,
 			$name
 		);
+
+		if ( $title === null ) {
+			throw new InvalidArgumentException( sprintf( 'Title %s is invalid.', $name ) );
+		}
 
 		$file = MediaWikiServices::getInstance()->getRepoGroup()->findFile( $title );
 
