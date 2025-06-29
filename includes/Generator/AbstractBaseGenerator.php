@@ -31,7 +31,6 @@ use MediaWiki\Extension\WikiSEO\WikiSEO;
 use MediaWiki\MediaWikiServices;
 use OutputPage;
 use PageImages\PageImages;
-use Title;
 
 abstract class AbstractBaseGenerator {
 	/**
@@ -105,11 +104,14 @@ abstract class AbstractBaseGenerator {
 	 * @throws InvalidArgumentException
 	 */
 	protected function getFileObject( string $name ): File {
-		// This should remove the namespace if present
-		$nameSplit = explode( ':', $name );
-		$name = array_pop( $nameSplit ) ?? '';
+		$title = MediaWikiServices::getInstance()->getTitleFactory()->makeTitleSafe(
+			NS_FILE,
+			$name
+		);
 
-		$title = Title::newFromText( sprintf( 'File:%s', $name ) );
+		if ( $title === null ) {
+			throw new InvalidArgumentException( sprintf( 'Title %s is invalid.', $name ) );
+		}
 
 		$file = MediaWikiServices::getInstance()->getRepoGroup()->getLocalRepo()
 			->findFile( $title );
