@@ -287,7 +287,7 @@ class WikiSEO {
 			try {
 				$class = new ReflectionClass( $classPath );
 				$this->generatorInstances[] = $class->newInstance();
-			} catch ( ReflectionException $e ) {
+			} catch ( ReflectionException ) {
 				$this->errors[] = wfMessage( 'wiki-seo-invalid-generator', $generator )->parse();
 			}
 		}

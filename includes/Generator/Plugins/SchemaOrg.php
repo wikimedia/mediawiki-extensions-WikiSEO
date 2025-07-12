@@ -155,7 +155,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 				$file = $this->getFileObject( $image );
 
 				return array_merge( $data, $this->getFileInfo( $file ) );
-			} catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException ) {
 				// Fallthrough
 			}
 		}
@@ -208,7 +208,7 @@ class SchemaOrg extends AbstractBaseGenerator implements GeneratorInterface {
 			} else {
 				$data = [];
 			}
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			// Uh oh either there was a ConfigException or there was an error expanding the URL.
 			// We'll bail out.
 			$data = [];

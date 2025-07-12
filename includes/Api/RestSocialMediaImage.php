@@ -68,7 +68,7 @@ class RestSocialMediaImage extends SimpleHandler {
 
 		try {
 			$out = $this->createImage( $this->createBackground( $title ), $title );
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			$this->makeError( 'wiki-seo-api-image-error', 500 );
 		}
 
@@ -78,7 +78,7 @@ class RestSocialMediaImage extends SimpleHandler {
 		try {
 			$stream = new StringStream( $out->getImageBlob() );
 			$response->setBody( $stream );
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			$this->makeError( 'wiki-seo-api-image-error', 500 );
 		} finally {
 			$out->clear();
@@ -154,7 +154,7 @@ class RestSocialMediaImage extends SimpleHandler {
 				if ( $thumb !== false ) {
 					try {
 						$background->readImage( $thumb->getLocalCopyPath() );
-					} catch ( ImagickException $e ) {
+					} catch ( ImagickException ) {
 						$background = null;
 					}
 				}
@@ -547,7 +547,7 @@ class RestSocialMediaImage extends SimpleHandler {
 				'pclimit' => '10',
 				'format' => 'json'
 			] ) );
-		} catch ( MWException $e ) {
+		} catch ( MWException ) {
 			return [];
 		}
 

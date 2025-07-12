@@ -155,7 +155,7 @@ abstract class AbstractBaseGenerator {
 				$this->metadata['image'] = $info['url'];
 				$this->metadata['image_width'] = $info['width'];
 				$this->metadata['image_height'] = $info['height'];
-			} catch ( InvalidArgumentException $e ) {
+			} catch ( InvalidArgumentException ) {
 				// File does not exist.
 				// Maybe the user has set an URL, should we do something?
 			}
@@ -171,7 +171,7 @@ abstract class AbstractBaseGenerator {
 					$this->metadata['image'] = $logo;
 					$this->fallbackImageActive = true;
 				}
-			} catch ( Exception $e ) {
+			} catch ( Exception ) {
 				// We do nothing
 			}
 		}

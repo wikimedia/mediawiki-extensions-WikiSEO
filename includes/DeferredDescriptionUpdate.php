@@ -75,7 +75,7 @@ class DeferredDescriptionUpdate implements DeferrableUpdate {
 	public function doUpdate(): void {
 		try {
 			$apiDescription = $this->loadDescriptionFromApi();
-		} catch ( Exception $e ) {
+		} catch ( Exception ) {
 			return;
 		}
 
