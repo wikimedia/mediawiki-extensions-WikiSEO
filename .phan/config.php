@@ -1,6 +1,11 @@
 <?php
 $cfg = require __DIR__ . '/../vendor/mediawiki/mediawiki-phan-config/src/config.php';
 
+// Load PHP extension stubs
+$cfg['autoload_internal_extension_signatures'] = [
+	'imagick' => '.phan/internal_stubs/imagick.phan_php'
+];
+
 // Ignored to allow upgrading Phan, to be fixed later.
 $cfg['suppress_issue_types'][] = 'MediaWikiNoBaseException';
 $cfg['suppress_issue_types'][] = 'MediaWikiNoEmptyIfDefined';
