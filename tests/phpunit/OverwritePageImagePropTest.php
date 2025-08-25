@@ -14,6 +14,12 @@ use Wikimedia\Rdbms\LoadBalancer;
  * @group Database
  */
 class OverwritePageImagePropTest extends MediaWikiIntegrationTestCase {
+
+	/** @inheritDoc */
+	public function setUp(): void {
+		$this->markTestSkippedIfExtensionNotLoaded( 'PageImages' );
+	}
+
 	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\OverwritePageImageProp
 	 * @return void
