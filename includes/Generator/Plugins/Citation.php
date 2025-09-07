@@ -31,7 +31,7 @@ use OutputPage;
  */
 class Citation extends AbstractBaseGenerator implements GeneratorInterface {
 	/**
-	 * @inheritdoc
+	 * @inheritDoc
 	 */
 	protected $tags = [
 		'description',
