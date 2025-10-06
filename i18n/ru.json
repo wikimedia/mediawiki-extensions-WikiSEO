@@ -2,10 +2,45 @@
 	"@metadata": {
 		"authors": [
 			"Kareyac",
-			"MidnightLG"
+			"MidnightLG",
+			"Vonavy"
 		]
 	},
-	"wiki-seo-desc": "Позволяет настроить мета теги для каждой страницы, такие как keywords и description, изменить title, а также различные теги для верификации сайта.",
+	"wiki-seo-desc": "Позволяет настроить метаданные для каждой страницы, такие как keywords и description, изменить title, а также различные теги для верификации сайта.",
+	"wiki-seo-empty-attr-tag": "Ошибка: &lt;seo&gt; должен содержать хотя бы один непустой атрибут.",
+	"wiki-seo-empty-attr-parser": "Ошибка: <nowiki>{{#seo:}}</nowiki> должен содержать хотя бы один непустой атрибут.",
+	"wiki-seo-invalid-generator": "Ошибка: $1 не является допустимым генератором метаданных.",
+	"wiki-seo-missing-page-title": "Ошибка: указанный заголовок страницы не является допустимым.",
+	"pageinfo-header-seo": "Свойства поисковой оптимизации",
+	"wiki-seo-pageinfo-below": "Информация из [https://www.mediawiki.org/wiki/Extension:WikiSEO/ru Extension:WikiSEO]",
 	"wiki-seo-pageinfo-header-description": "Описание",
-	"wiki-seo-param-keywords": "Ключевые слова:"
+	"wiki-seo-pageinfo-header-content": "Содержимое",
+	"wiki-seo-param-title": "Заголовок страницы:",
+	"wiki-seo-param-title-description": "Этот атрибут управляет содержимым элемента <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Режим заголовка",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO/ru#Title_Modes Подробности]",
+	"wiki-seo-param-title_separator": "Разделитель заголовка:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO/ru#Title_Modes Подробности]",
+	"wiki-seo-param-keywords": "Ключевые слова:",
+	"wiki-seo-param-keywords-description": "Этот атрибут управляет содержимым элементов <code>keywords</code> и <code>article:tag</code>.",
+	"wiki-seo-param-description": "Описание статьи:",
+	"wiki-seo-param-description-description": "Этот атрибут управляет содержимым элементов <code>description</code> и <code>og:description</code>.",
+	"wiki-seo-param-robots": "Режим сканирования (robots):",
+	"wiki-seo-param-google_bot": "Модуль GoogleBot:",
+	"wiki-seo-param-image": "Изображение статьи:",
+	"wiki-seo-param-image-description": "Этот атрибут управляет содержимым элемента <code>og:image</code>. Это изображение чаще всего отображается в виде миниатюры в социальных сетях.",
+	"wiki-seo-param-image_width": "Ширина изображения:",
+	"wiki-seo-param-image_height": "Высота изображения:",
+	"wiki-seo-param-image_alt": "Альтернативный текст изображения:",
+	"wiki-seo-param-type": "Тип статьи:",
+	"wiki-seo-param-site_name": "Название сайта:",
+	"wiki-seo-param-locale": "Язык статьи:",
+	"wiki-seo-param-section": "Раздел статьи:",
+	"wiki-seo-param-author": "Автор статьи:",
+	"wiki-seo-param-published_time": "Дата публикации статьи:",
+	"wiki-seo-param-twitter_site": "Имя пользователя в Twitter:",
+	"wiki-seo-api-disabled": "Генерация изображений отключена, установите $wgWikiSeoEnableSocialImages = true",
+	"wiki-seo-api-imagick-missing": "PHP Imagick отсутствует",
+	"wiki-seo-api-title-empty": "Параметр заголовка пуст",
+	"wiki-seo-api-image-error": "Не удалось сгенерировать изображение для социальных сетей"
 }
