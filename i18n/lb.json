@@ -5,7 +5,9 @@
 			"Volvox"
 		]
 	},
+	"pageinfo-header-seo": "SEO-Eegenschaften",
 	"wiki-seo-pageinfo-header-description": "Beschreiwung",
+	"wiki-seo-pageinfo-header-content": "Inhalt",
 	"wiki-seo-param-title": "Titel vun der Säit:",
 	"wiki-seo-param-keywords": "Schlësselwierder:",
 	"wiki-seo-param-description": "Artikelbeschreiwung:",
@@ -13,5 +15,6 @@
 	"wiki-seo-param-image_width": "Breet vum Bild:",
 	"wiki-seo-param-image_height": "Héicht vum Bild:",
 	"wiki-seo-param-image_alt": "Alternativtext vum Bild:",
-	"wiki-seo-param-type": "Artikeltyp:"
+	"wiki-seo-param-type": "Artikeltyp:",
+	"wiki-seo-param-section": "Artikelabschnitt:"
 }
