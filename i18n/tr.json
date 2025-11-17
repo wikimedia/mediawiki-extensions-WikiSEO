@@ -27,7 +27,7 @@
 	"wiki-seo-param-description": "Sayfa tanımı:",
 	"wiki-seo-param-description-description": "Bu özellik, <code>description</code> ve <code>of:description</code> öğelerinin içeriğini kontrol eder.",
 	"wiki-seo-param-robots": "Web robotu modu:",
-	"wiki-seo-param-google_bot": "GoogleBot modu:",
+	"wiki-seo-param-google_bot": "GoogleBot modülü:",
 	"wiki-seo-param-image": "Sayfa resmi:",
 	"wiki-seo-param-image-description": "Bu özellik <code>og:image</code> öğenin içeriğini düzenler. Bu resim genellikle sosyal medyada küçük resim olarak görünür.",
 	"wiki-seo-param-image_width": "Resim genişliği:",
