@@ -1,0 +1,43 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"wiki-seo-desc": "Permite a configuración de metadatos por páxina (como as palabras clave e a descrición), cambiar o título e varias etiquetas de verificación do sitio.",
+	"wiki-seo-empty-attr-tag": "Erro: a etiqueta &lt;seo&gt; debe conter polo menos un atributo que non estea baleiro.",
+	"wiki-seo-empty-attr-parser": "Erro: <nowiki>{{#seo:}}</nowiki> debe conter polo menos un atributo non baleiro.",
+	"wiki-seo-invalid-generator": "Erro: «$1» non é un xerador de metadatos válido.",
+	"wiki-seo-missing-page-title": "Erro: o título de páxina indicado non é válido.",
+	"pageinfo-header-seo": "Propiedades de SEO",
+	"wiki-seo-pageinfo-below": "Información da [https://www.mediawiki.org/wiki/Extension:WikiSEO extensión WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "Descrición",
+	"wiki-seo-pageinfo-header-content": "Contido",
+	"wiki-seo-param-title": "Título da páxina:",
+	"wiki-seo-param-title-description": "Este atributo controla o contido do elemento <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Modo de título",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Máis información]",
+	"wiki-seo-param-title_separator": "Separador de título:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Máis información]",
+	"wiki-seo-param-keywords": "Palabras clave:",
+	"wiki-seo-param-keywords-description": "Este atributo controla o contido dos elementos <code>keywords</code> e <code>article:tag</code>.",
+	"wiki-seo-param-description": "Descrición do artigo:",
+	"wiki-seo-param-description-description": "Este atributo controla o contido dos elementos <code>description</code> e <code>og:description</code>.",
+	"wiki-seo-param-robots": "Modo rastrexador (robots):",
+	"wiki-seo-param-image": "Imaxe do artigo:",
+	"wiki-seo-param-image-description": "Este atributo controla o contido do elemento <code>og:image</code>. Esta imaxe móstrase principalmente como miniatura nas redes sociais.",
+	"wiki-seo-param-image_width": "Ancho da imaxe:",
+	"wiki-seo-param-image_height": "Altura da imaxe:",
+	"wiki-seo-param-image_alt": "Texto alternativo da imaxe:",
+	"wiki-seo-param-type": "Tipo de artigo:",
+	"wiki-seo-param-site_name": "Nome do sitio:",
+	"wiki-seo-param-locale": "Configuración de lingua do artigo:",
+	"wiki-seo-param-section": "Sección do artigo:",
+	"wiki-seo-param-author": "Autor do artigo:",
+	"wiki-seo-param-published_time": "Data de publicación do artigo:",
+	"wiki-seo-param-twitter_site": "Identificador de Twitter do sitio:",
+	"wiki-seo-api-disabled": "A xeración de imaxes está desactivada; define «$wgWikiSeoEnableSocialImages = true»",
+	"wiki-seo-api-imagick-missing": "Falta a extensión Imagick de PHP",
+	"wiki-seo-api-title-empty": "O parámetro de título está baleiro",
+	"wiki-seo-api-image-error": "Non se puido xerar a imaxe das redes sociais"
+}
