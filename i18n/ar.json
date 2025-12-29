@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"ديفيد",
-			"محمد أحمد عبد الفتاح"
+			"محمد أحمد عبد الفتاح",
+			"Meno25"
 		]
 	},
 	"wiki-seo-desc": "يسمح بكل إعدادات تعريف الصفحة مثل الكلمات الرئيسية والوصف، وتغيير العنوان وعلامات التحقق من الموقع المختلفة.",
@@ -10,8 +11,35 @@
 	"wiki-seo-empty-attr-parser": "خطأ: يجب أن يحتوي <nowiki>{{#seo:}}</nowiki> على سمة غير فارغة واحدة على الأقل.",
 	"wiki-seo-invalid-generator": "خطأ: $1 ليس منشئ بيانات تعريف صالح.",
 	"wiki-seo-missing-page-title": "خطأ: عنوان الصفحة المحدد غير صالح.",
+	"pageinfo-header-seo": "خصائص تحسين محركات البحث",
+	"wiki-seo-pageinfo-below": "المعلومات من [https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "وصف",
+	"wiki-seo-pageinfo-header-content": "محتوى",
 	"wiki-seo-param-title": "عنوان الصفحة:",
+	"wiki-seo-param-title-description": "تتحكم هذه السمة في محتوى عنصر <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "وضع العنوان",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes More_information]",
+	"wiki-seo-param-title_separator": "فاصل العنوان:",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes مزيد من المعلومات]",
+	"wiki-seo-param-keywords": "الكلمات المفتاحية:",
+	"wiki-seo-param-keywords-description": "تتحكم هذه السمة في محتوى <code>keywords</code> وعناصر <code>article:tag</code> .",
+	"wiki-seo-param-description": "وصف المقال:",
+	"wiki-seo-param-description-description": "تتحكم هذه السمة في محتوى عنصري <code>description</code> و <code>og:description</code> .",
+	"wiki-seo-param-robots": "وضع الزحف (الروبوتات):",
 	"wiki-seo-param-image": "صورة المقالة:",
+	"wiki-seo-param-image-description": "تتحكم هذه الخاصية في محتوى عنصر <code>og:image</code> . تُعرض هذه الصورة غالبًا كصورة مصغرة على وسائل التواصل الاجتماعي.",
+	"wiki-seo-param-image_width": "عرض الصورة:",
 	"wiki-seo-param-image_height": "ارتفاع صورة:",
-	"wiki-seo-param-site_name": "اسم الموقع:"
+	"wiki-seo-param-image_alt": "نص بديل للصورة:",
+	"wiki-seo-param-type": "نوع المقالة:",
+	"wiki-seo-param-site_name": "اسم الموقع:",
+	"wiki-seo-param-locale": "موقع المقال:",
+	"wiki-seo-param-section": "قسم المقال:",
+	"wiki-seo-param-author": "مؤلف المقال:",
+	"wiki-seo-param-published_time": "تاريخ نشر المقال:",
+	"wiki-seo-param-twitter_site": "حساب الموقع على تويتر:",
+	"wiki-seo-api-disabled": "تم تعطيل إنشاء الصور، اضبط $wgWikiSeoEnableSocialImages = true",
+	"wiki-seo-api-imagick-missing": "PHP Imagick مفقود",
+	"wiki-seo-api-title-empty": "معلمة العنوان فارغة",
+	"wiki-seo-api-image-error": "تعذر إنشاء صورة لوسائل التواصل الاجتماعي"
 }
