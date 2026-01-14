@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Sabelöga",
+			"Stefan2255",
 			"WikiPhoenix"
 		]
 	},
@@ -15,7 +16,7 @@
 	"wiki-seo-pageinfo-header-description": "Beskrivning",
 	"wiki-seo-pageinfo-header-content": "Innehåll",
 	"wiki-seo-param-title": "Sidtitel:",
-	"wiki-seo-param-title-description": "Detta attribut styr innehållet i elementet <code><title></code>.<br>Det används vidare för elementen <code>og:title</code> och <code>twitter:title</code>.",
+	"wiki-seo-param-title-description": "Detta attribut styr innehållet i elementet <code><title></code>.",
 	"wiki-seo-param-title_mode": "Titelläge",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Mer information]",
 	"wiki-seo-param-title_separator": "Titelskiljare:",
@@ -23,11 +24,11 @@
 	"wiki-seo-param-keywords": "Nyckelord:",
 	"wiki-seo-param-keywords-description": "Detta attribut styr innehållet i elementen <code>keywords</code> och <code>article:tag</code> elements.",
 	"wiki-seo-param-description": "Artikelbeskrivning:",
-	"wiki-seo-param-description-description": "Detta attribut styr innehållet i elementet <code>description</code>.<br>Det används vidare för elementen <code>og:description</code> och <code>twitter:description</code>.",
+	"wiki-seo-param-description-description": "Detta attribut styr innehållet i elementet <code>description</code> och <code>og:description</code>.",
 	"wiki-seo-param-robots": "Crawler-läge (robotar):",
-	"wiki-seo-param-google_bot": "GoogleBot-läge:",
+	"wiki-seo-param-google_bot": "GoogleBot-modul:",
 	"wiki-seo-param-image": "Artikelbild:",
-	"wiki-seo-param-image-description": "Detta attribut styr innehållet i elementen <code>og:image</code> och <code>twitter:image</code>.<br>Bilden visas oftast som en miniatyr på sociala medier.",
+	"wiki-seo-param-image-description": "Detta attribut styr innehållet i elementen <code>og:image</code>. Bilden visas oftast som en miniatyr på sociala medier.",
 	"wiki-seo-param-image_width": "Bildbredd:",
 	"wiki-seo-param-image_height": "Bildhöjd:",
 	"wiki-seo-param-image_alt": "Alternativ bildtext:",
@@ -37,5 +38,9 @@
 	"wiki-seo-param-section": "Artikelavsnitt:",
 	"wiki-seo-param-author": "Artikelförfattare:",
 	"wiki-seo-param-published_time": "Artikelns publiceringsdatum:",
-	"wiki-seo-param-twitter_site": "Webbplatsens twitter-ID:"
+	"wiki-seo-param-twitter_site": "Webbplatsens twitter-ID:",
+	"wiki-seo-api-disabled": "Bildgenerering är inaktiverad, sätt $wgWikiSeoEnableSocialImages = true",
+	"wiki-seo-api-imagick-missing": "PHP Imagick saknas",
+	"wiki-seo-api-title-empty": "Titelparametern är tom",
+	"wiki-seo-api-image-error": "Kunde inte generera bilden för sociala medier"
 }
