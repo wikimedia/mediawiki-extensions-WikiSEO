@@ -220,6 +220,7 @@ abstract class AbstractBaseGenerator {
 				$continue = $services->getService( 'PageImages.PageImages' )
 					->getImage( $this->outputPage->getTitle() ) === null;
 			} else {
+				// @phan-suppress-next-line PhanUndeclaredStaticMethod
 				$continue = PageImages::getPageImage( $this->outputPage->getTitle() ) === false;
 			}
 		}
