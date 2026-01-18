@@ -2,7 +2,6 @@
 
 declare( strict_types=1 );
 use MediaWiki\Extension\WikiSEO\DeferredDescriptionUpdate;
-use MediaWiki\MediaWikiServices;
 
 $IP = getenv( 'MW_INSTALL_PATH' );
 if ( $IP === false ) {
@@ -36,8 +35,8 @@ class GenerateDescription extends Maintenance {
 			return (int)( $ns );
 		}, explode( ',', $this->getArg( 0, '' ) ) );
 
-		$pageProps = MediaWikiServices::getInstance()->getPageProps();
-		$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+		$pageProps = $this->getServiceContainer()->getPageProps();
+		$wikiPageFactory = $this->getServiceContainer()->getWikiPageFactory();
 
 		foreach ( $it as $batch ) {
 			foreach ( $batch as $page ) {
