@@ -164,6 +164,9 @@
 				"PageProps",
 				"TitleFactory"
 			]
+		},
+		"ScribuntoHooks": {
+			"class": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks"
 		}
 	},
 	"Hooks": {
@@ -172,7 +175,7 @@
 		"RevisionDataUpdates": "PageHooks",
 		"OutputPageAfterGetHeadLinksArray": "PageHooks",
 		"InfoAction": "InfoActionHook",
-		"ScribuntoExternalLibraries": "MediaWiki\\Extension\\WikiSEO\\Hooks\\ScribuntoHooks::onScribuntoExternalLibraries"
+		"ScribuntoExternalLibraries": "ScribuntoHooks"
 	},
 
 	"RestRoutes": [

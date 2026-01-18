@@ -28,20 +28,16 @@ use MediaWiki\Extension\WikiSEO\SeoLua;
  * Hooks concerning the scribunto extension
  * Adds the SEO Lua modlue
  */
-class ScribuntoHooks {
+class ScribuntoHooks implements
+	\MediaWiki\Extension\Scribunto\Hooks\ScribuntoExternalLibrariesHook
+{
 
 	/**
 	 * Register Lua Library
-	 *
-	 * @param string $engine
-	 * @param array &$extraLibraries
-	 * @return bool
 	 */
-	public static function onScribuntoExternalLibraries( string $engine, array &$extraLibraries ): bool {
+	public function onScribuntoExternalLibraries( string $engine, array &$extraLibraries ): void {
 		if ( $engine === 'lua' && ExtensionRegistry::getInstance()->isLoaded( 'Scribunto' ) ) {
 			$extraLibraries['mw.ext.seo'] = SeoLua::class;
 		}
-
-		return true;
 	}
 }
