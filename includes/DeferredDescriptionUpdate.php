@@ -37,35 +37,22 @@ use MWException;
  */
 class DeferredDescriptionUpdate implements DeferrableUpdate {
 
-	/**
-	 * @var Title The title to work on
-	 */
-	private $title;
-
-	/**
-	 * @var bool Whether to cut of dangling sentences
-	 */
-	private $clean;
-
-	/**
-	 * Current description property from ParserOutput
-	 *
-	 * @var string
-	 */
-	private $currentDescription;
+	private readonly string $currentDescription;
 
 	/**
 	 * Do a deferred update to the specified title.
 	 * Usually runs when RevisionDataUpdates occurs
 	 *
-	 * @param Title $title
-	 * @param string|null $currentDescription
-	 * @param bool $cleanDescription
+	 * @param Title $title The title to work on
+	 * @param string|null $currentDescription Current description property from ParserOutput
+	 * @param bool $clean Whether to cut of dangling sentences
 	 */
-	public function __construct( Title $title, ?string $currentDescription, bool $cleanDescription = false ) {
-		$this->title = $title;
+	public function __construct(
+		private readonly Title $title,
+		?string $currentDescription,
+		private readonly bool $clean = false,
+	) {
 		$this->currentDescription = $currentDescription ?? '';
-		$this->clean = $cleanDescription;
 	}
 
 	/**

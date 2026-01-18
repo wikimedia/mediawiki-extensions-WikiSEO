@@ -12,22 +12,18 @@ use PageImages\PageImages;
 class OverwritePageImageProp implements DeferrableUpdate {
 
 	/**
-	 * @var Title The title to work on
-	 */
-	private $title;
-
-	/**
 	 * @var mixed|string
 	 */
 	private $pageImage;
 
 	/**
-	 * @param Title $title
+	 * @param Title $title The title to work on
 	 * @param mixed|string $pageImage
 	 */
-	public function __construct( Title $title, $pageImage ) {
-		$this->title = $title;
-
+	public function __construct(
+		private readonly Title $title,
+		$pageImage,
+	) {
 		if ( !empty( $pageImage ) && str_contains( $pageImage, ':' ) ) {
 			$pageImage = explode( ':', $pageImage )[1];
 		}

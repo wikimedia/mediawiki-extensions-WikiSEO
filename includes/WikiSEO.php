@@ -41,11 +41,6 @@ class WikiSEO {
 	private const MODE_PARSER = 'parser';
 
 	/**
-	 * @var string 'tag' or 'parser' used to determine the error message
-	 */
-	private $mode;
-
-	/**
 	 * prepend, append or replace the new title to the existing title
 	 *
 	 * @var string
@@ -83,12 +78,12 @@ class WikiSEO {
 	 * WikiSEO constructor.
 	 * Loads generator names from LocalSettings
 	 *
-	 * @param string $mode the parser mode
+	 * @param string $mode the parser mode. 'tag' or 'parser' used to determine the error message
 	 */
-	public function __construct( $mode = self::MODE_PARSER ) {
+	public function __construct(
+		private readonly string $mode = self::MODE_PARSER,
+	) {
 		$this->setMetadataGenerators();
-
-		$this->mode = $mode;
 	}
 
 	/**

@@ -32,24 +32,13 @@ use RepoGroup;
 
 class InfoAction implements InfoActionHook {
 	/**
-	 * @var RepoGroup
-	 */
-	private $repoGroup;
-
-	private $pageProps;
-	private $titleFactory;
-
-	/**
 	 * InfoAction constructor.
-	 *
-	 * @param RepoGroup $repoGroup
-	 * @param PageProps $pageProps
-	 * @param TitleFactory $titleFactory
 	 */
-	public function __construct( $repoGroup, $pageProps, $titleFactory ) {
-		$this->repoGroup = $repoGroup;
-		$this->pageProps = $pageProps;
-		$this->titleFactory = $titleFactory;
+	public function __construct(
+		private readonly RepoGroup $repoGroup,
+		private readonly PageProps $pageProps,
+		private readonly TitleFactory $titleFactory,
+	) {
 	}
 
 	/**

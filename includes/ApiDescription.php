@@ -32,35 +32,23 @@ use MWException;
 class ApiDescription {
 
 	/**
-	 * @var Title The page title to get the description from
-	 */
-	private $title;
-
-	/**
-	 * Flag to try to remove dangling sentences
-	 *
-	 * @var bool
-	 */
-	private $tryCleanSentence;
-
-	/**
 	 * Description source
 	 * Currently only TextExtracts is supported
-	 *
-	 * @var string
 	 */
-	private $source;
+	private readonly string $source;
 
 	/**
 	 * ApiDescription constructor.
-	 * @param Title $title
-	 * @param bool $tryCleanSentence
+	 * @param Title $title The page title to get the description from
+	 * @param bool $tryCleanSentence Flag to try to remove dangling sentences
 	 * @param string $source
 	 * @throws ExtensionDependencyError
 	 */
-	public function __construct( Title $title, bool $tryCleanSentence = false, string $source = 'extracts' ) {
-		$this->title = $title;
-		$this->tryCleanSentence = $tryCleanSentence;
+	public function __construct(
+		private readonly Title $title,
+		private readonly bool $tryCleanSentence = false,
+		string $source = 'extracts',
+	) {
 		$this->source = strtolower( $source );
 
 		$this->checkExtensions();
@@ -121,7 +109,7 @@ class ApiDescription {
 
 		$text = array_shift( $data['query']['pages'] )['extract']['*'] ?? '';
 
-		if ( $this->tryCleanSentence === true && substr( $text, -1 ) !== '.' ) {
+		if ( $this->tryCleanSentence && substr( $text, -1 ) !== '.' ) {
 			$parts = explode( '.', $text );
 			array_pop( $parts );
 			$text = sprintf( '%s.', implode( '.', $parts ) );

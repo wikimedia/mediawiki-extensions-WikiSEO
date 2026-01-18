@@ -40,18 +40,9 @@ use Skin;
  * Hooks to run relating the page
  */
 class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
-	/**
-	 * @var Config
-	 */
-	private $mainConfig;
-
-	/**
-	 * PageHooks constructor.
-	 *
-	 * @param Config $config
-	 */
-	public function __construct( Config $config ) {
-		$this->mainConfig = $config;
+	public function __construct(
+		private readonly Config $config,
+	) {
 	}
 
 	/**
@@ -87,7 +78,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 
 		$this->overwritePageImageProp( $title, $output, $updates );
 
-		$autoEnabled = $this->mainConfig->get( 'WikiSeoEnableAutoDescription' );
+		$autoEnabled = $this->config->get( 'WikiSeoEnableAutoDescription' );
 
 		$currentDescription = $output->getPageProperty( 'description' );
 		$manualDescription = $output->getPageProperty( 'manualDescription' );
@@ -99,7 +90,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 		$updates[] = new DeferredDescriptionUpdate(
 			$title,
 			$currentDescription !== false ? $currentDescription : null,
-			$this->mainConfig->get( 'WikiSeoTryCleanAutoDescription' )
+			$this->config->get( 'WikiSeoTryCleanAutoDescription' )
 		);
 	}
 
@@ -114,7 +105,7 @@ class PageHooks implements BeforePageDisplayHook, RevisionDataUpdatesHook {
 	private function overwritePageImageProp( Title $title, ParserOutput $output, &$updates ) {
 		$imageProp = $output->getPageProperty( 'image' );
 
-		if ( $imageProp === null || !$this->mainConfig->get( 'WikiSeoOverwritePageImage' ) ||
+		if ( $imageProp === null || !$this->config->get( 'WikiSeoOverwritePageImage' ) ||
 			!ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
 			return;
 		}
