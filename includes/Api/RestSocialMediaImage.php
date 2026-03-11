@@ -358,7 +358,7 @@ class RestSocialMediaImage extends SimpleHandler {
 		}
 
 		// Contributors
-		$contributors = $this->getContributors( $title );
+		$contributors = $this->getContributors( $title->getPrefixedText() );
 
 		if ( !empty( $contributors ) ) {
 			$leftMargin += $imagick->queryFontMetrics( $roboto, $timestamp ?? '' )['textWidth'] + 40;

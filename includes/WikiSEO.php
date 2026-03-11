@@ -98,7 +98,7 @@ class WikiSEO {
 	 */
 	public function setMetadataFromPageProps( OutputPage $outputPage ): void {
 		if ( $outputPage->getTitle() === null ) {
-			$this->errors[] = wfMessage( 'wiki-seo-missing-page-title' );
+			$this->errors[] = wfMessage( 'wiki-seo-missing-page-title' )->parse();
 
 			return;
 		}
@@ -304,7 +304,7 @@ class WikiSEO {
 	public function finalize( ParserOutput $output ): string {
 		if ( empty( $this->metadata ) ) {
 			$message = sprintf( 'wiki-seo-empty-attr-%s', $this->mode );
-			$this->errors[] = wfMessage( $message );
+			$this->errors[] = wfMessage( $message )->parse();
 
 			return $this->makeErrorHtml();
 		}
