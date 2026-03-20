@@ -1,9 +1,45 @@
 {
 	"@metadata": {
 		"authors": [
-			"Georg101"
+			"Georg101",
+			"Random0Being"
 		]
 	},
+	"wiki-seo-desc": "Umožňuje nastavovat metadata pro jednotlivé stránky, jako například klíčová slova, popis, název a různé tagy pro ověření webu.",
+	"wiki-seo-empty-attr-tag": "Chyba: Tag &lt;seo&gt; musí obsahovat alespoň jeden neprázdný atribut.",
+	"wiki-seo-empty-attr-parser": "Chyba:<nowiki> {{#seo:}}</nowiki> musí obsahovat alespoň jeden neprázdný atribut.",
+	"wiki-seo-invalid-generator": "Chyba: $1 není platný generátor metadat.",
+	"wiki-seo-missing-page-title": "Chyba: zadaný název stránky je neplatný.",
+	"pageinfo-header-seo": "Vlastnosti SEO",
+	"wiki-seo-pageinfo-below": "Informace z [https://www.mediawiki.org/wiki/Extension:WikiSEO Rozšíření:WikiSEO]",
+	"wiki-seo-pageinfo-header-description": "Popis",
+	"wiki-seo-pageinfo-header-content": "Obsah",
 	"wiki-seo-param-title": "Název stránky:",
-	"wiki-seo-param-type": "Typ článku:"
+	"wiki-seo-param-title-description": "Tento atribut řídí obsah elementu <code>&lt;title&gt;</code>.",
+	"wiki-seo-param-title_mode": "Režim titulků",
+	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Více informací]",
+	"wiki-seo-param-title_separator": "Oddělovač titulku",
+	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes Více informací]",
+	"wiki-seo-param-keywords": "Klíčová slova:",
+	"wiki-seo-param-keywords-description": "Tento atribut řídí obsah elementů <code>keywords</code> a <code>article:tag</code>.",
+	"wiki-seo-param-description": "Popis článku:",
+	"wiki-seo-param-description-description": "Tento atribut řídí obsah elementů <code>description</code> a <code>og:description</code>.",
+	"wiki-seo-param-robots": "Režim prohledávání (roboti):",
+	"wiki-seo-param-google_bot": "Modul GoogleBota:",
+	"wiki-seo-param-image": "Obrázek článku:",
+	"wiki-seo-param-image-description": "Tento atribut řídí obsah elementu <code>og:image</code>. Tento obrázek se většinou zobrazuje jako miniatura na sociálních sítích.",
+	"wiki-seo-param-image_width": "Šířka obrázku:",
+	"wiki-seo-param-image_height": "Výška obrázku:",
+	"wiki-seo-param-image_alt": "Alternativní text k obrázku:",
+	"wiki-seo-param-type": "Typ článku:",
+	"wiki-seo-param-site_name": "Název webu:",
+	"wiki-seo-param-locale": "Lokalita článku:",
+	"wiki-seo-param-section": "Sekce článku:",
+	"wiki-seo-param-author": "Autor článku:",
+	"wiki-seo-param-published_time": "Datum zveřejnění článku:",
+	"wiki-seo-param-twitter_site": "Uživatelská adresa webu na Twitteru:",
+	"wiki-seo-api-disabled": "Generování obrázků je zakázáno, nastavte $wgWikiSeoEnableSocialImages = true",
+	"wiki-seo-api-imagick-missing": "Chybí PHP Imagick",
+	"wiki-seo-api-title-empty": "Parametr názvu je prázdný",
+	"wiki-seo-api-image-error": "Nepodařilo se vygenerovat obrázek ze sociálních médií"
 }
