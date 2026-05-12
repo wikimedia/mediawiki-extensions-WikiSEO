@@ -1,14 +1,15 @@
 {
 	"@metadata": {
 		"authors": [
-			"McDutchie"
+			"McDutchie",
+			"Siebrand"
 		]
 	},
 	"wiki-seo-desc": "Maakt meta-instellingen per pagina mogelijk, zoals trefwoorden en beschrijving, het wijzigen van de titel en verschillende site-verificatie-tags.",
 	"wiki-seo-empty-attr-tag": "Fout: de tag &lt;seo&gt; moet ten minste één niet-leeg attribuut bevatten.",
 	"wiki-seo-empty-attr-parser": "Fout: <nowiki>{{#seo:}}</nowiki> moet ten minste één niet-leeg attribuut bevatten.",
 	"wiki-seo-invalid-generator": "Fout: $1 is geen geldige metagegevens-generator.",
-	"wiki-seo-missing-page-title": "Fout: de gegeven pagina-titel is ongeldig.",
+	"wiki-seo-missing-page-title": "Fout: de gegeven pagina-titel is onjuist.",
 	"pageinfo-header-seo": "SEO-eigenschappen",
 	"wiki-seo-pageinfo-below": "Informatie van [https://www.mediawiki.org/wiki/Extension:WikiSEO Uitbreiding:WikiSEO]",
 	"wiki-seo-pageinfo-header-description": "Beschrijving",
