@@ -2,9 +2,14 @@
 	"@metadata": {
 		"authors": [
 			"Ykhwong",
-			"YeBoy371"
+			"YeBoy371",
+			"Tensama0415"
 		]
 	},
+	"wiki-seo-desc": "문서별 메타 설정(키워드 및 설명, 제목 변경, 다양한 사이트 인증 태그 등)을 허용합니다.",
+	"wiki-seo-empty-attr-tag": "오류: &lt;seo&gt; 태그에는 하나 이상의 비어 있지 않은 속성이 포함되어야 합니다.",
+	"wiki-seo-empty-attr-parser": "오류: <nowiki> {{#seo:}}</nowiki>는 최소한 하나의 비어 있지 않은 속성을 포함해야 합니다.",
+	"wiki-seo-invalid-generator": "오류: $1은(는) 유효한 메타데이터 생성기가 아닙니다.",
 	"wiki-seo-missing-page-title": "오류: 해당 문서 제목은 유효하지 않습니다.",
 	"pageinfo-header-seo": "SEO 속성",
 	"wiki-seo-pageinfo-below": "[https://www.mediawiki.org/wiki/Extension:WikiSEO Extension:WikiSEO]의 정보입니다.",
@@ -12,22 +17,30 @@
 	"wiki-seo-pageinfo-header-content": "내용",
 	"wiki-seo-param-title": "문서 제목:",
 	"wiki-seo-param-title-description": "이 속성은 <code>&lt;title&gt;</code> 요소의 내용을 제어합니다.",
+	"wiki-seo-param-title_mode": "제목 모드",
 	"wiki-seo-param-title_mode-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes 추가_정보]",
 	"wiki-seo-param-title_separator": "제목 구분자:",
 	"wiki-seo-param-title_separator-description": "[https://www.mediawiki.org/wiki/Extension:WikiSEO#Title_Modes 추가 정보]",
 	"wiki-seo-param-keywords": "키워드:",
 	"wiki-seo-param-keywords-description": "이 속성은 <code>keywords</code>와 <code>article:tag</code> 요소의 내용을 제어합니다.",
 	"wiki-seo-param-description": "문서 설명:",
+	"wiki-seo-param-description-description": "이 속성은 <code>description</code>와 <code>og:descriptio</code> 요소의 내용을 제어합니다.",
 	"wiki-seo-param-robots": "크롤러 모드 (로봇):",
 	"wiki-seo-param-google_bot": "구글봇 모듈:",
 	"wiki-seo-param-image": "문서 이미지:",
+	"wiki-seo-param-image-description": "이 속성은 <code>og:descriptio</code> 요소의 내용을 제어합니다. 이 이미지는 주로 소셜 미디어에서 섬네일로 표시됩니다.",
 	"wiki-seo-param-image_width": "이미지 너비:",
 	"wiki-seo-param-image_height": "이미지 높이:",
 	"wiki-seo-param-image_alt": "이미지 대체 텍스트:",
 	"wiki-seo-param-type": "문서유형:",
 	"wiki-seo-param-site_name": "사이트 이름:",
 	"wiki-seo-param-locale": "문서 로케일:",
+	"wiki-seo-param-section": "문서 문단:",
 	"wiki-seo-param-author": "문서 만든이:",
 	"wiki-seo-param-published_time": "문서 게시일:",
-	"wiki-seo-param-twitter_site": "사이트 트위터 핸들:"
+	"wiki-seo-param-twitter_site": "사이트 트위터 핸들:",
+	"wiki-seo-api-disabled": "이미지 생성이 비활성화되어 있습니다. $wgWikiSeoEnableSocialImages = true로 설정하세요",
+	"wiki-seo-api-imagick-missing": "PHP Imagick이 누락되었습니다",
+	"wiki-seo-api-title-empty": "제목 매개변수가 비어 있습니다",
+	"wiki-seo-api-image-error": "소셜 미디어 이미지를 생성할 수 없습니다"
 }
