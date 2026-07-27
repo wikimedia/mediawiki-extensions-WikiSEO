@@ -155,7 +155,7 @@ class InfoAction implements InfoActionHook {
 		$title = $this->titleFactory->newFromText( $value, NS_FILE );
 
 		if ( $title === null || !$title->exists() || !$title->inNamespace( NS_FILE ) ) {
-			return $value;
+			return htmlspecialchars( (string)$value );
 		}
 
 		$file = $this->repoGroup->findFile( $title->getDBkey() );
@@ -172,7 +172,7 @@ class InfoAction implements InfoActionHook {
 			}
 		}
 
-		return $value;
+		return htmlspecialchars( (string)$value );
 	}
 
 	/**
@@ -184,13 +184,13 @@ class InfoAction implements InfoActionHook {
 	private function formatAuthor( ?string $value ): string {
 		$parsed = parse_url( $value ?? '' );
 		if ( $parsed === false || empty( $parsed['path'] ) ) {
-			return $value;
+			return htmlspecialchars( (string)$value );
 		}
 
 		$title = $this->titleFactory->newFromText( ltrim( $parsed['path'], '/' ), NS_USER );
 
 		if ( $title === null ) {
-			return $value;
+			return htmlspecialchars( (string)$value );
 		}
 
 		return Html::rawElement( 'a', [
