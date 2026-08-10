@@ -61,6 +61,7 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 		$this->addPinterestSiteVerification();
 		$this->addNortonSiteVerification();
 		$this->addNaverSiteVerification();
+		$this->addBaiduSiteVerification();
 		$this->addFacebookAppId();
 		$this->addFacebookAdmins();
 		$this->addHrefLangs();
@@ -160,6 +161,20 @@ class MetaTag extends AbstractBaseGenerator implements GeneratorInterface {
 			$this->outputPage->addMeta(
 				'naver-site-verification',
 				$naverSiteVerificationKey
+			);
+		}
+	}
+
+	/**
+	 * Add $wgBaiduSiteVerificationKey from LocalSettings
+	 */
+	private function addBaiduSiteVerification(): void {
+		$baiduSiteVerificationKey = $this->getConfigValue( 'BaiduSiteVerificationKey' );
+
+		if ( !empty( $baiduSiteVerificationKey ) ) {
+			$this->outputPage->addMeta(
+				'baidu-site-verification',
+				$baiduSiteVerificationKey
 			);
 		}
 	}

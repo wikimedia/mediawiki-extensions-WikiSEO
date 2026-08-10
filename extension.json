@@ -45,6 +45,10 @@
 			"description": "Site verification key for the Naver Search Engine",
 			"value": null
 		},
+		"BaiduSiteVerificationKey": {
+			"description": "Site verification key for Baidu Search Resource Platform",
+			"value": null
+		},
 		"TwitterSiteHandle": {
 			"description": "Twitter Site handle to add globally",
 			"value": null

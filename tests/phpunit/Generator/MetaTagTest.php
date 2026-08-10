@@ -87,6 +87,26 @@ class MetaTagTest extends GeneratorTestBase {
 	}
 
 	/**
+	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addBaiduSiteVerification
+	 */
+	public function testAddBaiduSiteVerification() {
+		$this->overrideConfigValue( 'BaiduSiteVerificationKey', 'baidu-key' );
+
+		$out = $this->newInstance();
+
+		$generator = new MetaTag();
+		$generator->init( [], $out );
+		$generator->addMetadata();
+
+		self::assertContains(
+			[
+				'baidu-site-verification',
+				'baidu-key',
+			], $out->getMetaTags()
+		);
+	}
+
+	/**
 	 * @covers \MediaWiki\Extension\WikiSEO\Generator\MetaTag::addPinterestSiteVerification
 	 */
 	public function testAddPinterestSiteVerification() {
